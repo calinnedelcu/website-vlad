@@ -1,18 +1,15 @@
 import { Photo } from "@/components/Photo";
 import Link from "next/link";
-import { CountUp } from "@/components/CountUp";
 import { HeroCinematic } from "@/components/HeroCinematic";
 import { HorizontalShowcase } from "@/components/HorizontalShowcase";
 import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
-import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyIndexList } from "@/components/PropertyIndexList";
 import {
+  availableNeighborhoods,
   availableProperties,
   featuredProperties,
-  neighborhoods,
-  portfolioStats,
   soldProperties,
 } from "@/lib/properties";
 import { site } from "@/lib/site";
@@ -45,13 +42,13 @@ export default function HomePage() {
   const featured = featuredProperties();
   const available = availableProperties();
   const sold = soldProperties();
-  const zones = neighborhoods();
-  const stats = portfolioStats();
+  // Doar zonele cu stoc — vezi `availableNeighborhoods`.
+  const zones = availableNeighborhoods();
+  const commercial = available.filter((p) => p.segment === "comercial");
 
   const heroSlides = (featured.length >= 3 ? featured : available).slice(0, 4);
-  const showcase = available.slice(0, 8);
-  const residential = available.filter((p) => p.segment === "rezidential");
-  const commercial = available.filter((p) => p.segment === "comercial");
+  // O selecție, nu tot portofoliul: lista completă e pe /proprietati, cu filtre.
+  const showcase = featured.length ? featured : available.slice(0, 5);
   const closer = featured[1] ?? available[0];
 
   return (
@@ -110,6 +107,22 @@ export default function HomePage() {
                 </Link>
               </Reveal>
             </div>
+
+            {/* Cele două cifre care chiar spun ceva. Restul blocului de
+                statistici a plecat pe /despre — se repeta cu ce se vede
+                oricum mai jos. */}
+            <Reveal delay={260}>
+              <div className="border-line mt-12 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
+                <p className="nums text-sm">
+                  <span className="font-display mr-2 text-2xl">{available.length}</span>
+                  proprietăți în portofoliu, acum
+                </p>
+                <p className="nums text-sm">
+                  <span className="font-display mr-2 text-2xl">{commercial.length}</span>
+                  spații comerciale și industriale
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -119,60 +132,11 @@ export default function HomePage() {
       {/* ---------- Portofoliul, pe orizontală ---------- */}
       <HorizontalShowcase
         properties={showcase}
-        eyebrow="Portofoliu curent"
-        title="Ce am acum disponibil"
+        eyebrow="Selecție"
+        title="Câteva din ce am acum"
       />
 
-      {/* ---------- Cifre, calculate din portofoliu ---------- */}
-      <section id="cifre" className="shell py-24 md:py-32">
-        <Reveal variant="line" className="bg-line h-px w-full" />
-        <div className="mt-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((item, i) => (
-            <Reveal key={item.label} delay={i * 90}>
-              <CountUp value={item.value} className="display-lg" />
-              <p className="text-muted mt-4 max-w-[22ch] text-sm">{item.label}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
 
-      {/* ---------- Cele două piețe ---------- */}
-      <section id="piete" className="bg-void text-paper py-24 md:py-32">
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow text-paper/50">Două piețe</p>
-          </Reveal>
-          <div className="mt-14 grid gap-12 md:grid-cols-2">
-            <Reveal>
-              <Link href="/proprietati" className="group border-void-line block border-t pt-8">
-                <p className="font-display text-4xl md:text-5xl">Rezidențial</p>
-                <p className="text-paper/70 mt-4 max-w-[38ch]">
-                  Apartamente de vânzare și de închiriat, din Cișmigiu și Floreasca până în Chiajna
-                  și Voluntari. De la garsoniere de bloc nou la patru camere renovate în imobile
-                  interbelice.
-                </p>
-                <p className="text-paper group-hover:text-bronze-soft mt-6 text-sm transition-colors duration-500">
-                  {residential.length} proprietăți →
-                </p>
-              </Link>
-            </Reveal>
-
-            <Reveal delay={120}>
-              <Link href="/proprietati" className="group border-void-line block border-t pt-8">
-                <p className="font-display text-4xl md:text-5xl">Industrial și comercial</p>
-                <p className="text-paper/70 mt-4 max-w-[38ch]">
-                  Hale de producție și depozitare în parcuri industriale cu acces direct din
-                  Centură și A0, plus spații comerciale stradale cu vad. Curent trifazic, acces TIR,
-                  birouri pe două niveluri.
-                </p>
-                <p className="text-paper group-hover:text-bronze-soft mt-6 text-sm transition-colors duration-500">
-                  {commercial.length} proprietăți →
-                </p>
-              </Link>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       {/* ---------- Cum lucrez ---------- */}
       <section id="cum-lucrez" className="bg-paper-deep py-24 md:py-32">
@@ -216,48 +180,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- Indexul complet ---------- */}
-      <PropertyIndexList
-        properties={available}
-        eyebrow="Index"
-        title="Tot portofoliul, pe scurt"
-      />
 
       {/* ---------- Arhiva tranzacțiilor ----------
-          Apare doar când există proprietăți marcate ca vândute/închiriate.
-          Deocamdată nu avem istoricul lui — vezi README. */}
+          Ca listă, nu ca opt carduri mari: o tranzacție încheiată e dovadă, nu
+          marfă. Nimeni nu cumpără de aici, deci fotografiile mari erau spațiu
+          risipit. Cine vrea totuși să vadă, are previzualizarea la hover.
+          Apare doar cât timp există proprietăți vândute sau închiriate. */}
       {sold.length > 0 && (
-        <section id="arhiva" className="shell py-24 md:py-32">
-          <div className="border-line flex flex-wrap items-end justify-between gap-6 border-t pt-10">
-            <div>
-              <Reveal>
-                <p className="eyebrow">Track record</p>
-              </Reveal>
-              <SplitReveal className="display-lg mt-4 max-w-[18ch]">
-                Proprietăți intermediate
-              </SplitReveal>
-            </div>
-            <Reveal delay={100}>
-              <p className="text-muted max-w-[38ch] text-sm">
-                Rămân pe site după tranzacție. E singura dovadă care contează.
-              </p>
-              <a
-                href={site.transactionsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="link-underline mt-3 inline-block text-sm"
-              >
-                Istoricul complet, pe site-ul agenției
-              </a>
-            </Reveal>
-          </div>
-
-          <div className="mt-16 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-            {sold.map((property, i) => (
-              <PropertyCard key={property.slug} property={property} index={i + 1} delay={i * 100} />
-            ))}
-          </div>
-        </section>
+        <PropertyIndexList
+          properties={sold}
+          eyebrow="Track record"
+          title="Proprietăți intermediate"
+          note="Rămân pe site după tranzacție. E singura dovadă care contează. Prețurile sunt cele cerute la listare — cele de vânzare nu se publică."
+          linkHref={site.transactionsUrl}
+          linkLabel="Istoricul complet, pe site-ul agenției"
+        />
       )}
 
       {/* ---------- Închidere ---------- */}

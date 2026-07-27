@@ -76,7 +76,7 @@ Piesele mari de compoziție:
 | ---------------------- | -------------------------------------------------------------- |
 | `HeroCinematic`        | Ecran plin, fotografiile se rotesc lent, legenda arată ce vezi  |
 | `HorizontalShowcase`   | Portofoliul se derulează lateral cât pagina merge în jos        |
-| `PropertyIndexList`    | Index scanabil; la hover fotografia urmărește cursorul          |
+| `PropertyIndexList`    | Listă scanabilă; la hover fotografia urmărește cursorul. Ține arhiva tranzacțiilor de pe home |
 | `PropertyStickyBar`    | Titlu, preț și buton, lipite sus pe pagina de proprietate       |
 | `Marquee`              | Banda cu cartiere, curge continuu                               |
 | `PropertyCard`         | Card numerotat, preț pe aceeași linie cu zona, bară la hover    |
@@ -95,9 +95,14 @@ preluate din listarea lui Vlad de pe site-ul agenției
 - **Fotografiile** vin de pe CDN-ul agenției (`media.crmrebs.com`), la
   rezoluția originală (4096×2304 la majoritate), nu miniaturi.
 - **Textele din `story`** sunt descrierile scrise de Vlad, nu inventate.
-- **Cifrele de pe home** se calculează din portofoliu (`portfolioStats()`),
-  nu sunt scrise de mână. Un număr scris de mână devine minciună la prima
-  schimbare pe care nimeni n-o mai actualizează.
+- **Cifrele se calculează din portofoliu** (`portfolioStats()`), nu sunt scrise
+  de mână. Un număr scris de mână devine minciună la prima schimbare pe care
+  nimeni n-o mai actualizează.
+- **Zonele afișate public vin din `availableNeighborhoods()`, nu din
+  `neighborhoods()`.** A doua le include și pe cele unde a vândut tot. Când au
+  intrat tranzacțiile încheiate, banda de pe home a început să promită 17 zone
+  deși stocul acoperea 11. O zonă anunțată fără nimic în ea e o promisiune pe
+  care n-o poți ține la telefon.
 
 ### Ce am găsit greșit la datele agenției
 
@@ -189,6 +194,29 @@ Rămase din planul inițial, de făcut după ce intră conținutul real:
 - `/ghiduri` — acte, notar, taxe, Noua Casă
 - Versiune EN (contează pentru comercial și zona de nord)
 - Player video (Mux) și embed tur 3D — sloturile există deja în pagina de proprietate
+
+## Ce NU e pe prima pagină, și de ce
+
+Prima pagină a ajuns la un moment dat la 14 ecrane de derulat, cu 8 din 12
+proprietăți afișate de două ori. Ce s-a tăiat, ca să nu se reintroducă din
+reflex:
+
+- **Indexul proprietăților active.** Dubla exact conținutul selecției de
+  deasupra. Lista completă, cu filtre, e pe `/proprietati` — acolo îi e locul.
+- **Blocul de patru cifre.** Era identic cu cel de pe `/despre`, iar trei din
+  patru numere repetau ce se vedea în secțiunile vecine. Au rămas două cifre,
+  în manifest.
+- **Secțiunea „Două piețe”.** Spunea a doua oară ce spune manifestul, iar cele
+  două carduri duceau amândouă la `/proprietati`, fără filtru — arătau ca o
+  alegere, erau un singur link.
+- **Arhiva ca opt carduri mari** a devenit listă. O tranzacție încheiată e
+  dovadă, nu marfă: nimeni nu cumpără de acolo, deci fotografiile mari erau
+  spațiu risipit.
+
+Rezultat: 14,1 → 8,8 ecrane, 29 → 14 apariții de proprietăți.
+
+**Regula, dacă adaugi ceva:** o proprietate apare o singură dată pe o pagină,
+iar home-ul arată o selecție — nu tot portofoliul.
 
 ## Detaliile care fac diferența
 

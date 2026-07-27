@@ -3,12 +3,17 @@
 import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { dealLabel, priceLabel, type Property } from "@/lib/properties";
+import { dealLabel, priceLabel, statusLabel, type Property } from "@/lib/properties";
 
 interface PropertyIndexListProps {
   properties: Property[];
   eyebrow: string;
   title: string;
+  /** Linkul din dreapta titlului. Extern dacă începe cu http. */
+  linkHref: string;
+  linkLabel: string;
+  /** Rând mic sub titlu — context, nu decor. */
+  note?: string;
 }
 
 /** Cât de repede ajunge previzualizarea din urmă cursorul. Sub 0.1 pare leneș. */
@@ -28,7 +33,14 @@ const EASE = 0.15;
  * Pe touch și la `prefers-reduced-motion` previzualizarea nu se montează deloc:
  * rămâne o listă obișnuită, care e oricum lucrul important.
  */
-export function PropertyIndexList({ properties, eyebrow, title }: PropertyIndexListProps) {
+export function PropertyIndexList({
+  properties,
+  eyebrow,
+  title,
+  linkHref,
+  linkLabel,
+  note,
+}: PropertyIndexListProps) {
   const [active, setActive] = useState<number | null>(null);
   const [enabled, setEnabled] = useState(false);
 
@@ -103,10 +115,22 @@ export function PropertyIndexList({ properties, eyebrow, title }: PropertyIndexL
           <div>
             <p className="eyebrow text-paper/50">{eyebrow}</p>
             <h2 className="display-md mt-3">{title}</h2>
+            {note && <p className="text-paper/50 mt-4 max-w-[46ch] text-sm">{note}</p>}
           </div>
-          <Link href="/proprietati" className="link-underline text-paper/70 text-sm">
-            Deschide portofoliul cu filtre
-          </Link>
+          {linkHref.startsWith("http") ? (
+            <a
+              href={linkHref}
+              target="_blank"
+              rel="noreferrer"
+              className="link-underline text-paper/70 text-sm"
+            >
+              {linkLabel}
+            </a>
+          ) : (
+            <Link href={linkHref} className="link-underline text-paper/70 text-sm">
+              {linkLabel}
+            </Link>
+          )}
         </div>
 
         <div
@@ -114,37 +138,48 @@ export function PropertyIndexList({ properties, eyebrow, title }: PropertyIndexL
           onPointerLeave={() => setActive(null)}
           className="border-void-line mt-14 border-b"
         >
-          {properties.map((property, i) => (
-            <Link
-              key={property.slug}
-              href={`/proprietati/${property.slug}`}
-              onPointerEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
-              className={`group border-void-line block border-t py-6 transition-opacity duration-500 md:py-8 ${
-                active !== null && active !== i ? "opacity-35" : "opacity-100"
-              }`}
-            >
-              <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-                <span className="eyebrow nums text-paper/40 w-8 shrink-0">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+          {properties.map((property, i) => {
+            // Aceeași listă servește și portofoliul curent, și arhiva. La o
+            // tranzacție încheiată nu mai are sens „De vânzare”, iar prețul e
+            // istorie — se taie, exact ca pe card.
+            const done = property.status === "vandut" || property.status === "inchiriat";
 
-                <h3 className="index-row font-display flex-1 text-[1.75rem] leading-tight md:text-[2.75rem]">
-                  {property.title}
-                </h3>
+            return (
+              <Link
+                key={property.slug}
+                href={`/proprietati/${property.slug}`}
+                onPointerEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                className={`group border-void-line block border-t py-6 transition-opacity duration-500 md:py-8 ${
+                  active !== null && active !== i ? "opacity-35" : "opacity-100"
+                }`}
+              >
+                <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+                  <span className="eyebrow nums text-paper/40 w-8 shrink-0">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
 
-                <span className="text-paper/45 hidden shrink-0 text-sm md:block">
-                  {property.neighborhood}
-                </span>
-                <span className="text-paper/45 hidden shrink-0 text-sm lg:block">
-                  {dealLabel[property.deal]}
-                </span>
-                <span className="nums w-full shrink-0 text-sm md:w-44 md:text-right">
-                  {priceLabel(property)}
-                </span>
-              </div>
-            </Link>
-          ))}
+                  <h3 className="index-row font-display flex-1 text-[1.75rem] leading-tight md:text-[2.75rem]">
+                    {property.title}
+                  </h3>
+
+                  <span className="text-paper/45 hidden shrink-0 text-sm md:block">
+                    {property.neighborhood}
+                  </span>
+                  <span className="text-paper/45 hidden shrink-0 text-sm lg:block">
+                    {done ? statusLabel[property.status] : dealLabel[property.deal]}
+                  </span>
+                  <span
+                    className={`nums w-full shrink-0 text-sm md:w-44 md:text-right ${
+                      done ? "text-paper/40 line-through" : ""
+                    }`}
+                  >
+                    {priceLabel(property)}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
 

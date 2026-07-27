@@ -1023,8 +1023,22 @@ export const availableProperties = () =>
 export const soldProperties = () =>
   properties.filter((p) => p.status === "vandut" || p.status === "inchiriat");
 
+/** Toate zonele atinse vreodată — inclusiv cele unde nu mai e nimic de vânzare. */
 export const neighborhoods = () =>
   [...new Set(properties.map((p) => p.neighborhood))].sort((a, b) => a.localeCompare(b, "ro"));
+
+/**
+ * Zonele unde chiar are ceva acum.
+ *
+ * ASTA se afișează public, nu `neighborhoods()`. Când au intrat tranzacțiile
+ * încheiate, banda de pe home a început să promită 17 zone deși stocul acoperea
+ * 11 — cinci dintre ele erau zone unde vânduse tot. O zonă anunțată fără nimic
+ * în ea e o promisiune pe care n-o poți ține la telefon.
+ */
+export const availableNeighborhoods = () =>
+  [...new Set(availableProperties().map((p) => p.neighborhood))].sort((a, b) =>
+    a.localeCompare(b, "ro"),
+  );
 
 /**
  * Cifrele de pe home, calculate din portofoliul real.
@@ -1041,7 +1055,7 @@ export const portfolioStats = () => {
       value: String(live.filter((p) => p.segment === "comercial").length),
       label: "spații comerciale și industriale",
     },
-    { value: String(neighborhoods().length), label: "zone din București și Ilfov" },
+    { value: String(availableNeighborhoods().length), label: "zone din București și Ilfov" },
     { value: "0%", label: "comision pentru cumpărător și chiriaș" },
   ];
 };
