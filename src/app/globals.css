@@ -1,26 +1,458 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   Design tokens — "editorial arhitectural"
+   Hârtie caldă, cerneală aproape neagră, un singur accent bronz.
+   Fără culori tari. Tipografia și fotografia fac tot spectacolul.
+   ============================================================ */
+
+@theme {
+  /* Suprafețe */
+  --color-paper: #f5f3ef;
+  --color-paper-deep: #ebe7e0;
+  --color-ink: #14130f;
+  --color-ink-soft: #3a382f;
+  --color-muted: #77726a;
+  --color-line: #ddd8ce;
+  --color-line-soft: #e8e4dc;
+
+  /* Accent unic */
+  --color-bronze: #8a6534;
+  --color-bronze-soft: #b08b57;
+
+  /* Secțiuni închise */
+  --color-forest: #1b241e;
+  --color-forest-soft: #2a352d;
+
+  /* Negru cinematic — fundalul peste care trăiește fotografia */
+  --color-void: #0b0c0a;
+  --color-void-soft: #151714;
+  --color-void-line: #2b2d28;
+
+  /* Tipografie */
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Curbe de mișcare */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================
+   Base
+   ============================================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-bronze);
+  color: var(--color-paper);
+}
+
+/* ============================================================
+   Tipografie editorială
+   Titlurile serif merg strânse și mari — asta dă senzația de revistă.
+   ============================================================ */
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+@utility display-md {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+@utility display-sm {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+/* Titlul de pe hero — trebuie să umple ecranul, nu doar să fie mare */
+@utility display-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 9.2vw, 9.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+
+/* Eticheta mică, majuscule, spațiată — semnătura stilului editorial */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+@utility lede {
+  font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+
+@utility shell {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 4rem;
+  }
+}
+
+@utility shell-narrow {
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* ============================================================
+   Mișcare — dezvăluire la scroll
+   Totul e opt-in prin data-reveal, iar reduced-motion oprește tot.
+   ============================================================ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  transition:
+    opacity 1s var(--ease-out-expo),
+    transform 1.1s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="visible"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Imaginile se dezvăluie prin mască, nu prin fade — mult mai "scump" */
+[data-reveal-image] {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.3s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal-image="visible"] {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Linia care se trage de la stânga la dreapta */
+[data-reveal-line] {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal-line="visible"] {
+  transform: scaleX(1);
+}
+
+/* Titluri care urcă linie cu linie din spatele unei măști.
+   Padding-ul de jos e obligatoriu: fără el, masca ar tăia cozile de la
+   ț, ș, ț și virgule. Marginea negativă anulează spațiul adăugat. */
+.split-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
+}
+
+.split-inner {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1.15s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Ține titlul invizibil între primul paint și împărțirea pe linii, ca să nu se
+   vadă textul apărând, dispărând și reanimându-se.
+   `scripting: enabled` face exact verificarea de care avem nevoie, fără script
+   inline și fără nepotriviri la hidratare: dacă JS nu rulează — sau browserul
+   nu cunoaște feature-ul — titlul rămâne pur și simplu vizibil. */
+@media (scripting: enabled) {
+  [data-split-pending] {
+    visibility: hidden;
+  }
+}
+
+[data-split="visible"] .split-inner {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .split-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-reveal],
+  [data-reveal-image],
+  [data-reveal-line] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Componente mici, folosite peste tot
+   ============================================================ */
+
+/* Link cu subliniere care crește dinspre stânga */
+@utility link-underline {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.15em;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Zoom lent pe imagine la hover pe card */
+@utility media-zoom {
+  transition: transform 1.2s var(--ease-out-expo);
+
+  @media (hover: hover) {
+    .group:hover & {
+      transform: scale(1.04);
+    }
+  }
+}
+
+/* ============================================================
+   Stratul cinematic — fotografia pe negru
+   ============================================================ */
+
+/* Grain de film peste tot. E ieftin ca implementare și face cea mai mare
+   diferență între "curat" și "scump": rupe planurile mari de culoare, exact
+   ca hârtia tipărită. `pointer-events: none` ca să nu fure clickuri. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scrim sub textul așezat peste fotografie. Fără el, titlurile albe devin
+   ilizibile pe orice poză cu cer. */
+@utility scrim {
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 0.78) 0%,
+    rgb(0 0 0 / 0.45) 28%,
+    rgb(0 0 0 / 0.1) 58%,
+    transparent 100%
+  );
+}
+
+/* Scrimul de pe hero e mai agresiv decât pare nevoie: fotografiile de
+   interior sunt aproape toate luminoase, iar textul alb dispare pe ele.
+   Un gradient dinspre stânga ține partea cu titlul închisă, indiferent ce
+   fotografie intră la rotație. */
+@utility scrim-hero {
+  background:
+    linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.88) 0%,
+      rgb(0 0 0 / 0.55) 30%,
+      rgb(0 0 0 / 0.18) 64%,
+      rgb(0 0 0 / 0.1) 100%
+    ),
+    linear-gradient(to right, rgb(0 0 0 / 0.62) 0%, rgb(0 0 0 / 0.2) 48%, rgb(0 0 0 / 0.05) 80%),
+    /* și puțin în bandă sus, altfel meniul alb dispare pe fotografiile cu cer */
+      linear-gradient(to bottom, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0.18) 14%, transparent 28%);
+}
+
+@utility scrim-soft {
+  background: linear-gradient(to top, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0.05) 55%, transparent 100%);
+}
+
+/* Doar cât să țină numărul și eticheta din colțul de sus lizibile pe
+   fotografiile luminoase. Nu se vede ca umbră, se vede ca lipsa problemei. */
+@utility scrim-top {
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0.42) 0%, transparent 22%);
+}
+
+/* Zoom foarte lent pe fotografia din hero. Nu se observă cât te uiți,
+   se observă că imaginea „trăiește”.
+
+   E animație, nu tranziție, dintr-un motiv precis: o tranziție are nevoie de
+   o schimbare ca să pornească, iar prima fotografie se randează direct în
+   starea finală — deci stătea nemișcată până la a doua rotație. Animația
+   pornește la primul cadru, fără să aștepte nimic. */
+@keyframes slow-zoom {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.14);
+  }
+}
+
+.ken-burns {
+  animation: slow-zoom 14s var(--ease-out-expo) forwards;
+}
+
+/* Varianta de hero: mai scurtă, ca zoom-ul să se vadă cât stă fotografia pe
+   ecran. Clasa se pune doar pe slide-ul activ; la rotație e scoasă și pusă
+   pe următorul, deci repornește de fiecare dată de la capăt. */
+.hero-zoom {
+  animation: slow-zoom 9500ms linear forwards;
+}
+
+/* Banda cu text care curge. Conținutul se dublează în markup, de aceea
+   translația e exact -50%: bucla e invizibilă. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+
+@keyframes cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.scroll-cue {
+  animation: cue 2.6s var(--ease-in-out-quart) infinite;
+}
+
+/* Rândul din indexul de proprietăți: titlul alunecă spre dreapta la hover.
+   Scris aici, nu cu utilitare Tailwind, ca să fie explicit ce proprietate se
+   animă — în v4 `translate-x-*` scrie proprietatea `translate`, nu `transform`,
+   iar `transition-transform` n-ar prinde-o. */
+@utility index-row {
+  transition: translate 0.7s var(--ease-out-expo);
+
+  @media (hover: hover) {
+    .group:hover & {
+      translate: 1rem 0;
+    }
+  }
+}
+
+/* Butonul plin: fundalul urcă de jos la hover, textul rămâne pe loc.
+   Mult mai bun decât un simplu schimb de culoare — se vede intenția. */
+@utility btn-sweep {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: currentColor;
+    transform: translateY(101%);
+    transition: transform 0.55s var(--ease-out-expo);
+  }
+
+  @media (hover: hover) {
+    &:hover::before {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns,
+  .hero-zoom,
+  .marquee-track,
+  .scroll-cue {
+    animation: none !important;
+  }
 }
