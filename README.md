@@ -58,11 +58,15 @@ Trei lucruri care fac diferența dintre „merge local” și „merge pe Pages�
 
 | Rută                  | Ce e                                                          |
 | --------------------- | ------------------------------------------------------------- |
-| `/`                   | Home condus de portofoliu, pentru cumpărători                  |
-| `/proprietati`        | Grid cu filtre (tranzacție, tip, zonă) + arhiva tranzacțiilor  |
+| `/`                   | Home: sus ce e de vânzare acum, dedesubt ce s-a vândut deja    |
+| `/proprietati`        | Doar ce e disponibil, cu filtre (tranzacție, tip, zonă)        |
+| `/tranzactii`         | Doar ce s-a vândut, ca registru                                 |
 | `/proprietati/[slug]` | Pagina de proprietate — piesa de rezistență                    |
 | `/despre`             | Povestea lui Vlad                                              |
 | `/contact`            | Formular de lead + WhatsApp                                    |
+
+Activ și vândut sunt **pagini separate**, nu un comutator într-un filtru: sunt două
+intenții diferite (cumpăr ceva / verific pe cine sun).
 
 Fișiere de care te atingi cel mai des:
 
@@ -76,7 +80,7 @@ Piesele mari de compoziție:
 | ---------------------- | -------------------------------------------------------------- |
 | `HeroCinematic`        | Ecran plin, fotografiile se rotesc lent, legenda arată ce vezi  |
 | `HorizontalShowcase`   | Portofoliul se derulează lateral cât pagina merge în jos        |
-| `PropertyIndexList`    | Listă scanabilă; la hover fotografia urmărește cursorul. Ține arhiva tranzacțiilor de pe home |
+| `PropertyIndexList`    | Registrul de pe `/tranzactii`; la hover fotografia urmărește cursorul |
 | `PropertyStickyBar`    | Titlu, preț și buton, lipite sus pe pagina de proprietate       |
 | `Marquee`              | Banda cu cartiere, curge continuu                               |
 | `PropertyCard`         | Card numerotat, preț pe aceeași linie cu zona, bară la hover    |
@@ -203,6 +207,10 @@ reflex:
 
 - **Indexul proprietăților active.** Dubla exact conținutul selecției de
   deasupra. Lista completă, cu filtre, e pe `/proprietati` — acolo îi e locul.
+- **Selecția de proprietăți disponibile.** Rota aceleași proprietăți `featured`
+  pe care le rotește hero-ul, la două ecrane distanță. Acum hero-ul ține ce e
+  de vânzare acum, iar selecția orizontală ține ce s-a vândut deja — două
+  lucruri diferite, fiecare cu rostul lui.
 - **Blocul de patru cifre.** Era identic cu cel de pe `/despre`, iar trei din
   patru numere repetau ce se vedea în secțiunile vecine. Au rămas două cifre,
   în manifest.
@@ -213,7 +221,7 @@ reflex:
   dovadă, nu marfă: nimeni nu cumpără de acolo, deci fotografiile mari erau
   spațiu risipit.
 
-Rezultat: 14,1 → 8,8 ecrane, 29 → 14 apariții de proprietăți.
+Rezultat: 14,1 → 7,7 ecrane, 29 → 8 apariții de proprietăți, zero repetiții.
 
 **Regula, dacă adaugi ceva:** o proprietate apare o singură dată pe o pagină,
 iar home-ul arată o selecție — nu tot portofoliul.

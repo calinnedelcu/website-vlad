@@ -5,7 +5,6 @@ import { HorizontalShowcase } from "@/components/HorizontalShowcase";
 import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
-import { PropertyIndexList } from "@/components/PropertyIndexList";
 import {
   availableNeighborhoods,
   availableProperties,
@@ -46,9 +45,11 @@ export default function HomePage() {
   const zones = availableNeighborhoods();
   const commercial = available.filter((p) => p.segment === "comercial");
 
+  // Hero-ul ține ce e de vânzare ACUM. Selecția de dedesubt ține ce a vândut
+  // DEJA. Înainte, amândouă arătau aceleași proprietăți marcate `featured` —
+  // aceeași listă, la două ecrane distanță.
   const heroSlides = (featured.length >= 3 ? featured : available).slice(0, 4);
-  // O selecție, nu tot portofoliul: lista completă e pe /proprietati, cu filtre.
-  const showcase = featured.length ? featured : available.slice(0, 5);
+  const showcase = sold.slice(0, 6);
   const closer = featured[1] ?? available[0];
 
   return (
@@ -130,11 +131,17 @@ export default function HomePage() {
       <Marquee items={zones} />
 
       {/* ---------- Portofoliul, pe orizontală ---------- */}
-      <HorizontalShowcase
-        properties={showcase}
-        eyebrow="Selecție"
-        title="Câteva din ce am acum"
-      />
+      {/* Ce a vândut, cu fotografii mari. Ce e disponibil acum se vede sus, în
+          hero, și complet pe /proprietati. */}
+      {showcase.length > 0 && (
+        <HorizontalShowcase
+          properties={showcase}
+          eyebrow="Track record"
+          title="Câteva din ce am vândut"
+          linkHref="/tranzactii"
+          linkLabel="Toate tranzacțiile"
+        />
+      )}
 
 
 
@@ -181,21 +188,6 @@ export default function HomePage() {
       </section>
 
 
-      {/* ---------- Arhiva tranzacțiilor ----------
-          Ca listă, nu ca opt carduri mari: o tranzacție încheiată e dovadă, nu
-          marfă. Nimeni nu cumpără de aici, deci fotografiile mari erau spațiu
-          risipit. Cine vrea totuși să vadă, are previzualizarea la hover.
-          Apare doar cât timp există proprietăți vândute sau închiriate. */}
-      {sold.length > 0 && (
-        <PropertyIndexList
-          properties={sold}
-          eyebrow="Track record"
-          title="Proprietăți intermediate"
-          note="Rămân pe site după tranzacție. E singura dovadă care contează. Prețurile sunt cele cerute la listare — cele de vânzare nu se publică."
-          linkHref={site.transactionsUrl}
-          linkLabel="Istoricul complet, pe site-ul agenției"
-        />
-      )}
 
       {/* ---------- Închidere ---------- */}
       {closer && (

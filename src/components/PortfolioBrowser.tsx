@@ -28,19 +28,16 @@ export function PortfolioBrowser({ properties, neighborhoods }: PortfolioBrowser
   const [deal, setDeal] = useState<DealFilter>("toate");
   const [segment, setSegment] = useState<SegmentFilter>("toate");
   const [neighborhood, setNeighborhood] = useState("toate");
-  const [showSold, setShowSold] = useState(false);
 
   const results = useMemo(
     () =>
       properties.filter((p) => {
-        const isSold = p.status === "vandut" || p.status === "inchiriat";
-        if (isSold !== showSold) return false;
         if (deal !== "toate" && p.deal !== deal) return false;
         if (segment !== "toate" && p.segment !== segment) return false;
         if (neighborhood !== "toate" && p.neighborhood !== neighborhood) return false;
         return true;
       }),
-    [properties, deal, segment, neighborhood, showSold],
+    [properties, deal, segment, neighborhood],
   );
 
   return (
@@ -69,19 +66,6 @@ export function PortfolioBrowser({ properties, neighborhoods }: PortfolioBrowser
             </select>
           </div>
 
-          <div>
-            <p className="eyebrow mb-2.5">Arhivă</p>
-            <button
-              type="button"
-              onClick={() => setShowSold((v) => !v)}
-              aria-pressed={showSold}
-              className={`border-b pb-1 text-sm transition-colors ${
-                showSold ? "border-ink text-ink" : "border-line text-muted hover:text-ink"
-              }`}
-            >
-              {showSold ? "Văd tranzacțiile încheiate" : "Arată tranzacțiile încheiate"}
-            </button>
-          </div>
         </div>
 
         <p className="text-muted mt-6 text-sm">

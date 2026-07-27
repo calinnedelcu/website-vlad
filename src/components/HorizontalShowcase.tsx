@@ -3,7 +3,7 @@
 import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { priceLabel, type Property } from "@/lib/properties";
+import { priceLabel, statusLabel, type Property } from "@/lib/properties";
 
 /**
  * Cât scroll vertical costă un pixel de mișcare orizontală. Sub 1 pare că
@@ -20,6 +20,9 @@ interface HorizontalShowcaseProps {
   /** Titlul secțiunii, arătat vertical în stânga cât timp e prinsă. */
   eyebrow: string;
   title: string;
+  /** Unde duce lista completă. */
+  linkHref?: string;
+  linkLabel?: string;
 }
 
 /**
@@ -36,7 +39,13 @@ interface HorizontalShowcaseProps {
  * de ce — deci nu există nepotrivire la hidratare și nu se pierde conținut
  * dacă JS nu pornește.
  */
-export function HorizontalShowcase({ properties, eyebrow, title }: HorizontalShowcaseProps) {
+export function HorizontalShowcase({
+  properties,
+  eyebrow,
+  title,
+  linkHref,
+  linkLabel,
+}: HorizontalShowcaseProps) {
   const [pinned, setPinned] = useState(false);
   const outerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -141,9 +150,16 @@ export function HorizontalShowcase({ properties, eyebrow, title }: HorizontalSho
             <p className="eyebrow text-paper/50">{eyebrow}</p>
             <h2 className="display-md mt-3 max-w-[16ch]">{title}</h2>
           </div>
-          <p className="text-paper/40 hidden shrink-0 text-xs tracking-[0.18em] uppercase md:block">
-            {pinned ? "Derulează" : "Trage lateral"} →
-          </p>
+          <div className="hidden shrink-0 text-right md:block">
+            {linkHref && linkLabel && (
+              <Link href={linkHref} className="link-underline text-paper/70 block text-sm">
+                {linkLabel}
+              </Link>
+            )}
+            <p className="text-paper/40 mt-2 text-xs tracking-[0.18em] uppercase">
+              {pinned ? "Derulează" : "Trage lateral"} →
+            </p>
+          </div>
         </div>
 
         {pinned ? (
@@ -161,6 +177,9 @@ export function HorizontalShowcase({ properties, eyebrow, title }: HorizontalSho
 }
 
 function ShowcaseCard({ property, index }: { property: Property; index: number }) {
+  // Aceeași componentă ține și portofoliul curent, și vândutele.
+  const done = property.status === "vandut" || property.status === "inchiriat";
+
   return (
     <Link
       href={`/proprietati/${property.slug}`}
@@ -176,6 +195,11 @@ function ShowcaseCard({ property, index }: { property: Property; index: number }
         />
         <div className="scrim-soft pointer-events-none absolute inset-0" />
         <div className="scrim-top pointer-events-none absolute inset-0" />
+        {done && (
+          <span className="bg-paper/95 text-ink absolute top-4 right-4 px-3 py-1.5 text-[0.6875rem] font-medium tracking-[0.14em] uppercase">
+            {statusLabel[property.status]}
+          </span>
+        )}
         <span className="text-paper nums absolute top-5 left-5 text-xs tracking-[0.2em]">
           {String(index + 1).padStart(2, "0")}
         </span>
@@ -185,7 +209,9 @@ function ShowcaseCard({ property, index }: { property: Property; index: number }
         </div>
       </div>
       <div className="border-void-line text-paper/60 nums mt-4 flex items-center justify-between border-t pt-3 text-sm">
-        <span className="text-paper">{priceLabel(property)}</span>
+        <span className={done ? "text-paper/50 line-through" : "text-paper"}>
+          {priceLabel(property)}
+        </span>
         <span>{property.specs.surface} mp</span>
       </div>
     </Link>

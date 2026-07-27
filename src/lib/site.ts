@@ -62,6 +62,7 @@ export const site = {
 
 export const nav = [
   { href: "/proprietati", label: "Proprietăți" },
+  { href: "/tranzactii", label: "Tranzacții" },
   { href: "/despre", label: "Despre" },
   { href: "/contact", label: "Contact" },
 ] as const;

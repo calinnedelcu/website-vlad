@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Photo } from "@/components/Photo";
 import { PortfolioBrowser } from "@/components/PortfolioBrowser";
 import { SplitReveal } from "@/components/SplitReveal";
-import { availableProperties, neighborhoods, properties } from "@/lib/properties";
+import { availableNeighborhoods, availableProperties } from "@/lib/properties";
 
 export const metadata: Metadata = {
   title: "Proprietăți",
@@ -13,7 +13,8 @@ export const metadata: Metadata = {
 export default function PropertiesPage() {
   // Fundalul capului de pagină — o fotografie din portofoliu, ținută foarte
   // în spate. Nu concurează cu grila de dedesubt, doar dă adâncime.
-  const backdrop = availableProperties()[0]?.media.cover;
+  const available = availableProperties();
+  const backdrop = available[0]?.media.cover;
 
   return (
     <>
@@ -48,7 +49,7 @@ export default function PropertiesPage() {
       </section>
 
       <section className="shell pb-20 md:pb-28">
-        <PortfolioBrowser properties={properties} neighborhoods={[...neighborhoods()]} />
+        <PortfolioBrowser properties={available} neighborhoods={[...availableNeighborhoods()]} />
       </section>
     </>
   );
