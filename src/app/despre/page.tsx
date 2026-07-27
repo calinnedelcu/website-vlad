@@ -47,9 +47,10 @@ export default function AboutPage() {
   return (
     <>
       {/* ---------- Deschidere: portret + declarație ----------
-          Portretul e vertical, de studio, pe fundal alb — de aceea nu merge
-          full-bleed peste tot ecranul ca pe celelalte pagini. Stă într-o
-          coloană, iar albul de studio se leagă natural cu hârtia. */}
+          Portretul e vertical — de aceea nu merge full-bleed peste tot
+          ecranul ca pe celelalte pagini, ci stă într-o coloană alături de
+          titlu. Sigla agenției din spatele lui duce și brandul, nu doar
+          chipul. */}
       <section className="shell py-16 md:py-24">
         <div className="grid items-end gap-12 md:grid-cols-12">
           <div className="md:col-span-7">
@@ -88,7 +89,7 @@ export default function AboutPage() {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover object-top"
+              className="object-cover object-center"
             />
           </Reveal>
         </div>

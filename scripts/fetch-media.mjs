@@ -16,13 +16,15 @@
  * ce fișiere să aducă, ca lista să nu se dubleze în două locuri.
  */
 
-import { mkdir, readFile, writeFile, access } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { mkdir, readFile, readdir, writeFile, access } from "node:fs/promises";
+import { basename, dirname, extname, join } from "node:path";
 import sharp from "sharp";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const OUT_DIR = join(ROOT, "public", "media");
 const CDN = "https://media.crmrebs.com";
+/** Fotografii care nu vin de la agenție — portrete, orice dă Vlad direct. */
+const ASSETS_DIR = join(ROOT, "assets");
 
 /** Lățimea maximă. Peste asta nu se mai vede diferența pe niciun ecran uzual. */
 const MAX_WIDTH = 1600;
@@ -124,6 +126,42 @@ ${entries}
   await writeFile(join(ROOT, "src/lib/blur-data.ts"), contents);
 }
 
+/**
+ * Trece prin aceeași moară fotografiile locale din `assets/`.
+ *
+ * Ies în `public/media/local/`, cu același tratament ca cele de la agenție:
+ * redimensionate, webp, cu miniatură neclară. Ca să adaugi una nouă, o pui în
+ * `assets/` și rulezi `npm run media` — nimic de configurat.
+ */
+async function processLocal(blurs) {
+  let files;
+  try {
+    files = await readdir(ASSETS_DIR);
+  } catch {
+    return 0; // folderul poate lipsi, e în regulă
+  }
+
+  const images = files.filter((file) => /\.(jpe?g|png|webp)$/i.test(file));
+
+  for (const file of images) {
+    const source = await readFile(join(ASSETS_DIR, file));
+    const name = basename(file, extname(file));
+    const target = join(OUT_DIR, "local", `${name}.webp`);
+
+    const resized = await sharp(source)
+      .rotate()
+      .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+      .webp({ quality: QUALITY })
+      .toBuffer();
+
+    await mkdir(dirname(target), { recursive: true });
+    await writeFile(target, resized);
+    blurs[`/media/local/${name}.webp`] = await blurFor(resized);
+  }
+
+  return images.length;
+}
+
 async function main() {
   const paths = await collectPaths();
   console.log(`${paths.length} fișiere de adus${force ? " (--force)" : ""}\n`);
@@ -157,12 +195,14 @@ async function main() {
   });
 
   await Promise.all(workers);
+  const local = await processLocal(blurs);
   await writeBlurMap(blurs);
 
   const mb = (bytes) => (bytes / 1024 / 1024).toFixed(1);
   console.log(`\n\n  aduse:   ${done}`);
   console.log(`  sărite:  ${skipped}`);
   if (done) console.log(`  mărime:  ${mb(before)} MB -> ${mb(after)} MB`);
+  if (local) console.log(`  locale:  ${local} din assets/`);
   console.log(`  blur:    ${Object.keys(blurs).length} miniaturi -> src/lib/blur-data.ts`);
 
   if (failures.length) {

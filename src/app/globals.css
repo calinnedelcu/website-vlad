@@ -443,7 +443,7 @@ dd {
    ecran. Clasa se pune doar pe slide-ul activ; la rotație e scoasă și pusă
    pe următorul, deci repornește de fiecare dată de la capăt. */
 .hero-zoom {
-  animation: slow-zoom 9500ms linear forwards;
+  animation: slow-zoom 5200ms linear forwards;
 }
 
 /* Banda cu text care curge. Conținutul se dublează în markup, de aceea

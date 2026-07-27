@@ -78,7 +78,7 @@ export default function HomePage() {
                 alt={`${site.name}, ${site.role.toLowerCase()} la ${site.agency}`}
                 fill
                 sizes="(max-width: 768px) 60vw, 24vw"
-                className="object-cover object-top"
+                className="object-cover object-center"
               />
             </Reveal>
 
@@ -238,9 +238,17 @@ export default function HomePage() {
               </SplitReveal>
             </div>
             <Reveal delay={100}>
-              <p className="text-muted max-w-[36ch] text-sm">
+              <p className="text-muted max-w-[38ch] text-sm">
                 Rămân pe site după tranzacție. E singura dovadă care contează.
               </p>
+              <a
+                href={site.transactionsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline mt-3 inline-block text-sm"
+              >
+                Istoricul complet, pe site-ul agenției
+              </a>
             </Reveal>
           </div>
 

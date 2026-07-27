@@ -25,9 +25,13 @@ npm run dev
 | `npm run build` | export static în `out/` |
 | `npm run lint` | eslint |
 
-Fotografiile sunt commit-uite în repo (11 MB). `npm run media` sare peste ce
+Fotografiile sunt commit-uite în repo (~15 MB). `npm run media` sare peste ce
 există deja; cu `--force` reface tot. Rulează-l după ce adaugi proprietăți noi
 în `properties.ts`.
+
+Fotografii care nu vin de la agenție — portrete, orice dă Vlad direct — se pun
+în `assets/` și ies în `public/media/local/` la aceeași comandă. Nimic de
+configurat.
 
 ## Publicare
 
@@ -83,8 +87,11 @@ Portofoliul, fotografiile, descrierile și datele de contact sunt **reale**,
 preluate din listarea lui Vlad de pe site-ul agenției
 (`trimbitasu-estate.ro/proprietati/?agent=5830`, citită în iulie 2026).
 
-- **12 proprietăți** — 3 de vânzare, 9 de închiriat. Agenția afișează 15, dar
-  trei sunt duplicate (vezi mai jos).
+- **12 proprietăți active** — 3 de vânzare, 9 de închiriat. Agenția afișează 15,
+  dar trei sunt duplicate (vezi mai jos).
+- **8 tranzacții încheiate**, selecția dată de Vlad. Istoricul complet, filtrat
+  pe el pe site-ul agenției, arăta **54 de rezultate** în iulie 2026 — linkul
+  e pe home, sub arhivă (`site.transactionsUrl`).
 - **Fotografiile** vin de pe CDN-ul agenției (`media.crmrebs.com`), la
   rezoluția originală (4096×2304 la majoritate), nu miniaturi.
 - **Textele din `story`** sunt descrierile scrise de Vlad, nu inventate.
@@ -105,6 +112,13 @@ Corectat în `properties.ts`, dar merită spus și lor:
    de două ori, o dată ca apartament și o dată ca spațiu de birouri.
 3. **Descrierea de la Asmita Gardens spune „4 camere”**, dar titlul și
    specificațiile spun 3.
+4. **Anunțul `cp2991262` e intitulat „Pacii”**, dar descrierea spune Drumul
+   Bacriului, Roșu – Chiajna. Aici e trecută zona din descriere.
+5. **Anunțurile inactive nu-și mai arată fotografiile** — pagina de detaliu
+   propune proprietăți similare în locul lor. Pozele tranzacțiilor încheiate
+   sunt luate din `istoric-tranzactii/?agent=5830`, unde încă apar. Două dintre
+   ele (`cp3117764`, `cp2861711`) au pozele în alt folder decât ID-ul propriu,
+   pentru că sunt re-listări.
 
 ### Sincronizare automată
 
@@ -132,9 +146,9 @@ acces la API-ul sau exportul REBS și `properties` devine un fetch. Tipurile din
    din ce se vede în portofoliu. De când e în imobiliare, ce făcea înainte, de ce
    s-a dus pe industrial — numai el le știe. Vezi comentariul din
    `src/app/despre/page.tsx`.
-4. **Nu există testimoniale și nici istoric de tranzacții.** Secțiunea de arhivă
-   de pe home apare automat când există proprietăți cu status `vandut` sau
-   `inchiriat`; până atunci e ascunsă. Testimonialele inventate au fost șterse.
+4. **Nu există testimoniale.** Cele inventate au fost șterse. Istoricul de
+   tranzacții există acum (8 bucăți); secțiunea de arhivă de pe home apare
+   automat cât timp există proprietăți cu status `vandut` sau `inchiriat`.
 5. **De completat în `src/lib/site.ts`:** adresa biroului și conturile de social
    media (acum sunt linkuri goale).
 

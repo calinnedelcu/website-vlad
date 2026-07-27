@@ -6,8 +6,13 @@ import { useEffect, useState } from "react";
 import { priceLabel, type Property } from "@/lib/properties";
 import { site } from "@/lib/site";
 
-/** Cât stă o fotografie pe ecran înainte să treacă la următoarea. */
-const INTERVAL = 6500;
+/**
+ * Cât stă o fotografie pe ecran înainte să treacă la următoarea.
+ * Dacă-l schimbi, schimbă și durata lui `.hero-zoom` din globals.css —
+ * zoomul trebuie să acopere aproape tot intervalul, altfel se termină
+ * devreme și ultima secundă pare înghețată.
+ */
+const INTERVAL = 4600;
 
 interface HeroCinematicProps {
   properties: Property[];
