@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import Link from "next/link";
 import { CountUp } from "@/components/CountUp";
 import { Reveal } from "@/components/Reveal";
@@ -82,7 +82,7 @@ export default function AboutPage() {
           </div>
 
           <Reveal variant="image" delay={100} className="aspect-4/5 w-full md:col-span-4 md:col-start-9">
-            <Image
+            <Photo
               src={site.portrait}
               alt={`${site.name}, ${site.role.toLowerCase()} la ${site.agency}`}
               fill

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Gallery } from "@/components/Gallery";
@@ -16,6 +16,7 @@ import {
   statusLabel,
   type Property,
 } from "@/lib/properties";
+import { unprefixed } from "@/lib/asset";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -37,7 +38,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${property.title} — ${property.neighborhood}`,
       description: property.tagline,
-      images: [property.media.cover],
+      images: [unprefixed(property.media.cover)],
     },
   };
 }
@@ -61,7 +62,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         data-dark-hero
         className="bg-void text-paper relative isolate -mt-20 flex h-[92svh] min-h-[34rem] w-full flex-col overflow-hidden"
       >
-        <Image
+        <Photo
           src={property.media.cover}
           alt={property.title}
           fill
@@ -88,14 +89,14 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
             <div className="border-paper/20 mt-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-5 border-t pt-6">
               <div>
-                <p className={`display-sm ${sold ? "text-paper/50 line-through" : ""}`}>
+                <p className={`display-sm nums ${sold ? "text-paper/50 line-through" : ""}`}>
                   {priceLabel(property)}
                 </p>
                 {property.soldNote && (
                   <p className="text-paper/60 mt-2 text-sm">{property.soldNote}</p>
                 )}
               </div>
-              <div className="text-paper/70 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+              <div className="text-paper/70 nums flex flex-wrap gap-x-8 gap-y-2 text-sm">
                 <span>{property.specs.surface} mp</span>
                 {property.specs.rooms && <span>{property.specs.rooms} camere</span>}
                 {property.specs.land && <span>teren {property.specs.land} mp</span>}
@@ -263,7 +264,7 @@ function Spec({ label, value }: { label: string; value: string }) {
   return (
     <div className="border-line flex items-baseline justify-between gap-4 border-b py-3.5">
       <dt className="eyebrow">{label}</dt>
-      <dd className="text-right text-sm">{value}</dd>
+      <dd className="nums text-right text-sm">{value}</dd>
     </div>
   );
 }

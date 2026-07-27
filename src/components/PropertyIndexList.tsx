@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { dealLabel, priceLabel, type Property } from "@/lib/properties";
@@ -125,7 +125,7 @@ export function PropertyIndexList({ properties, eyebrow, title }: PropertyIndexL
               }`}
             >
               <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-                <span className="eyebrow text-paper/40 w-8 shrink-0">
+                <span className="eyebrow nums text-paper/40 w-8 shrink-0">
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
@@ -139,7 +139,7 @@ export function PropertyIndexList({ properties, eyebrow, title }: PropertyIndexL
                 <span className="text-paper/45 hidden shrink-0 text-sm lg:block">
                   {dealLabel[property.deal]}
                 </span>
-                <span className="w-full shrink-0 text-sm md:w-44 md:text-right">
+                <span className="nums w-full shrink-0 text-sm md:w-44 md:text-right">
                   {priceLabel(property)}
                 </span>
               </div>
@@ -160,7 +160,7 @@ export function PropertyIndexList({ properties, eyebrow, title }: PropertyIndexL
           }`}
         >
           {properties.map((property, i) => (
-            <Image
+            <Photo
               key={property.slug}
               src={property.media.cover}
               alt=""

@@ -54,7 +54,9 @@ export function CountUp({ value, className }: { value: string; className?: strin
   }, [value]);
 
   return (
-    <p ref={ref} className={className}>
+    // `nums` e obligatoriu aici: fără cifre de lățime egală, numărul tresare
+    // pe orizontală la fiecare cadru cât timp se numără.
+    <p ref={ref} className={`nums ${className ?? ""}`}>
       {value}
     </p>
   );

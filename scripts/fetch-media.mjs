@@ -41,7 +41,9 @@ async function collectPaths() {
     (match) => `property_images/${match[1]}`,
   );
 
-  const portrait = site.match(/media\.crmrebs\.com\/(avatars\/[^"']+)/)?.[1];
+  // `[^\s"']` și nu `[^"']`: URL-ul apare într-un comentariu, iar fără
+  // restricția pe spațiu potrivirea trecea peste rândul următor.
+  const portrait = site.match(/media\.crmrebs\.com\/(avatars\/[^\s"']+)/)?.[1];
 
   return [...new Set([...propertyPaths, ...(portrait ? [portrait] : [])])];
 }
@@ -55,10 +57,34 @@ const exists = (path) =>
     () => false,
   );
 
+/** Cheia publică a fișierului, așa cum apare în `src` — fără prefixul de deploy. */
+const publicPathFor = (path) => `/media/${path.replace(/\.(jpe?g|png|webp)$/i, ".webp")}`;
+
+/**
+ * Miniatura neclară care se vede cât se încarcă fotografia mare.
+ *
+ * 20px lățime, deci câteva sute de bytes — intră direct în HTML ca data URL,
+ * fără o cerere separată. E diferența dintre o fotografie care apare brusc și
+ * una care „developează”.
+ */
+async function blurFor(buffer) {
+  const tiny = await sharp(buffer)
+    .rotate()
+    .resize({ width: 20 })
+    .webp({ quality: 40 })
+    .toBuffer();
+
+  return `data:image/webp;base64,${tiny.toString("base64")}`;
+}
+
 async function fetchOne(path) {
   const target = outputFor(path);
 
-  if (!force && (await exists(target))) return { path, skipped: true };
+  if (!force && (await exists(target))) {
+    // Chiar dacă fișierul mare există, avem nevoie de blur pentru hartă.
+    const cached = await readFile(target);
+    return { path, skipped: true, blur: await blurFor(cached) };
+  }
 
   const response = await fetch(`${CDN}/${path}`);
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
@@ -73,7 +99,29 @@ async function fetchOne(path) {
   await mkdir(dirname(target), { recursive: true });
   await writeFile(target, resized);
 
-  return { path, before: original.length, after: resized.length };
+  return { path, before: original.length, after: resized.length, blur: await blurFor(resized) };
+}
+
+/** Scrie harta de miniaturi ca modul TS, ca să fie tipată și inlinuită la build. */
+async function writeBlurMap(blurs) {
+  const entries = Object.keys(blurs)
+    .sort()
+    .map((key) => `  ${JSON.stringify(key)}: ${JSON.stringify(blurs[key])},`)
+    .join("\n");
+
+  const contents = `/**
+ * GENERAT AUTOMAT de scripts/fetch-media.mjs — nu edita de mână.
+ *
+ * Miniaturi de 20px, în base64, folosite ca \`blurDataURL\` cât se încarcă
+ * fotografia mare. Cheile sunt căile publice, fără prefixul de deploy.
+ */
+
+export const blurData: Record<string, string> = {
+${entries}
+};
+`;
+
+  await writeFile(join(ROOT, "src/lib/blur-data.ts"), contents);
 }
 
 async function main() {
@@ -85,12 +133,14 @@ async function main() {
   let before = 0;
   let after = 0;
   const failures = [];
+  const blurs = {};
 
   const queue = [...paths];
   const workers = Array.from({ length: CONCURRENCY }, async () => {
     for (let next = queue.shift(); next; next = queue.shift()) {
       try {
         const result = await fetchOne(next);
+        blurs[publicPathFor(next)] = result.blur;
         if (result.skipped) {
           skipped += 1;
         } else {
@@ -107,11 +157,13 @@ async function main() {
   });
 
   await Promise.all(workers);
+  await writeBlurMap(blurs);
 
   const mb = (bytes) => (bytes / 1024 / 1024).toFixed(1);
   console.log(`\n\n  aduse:   ${done}`);
   console.log(`  sărite:  ${skipped}`);
   if (done) console.log(`  mărime:  ${mb(before)} MB -> ${mb(after)} MB`);
+  console.log(`  blur:    ${Object.keys(blurs).length} miniaturi -> src/lib/blur-data.ts`);
 
   if (failures.length) {
     console.log(`\n  eșuate: ${failures.length}`);

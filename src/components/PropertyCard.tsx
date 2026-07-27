@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "./Photo";
 import Link from "next/link";
 import { priceLabel, statusLabel, type Property } from "@/lib/properties";
 import { Reveal } from "./Reveal";
@@ -29,7 +29,7 @@ export function PropertyCard({
     <Reveal delay={delay}>
       <Link href={`/proprietati/${property.slug}`} className="group block">
         <div className={`relative overflow-hidden ${tall ? "aspect-[3/4]" : "aspect-[4/3]"}`}>
-          <Image
+          <Photo
             src={property.media.cover}
             alt={property.title}
             fill
@@ -67,7 +67,7 @@ export function PropertyCard({
               {property.neighborhood} — {property.kind}
             </p>
             <p
-              className={`shrink-0 text-sm ${
+              className={`nums shrink-0 text-sm ${
                 sold ? "text-muted line-through" : dark ? "text-paper" : "text-ink"
               }`}
             >
@@ -88,7 +88,7 @@ export function PropertyCard({
           </p>
 
           <div
-            className={`mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 border-t pt-4 text-sm ${
+            className={`nums mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 border-t pt-4 text-sm ${
               dark ? "border-void-line text-paper/60" : "border-line text-muted"
             }`}
           >

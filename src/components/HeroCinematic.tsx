@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { priceLabel, type Property } from "@/lib/properties";
@@ -93,7 +93,7 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
               className={`h-full w-full ${i === index ? "hero-zoom" : ""}`}
               style={{ transform: "scale(1.02)" }}
             >
-              <Image
+              <Photo
                 src={property.media.cover}
                 alt=""
                 fill
@@ -135,7 +135,7 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
                   <p className="font-display group-hover:text-bronze-soft mt-1.5 text-2xl transition-colors duration-500">
                     {current.title}
                   </p>
-                  <p className="text-paper/70 mt-1 text-sm">{priceLabel(current)}</p>
+                  <p className="text-paper/70 nums mt-1 text-sm">{priceLabel(current)}</p>
                 </Link>
               </div>
             )}

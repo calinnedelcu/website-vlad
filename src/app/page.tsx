@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import Link from "next/link";
 import { CountUp } from "@/components/CountUp";
 import { HeroCinematic } from "@/components/HeroCinematic";
@@ -73,7 +73,7 @@ export default function HomePage() {
               delay={80}
               className="mt-8 aspect-4/5 w-full max-w-[15rem] md:mt-10 md:max-w-none"
             >
-              <Image
+              <Photo
                 src={site.portrait}
                 alt={`${site.name}, ${site.role.toLowerCase()} la ${site.agency}`}
                 fill
@@ -188,7 +188,7 @@ export default function HomePage() {
 
               {showcase[1] && (
                 <Reveal variant="image" className="mt-12 hidden aspect-4/5 w-full md:block">
-                  <Image
+                  <Photo
                     src={showcase[1].media.cover}
                     alt=""
                     fill
@@ -255,7 +255,7 @@ export default function HomePage() {
       {/* ---------- Închidere ---------- */}
       {closer && (
         <section id="contact-band" className="bg-void text-paper relative isolate overflow-hidden">
-          <Image
+          <Photo
             src={closer.media.cover}
             alt=""
             fill

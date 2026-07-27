@@ -48,7 +48,7 @@ export function PropertyStickyBar({ property }: { property: Property }) {
         </div>
 
         <div className="flex shrink-0 items-center gap-6">
-          <p className={`text-sm ${sold ? "text-muted line-through" : ""}`}>
+          <p className={`nums text-sm ${sold ? "text-muted line-through" : ""}`}>
             {priceLabel(property)}
           </p>
           <a

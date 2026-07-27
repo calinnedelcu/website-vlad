@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "./Photo";
 import { useCallback, useEffect, useState } from "react";
 import { Reveal } from "./Reveal";
 
@@ -51,7 +51,7 @@ export function Gallery({ images, title }: { images: string[]; title: string }) 
                   narrow ? "aspect-[4/3] md:w-[62%]" : "aspect-[16/9]"
                 } ${narrow && alignRight ? "md:ml-auto" : ""}`}
               >
-                <Image
+                <Photo
                   src={src}
                   alt={`${title} — imaginea ${i + 1}`}
                   fill
@@ -73,7 +73,7 @@ export function Gallery({ images, title }: { images: string[]; title: string }) 
           onClick={close}
         >
           <div className="relative h-[82vh] w-[92vw]" onClick={(e) => e.stopPropagation()}>
-            <Image
+            <Photo
               src={images[openAt]}
               alt={`${title} — imaginea ${openAt + 1}`}
               fill

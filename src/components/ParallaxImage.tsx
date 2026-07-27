@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "./Photo";
 import { useEffect, useRef } from "react";
 
 interface ParallaxImageProps {
@@ -85,7 +85,7 @@ export function ParallaxImage({
         className="absolute inset-x-0"
         style={{ top: `-${amount * 100}%`, bottom: `-${amount * 100}%` }}
       >
-        <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
+        <Photo src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
       </div>
     </div>
   );

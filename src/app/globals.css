@@ -46,6 +46,9 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  /* Header-ul e fix, 5rem. Fără asta, un link cu ancoră aterizează cu titlul
+     ascuns sub el. */
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -55,11 +58,82 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   overflow-x: hidden;
+  /* Fără dreptunghiul gri la atingere pe iOS — se vede ieftin. */
+  -webkit-tap-highlight-color: transparent;
+  /* Ligaturi și kerning pornite explicit, nu lăsate la voia browserului. */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+}
+
+/* Textul curent nu rămâne niciodată cu un cuvânt singur pe ultimul rând. */
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+/* Cifrele din prețuri, suprafețe și indexuri se aliniază pe coloană doar dacă
+   au aceeași lățime. Altfel „180.000” și „3.250” par prost aliniate. */
+@utility nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
 
 ::selection {
   background-color: var(--color-bronze);
   color: var(--color-paper);
+}
+
+/* ============================================================
+   Focus
+   Starea de focus e parte din design, nu o scăpare a browserului.
+   Inelul albastru implicit ar rupe toată paleta.
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring, var(--color-bronze));
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Pe secțiunile închise, bronzul închis nu se vede. */
+.bg-void,
+.bg-forest,
+[data-dark-hero] {
+  --focus-ring: var(--color-bronze-soft);
+}
+
+/* ============================================================
+   Bara de scroll
+   Discretă, în paleta site-ului. Firefox primește varianta scurtă.
+   ============================================================ */
+
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-paper-deep);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border: 3px solid var(--color-paper-deep);
+    border-radius: 99px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted);
+  }
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) var(--color-paper-deep);
+  }
 }
 
 /* ============================================================
@@ -84,6 +158,7 @@ body {
 }
 
 @utility display-md {
+  text-wrap: balance;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2rem, 4vw, 3.25rem);
@@ -92,6 +167,7 @@ body {
 }
 
 @utility display-sm {
+  text-wrap: balance;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(1.5rem, 2.5vw, 2rem);
@@ -161,10 +237,10 @@ body {
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(1.75rem);
+  transform: translateY(1.25rem);
   transition:
-    opacity 1s var(--ease-out-expo),
-    transform 1.1s var(--ease-out-expo);
+    opacity 0.75s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -176,7 +252,7 @@ body {
 /* Imaginile se dezvăluie prin mască, nu prin fade — mult mai "scump" */
 [data-reveal-image] {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.3s var(--ease-out-expo);
+  transition: clip-path 1.05s var(--ease-out-expo);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -188,7 +264,7 @@ body {
 [data-reveal-line] {
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 1.2s var(--ease-out-expo);
+  transition: transform 1s var(--ease-out-expo);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -209,7 +285,7 @@ body {
 .split-inner {
   display: block;
   transform: translateY(105%);
-  transition: transform 1.15s var(--ease-out-expo);
+  transition: transform 0.95s var(--ease-out-expo);
   transition-delay: var(--reveal-delay, 0ms);
 }
 

@@ -21,7 +21,7 @@ npm run dev
 | Comandă | Ce face |
 | --- | --- |
 | `npm run dev` | server local, fără prefix de cale |
-| `npm run media` | aduce fotografiile de pe CDN-ul agenției și le redimensionează în `public/media/` |
+| `npm run media` | aduce fotografiile, le redimensionează, generează miniaturile neclare și cardul de share |
 | `npm run build` | export static în `out/` |
 | `npm run lint` | eslint |
 
@@ -41,10 +41,14 @@ Trei lucruri care fac diferența dintre „merge local” și „merge pe Pages�
   formularul de contact deschide WhatsApp în loc să trimită un email.
 - `images.unoptimized: true` — nu există optimizator. De aceea fotografiile
   sunt aduse și redimensionate din timp.
-- **`next/image` nu adaugă `basePath` la `src` când e `unoptimized`.** Toate
-  căile către `public/` trec prin `asset()` din `src/lib/asset.ts`. Dacă
-  adaugi o imagine nouă și uiți, dă 404 pe Pages și merge perfect în local —
-  cel mai enervant tip de bug.
+- **Prefixul se pune în două locuri, în sensuri opuse.** Ambele dau bug-uri
+  care se văd doar pe deploy, niciodată în local:
+  - `next/image` **nu** adaugă `basePath` la `src` când e `unoptimized`. Toate
+    căile către `public/` trec prin `asset()` din `src/lib/asset.ts`. Uiți →
+    404 pe Pages.
+  - `metadataBase` **adaugă** el prefixul la căile din `openGraph.images`. Dacă
+    îi dai o cale care îl are deja, iese `/repo/repo/og.jpg` și cardul de share
+    rămâne gol. De aceea metadatele folosesc `unprefixed()`.
 
 ## Structură
 
@@ -171,6 +175,29 @@ Rămase din planul inițial, de făcut după ce intră conținutul real:
 - `/ghiduri` — acte, notar, taxe, Noua Casă
 - Versiune EN (contează pentru comercial și zona de nord)
 - Player video (Mux) și embed tur 3D — sloturile există deja în pagina de proprietate
+
+## Detaliile care fac diferența
+
+Nu sunt funcționalități, sunt finisaje. Dacă le scoți, site-ul face exact
+același lucru — doar că se simte ieftin.
+
+- **Fotografiile urcă dintr-o miniatură neclară**, nu apar brusc. Miniaturile
+  au 20px lățime, sunt generate la `npm run media` și intră direct în HTML
+  (`src/lib/blur-data.ts`, ~13 KB gzip pentru tot site-ul). E cel mai vizibil
+  detaliu de pe listă.
+- **Cifre cu lățime egală** (`nums`) pe prețuri, suprafețe și numerele de
+  index. Fără ele, prețurile din listă par prost aliniate, iar numărătoarea de
+  pe home tresare din umeri la fiecare cadru.
+- **Starea de focus e desenată** — inel bronz, iar pe secțiunile închise bronz
+  deschis. Inelul albastru implicit ar rupe toată paleta.
+- **Titlurile scurte nu rămân cu un cuvânt singur pe ultimul rând**
+  (`text-wrap: balance`), iar textul curent nici atât (`pretty`).
+- **`scroll-padding-top`** ca un link cu ancoră să nu aterizeze cu titlul sub
+  header-ul fix.
+- **Card de share** (`public/og.jpg`) — un agent își trimite linkurile pe
+  WhatsApp de zeci de ori pe zi; fără el, linkul apare ca un rând gri.
+- Bară de scroll în paletă, favicon propriu, fără dreptunghiul gri la atingere
+  pe iOS, ligaturi și kerning pornite explicit.
 
 ## Note de implementare
 

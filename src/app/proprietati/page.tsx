@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/Photo";
 import { PortfolioBrowser } from "@/components/PortfolioBrowser";
 import { SplitReveal } from "@/components/SplitReveal";
 import { availableProperties, neighborhoods, properties } from "@/lib/properties";
@@ -22,7 +22,7 @@ export default function PropertiesPage() {
         className="bg-void text-paper relative isolate -mt-20 overflow-hidden"
       >
         {backdrop && (
-          <Image
+          <Photo
             src={backdrop}
             alt=""
             fill

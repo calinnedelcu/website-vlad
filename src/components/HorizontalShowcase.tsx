@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { priceLabel, type Property } from "@/lib/properties";
@@ -167,7 +167,7 @@ function ShowcaseCard({ property, index }: { property: Property; index: number }
       className="group w-[78vw] shrink-0 snap-start sm:w-[52vw] md:w-[34vw] lg:w-[28vw]"
     >
       <div className="relative aspect-[3/4] overflow-hidden">
-        <Image
+        <Photo
           src={property.media.cover}
           alt={property.title}
           fill
@@ -176,7 +176,7 @@ function ShowcaseCard({ property, index }: { property: Property; index: number }
         />
         <div className="scrim-soft pointer-events-none absolute inset-0" />
         <div className="scrim-top pointer-events-none absolute inset-0" />
-        <span className="text-paper absolute top-5 left-5 text-xs tracking-[0.2em]">
+        <span className="text-paper nums absolute top-5 left-5 text-xs tracking-[0.2em]">
           {String(index + 1).padStart(2, "0")}
         </span>
         <div className="absolute inset-x-5 bottom-5">
@@ -184,7 +184,7 @@ function ShowcaseCard({ property, index }: { property: Property; index: number }
           <h3 className="font-display mt-1 text-2xl leading-tight">{property.title}</h3>
         </div>
       </div>
-      <div className="border-void-line text-paper/60 mt-4 flex items-center justify-between border-t pt-3 text-sm">
+      <div className="border-void-line text-paper/60 nums mt-4 flex items-center justify-between border-t pt-3 text-sm">
         <span className="text-paper">{priceLabel(property)}</span>
         <span>{property.specs.surface} mp</span>
       </div>
