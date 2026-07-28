@@ -4,6 +4,8 @@ import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { priceLabel, statusLabel, type Property } from "@/lib/properties";
+import { Morph } from "./Morph";
+import { morphName } from "@/lib/morph";
 
 /**
  * Cât scroll vertical costă un pixel de mișcare orizontală. Sub 1 pare că
@@ -186,13 +188,15 @@ function ShowcaseCard({ property, index }: { property: Property; index: number }
       className="group w-[78vw] shrink-0 snap-start sm:w-[52vw] md:w-[34vw] lg:w-[28vw]"
     >
       <div className="relative aspect-[3/4] overflow-hidden">
-        <Photo
-          src={property.media.cover}
-          alt={property.title}
-          fill
-          sizes="(max-width: 768px) 78vw, 34vw"
-          className="media-zoom object-cover"
-        />
+        <Morph name={morphName(property.slug)}>
+          <Photo
+            src={property.media.cover}
+            alt={property.title}
+            fill
+            sizes="(max-width: 768px) 78vw, 34vw"
+            className="media-zoom object-cover"
+          />
+        </Morph>
         <div className="scrim-soft pointer-events-none absolute inset-0" />
         <div className="scrim-top pointer-events-none absolute inset-0" />
         {done && (

@@ -82,7 +82,9 @@ Piesele mari de compoziție:
 | `HorizontalShowcase`   | Portofoliul se derulează lateral cât pagina merge în jos        |
 | `PropertyIndexList`    | Registrul de pe `/tranzactii`; la hover fotografia urmărește cursorul |
 | `PropertyStickyBar`    | Titlu, preț și buton, lipite sus pe pagina de proprietate       |
-| `Marquee`              | Banda cu cartiere, curge continuu                               |
+| `PortfolioMap`         | Harta portofoliului: 17 zone, București plin / Ilfov gol        |
+| `HeroCanvas`           | Trecerea dintre fotografiile din hero, desenată în WebGL        |
+| `Morph`                | Fotografia trece dintr-o pagină în alta (View Transitions)      |
 | `PropertyCard`         | Card numerotat, preț pe aceeași linie cu zona, bară la hover    |
 
 ## Date reale
@@ -223,8 +225,55 @@ reflex:
 
 Rezultat: 14,1 → 7,7 ecrane, 29 → 8 apariții de proprietăți, zero repetiții.
 
+Apoi harta a înlocuit banda cu cartiere și a adus pagina la **8,9 ecrane**
+(măsurat la 1440×900). E singura secțiune care a crescut pagina de la
+curățenia aia încoace, și a fost o alegere: banda spunea același lucru ca harta
+— „lucrez în zonele astea” — dar îl spunea ca decor. Dacă mai crește ceva,
+crește în locul altcuiva.
+
 **Regula, dacă adaugi ceva:** o proprietate apare o singură dată pe o pagină,
 iar home-ul arată o selecție — nu tot portofoliul.
+
+## Harta
+
+Conturul e **geometrie reală**, adusă din OpenStreetMap:
+
+```bash
+npm run geo
+```
+
+`scripts/fetch-geo.mjs` cere Nominatim limita municipiului și cele șase
+sectoare, le proiectează în kilometri, le simplifică (Ramer–Douglas–Peucker,
+1340 → 137 de puncte pentru oraș) și le scrie în `src/lib/bucharest-shape.ts`.
+Rezultatul e comis în repo — build-ul nu depinde de rețea. Se rulează rar:
+granițele administrative nu se schimbă.
+
+**Atribuirea OpenStreetMap de sub hartă e obligatorie (ODbL). Nu o scoate.**
+
+`src/lib/geo.ts` ține coordonatele zonelor. Două lucruri de reținut:
+
+- **Coordonatele zonelor sunt centre aproximative, nu adrese.** Arată în ce
+  parte a orașului cade o proprietate, nu unde e. Restul site-ului promite
+  același lucru („adresa exactă nu se publică niciodată”).
+- **`county` NU e aproximativ.** E apartenența administrativă, și e ce afirmă
+  harta categoric: punct plin = București, punct gol = Ilfov. Verificat
+  împotriva poligonului real cu `isPointInFill` — toate cele 17 zone cad de
+  partea pe care o declară.
+- Dacă schimbi `BOUNDS` în `geo.ts`, **rulează `npm run geo` din nou**. Conturul
+  e proiectat cu aceleași margini; altfel desenul și punctele nu mai cad în
+  același loc.
+
+### De ce nu e Centura pe hartă
+
+A fost, desenată din memorie ca cerc de rază constantă (11,5 km). Punea
+Măgurele, Vârteju și Chiajna *înăuntrul* orașului — pe dos față de realitate,
+fix pe argumentul pentru care există secțiunea. Centura adevărată e un poligon
+neregulat de ~72 km, cu raza între ~8,5 și ~13 km.
+
+Am scos-o, dar atunci au rămas niște puncte plutind în negru: nici hartă, nici
+informație. **Concluzia corectă n-a fost „scoate reperul”, ci „ia geometria
+adevărată”** — de aici scriptul. Dacă vrei și Centura, ia traseul real din OSM
+și desenează-l ca polilinie. Nu-l aproxima.
 
 ## Detaliile care fac diferența
 

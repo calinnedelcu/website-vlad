@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
-import { PageTransition } from "@/components/PageTransition";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StickyContact } from "@/components/StickyContact";
@@ -64,7 +63,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {/* Grain peste toată pagina — vezi .grain din globals.css */}
         <div className="grain" aria-hidden />
-        <PageTransition />
         <SiteHeader />
         <main className="pt-20">{children}</main>
         <SiteFooter />

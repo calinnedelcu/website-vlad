@@ -446,21 +446,49 @@ dd {
   animation: slow-zoom 5200ms linear forwards;
 }
 
-/* Banda cu text care curge. Conținutul se dublează în markup, de aceea
-   translația e exact -50%: bucla e invizibilă. */
-@keyframes marquee {
+/* ------------------------------------------------------------
+   Intrarea în pagină
+   Primul ecran nu „e pur și simplu acolo”: fotografia se deschide dintr-un
+   cadru mai strâns și mai întunecat, iar textul urcă peste ea în ordine.
+   Durează 1,4s cu totul și se joacă o singură dată.
+
+   Fără preloader și fără procente false: nu ținem pe nimeni la ușă ca să
+   arătăm o animație. Ce se mișcă e conținutul care s-ar fi încărcat oricum.
+   ------------------------------------------------------------ */
+
+/* `backwards`, nu `both`: după ce se termină, elementul rămâne exact cum l-ar
+   fi randat browserul. Un `filter` rămas în urmă ar crea permanent un context
+   de stivuire și un bloc de referință peste care ar călca alte lucruri —
+   printre ele fotografia care trece în pagina proprietății. */
+@keyframes hero-open {
   from {
-    transform: translateX(0);
+    transform: scale(1.08);
+    filter: brightness(0.4) saturate(0.75);
   }
   to {
-    transform: translateX(-50%);
+    transform: scale(1);
+    filter: brightness(1) saturate(1);
   }
 }
 
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 46s linear infinite;
+.hero-open {
+  animation: hero-open 1500ms var(--ease-out-expo) backwards;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.1rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in {
+  animation: hero-in 900ms var(--ease-out-expo) backwards;
+  animation-delay: var(--in-delay, 0ms);
 }
 
 @keyframes cue {
@@ -527,8 +555,73 @@ dd {
 @media (prefers-reduced-motion: reduce) {
   .ken-burns,
   .hero-zoom,
-  .marquee-track,
-  .scroll-cue {
+  .scroll-cue,
+  .hero-open,
+  .hero-in {
     animation: none !important;
+  }
+}
+
+/* ============================================================
+   Tranziții între pagini
+   Înainte, aici era o cortină care mătura ecranul la fiecare navigare —
+   decor peste o tăietură, nu o legătură între pagini. Acum legătura o face
+   browserul: fotografia pe care s-a dat click e același obiect pe pagina
+   următoare, deci se mută și crește în loc să dispară. Vezi Morph.tsx.
+   ============================================================ */
+
+/* Fundalul paginii se schimbă mai lent decât implicitul de 250ms — cât să se
+   citească drept schimbare, nu clipire. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 520ms;
+  animation-timing-function: var(--ease-in-out-quart);
+}
+
+/* Fotografia care trece dintr-o pagină în alta. */
+::view-transition-group(.morph) {
+  animation-duration: 640ms;
+  animation-timing-function: var(--ease-out-expo);
+  /* Peste conținutul care se estompează dedesubt, altfel se pierde în el. */
+  z-index: 20;
+}
+
+/* Cele două instantanee au proporții diferite (card 4:3, hero pe tot ecranul),
+   deci interpolarea lasă o clipă de imagine întinsă. Un pic de neclaritate la
+   mijlocul drumului o acoperă complet — nu se vede ca efect, se vede ca
+   absența problemei. */
+::view-transition-image-pair(.morph) {
+  animation-name: morph-blur;
+  animation-duration: 640ms;
+}
+
+@keyframes morph-blur {
+  35% {
+    filter: blur(5px);
+  }
+}
+
+/* Header-ul e reperul fix: cât timp conținutul se schimbă, el stă. Fără
+   `display: none` pe instantaneul vechi s-ar vedea o clipă două header-e
+   suprapuse. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

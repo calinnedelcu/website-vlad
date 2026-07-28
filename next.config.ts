@@ -20,6 +20,18 @@ const nextConfig: NextConfig = {
     // `npm run media` (scripts/fetch-media.mjs), în `public/media/`.
     unoptimized: true,
   },
+
+  experimental: {
+    /**
+     * Leagă navigarea între pagini de View Transitions API din browser, ca
+     * fotografia pe care s-a dat click să se transforme în hero-ul paginii
+     * următoare în loc să dispară. Vezi `src/components/Morph.tsx`.
+     *
+     * E strict client-side, deci nu intră în conflict cu `output: "export"`.
+     * Unde browserul nu are API-ul, navigarea rămâne exact ca înainte.
+     */
+    viewTransition: true,
+  },
 };
 
 export default nextConfig;

@@ -1,6 +1,8 @@
 import { Photo } from "./Photo";
 import Link from "next/link";
 import { priceLabel, statusLabel, type Property } from "@/lib/properties";
+import { Morph } from "./Morph";
+import { morphName } from "@/lib/morph";
 import { Reveal } from "./Reveal";
 
 interface PropertyCardProps {
@@ -29,14 +31,19 @@ export function PropertyCard({
     <Reveal delay={delay}>
       <Link href={`/proprietati/${property.slug}`} className="group block">
         <div className={`relative overflow-hidden ${tall ? "aspect-[3/4]" : "aspect-[4/3]"}`}>
-          <Photo
-            src={property.media.cover}
-            alt={property.title}
-            fill
-            priority={priority}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 40vw"
-            className={`media-zoom object-cover ${sold ? "grayscale-[0.4]" : ""}`}
-          />
+          {/* Aceeași fotografie poartă același nume și pe pagina proprietății,
+              deci la click se mută și crește în locul hero-ului în loc să
+              dispară. Vezi Morph. */}
+          <Morph name={morphName(property.slug)}>
+            <Photo
+              src={property.media.cover}
+              alt={property.title}
+              fill
+              priority={priority}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 40vw"
+              className={`media-zoom object-cover ${sold ? "grayscale-[0.4]" : ""}`}
+            />
+          </Morph>
 
           {/* Scrim discret: ține numărul și eticheta lizibile pe orice fotografie. */}
           <div className="scrim-soft pointer-events-none absolute inset-0 opacity-70" />

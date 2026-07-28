@@ -8,6 +8,8 @@ import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
 import { PropertyCard } from "@/components/PropertyCard";
 import { PropertyStickyBar } from "@/components/PropertyStickyBar";
+import { Morph } from "@/components/Morph";
+import { morphName } from "@/lib/morph";
 import {
   getProperty,
   priceLabel,
@@ -62,14 +64,22 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         data-dark-hero
         className="bg-void text-paper relative isolate -mt-20 flex h-[92svh] min-h-[34rem] w-full flex-col overflow-hidden"
       >
-        <Photo
-          src={property.media.cover}
-          alt={property.title}
-          fill
-          priority
-          sizes="100vw"
-          className={`ken-burns object-cover ${sold ? "grayscale-[0.3]" : ""}`}
-        />
+        {/* Capătul celălalt al morph-ului: aceeași fotografie, același nume ca
+            pe card. Zoomul lent stă pe învelitoare, nu pe imagine — altfel
+            browserul ar prinde instantaneul în mijlocul unui `transform` și
+            tranziția ar porni dintr-o mărime greșită. */}
+        <div className="ken-burns absolute inset-0">
+          <Morph name={morphName(property.slug)}>
+            <Photo
+              src={property.media.cover}
+              alt={property.title}
+              fill
+              priority
+              sizes="100vw"
+              className={`object-cover ${sold ? "grayscale-[0.3]" : ""}`}
+            />
+          </Morph>
+        </div>
         <div className="scrim-hero pointer-events-none absolute inset-0" />
 
         <div className="shell relative flex h-full flex-col pt-28 pb-10 md:pb-14">

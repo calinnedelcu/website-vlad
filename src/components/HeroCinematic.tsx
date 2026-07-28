@@ -2,8 +2,12 @@
 
 import { Photo } from "./Photo";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { priceLabel, type Property } from "@/lib/properties";
+import { HeroCanvas } from "./HeroCanvas";
+import { Morph } from "./Morph";
+import { morphName } from "@/lib/morph";
+import { SplitReveal } from "./SplitReveal";
 import { site } from "@/lib/site";
 
 /**
@@ -32,7 +36,14 @@ interface HeroCinematicProps {
  * neîncărcată la fiecare rotație.
  */
 export function HeroCinematic({ properties }: HeroCinematicProps) {
-  const slides = properties.slice(0, 4);
+  /**
+   * Memorate, nu recalculate: lista de căi ajunge la HeroCanvas ca dependență
+   * de efect. Un tablou nou la fiecare randare ar reconstrui contextul WebGL
+   * și ar reîncărca toate texturile la fiecare rotație, adică o dată la 4,6
+   * secunde, la nesfârșit.
+   */
+  const slides = useMemo(() => properties.slice(0, 4), [properties]);
+  const covers = useMemo(() => slides.map((property) => property.media.cover), [slides]);
   const [index, setIndex] = useState(0);
   const [auto, setAuto] = useState(false);
 
@@ -78,8 +89,13 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
       data-dark-hero
       className="bg-void text-paper relative isolate -mt-20 h-[100svh] min-h-[36rem] w-full overflow-hidden"
     >
-      {/* --- Fotografiile suprapuse --- */}
-      <div className="absolute inset-0">
+      {/* --- Fotografiile suprapuse ---
+          `.hero-open` e deschiderea: cadrul pornește puțin mai strâns și mai
+          întunecat și se așază în 1,5s. Nu atinge opacitatea și nu maschează
+          nimic, tocmai ca fotografia să rămână eligibilă pentru LCP — un
+          preloader ar fi cumpărat aceeași senzație cu o secundă din timpul
+          omului. Vezi globals.css. */}
+      <div className="hero-open absolute inset-0">
         {slides.map((property, i) => (
           <div
             key={property.slug}
@@ -95,34 +111,59 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
                 în v4 utilitarul setează proprietatea CSS `scale`, care ar
                 rămâne peste `transform`-ul animației. */}
             <div
-              className={`h-full w-full ${i === index ? "hero-zoom" : ""}`}
+              // `relative` e doar ca `fill` să-și găsească reperul explicit:
+              // `transform` creează oricum blocul de referință, dar next/image
+              // se uită la `position` și altfel avertizează degeaba.
+              className={`relative h-full w-full ${i === index ? "hero-zoom" : ""}`}
               style={{ transform: "scale(1.02)" }}
             >
-              <Photo
-                src={property.media.cover}
-                alt=""
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className="object-cover"
-              />
+              {/* Numele îl poartă doar fotografia de pe ecran acum. La click
+                  pe legendă, ea rămâne pe loc și restul paginii se schimbă în
+                  jurul ei — proprietatea nu „se încarcă”, se deschide. */}
+              <Morph name={i === index ? morphName(property.slug) : undefined}>
+                <Photo
+                  src={property.media.cover}
+                  alt=""
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </Morph>
             </div>
           </div>
         ))}
+
+        {/* Peste teancul de fotografii, trecerea desenată pe GPU. Se aprinde
+            singură când e gata; până atunci — și oriunde nu are ce rula — se
+            vede fade-ul obișnuit de dedesubt. Vezi HeroCanvas. */}
+        <HeroCanvas
+          images={covers}
+          index={index}
+          interval={INTERVAL}
+        />
       </div>
 
       <div className="scrim-hero pointer-events-none absolute inset-0" />
 
-      {/* --- Conținut --- */}
+      {/* --- Conținut ---
+          Ordinea intrării e regie, nu decor: mai întâi cine ești, apoi ce
+          vinzi, la final ce poți face. Fiecare element intră după ce ochiul
+          l-a terminat pe cel dinainte. Vezi `.hero-in` din globals.css. */}
       <div className="shell relative flex h-full flex-col pt-28 pb-10 md:pb-14">
-        <p className="eyebrow text-paper/55">
+        <p className="eyebrow text-paper/55 hero-in" style={{ "--in-delay": "480ms" } as CSSProperties}>
           {site.role} · {site.city}
         </p>
 
         <div className="mt-auto">
-          <h1 className="display-hero max-w-[13ch]">{site.tagline}</h1>
+          <SplitReveal as="h1" className="display-hero max-w-[13ch]" immediate delay={620} stagger={110}>
+            {site.tagline}
+          </SplitReveal>
 
-          <div className="border-paper/20 mt-10 grid gap-8 border-t pt-6 md:grid-cols-12 md:items-end">
+          <div
+            className="border-paper/20 hero-in mt-10 grid gap-8 border-t pt-6 md:grid-cols-12 md:items-end"
+            style={{ "--in-delay": "1080ms" } as CSSProperties}
+          >
             <div className="md:col-span-4">
               <Link
                 href="/proprietati"
@@ -177,7 +218,10 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
       </div>
 
       {/* --- Semnalul de scroll --- */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden justify-center md:flex">
+      <div
+        className="hero-in pointer-events-none absolute inset-x-0 bottom-0 hidden justify-center md:flex"
+        style={{ "--in-delay": "1400ms" } as CSSProperties}
+      >
         <span className="bg-paper/50 scroll-cue block h-16 w-px" />
       </div>
     </section>

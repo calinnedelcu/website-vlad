@@ -51,6 +51,11 @@ export function SiteHeader() {
 
   return (
     <header
+      // Header-ul e singurul reper fix în timpul unei tranziții de pagină.
+      // Dacă s-ar estompa și el odată cu restul, s-ar pierde senzația că doar
+      // conținutul s-a schimbat. Numele îl scoate din instantaneul general;
+      // regulile din globals.css îi opresc orice animație.
+      style={{ viewTransitionName: "site-header" }}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
         light
           ? "text-paper border-b border-transparent"

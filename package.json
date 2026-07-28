@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "media": "node scripts/fetch-media.mjs && node scripts/build-og.mjs"
+    "media": "node scripts/fetch-media.mjs && node scripts/build-og.mjs",
+    "geo": "node scripts/fetch-geo.mjs"
   },
   "dependencies": {
     "next": "16.2.12",

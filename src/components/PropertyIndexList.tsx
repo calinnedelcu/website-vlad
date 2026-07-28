@@ -4,6 +4,8 @@ import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { dealLabel, priceLabel, statusLabel, type Property } from "@/lib/properties";
+import { Morph } from "./Morph";
+import { morphName } from "@/lib/morph";
 
 interface PropertyIndexListProps {
   properties: Property[];
@@ -195,15 +197,20 @@ export function PropertyIndexList({
           }`}
         >
           {properties.map((property, i) => (
-            <Photo
-              key={property.slug}
-              src={property.media.cover}
-              alt=""
-              fill
-              sizes="288px"
-              className="object-cover transition-opacity duration-400"
-              style={{ opacity: active === i ? 1 : 0 }}
-            />
+            // Numele îl primește doar fotografia vizibilă: la click, exact
+            // dreptunghiul de sub cursor zboară și se deschide în hero-ul
+            // paginii următoare. Celelalte n-au ce lega, ar fi doar straturi
+            // în plus la fiecare navigare.
+            <Morph key={property.slug} name={active === i ? morphName(property.slug) : undefined}>
+              <Photo
+                src={property.media.cover}
+                alt=""
+                fill
+                sizes="288px"
+                className="object-cover transition-opacity duration-400"
+                style={{ opacity: active === i ? 1 : 0 }}
+              />
+            </Morph>
           ))}
         </div>
       )}

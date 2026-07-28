@@ -2,13 +2,13 @@ import { Photo } from "@/components/Photo";
 import Link from "next/link";
 import { HeroCinematic } from "@/components/HeroCinematic";
 import { HorizontalShowcase } from "@/components/HorizontalShowcase";
-import { Marquee } from "@/components/Marquee";
+import { PortfolioMap } from "@/components/PortfolioMap";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
 import {
-  availableNeighborhoods,
   availableProperties,
   featuredProperties,
+  properties,
   soldProperties,
 } from "@/lib/properties";
 import { site } from "@/lib/site";
@@ -41,8 +41,6 @@ export default function HomePage() {
   const featured = featuredProperties();
   const available = availableProperties();
   const sold = soldProperties();
-  // Doar zonele cu stoc — vezi `availableNeighborhoods`.
-  const zones = availableNeighborhoods();
   const commercial = available.filter((p) => p.segment === "comercial");
 
   // Hero-ul ține ce e de vânzare ACUM. Selecția de dedesubt ține ce a vândut
@@ -128,7 +126,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Marquee items={zones} />
+      {/* Aici era o bandă cu numele cartierelor, care curgea la nesfârșit.
+          Spunea exact același lucru ca harta — „lucrez în zonele astea” — dar
+          îl spunea ca decor: nu puteai citi din ea nici unde sunt, nici câte
+          sunt, nici care e diferența dintre ele. Aceeași informație, arătată
+          în loc să fie derulată, și fără să crească pagina cu un ecran. */}
+      <PortfolioMap properties={properties} />
 
       {/* ---------- Portofoliul, pe orizontală ---------- */}
       {/* Ce a vândut, cu fotografii mari. Ce e disponibil acum se vede sus, în
