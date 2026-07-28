@@ -233,50 +233,93 @@ export function PortfolioMap({ properties }: PortfolioMapProps) {
             </div>
           </div>
 
-          {/* ---------- Lista ---------- */}
-          {/* Partea care chiar contează: harta poate să nu spună nimic cuiva
-              care nu cunoaște orașul, lista spune tot. */}
+          {/* ---------- Panoul ---------- */}
+          {/* Harta poate să nu spună nimic cuiva care nu cunoaște orașul, deci
+              tot ce arată ea trebuie să existe și în text. Dar lista completă
+              nu are ce căuta în starea de repaus: șaptesprezece rânduri pe
+              toată lățimea, sub o hartă, erau un zid — mai ales pe telefon,
+              unde nu stau alături, ci unul sub altul. Implicit e strânsă
+              într-un rând; cine vrea toate zonele o deschide. */}
           <div className="md:col-span-4 md:col-start-9">
-            <p className="eyebrow text-paper/50">
-              {shown ? shown.name : `${zones.length} zone`}
-            </p>
+            <div className="flex items-baseline justify-between gap-4">
+              <p className="eyebrow text-paper/50">{shown ? shown.name : "Alege o zonă"}</p>
 
-            <ul className="border-void-line mt-5 border-t">
-              {(shown ? shown.items : []).map((property) => (
-                <li key={property.slug}>
-                  <Link
-                    href={`/proprietati/${property.slug}`}
-                    className="border-void-line group block border-b py-4"
-                  >
-                    <p className="font-display group-hover:text-bronze-soft text-xl leading-tight transition-colors duration-300">
-                      {property.title}
-                    </p>
-                    <p className="text-paper/45 nums mt-1 text-sm">
-                      {property.status === "disponibil"
-                        ? priceLabel(property)
-                        : statusLabel[property.status]}{" "}
-                      · {property.specs.surface} mp
-                    </p>
-                  </Link>
-                </li>
-              ))}
+              {/* Ieșirea din zona aleasă. Pe mouse o face `pointerleave` de pe
+                  hartă, dar la atingere evenimentul ăla nu vine niciodată:
+                  fără butonul ăsta, cine deschide o zonă pe telefon rămâne
+                  blocat în ea, fără drum înapoi la listă. */}
+              {shown && (
+                <button
+                  type="button"
+                  onClick={() => setActive(null)}
+                  className="text-paper/40 hover:text-paper shrink-0 text-xs transition-colors duration-300"
+                >
+                  Toate zonele
+                </button>
+              )}
+            </div>
 
-              {!shown &&
-                zones.map((zone) => (
-                  <li key={zone.name}>
-                    <button
-                      type="button"
-                      onPointerEnter={() => setActive(zone.name)}
-                      onFocus={() => setActive(zone.name)}
-                      onClick={() => setActive(zone.name)}
-                      className="border-void-line hover:text-bronze-soft flex w-full items-baseline justify-between border-b py-2.5 text-left text-sm transition-colors duration-300"
+            {shown ? (
+              <ul className="border-void-line mt-5 border-t">
+                {shown.items.map((property) => (
+                  <li key={property.slug}>
+                    <Link
+                      href={`/proprietati/${property.slug}`}
+                      className="border-void-line group block border-b py-4"
                     >
-                      <span>{zone.name}</span>
-                      <span className="nums text-paper/40">{zone.items.length}</span>
-                    </button>
+                      <p className="font-display group-hover:text-bronze-soft text-xl leading-tight transition-colors duration-300">
+                        {property.title}
+                      </p>
+                      <p className="text-paper/45 nums mt-1 text-sm">
+                        {property.status === "disponibil"
+                          ? priceLabel(property)
+                          : statusLabel[property.status]}{" "}
+                        · {property.specs.surface} mp
+                      </p>
+                    </Link>
                   </li>
                 ))}
-            </ul>
+              </ul>
+            ) : (
+              <>
+                {/* „sau din listă” nu e o formulă de politețe: pe telefon,
+                    harta intră în ~335px, iar Cișmigiu și Grădina Icoanei sunt
+                    la 1,4 km unul de altul — adică vreo 17 pixeli. Punctele nu
+                    se pot nimeri cu degetul la scara aia, deci lista de mai jos
+                    e calea adevărată acolo, nu o variantă de rezervă. */}
+                <p className="text-paper/55 mt-5 text-sm">
+                  Alege o zonă, de pe hartă sau din listă, și îți arăt ce am acolo.
+                </p>
+
+                {/* `<details>` nativ: se deschide fără JS, e în ordinea de
+                    tabulare și anunță singur starea. Nu avem nevoie de stare
+                    în React pentru o listă care doar se pliază. */}
+                <details className="group mt-6">
+                  <summary className="border-void-line hover:text-bronze-soft flex cursor-pointer list-none items-center justify-between border-t border-b py-3 text-sm transition-colors duration-300 [&::-webkit-details-marker]:hidden">
+                    Toate zonele
+                    <span className="nums text-paper/40 group-open:hidden">{zones.length}</span>
+                    <span className="text-paper/40 hidden group-open:inline">Închide</span>
+                  </summary>
+
+                  <ul className="max-h-[19rem] overflow-y-auto">
+                    {zones.map((zone) => (
+                      <li key={zone.name}>
+                        <button
+                          type="button"
+                          onPointerEnter={() => setActive(zone.name)}
+                          onFocus={() => setActive(zone.name)}
+                          onClick={() => setActive(zone.name)}
+                          className="border-void-line hover:text-bronze-soft flex w-full items-baseline justify-between border-b py-2.5 text-left text-sm transition-colors duration-300"
+                        >
+                          <span>{zone.name}</span>
+                          <span className="nums text-paper/40">{zone.items.length}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </>
+            )}
 
             {missing > 0 && (
               <p className="text-paper/35 mt-5 text-xs">
