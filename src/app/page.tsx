@@ -6,12 +6,7 @@ import { OpeningBand } from "@/components/OpeningBand";
 import { PortfolioMap } from "@/components/PortfolioMap";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
-import {
-  availableProperties,
-  featuredProperties,
-  properties,
-  soldProperties,
-} from "@/lib/properties";
+import { availableProperties, properties, soldProperties } from "@/lib/properties";
 import { site } from "@/lib/site";
 
 /**
@@ -39,7 +34,6 @@ const steps = [
 ];
 
 export default function HomePage() {
-  const featured = featuredProperties();
   const available = availableProperties();
   const sold = soldProperties();
   const commercial = available.filter((p) => p.segment === "comercial");
@@ -47,9 +41,23 @@ export default function HomePage() {
   // Hero-ul ține ce e de vânzare ACUM. Selecția de dedesubt ține ce a vândut
   // DEJA. Înainte, amândouă arătau aceleași proprietăți marcate `featured` —
   // aceeași listă, la două ecrane distanță.
-  const heroSlides = (featured.length >= 3 ? featured : available).slice(0, 4);
+  //
+  // Și numai rezidențial, cerut de Vlad: prima pagină trebuie să deschidă cu
+  // apartamente. Din cele 5 proprietăți marcate `featured`, 3 erau hale și
+  // spații comerciale, deci jumătate din hero era hală. Halele nu dispar de pe
+  // site — au pagina lor și sunt pe hartă — doar că nu ele întâmpină omul.
+  //
+  // Ordinea: întâi cele alese de el, apoi restul, ca selecția să conteze fără
+  // să rămână hero-ul gol dacă `featured` se schimbă.
+  const residential = available.filter((p) => p.segment === "rezidential");
+  const heroSlides = [
+    ...residential.filter((p) => p.featured),
+    ...residential.filter((p) => !p.featured),
+  ].slice(0, 4);
   const showcase = sold.slice(0, 6);
-  const closer = featured[1] ?? available[0];
+  // Fotografia de la final: tot rezidențial, dar una care nu e deja în hero —
+  // altfel s-ar vedea aceeași poză de două ori pe aceeași pagină.
+  const closer = residential.find((p) => !heroSlides.includes(p)) ?? residential[0];
 
   return (
     <>

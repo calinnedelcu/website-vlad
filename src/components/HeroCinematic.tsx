@@ -2,7 +2,7 @@
 
 import { Photo } from "./Photo";
 import Link from "next/link";
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { priceLabel, type Property } from "@/lib/properties";
 import { HeroCanvas } from "./HeroCanvas";
 import { Morph } from "./Morph";
@@ -17,6 +17,12 @@ import { site } from "@/lib/site";
  * devreme și ultima secundă pare înghețată.
  */
 const INTERVAL = 4600;
+
+/**
+ * Cât trebuie să alunece degetul ca să conteze trecere, nu click ratat.
+ * Sub ~40px, orice apăsare cu degetul mare pe ecran ar schimba fotografia.
+ */
+const SWIPE_MIN = 44;
 
 interface HeroCinematicProps {
   properties: Property[];
@@ -46,6 +52,26 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
   const covers = useMemo(() => slides.map((property) => property.media.cover), [slides]);
   const [index, setIndex] = useState(0);
   const [auto, setAuto] = useState(false);
+  /**
+   * Crește la fiecare intervenție a omului și repornește ceasul rotației.
+   * Fără el, dacă dai la fotografia următoare cu o jumătate de secundă înainte
+   * să sune cronometrul, ea sare imediat mai departe — adică exact senzația că
+   * nu tu conduci.
+   */
+  const [nudge, setNudge] = useState(0);
+
+  /** Punctul de unde a început gestul curent, cât ține el. */
+  const drag = useRef<{ x: number; y: number; id: number } | null>(null);
+
+  const go = useCallback(
+    (next: number) => {
+      const count = slides.length;
+      if (count < 2) return;
+      setIndex(((next % count) + count) % count);
+      setNudge((n) => n + 1);
+    },
+    [slides.length],
+  );
 
   // Pornim rotația abia după montare și doar dacă omul n-a cerut mai puțină
   // mișcare. Fără JS sau cu reduced-motion rămâne prima fotografie, fixă —
@@ -78,15 +104,52 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
       window.clearInterval(timer);
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, [auto, slides.length]);
+    // `nudge` e aici dinadins: schimbarea lui reface intervalul de la zero.
+  }, [auto, slides.length, nudge]);
 
   const current = slides[index];
+
+  /**
+   * Trecerea cu degetul.
+   *
+   * Ne uităm doar la punctul de plecare și la cel de sosire, nu urmărim
+   * mișcarea: fotografia nu se trage sub deget, doar sare la următoarea. E
+   * suficient pentru ce trebuie și nu se bate cu scroll-ul paginii.
+   *
+   * Două condiții ca să conteze un gest, și amândouă sunt necesare:
+   * distanța minimă separă gestul de un click ratat, iar comparația cu
+   * mișcarea pe verticală ne ține departe de scroll — cine derulează pagina cu
+   * degetul peste hero n-are de ce să schimbe fotografia.
+   */
+  const onPointerDown = (event: React.PointerEvent) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    drag.current = { x: event.clientX, y: event.clientY, id: event.pointerId };
+  };
+
+  const onPointerUp = (event: React.PointerEvent) => {
+    const start = drag.current;
+    drag.current = null;
+    if (!start || start.id !== event.pointerId) return;
+
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+    go(index + (dx < 0 ? 1 : -1));
+  };
 
   return (
     // `data-dark-hero` spune header-ului că trebuie să treacă pe alb cât e
     // deasupra fotografiei. Vezi SiteHeader.
     <section
       data-dark-hero
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerCancel={() => (drag.current = null)}
+      // Trasul cu mouse-ul peste o fotografie pornește altfel gestul nativ de
+      // „ia imaginea și mut-o”, care se vede ca o fantomă a pozei lipită de
+      // cursor și înghite gestul nostru.
+      onDragStart={(event) => event.preventDefault()}
       // Fără `-mt-20` de când deasupra stă banda de deschidere: marginea aia
       // negativă anula `pt-20` de pe `main`, ca hero-ul să treacă pe sub
       // header. Acum banda face asta, iar hero-ul e al doilea — cu ea, se urca
@@ -190,14 +253,23 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
               </div>
             )}
 
-            {/* Indicatoare: fiecare bară se umple cât stă fotografia pe ecran. */}
+            {/* Indicatoare: fiecare bară se umple cât stă fotografia pe ecran.
+                Sunt și comanda manuală de la tastatură — săgeți stânga/dreapta
+                cât timp una dintre ele are focus. */}
             {slides.length > 1 && (
-              <div className="flex gap-3 md:col-span-2 md:col-start-11 md:justify-end">
+              <div
+                className="flex gap-3 md:col-span-2 md:col-start-11 md:justify-end"
+                onKeyDown={(event) => {
+                  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+                  event.preventDefault();
+                  go(index + (event.key === "ArrowRight" ? 1 : -1));
+                }}
+              >
                 {slides.map((property, i) => (
                   <button
                     key={property.slug}
                     type="button"
-                    onClick={() => setIndex(i)}
+                    onClick={() => go(i)}
                     aria-label={`Vezi ${property.title}`}
                     aria-current={i === index}
                     className="group w-10 py-3 md:w-8"
