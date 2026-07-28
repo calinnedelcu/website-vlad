@@ -404,6 +404,28 @@ dd {
       linear-gradient(to bottom, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0.18) 14%, transparent 28%);
 }
 
+/* Banda de deschidere. Pe telefon fotografia e fundalul întreg, deci are
+   nevoie de întuneric peste tot ca să se citească sigla și numele. De la `md`
+   în sus fotografia stă doar în dreapta, așa că e de ajuns să i se topească
+   marginea din stânga în negru — restul rămâne curat. */
+@utility scrim-band {
+  background:
+    linear-gradient(
+      to right,
+      var(--color-void) 0%,
+      rgb(11 12 10 / 0.8) 55%,
+      rgb(11 12 10 / 0.52) 100%
+    ),
+    /* Fotografia are exact în dreptul textului partea cea mai aglomerată —
+       mâinile, dungile de pe perete. Un plus de întuneric doar pe banda de
+       jos ține eticheta lizibilă fără să înece tot cadrul. */
+    linear-gradient(to top, rgb(11 12 10 / 0.55) 0%, transparent 40%);
+
+  @media (width >= 48rem) {
+    background: linear-gradient(to right, var(--color-void) 0%, transparent 42%);
+  }
+}
+
 @utility scrim-soft {
   background: linear-gradient(to top, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0.05) 55%, transparent 100%);
 }

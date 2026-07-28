@@ -16,9 +16,9 @@ export const site = {
   /** Se schimbă când intră domeniul propriu. Acum e previzualizarea de pe GitHub Pages. */
   url: "https://calinnedelcu.github.io/website-vlad",
 
-  tagline: "Apartamente în București. Hale pe Centură.",
+  tagline: "Apartamente în București și hale pe Centură.",
   intro:
-    "Vânzări și închirieri rezidențiale în București și Ilfov, plus spații industriale și comerciale cu acces direct din Centură și A0. Comision 0% pentru cumpărător și pentru chiriaș.",
+    "Vând și închiriez apartamente în București și Ilfov, și spații industriale și comerciale cu acces din Centură și A0. Comisionul îl plătește proprietarul, nu cumpărătorul sau chiriașul.",
 
   contact: {
     phone: "+40 750 467 866",
@@ -34,6 +34,21 @@ export const site = {
    * `assets/portret-vlad.jpeg`, procesată de `npm run media`.
    */
   portrait: asset("/media/local/portret-vlad.webp"),
+
+  /**
+   * Portretul de deschidere: Vlad în costum, la birou. Sursa e
+   * `assets/portret-vlad-birou.jpeg`, procesată de `npm run media`.
+   * Capul lui stă între 19% și 42% din înălțimea cadrului — de aceea peste tot
+   * unde se taie se folosește `object-position: center 20%`.
+   */
+  portraitOffice: asset("/media/local/portret-vlad-birou.webp"),
+
+  /**
+   * Sigla agenției, decupată de pe fundalul ei bleumarin — vezi
+   * `scripts/cutout-logo.mjs`. Are canal alfa, deci poate sta pe orice
+   * suprafață fără să se vadă un dreptunghi în jurul ei.
+   */
+  agencyLogo: asset("/media/local/logo-trimbitasu-estate.webp"),
 
   /**
    * Varianta de studio, pe fundal alb, de pe pagina de echipă a agenției.

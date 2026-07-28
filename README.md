@@ -234,6 +234,48 @@ crește în locul altcuiva.
 **Regula, dacă adaugi ceva:** o proprietate apare o singură dată pe o pagină,
 iar home-ul arată o selecție — nu tot portofoliul.
 
+### Banda de deschidere
+
+Vlad a cerut ca primul lucru la deschidere să fie el și Trîmbițașu Estate, iar
+ofertele imediat după. E o bandă de ~44% din înălțime, nu ecran plin, din două
+motive practice: fotografia e făcută cu telefonul seara, cu blitz — la lățime de
+ecran întreg i se văd zgomotul și cutele — iar cadrul e portret (1600×2048), deci
+întins pe un ecran de 2560px ar rămâne din el o fâșie fără cap. Așa, pe primul
+ecran intră și el, și 459px din prima proprietate.
+
+Banda arată **doar sigla și o linie**. Numele lui e în header, la câțiva
+centimetri deasupra, iar „Trîmbițașu Estate” scris ca text ar repeta sigla.
+
+Sigla vine ca JPEG, auriu pe bleumarin plat. `scripts/cutout-logo.mjs` scoate
+fundalul și recuperează culoarea din marginile amestecate, altfel ar fi rămas cu
+halou. Se rulează o dată, manual; rezultatul intră în `assets/`.
+
+Două lucruri s-au rupt când a apărut banda, ambele reparate:
+
+- `HeroCinematic` avea `-mt-20`, ca să treacă pe sub header cât era prima
+  secțiune. Cu banda deasupra, marginea aia îl urca 80px peste ea și îi acoperea
+  jumătate din siglă.
+- `SiteHeader` căuta `querySelector("[data-dark-hero]")` — prima secțiune
+  închisă. Cu două una după alta, header-ul trecea pe negru imediat ce se
+  termina banda, adică fix peste fotografia hero-ului. Acum verifică o
+  suprapunere reală cu oricare dintre ele.
+
+Și a scos un al doilea portret al lui Vlad din secțiunea „Ce fac”: fața lui e
+acum primul lucru de pe site, iar a doua fotografie la două ecrane distanță doar
+repeta — odată cu ea și „Agent imobiliar”.
+
+### Tonul textelor
+
+Textele erau scrise ca reclamă, nu ca om: „Îți zic în două minute dacă am sau
+nu”, „Nu «ultracentral, superb»”, „Una îmi ține cash-flow-ul, cealaltă îmi ține
+răbdarea”, „Un apartament în Floreasca și o hală lângă A0 nu se vând la fel”.
+Construcții în două timpi, cu poantă la final.
+
+Rescrise mai așezat, cu aceleași fapte. **Regula: nicio afirmație nouă.** Ce se
+putea verifica înainte se verifică și acum; unde textul vechi dădea cifre care
+nu se pot verifica („un apartament se închiriază în două săptămâni”) au fost
+scoase, nu reformulate.
+
 ### Subsolul
 
 A fost aproape o a doua pagină: titlu mare, două butoane, patru coloane. Repeta

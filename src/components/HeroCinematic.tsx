@@ -87,7 +87,11 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
     // deasupra fotografiei. Vezi SiteHeader.
     <section
       data-dark-hero
-      className="bg-void text-paper relative isolate -mt-20 h-[100svh] min-h-[36rem] w-full overflow-hidden"
+      // Fără `-mt-20` de când deasupra stă banda de deschidere: marginea aia
+      // negativă anula `pt-20` de pe `main`, ca hero-ul să treacă pe sub
+      // header. Acum banda face asta, iar hero-ul e al doilea — cu ea, se urca
+      // 80px peste bandă și îi acoperea sigla pe jumătate.
+      className="bg-void text-paper relative isolate h-[100svh] min-h-[36rem] w-full overflow-hidden"
     >
       {/* --- Fotografiile suprapuse ---
           `.hero-open` e deschiderea: cadrul pornește puțin mai strâns și mai
@@ -151,10 +155,10 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
           vinzi, la final ce poți face. Fiecare element intră după ce ochiul
           l-a terminat pe cel dinainte. Vezi `.hero-in` din globals.css. */}
       <div className="shell relative flex h-full flex-col pt-28 pb-10 md:pb-14">
-        <p className="eyebrow text-paper/55 hero-in" style={{ "--in-delay": "480ms" } as CSSProperties}>
-          {site.role} · {site.city}
-        </p>
-
+        {/* Aici era „Agent imobiliar · București”. A plecat când prima pagină a
+            primit banda de deschidere: aceeași etichetă apărea de două ori pe
+            același ecran, la câteva sute de pixeli distanță. Cine e și unde
+            lucrează se spune o dată, sus. */}
         <div className="mt-auto">
           <SplitReveal as="h1" className="display-hero max-w-[13ch]" immediate delay={620} stagger={110}>
             {site.tagline}

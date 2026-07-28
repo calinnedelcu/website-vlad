@@ -2,6 +2,7 @@ import { Photo } from "@/components/Photo";
 import Link from "next/link";
 import { HeroCinematic } from "@/components/HeroCinematic";
 import { HorizontalShowcase } from "@/components/HorizontalShowcase";
+import { OpeningBand } from "@/components/OpeningBand";
 import { PortfolioMap } from "@/components/PortfolioMap";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
@@ -22,18 +23,18 @@ import { site } from "@/lib/site";
 const steps = [
   {
     n: "01",
-    title: "Comision 0% de la tine",
-    body: "Pe fiecare proprietate din portofoliu, cumpărătorul sau chiriașul nu plătește comision. Onorariul vine de la proprietar. E scris pe fiecare anunț, nu e o ofertă de moment.",
+    title: "Comisionul îl plătește proprietarul",
+    body: "Pe toate proprietățile din portofoliu, cumpărătorul și chiriașul nu plătesc comision. Scrie pe fiecare anunț, deci poți verifica înainte să mă suni.",
   },
   {
     n: "02",
     title: "Majoritatea sunt în exclusivitate",
-    body: "Când o proprietate e luată în exclusivitate, nu concurez cu alți cinci agenți pe același anunț. Înseamnă că știu istoria ei, pot negocia serios și îți răspund la orice întrebare fără să sun pe altcineva.",
+    body: "Când o proprietate e luată în exclusivitate, o țin eu. Știu de când e pe piață, ce s-a schimbat la preț și ce au reclamat oamenii care au venit s-o vadă. Pot să-ți răspund fără să sun pe altcineva.",
   },
   {
     n: "03",
-    title: "Scriu ce e acolo, cu metri și minute",
-    body: "În descrieri găsești strada, etajul, ce s-a schimbat și în ce an, cât faci pe jos până la metrou sau la stație. Nu „ultracentral, superb”. Dacă ceva lipsește dintr-o proprietate, o afli înainte să te deplasezi.",
+    title: "Anunțuri scrise cu cifre",
+    body: "În descrieri găsești strada, etajul, ce s-a renovat și în ce an, cât faci pe jos până la metrou sau la stație. Dacă lipsește ceva important, scriu și asta — ca să nu te deplasezi degeaba.",
   },
 ];
 
@@ -52,43 +53,29 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Cerut de Vlad: primul lucru la deschidere e el și agenția, apoi
+          ofertele. Vezi OpeningBand pentru de ce e bandă, nu ecran plin. */}
+      <OpeningBand />
+
       <HeroCinematic properties={heroSlides} />
 
       {/* ---------- Manifest ---------- */}
       <section id="manifest" className="shell py-24 md:py-40">
         <div className="grid gap-12 md:grid-cols-12">
-          {/* Coloana cu omul. Un site de agent fără fața agentului pe prima
-              pagină e o broșură — oamenii aleg persoana, nu agenția. */}
+          {/* Aici era al doilea portret al lui Vlad, cu numele și rolul sub el.
+              A plecat când prima pagină a primit banda de deschidere: fața lui
+              e acum primul lucru de pe site, mare, iar a doua fotografie a lui
+              la două ecrane distanță nu mai adăuga nimic — doar repeta, și
+              odată cu ea repeta și „Agent imobiliar”. */}
           <div className="md:col-span-3">
             <Reveal>
               <p className="eyebrow">Ce fac</p>
-            </Reveal>
-
-            <Reveal
-              variant="image"
-              delay={80}
-              className="mt-8 aspect-4/5 w-full max-w-[15rem] md:mt-10 md:max-w-none"
-            >
-              <Photo
-                src={site.portrait}
-                alt={`${site.name}, ${site.role.toLowerCase()} la ${site.agency}`}
-                fill
-                sizes="(max-width: 768px) 60vw, 24vw"
-                className="object-cover object-center"
-              />
-            </Reveal>
-
-            <Reveal delay={180}>
-              <p className="mt-5 text-sm">{site.name}</p>
-              <p className="text-muted text-sm">
-                {site.role} · {site.agency}
-              </p>
             </Reveal>
           </div>
 
           <div className="md:col-span-8 md:col-start-5">
             <SplitReveal className="display-lg max-w-[20ch]" stagger={80}>
-              Un apartament în Floreasca și o hală lângă A0 nu se vând la fel.
+              Vând apartamente în București și spații industriale în Ilfov.
             </SplitReveal>
 
             <div className="mt-12 grid gap-10 md:grid-cols-2">
@@ -97,9 +84,10 @@ export default function HomePage() {
               </Reveal>
               <Reveal delay={200}>
                 <p className="text-muted">
-                  Unul se vinde cu lumina de dimineață și cu drumul până la metrou. Celălalt, cu
-                  curentul trifazic și cu cât faci până la centură. Am în portofoliu și una, și
-                  alta — și le tratez ca pe două meserii diferite, pentru că sunt.
+                  Sunt două piețe cu ritmuri diferite. La un apartament contează etajul, lumina
+                  și cât faci pe jos până la metrou. La o hală contează înălțimea utilă, curentul
+                  trifazic și cât faci până la A0. Le țin pe amândouă pentru că am clienți pentru
+                  amândouă.
                 </p>
                 <Link href="/despre" className="link-underline mt-6 inline-block text-sm">
                   Despre Vlad
@@ -204,7 +192,7 @@ export default function HomePage() {
           />
           <div className="shell relative py-28 text-center md:py-44">
             <SplitReveal className="display-lg mx-auto max-w-[20ch]" stagger={80}>
-              Spune-mi ce cauți. Îți zic în două minute dacă am sau nu.
+              Spune-mi ce cauți și îți răspund cu ce am în portofoliu.
             </SplitReveal>
             <Reveal delay={200}>
               <div className="mt-12 flex flex-wrap justify-center gap-4">

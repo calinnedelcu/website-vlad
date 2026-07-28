@@ -20,9 +20,9 @@ export const metadata: Metadata = {
  * jumătate. Vezi README.
  */
 const story = [
-  "Lucrez ca agent imobiliar la Trîmbițașu Estate, în București. Portofoliul meu are două jumătăți care par să n-aibă legătură: apartamente de vânzare și de închiriat în oraș, și hale de producție și depozitare în parcurile industriale de pe centură.",
-  "Nu e o întâmplare. Sunt piețe cu ritmuri diferite — un apartament se închiriază în două săptămâni, o hală poate sta două luni și apoi se semnează pe trei ani. Una îmi ține cash-flow-ul, cealaltă îmi ține răbdarea. Și fiecare mă învață altceva despre cum se negociază.",
-  "Ce e la fel la amândouă: proprietarul plătește comisionul, nu tu. Și scriu în anunț ce e acolo, cu stradă, etaj, an de renovare și minute de mers pe jos — ca să nu te deplasezi degeaba.",
+  "Lucrez ca agent imobiliar la Trîmbițașu Estate, în București. Portofoliul meu are două părți: apartamente de vânzare și de închiriat în oraș, și hale de producție și depozitare în parcurile industriale de pe centură.",
+  "Sunt piețe cu ritmuri diferite, și se caută altfel. La un apartament oamenii vin repede și se hotărăsc din ce văd la vizionare. La o hală discuția ține mai mult și se poartă pe alte lucruri: înălțime utilă, curent trifazic, acces pentru TIR, cât faci până la A0.",
+  "Ce e la fel la amândouă: comisionul îl plătește proprietarul, nu tu. Și scriu în anunț ce e acolo — stradă, etaj, an de renovare, minute de mers pe jos — ca să știi dacă merită drumul înainte să-l faci.",
 ];
 
 const values = [
@@ -32,10 +32,10 @@ const values = [
   },
   {
     title: "Lucrez pe exclusivitate",
-    body: "Majoritatea proprietăților sunt luate în exclusivitate. Nu concurez cu alți agenți pe același anunț, deci pot să-ți spun tot ce știu despre ea.",
+    body: "Majoritatea proprietăților sunt luate în exclusivitate, deci le știu istoria și pot să-ți spun tot ce știu despre ele.",
   },
   {
-    title: "Descrieri cu cifre, nu cu adjective",
+    title: "Descrieri cu cifre",
     body: "Strada, etajul, anul renovării, distanța până la metrou în minute. Dacă ceva lipsește, scrie și asta.",
   },
 ];

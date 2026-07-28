@@ -23,10 +23,22 @@ export function SiteHeader() {
   useEffect(() => {
     const check = () => {
       setScrolled(window.scrollY > 24);
-      const hero = document.querySelector("[data-dark-hero]");
-      // 5rem = înălțimea header-ului. Cât timp hero-ul ajunge sub el, suntem
-      // încă „pe fotografie”.
-      setOnDark(!!hero && hero.getBoundingClientRect().bottom > 80);
+
+      // 5rem = înălțimea header-ului; verificăm ce se află sub linia aia.
+      //
+      // Se uită la TOATE secțiunile închise, nu la prima găsită: de când
+      // prima pagină începe cu banda de deschidere urmată de hero, sunt două
+      // una după alta. Cu `querySelector` simplu, header-ul trecea pe negru
+      // imediat ce se termina banda — adică fix peste fotografia hero-ului.
+      //
+      // Și e o suprapunere adevărată, nu doar „marginea de jos e sub linie”:
+      // altfel orice secțiune închisă rămasă în urmă pe pagină ar fi ținut
+      // header-ul alb la nesfârșit.
+      const overlapping = [...document.querySelectorAll("[data-dark-hero]")].some((section) => {
+        const box = section.getBoundingClientRect();
+        return box.top < 80 && box.bottom > 80;
+      });
+      setOnDark(overlapping);
     };
 
     check();
