@@ -234,6 +234,24 @@ crește în locul altcuiva.
 **Regula, dacă adaugi ceva:** o proprietate apare o singură dată pe o pagină,
 iar home-ul arată o selecție — nu tot portofoliul.
 
+### Subsolul
+
+A fost aproape o a doua pagină: titlu mare, două butoane, patru coloane. Repeta
+lucruri care erau deja pe ecran — titlul relua banda de contact de pe home
+(amândouă începeau cu „Spune-mi ce cauți”), coloana „Navigare” era identică cu
+meniul fix din header, iar telefonul apărea de până la patru ori simultan
+(header pe desktop, `StickyContact` pe mobil, butonul din subsol, coloana de
+contact).
+
+Acum ține **doar ce n-are alt loc pe site**: emailul, rețelele, cine e și pentru
+cine lucrează, mărunțișul legal. 13 linkuri → 5, telefonul de 5 ori → 0, un
+titlu mare → niciunul. Contactul rămâne la un click de oriunde.
+
+Culoarea: subsolul era **singurul loc din tot codul** care folosea verdele
+`forest`, rămășiță dintr-o paletă mai veche. Închisul e rezervat momentelor cu
+fotografie; subsolul n-are fotografie. A trecut pe `paper-deep`, iar tokenii
+`--color-forest*` au fost șterși.
+
 ## Harta
 
 Conturul e **geometrie reală**, adusă din OpenStreetMap:
