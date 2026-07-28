@@ -27,8 +27,11 @@ export function SiteFooter() {
   return (
     <footer className="bg-paper-deep text-ink mt-32">
       <div className="shell py-16 md:py-20">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
+        {/* Pe telefon, „Scrie-mi” și „Social” stau umăr la umăr: sunt două
+            liste de câte două rânduri, iar una sub alta însemnau un ecran de
+            subsol pentru patru linkuri. */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-12">
+          <div className="col-span-2 md:col-span-5">
             <p className="font-display text-2xl leading-none">{site.name}</p>
             <p className="text-muted mt-2 text-sm">
               {site.role} la {site.agency}, {site.city}.

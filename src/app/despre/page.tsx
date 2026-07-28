@@ -25,18 +25,27 @@ const story = [
   "Ce e la fel la amândouă: comisionul îl plătește proprietarul, nu tu. Și scriu în anunț ce e acolo — stradă, etaj, an de renovare, minute de mers pe jos — ca să știi dacă merită drumul înainte să-l faci.",
 ];
 
+/**
+ * Cele trei lucruri verificabile. Erau scrise de două ori pe site — o dată
+ * aici, o dată în „Cum lucrez” pe prima pagină, cu alte cuvinte și același
+ * înțeles. Prima pagină a rămas fără secțiune (vezi comentariul de acolo), iar
+ * textele ei, care erau mai bune, au venit aici.
+ *
+ * Nimic din ce scrie mai jos nu e inventat: se poate verifica pe anunțuri.
+ * Vezi README.
+ */
 const values = [
   {
-    title: "Comisionul nu vine de la tine",
-    body: "Pe fiecare proprietate din portofoliu scrie „comision 0%” pentru cumpărător sau chiriaș. Onorariul îl plătește proprietarul.",
+    title: "Comisionul îl plătește proprietarul",
+    body: "Pe toate proprietățile din portofoliu, cumpărătorul și chiriașul nu plătesc comision. Scrie pe fiecare anunț, deci poți verifica înainte să mă suni.",
   },
   {
-    title: "Lucrez pe exclusivitate",
-    body: "Majoritatea proprietăților sunt luate în exclusivitate, deci le știu istoria și pot să-ți spun tot ce știu despre ele.",
+    title: "Majoritatea sunt în exclusivitate",
+    body: "Când o proprietate e luată în exclusivitate, o țin eu. Știu de când e pe piață, ce s-a schimbat la preț și ce au reclamat oamenii care au venit s-o vadă. Pot să-ți răspund fără să sun pe altcineva.",
   },
   {
-    title: "Descrieri cu cifre",
-    body: "Strada, etajul, anul renovării, distanța până la metrou în minute. Dacă ceva lipsește, scrie și asta.",
+    title: "Anunțuri scrise cu cifre",
+    body: "În descrieri găsești strada, etajul, ce s-a renovat și în ce an, cât faci pe jos până la metrou sau la stație. Dacă lipsește ceva important, scriu și asta — ca să nu te deplasezi degeaba.",
   },
 ];
 

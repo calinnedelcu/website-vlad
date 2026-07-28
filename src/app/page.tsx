@@ -3,40 +3,33 @@ import Link from "next/link";
 import { HeroCinematic } from "@/components/HeroCinematic";
 import { HorizontalShowcase } from "@/components/HorizontalShowcase";
 import { OpeningBand } from "@/components/OpeningBand";
-import { PortfolioMap } from "@/components/PortfolioMap";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
-import { availableProperties, properties, soldProperties } from "@/lib/properties";
+import { availableProperties, neighborhoods, soldProperties } from "@/lib/properties";
 import { site } from "@/lib/site";
 
 /**
- * Textele de mai jos sunt scrise strict pe ce se poate demonstra din
- * portofoliul real: comision 0% și exclusivitate pe anunțuri, descrieri cu
- * repere și distanțe verificabile, prezență pe două piețe diferite.
- * Nu inventa aici cifre sau promisiuni — vezi README.
+ * Prima pagină ține șase lucruri, în ordinea asta: cine e, ce vinde acum, ce
+ * face, ce a vândut deja, cum îl suni, mărunțișul.
+ *
+ * Vlad a cerut o pagină scurtă. Scurtarea n-a însemnat să ștergem conținut, ci
+ * să nu-l mai spunem de două ori:
+ *
+ * - „Cum lucrez” (comision 0%, exclusivitate, anunțuri cu cifre) spunea exact
+ *   ce spune „Ce poți să aștepți” de pe /despre. A rămas acolo, cu textul mai
+ *   bun de aici. Costa 1,5 ecrane pentru zero informație nouă.
+ * - Al doilea paragraf din „Ce fac” („sunt două piețe cu ritmuri diferite”) e
+ *   povestea de pe /despre, repovestită. A plecat.
+ * - Harta s-a mutat pe /proprietati. Nu e decor, e unealtă de căutare: acolo
+ *   te uiți pe zone și dai imediat în listă. Aici era frumoasă și fără urmare.
+ *
+ * Dacă adaugi ceva aici, întreabă-te întâi dacă nu scrie deja pe alt ecran.
  */
-const steps = [
-  {
-    n: "01",
-    title: "Comisionul îl plătește proprietarul",
-    body: "Pe toate proprietățile din portofoliu, cumpărătorul și chiriașul nu plătesc comision. Scrie pe fiecare anunț, deci poți verifica înainte să mă suni.",
-  },
-  {
-    n: "02",
-    title: "Majoritatea sunt în exclusivitate",
-    body: "Când o proprietate e luată în exclusivitate, o țin eu. Știu de când e pe piață, ce s-a schimbat la preț și ce au reclamat oamenii care au venit s-o vadă. Pot să-ți răspund fără să sun pe altcineva.",
-  },
-  {
-    n: "03",
-    title: "Anunțuri scrise cu cifre",
-    body: "În descrieri găsești strada, etajul, ce s-a renovat și în ce an, cât faci pe jos până la metrou sau la stație. Dacă lipsește ceva important, scriu și asta — ca să nu te deplasezi degeaba.",
-  },
-];
-
 export default function HomePage() {
   const available = availableProperties();
   const sold = soldProperties();
   const commercial = available.filter((p) => p.segment === "comercial");
+  const zones = neighborhoods();
 
   // Hero-ul ține ce e de vânzare ACUM. Selecția de dedesubt ține ce a vândut
   // DEJA. Înainte, amândouă arătau aceleași proprietăți marcate `featured` —
@@ -68,7 +61,7 @@ export default function HomePage() {
       <HeroCinematic properties={heroSlides} />
 
       {/* ---------- Manifest ---------- */}
-      <section id="manifest" className="shell py-24 md:py-40">
+      <section id="manifest" className="shell py-20 md:py-28">
         <div className="grid gap-12 md:grid-cols-12">
           {/* Aici era al doilea portret al lui Vlad, cu numele și rolul sub el.
               A plecat când prima pagină a primit banda de deschidere: fața lui
@@ -90,28 +83,26 @@ export default function HomePage() {
               Vând apartamente în București și spații industriale în Ilfov.
             </SplitReveal>
 
-            <div className="mt-12 grid gap-10 md:grid-cols-2">
+            {/* Un singur paragraf. Al doilea explica de ce ține două piețe
+                deodată — dar aia e chiar povestea de pe /despre, spusă a doua
+                oară cu alte cuvinte. Cine vrea explicația are linkul dedesubt.
+                `site.intro` rămâne pentru că duce singurul lucru pe care omul
+                chiar trebuie să-l afle devreme: comisionul nu vine de la el. */}
+            <div className="mt-10">
               <Reveal delay={120}>
-                <p className="lede">{site.intro}</p>
-              </Reveal>
-              <Reveal delay={200}>
-                <p className="text-muted">
-                  Sunt două piețe cu ritmuri diferite. La un apartament contează etajul, lumina
-                  și cât faci pe jos până la metrou. La o hală contează înălțimea utilă, curentul
-                  trifazic și cât faci până la A0. Le țin pe amândouă pentru că am clienți pentru
-                  amândouă.
-                </p>
+                <p className="lede max-w-[52ch]">{site.intro}</p>
                 <Link href="/despre" className="link-underline mt-6 inline-block text-sm">
                   Despre Vlad
                 </Link>
               </Reveal>
             </div>
 
-            {/* Cele două cifre care chiar spun ceva. Restul blocului de
-                statistici a plecat pe /despre — se repeta cu ce se vede
-                oricum mai jos. */}
-            <Reveal delay={260}>
-              <div className="border-line mt-12 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
+            {/* Cifrele care chiar spun ceva. Restul blocului de statistici a
+                plecat pe /despre — se repeta cu ce se vede oricum mai jos.
+                A treia e și drumul către hartă, de când harta stă lângă
+                lista de proprietăți. */}
+            <Reveal delay={200}>
+              <div className="border-line mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
                 <p className="nums text-sm">
                   <span className="font-display mr-2 text-2xl">{available.length}</span>
                   proprietăți în portofoliu, acum
@@ -120,18 +111,21 @@ export default function HomePage() {
                   <span className="font-display mr-2 text-2xl">{commercial.length}</span>
                   spații comerciale și industriale
                 </p>
+                <Link href="/proprietati#harta" className="nums group text-sm">
+                  <span className="font-display mr-2 text-2xl">{zones.length}</span>
+                  <span className="link-underline">zone, pe hartă</span>
+                </Link>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Aici era o bandă cu numele cartierelor, care curgea la nesfârșit.
-          Spunea exact același lucru ca harta — „lucrez în zonele astea” — dar
-          îl spunea ca decor: nu puteai citi din ea nici unde sunt, nici câte
-          sunt, nici care e diferența dintre ele. Aceeași informație, arătată
-          în loc să fie derulată, și fără să crească pagina cu un ecran. */}
-      <PortfolioMap properties={properties} />
+      {/* Aici a stat pe rând o bandă cu numele cartierelor, care curgea la
+          nesfârșit, apoi harta care a înlocuit-o. Harta a plecat pe
+          /proprietati: e o unealtă de căutare, iar acolo te uiți pe zone și
+          dai imediat în listă. Aici costa 1,3 ecrane și nu ducea nicăieri.
+          Drumul spre ea a rămas — cifra „zone, pe hartă” de mai sus. */}
 
       {/* ---------- Portofoliul, pe orizontală ---------- */}
       {/* Ce a vândut, cu fotografii mari. Ce e disponibil acum se vede sus, în
@@ -146,51 +140,13 @@ export default function HomePage() {
         />
       )}
 
-
-
-      {/* ---------- Cum lucrez ---------- */}
-      <section id="cum-lucrez" className="bg-paper-deep py-24 md:py-32">
-        <div className="shell grid gap-14 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <div className="md:sticky md:top-28">
-              <Reveal>
-                <p className="eyebrow">Cum lucrez</p>
-              </Reveal>
-              <SplitReveal className="display-md mt-4 max-w-[14ch]">
-                Trei lucruri pe care le poți verifica
-              </SplitReveal>
-
-              {showcase[1] && (
-                <Reveal variant="image" className="mt-12 hidden aspect-4/5 w-full md:block">
-                  <Photo
-                    src={showcase[1].media.cover}
-                    alt=""
-                    fill
-                    sizes="40vw"
-                    className="object-cover"
-                  />
-                </Reveal>
-              )}
-            </div>
-          </div>
-
-          <div className="md:col-span-6 md:col-start-7">
-            {steps.map((step, i) => (
-              <Reveal key={step.n} delay={i * 100}>
-                <div className="border-line grid gap-4 border-t py-12 sm:grid-cols-[4rem_1fr]">
-                  <span className="eyebrow pt-2">{step.n}</span>
-                  <div>
-                    <h3 className="display-sm">{step.title}</h3>
-                    <p className="text-ink-soft mt-3 max-w-[52ch]">{step.body}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
+      {/* Aici era „Cum lucrez”: comision plătit de proprietar, exclusivitate,
+          anunțuri cu cifre. Trei lucruri adevărate și importante — dar scrise
+          deja, cuvânt cu cuvânt ca înțeles, în „Ce poți să aștepți” de pe
+          /despre. Un ecran și jumătate ca să repeți o pagină de alături.
+          Textele bune de aici s-au dus acolo, deci n-a rămas nimic pe drum.
+          Iar comisionul, singurul care contează în primele secunde, e oricum
+          în paragraful de sus. */}
 
       {/* ---------- Închidere ---------- */}
       {closer && (
@@ -202,7 +158,7 @@ export default function HomePage() {
             sizes="100vw"
             className="object-cover opacity-35"
           />
-          <div className="shell relative py-28 text-center md:py-44">
+          <div className="shell relative py-20 text-center md:py-28">
             <SplitReveal className="display-lg mx-auto max-w-[20ch]" stagger={80}>
               Spune-mi ce cauți și îți răspund cu ce am în portofoliu.
             </SplitReveal>
