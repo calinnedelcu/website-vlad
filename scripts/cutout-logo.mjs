@@ -74,8 +74,6 @@ for (let i = 0; i < info.width * info.height; i++) {
   out[q + 3] = Math.round(alpha * 255);
 }
 
-const target = join(ROOT, "assets/logo-trimbitasu-estate.png");
-
 // `trim` scoate marginile devenite transparente: sigla ajunge să umple caseta,
 // deci n-avem nevoie de potriveli din CSS ca să pară centrată.
 const png = await sharp(out, { raw: { width: info.width, height: info.height, channels: 4 } })
@@ -83,9 +81,43 @@ const png = await sharp(out, { raw: { width: info.width, height: info.height, ch
   .png()
   .toBuffer();
 
-await writeFile(target, png);
+await writeFile(join(ROOT, "assets/logo-trimbitasu-estate.png"), png);
 
-const final = await sharp(png).metadata();
-console.log(`${info.width}×${info.height} → ${final.width}×${final.height}`);
+const full = await sharp(png).metadata();
+console.log(`${info.width}×${info.height} → ${full.width}×${full.height}`);
 console.log(`pixeli păstrați: ${((kept / (info.width * info.height)) * 100).toFixed(1)}%`);
 console.log(`scris: assets/logo-trimbitasu-estate.png (${(png.length / 1024).toFixed(0)} KB)`);
+
+/**
+ * Și doar monograma, fără cuvântul-marcă de sub ea.
+ *
+ * Sigla întreagă are „TRÎMBIȚAȘU ESTATE” scris în ultimii 32% din înălțime. La
+ * mărimea la care stă pe site, textul ăla ajunge la ~7px înălțime de literă pe
+ * telefon și ~9px pe desktop — majuscule serif cu Î, Ț și Ș, adică o pată, nu
+ * un cuvânt. În plus, header-ul scrie aceleași două cuvinte la câțiva
+ * centimetri deasupra, cules ca lume.
+ *
+ * Monograma singură e geometrică și se citește la orice mărime.
+ */
+const gap = await (async () => {
+  const { data: d, info: i } = await sharp(png).raw().toBuffer({ resolveWithObject: true });
+  const opaque = (y) => {
+    let n = 0;
+    for (let x = 0; x < i.width; x++) if (d[(y * i.width + x) * 4 + 3] > 40) n++;
+    return n / i.width;
+  };
+  // Primul rând complet gol după jumătatea de sus: acolo se termină semnul.
+  for (let y = Math.round(i.height * 0.45); y < i.height; y++) if (opaque(y) < 0.005) return y;
+  return i.height;
+})();
+
+const mark = await sharp(png)
+  .extract({ left: 0, top: 0, width: full.width, height: gap })
+  .trim()
+  .png()
+  .toBuffer();
+
+await writeFile(join(ROOT, "assets/logo-trimbitasu-mark.png"), mark);
+
+const markMeta = await sharp(mark).metadata();
+console.log(`scris: assets/logo-trimbitasu-mark.png (${markMeta.width}×${markMeta.height})`);

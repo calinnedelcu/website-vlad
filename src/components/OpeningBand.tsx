@@ -26,18 +26,32 @@ export function OpeningBand() {
       // secțiuni închise una după alta, deci SiteHeader le verifică pe toate,
       // nu doar pe prima — vezi acolo.
       data-dark-hero
-      className="bg-void text-paper relative isolate -mt-20 h-[52svh] min-h-[22rem] overflow-hidden md:h-[44svh]"
+      // Aceeași înălțime peste tot. Pe telefon era 52svh, iar cum lățimea
+      // benzii și proporția cadrului erau aproape identice, se vedea 2%→90%
+      // din fotografie — practic tot, inclusiv mâinile împreunate în poală, la
+      // 83–90%. Ele ajungeau centrul vizual al benzii. La 44svh se vede
+      // 3%→77%: cap și umeri, restul rămâne afară.
+      className="bg-void text-paper relative isolate -mt-20 h-[44svh] min-h-[19rem] overflow-hidden"
     >
       {/* Pe telefon fotografia e fundalul întregii benzi; de la `md` în sus se
-          retrage în dreapta, ca să nu fie nevoie s-o întindem pe lat. */}
-      <div className="absolute inset-0 md:right-0 md:left-auto md:w-[42%]">
+          retrage în dreapta, ca să nu fie nevoie s-o întindem pe lat.
+
+          Caseta iese cu 15% în afara ecranului, în ambele părți, și asta nu e
+          o scăpare. `object-fit: cover` taie doar cât trebuie ca să umple
+          caseta: pe un telefon îngust, banda ajunge aproape la proporția
+          cadrului (0.89 față de 0.78), deci nu se taie mai nimic — se vedea
+          1%→89% din fotografie, adică tot, cu mâinile împreunate în poală.
+          `object-position` singur n-are ce face acolo, fiindcă nu mai există
+          surplus de mutat. O casetă mai lată forțează decuparea pe verticală
+          și lasă cap și umeri. */}
+      <div className="absolute inset-y-0 -right-[15%] -left-[15%] md:right-0 md:left-auto md:w-[42%]">
         <Photo
           src={site.portraitOffice}
           alt={`${site.name}, ${site.role.toLowerCase()} la ${site.agency}`}
           fill
           priority
           sizes="(max-width: 768px) 100vw, 42vw"
-          className="object-cover object-[center_20%]"
+          className="object-cover object-[center_12%]"
         />
         <div className="scrim-band pointer-events-none absolute inset-0" />
       </div>
@@ -47,15 +61,17 @@ export function OpeningBand() {
             deasupra, iar „Trîmbițașu Estate” scris ca text ar repeta sigla —
             adică aceleași două cuvinte de trei ori într-un singur ecran. */}
         <div className="flex items-end gap-5 md:gap-6">
-          {/* Decupată, deci stă direct pe negru fără casetă în jur. */}
+          {/* Doar monograma, decupată, deci stă direct pe negru fără casetă în
+              jur. Cuvântul-marcă din siglă e lăsat afară dinadins — vezi
+              `agencyMark` în site.ts. */}
           <Photo
-            src={site.agencyLogo}
+            src={site.agencyMark}
             alt={site.agency}
             width={790}
-            height={976}
+            height={639}
             priority
-            sizes="(max-width: 768px) 4.5rem, 6rem"
-            className="h-18 w-auto md:h-24"
+            sizes="(max-width: 768px) 5rem, 7rem"
+            className="h-14 w-auto md:h-20"
           />
 
           <p className="eyebrow text-paper/75 pb-2">

@@ -51,6 +51,16 @@ export const site = {
   agencyLogo: asset("/media/local/logo-trimbitasu-estate.webp"),
 
   /**
+   * Doar monograma, fără cuvântul-marcă. Asta se folosește pe site.
+   *
+   * În sigla întreagă, „TRÎMBIȚAȘU ESTATE” ocupă ultimii 32% din înălțime — la
+   * mărimea la care stă în banda de deschidere iese la ~7px înălțime de literă
+   * pe telefon, majuscule serif cu Î, Ț, Ș. Adică o pată. Iar header-ul scrie
+   * aceleași două cuvinte la câțiva centimetri deasupra, cules corect.
+   */
+  agencyMark: asset("/media/local/logo-trimbitasu-mark.webp"),
+
+  /**
    * Varianta de studio, pe fundal alb, de pe pagina de echipă a agenției.
    * Tăiată curat, deci merge unde e nevoie de un portret mic și neutru.
    * Original: media.crmrebs.com/avatars/11432/b78b0816-e835-4a98-907d-a5d8fbef5af5.jpeg
