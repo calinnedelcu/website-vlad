@@ -150,11 +150,14 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
       // „ia imaginea și mut-o”, care se vede ca o fantomă a pozei lipită de
       // cursor și înghite gestul nostru.
       onDragStart={(event) => event.preventDefault()}
+      // `select-none`: altfel trasul peste titlu selectează textul în loc să
+      // treacă la fotografia următoare, iar omul rămâne cu o dâră albastră pe
+      // ecran și cu senzația că site-ul s-a stricat.
       // Fără `-mt-20` de când deasupra stă banda de deschidere: marginea aia
       // negativă anula `pt-20` de pe `main`, ca hero-ul să treacă pe sub
       // header. Acum banda face asta, iar hero-ul e al doilea — cu ea, se urca
       // 80px peste bandă și îi acoperea sigla pe jumătate.
-      className="bg-void text-paper relative isolate h-[100svh] min-h-[36rem] w-full overflow-hidden"
+      className="bg-void text-paper relative isolate h-[100svh] min-h-[36rem] w-full overflow-hidden select-none"
     >
       {/* --- Fotografiile suprapuse ---
           `.hero-open` e deschiderea: cadrul pornește puțin mai strâns și mai
@@ -194,6 +197,12 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
                   fill
                   priority={i === 0}
                   sizes="100vw"
+                  // Fără asta, trasul cu mouse-ul peste fotografie pornește
+                  // mutarea nativă de imagine a browserului. Ea începe cu un
+                  // `pointercancel`, care ne ștergea gestul din mână înainte
+                  // să apuce să vină `pointerup` — de aia „nu mergea să tragi”
+                  // în browser adevărat, deși mergea la test.
+                  draggable={false}
                   className="object-cover"
                 />
               </Morph>
@@ -253,40 +262,77 @@ export function HeroCinematic({ properties }: HeroCinematicProps) {
               </div>
             )}
 
-            {/* Indicatoare: fiecare bară se umple cât stă fotografia pe ecran.
-                Sunt și comanda manuală de la tastatură — săgeți stânga/dreapta
-                cât timp una dintre ele are focus. */}
+            {/* Comenzile.
+                Înainte erau doar barele-indicator: linii de 1px la 25%
+                opacitate, în colț. Comanda exista — trăgeai cu degetul, iar
+                săgețile de la tastatură mergeau — dar nimic nu spunea asta, iar
+                săgețile cereau întâi focus pe o linie de un pixel. Adică o
+                funcție pe care trebuia s-o ghicești. De aici două butoane
+                adevărate, cu contur, de 44px. */}
             {slides.length > 1 && (
               <div
-                className="flex gap-3 md:col-span-2 md:col-start-11 md:justify-end"
+                className="flex items-center justify-between gap-5 md:col-span-3 md:col-start-10 md:justify-end"
                 onKeyDown={(event) => {
                   if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
                   event.preventDefault();
                   go(index + (event.key === "ArrowRight" ? 1 : -1));
                 }}
               >
-                {slides.map((property, i) => (
-                  <button
-                    key={property.slug}
-                    type="button"
-                    onClick={() => go(i)}
-                    aria-label={`Vezi ${property.title}`}
-                    aria-current={i === index}
-                    className="group w-10 py-3 md:w-8"
-                  >
-                    <span className="bg-paper/25 block h-px w-full origin-left">
-                      <span
-                        className="bg-paper block h-px origin-left"
-                        style={{
-                          transform: `scaleX(${i === index ? 1 : 0})`,
-                          transitionProperty: "transform",
-                          transitionTimingFunction: "linear",
-                          transitionDuration: i === index && auto ? `${INTERVAL}ms` : "400ms",
-                        }}
-                      />
-                    </span>
-                  </button>
-                ))}
+                <div className="flex gap-2">
+                  {(
+                    [
+                      ["Fotografia precedentă", -1, "M15 18l-6-6 6-6"],
+                      ["Fotografia următoare", 1, "M9 6l6 6-6 6"],
+                    ] as const
+                  ).map(([label, step, path]) => (
+                    <button
+                      key={label}
+                      type="button"
+                      onClick={() => go(index + step)}
+                      aria-label={label}
+                      className="border-paper/35 text-paper/70 hover:border-paper hover:text-paper grid h-11 w-11 place-items-center border transition-colors duration-300"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="square"
+                      >
+                        <path d={path} />
+                      </svg>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Barele rămân, dar mai groase: arată cât mai stă fotografia
+                    pe ecran, ceea ce butoanele nu pot spune. */}
+                <div className="flex gap-2">
+                  {slides.map((property, i) => (
+                    <button
+                      key={property.slug}
+                      type="button"
+                      onClick={() => go(i)}
+                      aria-label={`Vezi ${property.title}`}
+                      aria-current={i === index}
+                      className="group w-7 py-4"
+                    >
+                      <span className="bg-paper/30 block h-0.5 w-full origin-left">
+                        <span
+                          className="bg-paper block h-0.5 origin-left"
+                          style={{
+                            transform: `scaleX(${i === index ? 1 : 0})`,
+                            transitionProperty: "transform",
+                            transitionTimingFunction: "linear",
+                            transitionDuration: i === index && auto ? `${INTERVAL}ms` : "400ms",
+                          }}
+                        />
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
