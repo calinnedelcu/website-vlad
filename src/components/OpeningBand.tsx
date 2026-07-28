@@ -29,9 +29,14 @@ export function OpeningBand() {
       // Aceeași înălțime peste tot. Pe telefon era 52svh, iar cum lățimea
       // benzii și proporția cadrului erau aproape identice, se vedea 2%→90%
       // din fotografie — practic tot, inclusiv mâinile împreunate în poală, la
-      // 83–90%. Ele ajungeau centrul vizual al benzii. La 44svh se vede
-      // 3%→77%: cap și umeri, restul rămâne afară.
-      className="bg-void text-paper relative isolate -mt-20 h-[44svh] min-h-[19rem] overflow-hidden"
+      // 83–90%. Ele ajungeau centrul vizual al benzii.
+      //
+      // Acum 50svh, cerut de Vlad („poza cu mine o țâră mai mare”). Se vede
+      // 4%→69% din cadru: cap și umeri, mâinile rămân afară. Cifra nu e
+      // aleasă doar ca să fie mai mare — 50svh aici plus 46svh la hero încap
+      // împreună într-un ecran, deci primul ecran ține și fața lui, și prima
+      // ofertă. Dacă schimbi una, uită-te și la cealaltă.
+      className="bg-void text-paper relative isolate -mt-20 h-[50svh] min-h-[21rem] overflow-hidden"
     >
       {/* Pe telefon fotografia e fundalul întregii benzi; de la `md` în sus se
           retrage în dreapta, ca să nu fie nevoie s-o întindem pe lat.

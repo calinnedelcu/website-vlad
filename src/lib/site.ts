@@ -16,7 +16,12 @@ export const site = {
   /** Se schimbă când intră domeniul propriu. Acum e previzualizarea de pe GitHub Pages. */
   url: "https://calinnedelcu.github.io/website-vlad",
 
-  tagline: "Apartamente în București și hale pe Centură.",
+  /*
+   * Aici era `tagline`, titlul mare de pe prima pagină. A plecat odată cu
+   * titlul: la jumătate de ecran nu mai încăpea, iar fraza asta trăiește
+   * oricum întreagă în titlul secțiunii „Ce fac”. Dacă vrei un slogan scurt
+   * înapoi, scrie-l aici — dar caută-i întâi un loc unde nu repetă altceva.
+   */
   intro:
     "Vând și închiriez apartamente în București și Ilfov, și spații industriale și comerciale cu acces din Centură și A0. Comisionul îl plătește proprietarul, nu cumpărătorul sau chiriașul.",
 

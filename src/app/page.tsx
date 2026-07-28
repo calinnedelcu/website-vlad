@@ -82,7 +82,11 @@ export default function HomePage() {
           </div>
 
           <div className="md:col-span-8 md:col-start-5">
-            <SplitReveal className="display-lg max-w-[20ch]" stagger={80}>
+            {/* `h1`-ul paginii stă aici de când banda cu ofertele a rămas fără
+                titlu — vezi HeroCinematic. E și locul potrivit: fraza asta
+                spune întreg ce se vinde, iar sus, peste fotografii de
+                apartamente, jumătate din ea era despre hale. */}
+            <SplitReveal as="h1" className="display-lg max-w-[20ch]" stagger={80}>
               Vând apartamente în București și spații industriale în Ilfov.
             </SplitReveal>
 
