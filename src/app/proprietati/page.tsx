@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Photo } from "@/components/Photo";
 import { PortfolioBrowser } from "@/components/PortfolioBrowser";
-import { PortfolioMap } from "@/components/PortfolioMap";
 import { SplitReveal } from "@/components/SplitReveal";
-import { availableNeighborhoods, availableProperties, properties } from "@/lib/properties";
+import { availableNeighborhoods, availableProperties } from "@/lib/properties";
 
 export const metadata: Metadata = {
   title: "Proprietăți",
@@ -49,16 +48,13 @@ export default function PropertiesPage() {
         </div>
       </section>
 
+      {/* Harta e înăuntru, nu aici: stă sub bara de filtre și e legată la
+          filtrul de zonă, deci ține de browser, nu de pagină. Vezi
+          PortfolioBrowser. A fost o vreme jos de tot, după grilă — acolo o
+          vedea doar cine derula până la capăt, adică nimeni. */}
       <section className="shell pb-20 md:pb-28">
         <PortfolioBrowser properties={available} neighborhoods={[...availableNeighborhoods()]} />
       </section>
-
-      {/* Harta a stat pe prima pagină, unde arăta bine și nu ducea nicăieri.
-          Aici e la locul ei: omul tocmai a trecut prin listă și filtre, iar
-          harta îi spune ce nu spune nicio filtrare — unde sunt lucrurile astea
-          unele față de altele. Primește tot portofoliul, nu doar ce e liber
-          acum: e o hartă a zonelor în care lucrează, nu un al doilea filtru. */}
-      <PortfolioMap properties={properties} />
     </>
   );
 }

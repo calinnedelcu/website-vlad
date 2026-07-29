@@ -3,9 +3,15 @@ import Link from "next/link";
 import { HeroCinematic } from "@/components/HeroCinematic";
 import { HorizontalShowcase } from "@/components/HorizontalShowcase";
 import { OpeningBand } from "@/components/OpeningBand";
+import { PortfolioMap } from "@/components/PortfolioMap";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
-import { availableProperties, neighborhoods, soldProperties } from "@/lib/properties";
+import {
+  availableProperties,
+  neighborhoods,
+  properties,
+  soldProperties,
+} from "@/lib/properties";
 import { site } from "@/lib/site";
 
 /**
@@ -99,8 +105,8 @@ export default function HomePage() {
 
             {/* Cifrele care chiar spun ceva. Restul blocului de statistici a
                 plecat pe /despre — se repeta cu ce se vede oricum mai jos.
-                A treia e și drumul către hartă, de când harta stă lângă
-                lista de proprietăți. */}
+                A treia duce la harta de dedesubt: e și cifră, și indicator că
+                harta există, pentru cine nu derulează. */}
             <Reveal delay={200}>
               <div className="border-line mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
                 <p className="nums text-sm">
@@ -111,7 +117,7 @@ export default function HomePage() {
                   <span className="font-display mr-2 text-2xl">{commercial.length}</span>
                   spații comerciale și industriale
                 </p>
-                <Link href="/proprietati#harta" className="nums group text-sm">
+                <Link href="#harta" className="nums group text-sm">
                   <span className="font-display mr-2 text-2xl">{zones.length}</span>
                   <span className="link-underline">zone, pe hartă</span>
                 </Link>
@@ -121,11 +127,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Aici a stat pe rând o bandă cu numele cartierelor, care curgea la
-          nesfârșit, apoi harta care a înlocuit-o. Harta a plecat pe
-          /proprietati: e o unealtă de căutare, iar acolo te uiți pe zone și
-          dai imediat în listă. Aici costa 1,3 ecrane și nu ducea nicăieri.
-          Drumul spre ea a rămas — cifra „zone, pe hartă” de mai sus. */}
+      {/* Harta. A plecat o rundă pe /proprietati, ca prima pagină să se
+          scurteze — și Vlad a observat în aceeași seară că lipsește. Are
+          dreptate: e singurul loc de pe site unde „București și Ilfov” devine
+          ceva ce se vede, nu o formulă. S-a întors, și e și pe /proprietati,
+          dar acolo în celălalt mod — acolo filtrează, aici povestește. Costă
+          1,3 ecrane din prima pagină; le plătim conștient. */}
+      <PortfolioMap properties={properties} />
 
       {/* ---------- Portofoliul, pe orizontală ---------- */}
       {/* Ce a vândut, cu fotografii mari. Ce e disponibil acum se vede sus, în

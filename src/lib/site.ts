@@ -90,7 +90,15 @@ export const site = {
   ],
 } as const;
 
+/**
+ * Meniul. „Acasă” e primul dinadins: până acum drumul înapoi la prima pagină
+ * era doar sigla din colț. Pe desktop se vede tot timpul, deci treacă-meargă;
+ * pe telefon însă meniul acoperă tot ecranul, sigla dispare sub el, iar din
+ * cele patru rânduri niciunul nu ducea acasă. Vlad a intrat undeva din meniu
+ * și a rămas acolo — pe bună dreptate.
+ */
 export const nav = [
+  { href: "/", label: "Acasă" },
   { href: "/proprietati", label: "Proprietăți" },
   { href: "/tranzactii", label: "Tranzacții" },
   { href: "/despre", label: "Despre" },

@@ -86,9 +86,12 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav className="hidden items-center gap-7 md:flex lg:gap-9">
           {nav.map((item) => {
-            const active = pathname.startsWith(item.href);
+            // „/” e prefixul oricărei alte adrese, deci cu `startsWith` „Acasă”
+            // ar fi apărut activ pe tot site-ul. Doar el se compară exact.
+            const active =
+              item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Photo } from "@/components/Photo";
-import { PropertyIndexList } from "@/components/PropertyIndexList";
+import { PropertyCard } from "@/components/PropertyCard";
+import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
 import { soldProperties } from "@/lib/properties";
 import { site } from "@/lib/site";
@@ -44,16 +45,52 @@ export default function TransactionsPage() {
         </div>
       </section>
 
-      {/* Un registru, nu o vitrină: aici nimeni nu cumpără, deci lista bate
-          grila de carduri. Fotografia apare la hover, pentru cine vrea. */}
-      <PropertyIndexList
-        properties={sold}
-        eyebrow="Registru"
-        title="Ce a trecut prin mâna mea"
-        note="Selecția de mai jos e cea aleasă de Vlad. Istoricul complet, cu toate tranzacțiile trecute prin el, e ținut de agenție."
-        linkHref={site.transactionsUrl}
-        linkLabel="Istoricul complet, pe site-ul agenției"
-      />
+      {/* Aici era o listă de rânduri, fără nicio fotografie — cu una singură
+          care urmărea cursorul, deci numai pe desktop și numai la hover. Pe
+          telefon, unde se uită cei mai mulți, pagina asta era text pe text.
+          Cerut de Vlad: poze. Și are dreptate — proprietățile vândute sunt
+          singura lui dovadă, iar o dovadă pe care n-o vezi nu dovedește nimic.
+          Aceleași carduri ca pe /proprietati, care știu deja să arate o
+          proprietate încheiată: fotografia se decolorează, prețul se taie,
+          eticheta „vândut” stă în colț. */}
+      <section className="shell py-20 md:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <Reveal>
+              <p className="eyebrow">Registru</p>
+            </Reveal>
+            <SplitReveal className="display-md mt-3">Ce a trecut prin mâna mea</SplitReveal>
+            <Reveal delay={120}>
+              <p className="text-muted mt-4 max-w-[46ch] text-sm">
+                Selecția de mai jos e cea aleasă de Vlad. Istoricul complet, cu toate tranzacțiile
+                trecute prin el, e ținut de agenție.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={160}>
+            <a
+              href={site.transactionsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="link-underline text-sm"
+            >
+              Istoricul complet, pe site-ul agenției
+            </a>
+          </Reveal>
+        </div>
+
+        <div className="mt-14 grid gap-x-10 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
+          {sold.map((property, i) => (
+            <PropertyCard
+              key={property.slug}
+              property={property}
+              index={i + 1}
+              delay={(i % 3) * 100}
+              priority={i < 3}
+            />
+          ))}
+        </div>
+      </section>
     </>
   );
 }
