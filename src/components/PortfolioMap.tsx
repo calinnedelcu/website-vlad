@@ -68,6 +68,19 @@ export function PortfolioMap({
   const isFilter = variant === "filter";
   /** Ce e sub cursor acum. Se pierde la `pointerleave`, în ambele moduri. */
   const [hovered, setHovered] = useState<string | null>(null);
+  /**
+   * Zona aleasă cu click, în modul editorial. Nu se pierde la `pointerleave`,
+   * și ăsta e tot rostul ei.
+   *
+   * Înainte, `selected` era chiar `hovered`: alegeai o zonă cu mouse-ul, în
+   * panou apăreau proprietățile ei, iar ca să dai click pe vreuna trebuia să
+   * ieși cu mouse-ul de pe hartă — adică exact gestul care ștergea selecția.
+   * Lista dispărea sub cursor și nu se putea ajunge niciodată la ea. La fel și
+   * în lista „Toate zonele”: treceai cu mouse-ul peste un rând, panoul se
+   * schimba în lista de proprietăți, deci lista de zone de sub cursor se
+   * evapora.
+   */
+  const [picked, setPicked] = useState<string | null>(null);
 
   const zones = useMemo<MapZone[]>(() => {
     const grouped = new Map<string, Property[]>();
@@ -94,19 +107,31 @@ export function PortfolioMap({
   }, [properties]);
 
   /**
-   * Zona aleasă. În modul editorial e chiar ce e sub cursor; în modul filtru
-   * vine din bara de filtre și rămâne acolo până o schimbi.
+   * Zona aleasă. Vine din bara de filtre în modul filtru, din click în modul
+   * editorial. În niciunul nu depinde de unde stă mouse-ul.
    */
-  const selected = isFilter ? (value && value !== "toate" ? value : null) : hovered;
-  /** Ce se scrie pe etichetă: cursorul bate selecția, ca să poți iscodi harta. */
+  const selected = isFilter ? (value && value !== "toate" ? value : null) : picked;
+  /** Zona din panou. Se mișcă doar la click. */
+  const selectedZone = zones.find((zone) => zone.name === selected);
+  /**
+   * Eticheta de pe hartă. Asta da, urmărește cursorul — dar e doar un nume
+   * lipit lângă un punct, nu conținut cu linkuri în el, deci n-are cum să-ți
+   * fugă de sub deget.
+   */
   const shown = zones.find((zone) => zone.name === (hovered ?? selected));
   const missing = properties.length - zones.reduce((n, zone) => n + zone.items.length, 0);
   const inIlfov = zones.filter((zone) => zone.ilfov).length;
 
-  /** Un click pe un punct: alege zona în editorial, comută filtrul în filtru. */
+  /** Click pe un punct sau pe un rând din listă. A doua oară pe același: înapoi. */
   const pick = (name: string) => {
     if (isFilter) onChange?.(selected === name ? "toate" : name);
-    else setHovered(name);
+    else setPicked((current) => (current === name ? null : name));
+  };
+
+  /** Ieșirea din zona aleasă. */
+  const clear = () => {
+    if (isFilter) onChange?.("toate");
+    else setPicked(null);
   };
 
   /* ---------- Harta propriu-zisă ----------
@@ -185,7 +210,10 @@ export function PortfolioMap({
               zone.items.length
             } ${zone.items.length === 1 ? "proprietate" : "proprietăți"}`}
             aria-pressed={selected === zone.name}
-            className="absolute grid place-items-center"
+            // Tailwind v4 pune `cursor: default` pe butoane. Pe niște cerculețe
+            // care nu seamănă cu un buton, asta înseamnă că nimic nu spune că
+            // se poate da click — și chiar asta a fost reclamația.
+            className="absolute grid cursor-pointer place-items-center"
             style={{
               left: `${(zone.x / mapSize.width) * 100}%`,
               top: `${(zone.y / mapSize.height) * 100}%`,
@@ -347,29 +375,33 @@ export function PortfolioMap({
               nu are ce căuta în starea de repaus: șaptesprezece rânduri pe
               toată lățimea, sub o hartă, erau un zid — mai ales pe telefon,
               unde nu stau alături, ci unul sub altul. Implicit e strânsă
-              într-un rând; cine vrea toate zonele o deschide. */}
+              într-un rând; cine vrea toate zonele o deschide.
+
+              Panoul ascultă de `selectedZone`, nu de ce e sub cursor. Altfel
+              conținutul din el fuge exact când te duci să dai click pe el. */}
           <div className="md:col-span-4 md:col-start-9">
             <div className="flex items-baseline justify-between gap-4">
-              <p className="eyebrow text-paper/50">{shown ? shown.name : "Alege o zonă"}</p>
+              <p className="eyebrow text-paper/50">
+                {selectedZone ? selectedZone.name : "Alege o zonă"}
+              </p>
 
-              {/* Ieșirea din zona aleasă. Pe mouse o face `pointerleave` de pe
-                  hartă, dar la atingere evenimentul ăla nu vine niciodată:
-                  fără butonul ăsta, cine deschide o zonă pe telefon rămâne
-                  blocat în ea, fără drum înapoi la listă. */}
-              {shown && (
+              {/* Singura ieșire din zona aleasă, de când selecția nu mai moare
+                  la `pointerleave`. Înainte era doar o plasă pentru atingere;
+                  acum e drumul înapoi și pe mouse. */}
+              {selectedZone && (
                 <button
                   type="button"
-                  onClick={() => setHovered(null)}
-                  className="text-paper/40 hover:text-paper shrink-0 text-xs transition-colors duration-300"
+                  onClick={clear}
+                  className="text-paper/40 hover:text-paper shrink-0 cursor-pointer text-xs transition-colors duration-300"
                 >
                   Toate zonele
                 </button>
               )}
             </div>
 
-            {shown ? (
+            {selectedZone ? (
               <ul className="border-void-line mt-5 border-t">
-                {shown.items.map((property) => (
+                {selectedZone.items.map((property) => (
                   <li key={property.slug}>
                     <Link
                       href={`/proprietati/${property.slug}`}
@@ -396,7 +428,7 @@ export function PortfolioMap({
                     se pot nimeri cu degetul la scara aia, deci lista de mai jos
                     e calea adevărată acolo, nu o variantă de rezervă. */}
                 <p className="text-paper/55 mt-5 text-sm">
-                  Alege o zonă, de pe hartă sau din listă, și îți arăt ce am acolo.
+                  Dă click pe o zonă, de pe hartă sau din listă, și îți arăt ce am acolo.
                 </p>
 
                 {/* `<details>` nativ: se deschide fără JS, e în ordinea de
@@ -409,15 +441,21 @@ export function PortfolioMap({
                     <span className="text-paper/40 hidden group-open:inline">Închide</span>
                   </summary>
 
-                  <ul className="max-h-[19rem] overflow-y-auto">
+                  {/* Trecerea cu mouse-ul peste un rând aprinde punctul lui pe
+                      hartă și atât. Panoul nu se schimbă — dacă s-ar schimba,
+                      lista asta ar dispărea de sub cursorul care o parcurge. */}
+                  <ul
+                    className="max-h-[19rem] overflow-y-auto"
+                    onPointerLeave={() => setHovered(null)}
+                  >
                     {zones.map((zone) => (
                       <li key={zone.name}>
                         <button
                           type="button"
                           onPointerEnter={() => setHovered(zone.name)}
                           onFocus={() => setHovered(zone.name)}
-                          onClick={() => setHovered(zone.name)}
-                          className="border-void-line hover:text-bronze-soft flex w-full items-baseline justify-between border-b py-2.5 text-left text-sm transition-colors duration-300"
+                          onClick={() => pick(zone.name)}
+                          className="border-void-line hover:text-bronze-soft flex w-full cursor-pointer items-baseline justify-between border-b py-2.5 text-left text-sm transition-colors duration-300"
                         >
                           <span>{zone.name}</span>
                           <span className="nums text-paper/40">{zone.items.length}</span>
