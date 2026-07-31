@@ -42,3 +42,6 @@ next-env.d.ts
 
 # scratch local Claude Code
 /.claude/
+
+# ZCode session scratch
+/.zcode/

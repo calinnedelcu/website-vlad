@@ -17,13 +17,13 @@ export const site = {
   url: "https://calinnedelcu.github.io/website-vlad",
 
   /*
-   * Aici era `tagline`, titlul mare de pe prima pagină. A plecat odată cu
-   * titlul: la jumătate de ecran nu mai încăpea, iar fraza asta trăiește
-   * oricum întreagă în titlul secțiunii „Ce fac”. Dacă vrei un slogan scurt
-   * înapoi, scrie-l aici — dar caută-i întâi un loc unde nu repetă altceva.
+   * Paragraful de deschidere de pe prima pagină. A plecat fraza despre
+   * comision: acum trăiește o singură dată, în blocul „Reprezentare exclusivă"
+   * de deasupra hărții. Aici rămâne doar ce vinde — celelalte două piețe — ca
+   * paragraful să nu repete blocul de sub el.
    */
   intro:
-    "Vând și închiriez apartamente în București și Ilfov, și spații industriale și comerciale cu acces din Centură și A0. Comisionul îl plătește proprietarul, nu cumpărătorul sau chiriașul.",
+    "Vând și închiriez apartamente în București și Ilfov, și spații industriale și comerciale cu acces din Centură și A0.",
 
   contact: {
     phone: "+40 750 467 866",

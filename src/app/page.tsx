@@ -36,6 +36,10 @@ export default function HomePage() {
   const sold = soldProperties();
   const commercial = available.filter((p) => p.segment === "comercial");
   const zones = neighborhoods();
+  // Defalcarea pe tip de tranzacție, cerută de Vlad: nu „12 proprietăți", ci
+  // cât din ea e de vânzare și cât e de închiriat. Se calculează, nu se scrie.
+  const sales = available.filter((p) => p.deal === "vanzare");
+  const rentals = available.filter((p) => p.deal === "inchiriere");
 
   // Hero-ul ține ce e de vânzare ACUM. Selecția de dedesubt ține ce a vândut
   // DEJA. Înainte, amândouă arătau aceleași proprietăți marcate `featured` —
@@ -92,8 +96,8 @@ export default function HomePage() {
             {/* Un singur paragraf. Al doilea explica de ce ține două piețe
                 deodată — dar aia e chiar povestea de pe /despre, spusă a doua
                 oară cu alte cuvinte. Cine vrea explicația are linkul dedesubt.
-                `site.intro` rămâne pentru că duce singurul lucru pe care omul
-                chiar trebuie să-l afle devreme: comisionul nu vine de la el. */}
+                Comisionul nu mai e aici: s-a mutat în blocul „Reprezentare
+                exclusivă" de mai jos, ca să fie spus o singură dată. */}
             <div className="mt-10">
               <Reveal delay={120}>
                 <p className="lede max-w-[52ch]">{site.intro}</p>
@@ -110,8 +114,12 @@ export default function HomePage() {
             <Reveal delay={200}>
               <div className="border-line mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
                 <p className="nums text-sm">
-                  <span className="font-display mr-2 text-2xl">{available.length}</span>
-                  proprietăți în portofoliu, acum
+                  <span className="font-display mr-2 text-2xl">{sales.length}</span>
+                  vânzări
+                </p>
+                <p className="nums text-sm">
+                  <span className="font-display mr-2 text-2xl">{rentals.length}</span>
+                  chirii
                 </p>
                 <p className="nums text-sm">
                   <span className="font-display mr-2 text-2xl">{commercial.length}</span>
@@ -122,6 +130,68 @@ export default function HomePage() {
                   <span className="link-underline">zone, pe hartă</span>
                 </Link>
               </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- Reprezentare exclusivă ----------
+         Cerut de Vlad: pe partea albă, deasupra hărții, trei lucruri pe care
+         vrea să le spună clar. Comisionul a venit de aici — înainte era în
+         `site.intro`, acum trăiește o singură dată, ca titlu. Celelalte trei
+         (reprezentare single-party, colaborare, transparență) sunt noi: nu
+         existau nicăieri pe site, deși sunt adevărate și deferențiatoare. Ton
+         așezat, ca peste tot: afirmații verificabile, nu „100%" ca cifră de
+         marketing. Vezi și /despre, „Ce poți să aștepți" — acolo e totul
+         extins; aici e doar titlurile, ca să ajungă la ochiul care doar trece. */}
+      <section id="exclusivitate" className="shell py-20 md:py-28">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-3">
+            <Reveal>
+              <p className="eyebrow">Cum lucrez</p>
+            </Reveal>
+          </div>
+
+          <div className="md:col-span-8 md:col-start-5">
+            <Reveal>
+              <SplitReveal as="h2" className="display-sm max-w-[20ch]" stagger={80}>
+                Comision 0 pentru cumpărător și chiriaș.
+              </SplitReveal>
+            </Reveal>
+
+            <Reveal delay={120}>
+              {/* Cele trei piese, ca rânduri, nu carduri: o afirmație pe fiecare,
+                  fără ilustrații. Pe negru ar fi trebuit carduri; pe hârtie se
+                  citește mai bine ca listă. */}
+              <ul className="border-line mt-10 divide-y divide-line">
+                <li className="flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-8">
+                  <span className="text-ink-soft nums w-44 shrink-0 text-xs tracking-[0.08em] uppercase">
+                    Reprezentare exclusivă
+                  </span>
+                  <p className="text-ink-soft max-w-[44ch] text-sm leading-relaxed">
+                    Reprezent o singură parte în tranzacție. Fără joc dublu, fără interese
+                    încrucișate — când te reprezint pe tine, lucrez pentru tine.
+                  </p>
+                </li>
+                <li className="flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-8">
+                  <span className="text-ink-soft nums w-44 shrink-0 text-xs tracking-[0.08em] uppercase">
+                    Colaborare
+                  </span>
+                  <p className="text-ink-soft max-w-[44ch] text-sm leading-relaxed">
+                    Colaborez cu toate agențiile din piață. O proprietate listată la mine e
+                    văzută de toți agenții activi, deci de toți cumpărătorii lor.
+                  </p>
+                </li>
+                <li className="flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-8">
+                  <span className="text-ink-soft nums w-44 shrink-0 text-xs tracking-[0.08em] uppercase">
+                    Transparență
+                  </span>
+                  <p className="text-ink-soft max-w-[44ch] text-sm leading-relaxed">
+                    Preț, stare și istoric, scrise în anunț. Știi ce cumperi înainte să
+                    faci drumul — și poți verifica totul independent.
+                  </p>
+                </li>
+              </ul>
             </Reveal>
           </div>
         </div>

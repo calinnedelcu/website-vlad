@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { cityPath, sectorPaths } from "@/lib/bucharest-shape";
 import { cityCentre, mapSize, project, zoneCoords } from "@/lib/geo";
 import { priceLabel, statusLabel, type Property } from "@/lib/properties";
@@ -59,6 +59,147 @@ interface MapZone {
   ilfov: boolean;
 }
 
+/** O proprietate vândută sau închiriată — dovada de track record, nu ofertă. */
+const isSold = (p: Property) => p.status === "vandut" || p.status === "inchiriat";
+
+/**
+ * Bottom sheet pentru lista proprietăților dintr-o zonă, pe telefon.
+ *
+ * Modeled după lightbox-ul din `Gallery`: backdrop care închide la click,
+ * `role="dialog"`, scroll-lock (în componenta părinte). Animația e pe
+ * `transform: translateY`, cu easing-ul site-ului. Respectă `prefers-reduced-motion`
+ * prin regula globală din `globals.css` (transform→none).
+ *
+ * Două mișcări: slide SUS la deschidere (prima impresie contează), slide JOS la
+ * închidere. Demontarea vine abia după ce slide-ul de jos s-a terminat — de aia
+ * `visible` e o stare internă, urmărită după `open`, iar `onClose` (care
+ * demontează la părinte) se apelează cu o întârziere egală cu tranziția.
+ */
+function MapSheet({
+  open,
+  onClose,
+  zone,
+  children,
+}: {
+  open: boolean;
+  onClose: () => void;
+  zone: MapZone;
+  children: ReactNode;
+}) {
+  // La mount randăm cu `translate-y-full` (jos), apoi un cadru mai târziu
+  // urcăm — ca slide-ul de intrare să aibă o valoare de la care să pornească.
+  // Fără citirea asta de layout, React pune direct clasa finală și nicio
+  // mișcare nu se vede (aceeași capcană ca zoom-ul din hero).
+  const [entered, setEntered] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setEntered(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+  // `visible` e derivat din `open` (+ intrarea la mount), nu ținut în efect:
+  // la închidere `open` trece fals și slide-ul jos pornește imediat, fără
+  // efect sincron care să declanșeze randări în cascadă.
+  const visible = entered && open;
+
+  const active = zone.items.filter((p) => !isSold(p)).length;
+  const sold = zone.items.filter(isSold).length;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex flex-col justify-end md:hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Proprietăți în ${zone.name}`}
+    >
+      {/* Backdrop: întunecă harta, închide la atingere. Când sheet-ul e în
+          curs de închidere, nu mai interceptează atingerile (altfel ar bloca
+          harta de dedesubt cât durează slide-ul jos). */}
+      <button
+        type="button"
+        aria-label="Închide"
+        onClick={onClose}
+        tabIndex={visible ? 0 : -1}
+        className={`absolute inset-0 bg-void/70 transition-opacity duration-300 ${
+          visible ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
+
+      {/* Sheet-ul. Lungimea capped la 80% din ecran; restul se derulează în el. */}
+      <div
+        className={`bg-void-soft border-void-line relative max-h-[80dvh] overflow-hidden rounded-t-2xl border-t transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          visible ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        {/* Mânerul de sus: singurul reper vizual că sheet-ul se poate trage.
+            E doar vizual (nu implementăm drag); închiderea se face prin
+            buton, backdrop sau Escape. */}
+        <div className="flex justify-center pt-3">
+          <span className="bg-paper/25 h-1 w-10 rounded-full" />
+        </div>
+
+        <div className="flex items-baseline justify-between gap-4 px-5 pt-3">
+          <div>
+            <p className="eyebrow text-paper/50">{zone.name}</p>
+            <p className="text-paper/45 nums mt-1 text-xs">
+              {active > 0 && `${active} ${active === 1 ? "activă" : "active"}`}
+              {active > 0 && sold > 0 && " · "}
+              {sold > 0 && `${sold} ${sold === 1 ? "vândută" : "vândute"}`}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-paper/60 hover:text-paper shrink-0 cursor-pointer text-xs transition-colors duration-300"
+          >
+            Închide
+          </button>
+        </div>
+
+        <div className="max-h-[60dvh] overflow-y-auto px-5 pb-8 pt-3">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Un rând de proprietate în lista de la click pe o zonă.
+ *
+ * E scos ca bucată partajată: randează la fel în panoul de lângă hartă (desktop)
+ * și în bottom sheet-ul de pe telefon. Singura diferență între active și
+ * vândute e eticheta: cele active arată prețul, cele vândute arată statusul ca
+ * badge — cerut de Vlad, ca „să se observe care sunt vândute", nu doar text
+ * mic gri sub titlu, de neosebit de un preț.
+ */
+function ZonePropertyItem({ property }: { property: Property }) {
+  const sold = isSold(property);
+  return (
+    <li>
+      <Link
+        href={`/proprietati/${property.slug}`}
+        className="border-void-line group block border-b py-4"
+      >
+        <p className="font-display group-hover:text-bronze-soft text-xl leading-tight transition-colors duration-300">
+          {property.title}
+        </p>
+        {sold ? (
+          <div className="mt-1.5 flex items-center gap-2.5">
+            {/* Badge, nu text gri: o proprietate vândută trebuie să se vadă
+                că e vândută, nu să semene cu un preț. Ton așezat, fără roșu. */}
+            <span className="border-paper/25 text-paper/60 inline-flex items-center border px-2 py-0.5 text-[0.6875rem] tracking-[0.08em] uppercase">
+              {statusLabel[property.status]}
+            </span>
+            <span className="text-paper/45 nums text-sm">{property.specs.surface} mp</span>
+          </div>
+        ) : (
+          <p className="text-paper/45 nums mt-1 text-sm">
+            {property.status === "rezervat" ? `${statusLabel.rezervat} · ` : ""}
+            {priceLabel(property)} · {property.specs.surface} mp
+          </p>
+        )}
+      </Link>
+    </li>
+  );
+}
+
 export function PortfolioMap({
   properties,
   variant = "editorial",
@@ -81,6 +222,59 @@ export function PortfolioMap({
    * evapora.
    */
   const [picked, setPicked] = useState<string | null>(null);
+
+  /**
+   * Pe telefon, lista proprietăților din zona aleasă vine într-un bottom sheet
+   * care urcă din jos, nu în panoul de lângă hartă — acela cade sub hartă pe un
+   * ecran îngust, deci după click trebuie scroll ca să-l vezi, și nici nu e
+   * evident că a apărut. Vlad: „trebuie scroll în jos ca să le vezi".
+   *
+   * Detectat la montare, ca în `HorizontalShowcase`: server-ul randează mereu
+   * varianta de desktop (panou în grid), iar clientul schimbă pe sheet doar pe
+   * ecran îngust. Așa nu există nepotrivire la hidratare și panoul rămâne dacă
+   * JS nu pornește.
+   */
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  /** Sheet-ul e deschis pe telefon doar cât e o zonă aleasă. */
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  /**
+   * Închide sheet-ul în două timpi: întâi `sheetOpen=false` (pornește slide-ul
+   * jos — `MapSheet` randează `translate-y-full` când `open` e fals), apoi după
+   * cât durează tranziția resetăm `picked`, ceea ce demontează sheet-ul. Altfel
+   * demontarea ar tăia animația la jumătate, iar backdrop-ul ar rămâne (
+   * `opacity-0`, dar `pointer-events` pe el) blocând harta de dedesubt.
+   */
+  const closeSheet = () => {
+    setSheetOpen(false);
+    window.setTimeout(() => setPicked(null), 500);
+  };
+
+  // Scroll-lock pe body cât timp sheet-ul e deschis, plus Escape ca să-l închizi
+  // — aceleași reguli ca la lightbox-ul din `Gallery`. Doar pe mobil, fiindcă
+  // doar acolo există sheet.
+  useEffect(() => {
+    if (!sheetOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSheet();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [sheetOpen]);
 
   const zones = useMemo<MapZone[]>(() => {
     const grouped = new Map<string, Property[]>();
@@ -125,13 +319,27 @@ export function PortfolioMap({
   /** Click pe un punct sau pe un rând din listă. A doua oară pe același: înapoi. */
   const pick = (name: string) => {
     if (isFilter) onChange?.(selected === name ? "toate" : name);
-    else setPicked((current) => (current === name ? null : name));
+    else if (!isMobile) {
+      // Desktop: panoul din grid. Comută `picked`.
+      setPicked((current) => (current === name ? null : name));
+    } else {
+      // Telefon: prima oară pe o zonă deschide sheet-ul; a doua oară pe
+      // aceeași îl închide (nu-l redeschide gol).
+      if (selected === name) closeSheet();
+      else {
+        setPicked(name);
+        setSheetOpen(true);
+      }
+    }
   };
 
   /** Ieșirea din zona aleasă. */
   const clear = () => {
     if (isFilter) onChange?.("toate");
-    else setPicked(null);
+    else {
+      setPicked(null);
+      setSheetOpen(false);
+    }
   };
 
   /* ---------- Harta propriu-zisă ----------
@@ -348,6 +556,30 @@ export function PortfolioMap({
     );
   }
 
+  /* ---------- Lista proprietăților dintr-o zonă (partajată) ----------
+     Aceeași listă în două locuri: panoul de lângă hartă (desktop) și bottom
+     sheet-ul (telefon). Activele primele, vândutele la final cu etichetă. */
+  const renderZoneItems = (zone: MapZone) => {
+    const active = zone.items.filter((p) => !isSold(p));
+    const sold = zone.items.filter(isSold);
+    const mixed = active.length > 0 && sold.length > 0;
+    return (
+      <ul className="border-void-line border-t">
+        {active.map((property) => (
+          <ZonePropertyItem key={property.slug} property={property} />
+        ))}
+        {mixed && (
+          <li className="text-paper/35 mt-2 mb-1 px-0.5 text-[0.6875rem] tracking-[0.08em] uppercase">
+            Vândute anterior
+          </li>
+        )}
+        {sold.map((property) => (
+          <ZonePropertyItem key={property.slug} property={property} />
+        ))}
+      </ul>
+    );
+  };
+
   /* ---------- Modul editorial ---------- */
   return (
     <section id="harta" className="bg-void text-paper py-24 md:py-32">
@@ -367,19 +599,20 @@ export function PortfolioMap({
           <div className="md:col-span-7">
             {map}
             <div className="mt-6">{legend}</div>
+            {/* Pe telefon, harta e singură (panoul e ascuns, vine în sheet).
+                Fără un hint, nu e evident că atingerea unei buline face ceva.
+                Doar mobil; pe desktop panoul din dreapta își spune singur rostul. */}
+            <p className="text-paper/45 mt-5 text-sm md:hidden">
+              Atinge o zonă, ca să vezi ce am acolo.
+            </p>
           </div>
 
-          {/* ---------- Panoul ---------- */}
-          {/* Harta poate să nu spună nimic cuiva care nu cunoaște orașul, deci
-              tot ce arată ea trebuie să existe și în text. Dar lista completă
-              nu are ce căuta în starea de repaus: șaptesprezece rânduri pe
-              toată lățimea, sub o hartă, erau un zid — mai ales pe telefon,
-              unde nu stau alături, ci unul sub altul. Implicit e strânsă
-              într-un rând; cine vrea toate zonele o deschide.
-
-              Panoul ascultă de `selectedZone`, nu de ce e sub cursor. Altfel
-              conținutul din el fuge exact când te duci să dai click pe el. */}
-          <div className="md:col-span-4 md:col-start-9">
+          {/* ---------- Panoul (desktop) ----------
+             Pe telefon, panoul ăsta e ascuns — lista vine în bottom sheet-ul de
+             la sfârșit (vezi `isMobile` mai sus), ca să nu cadă sub hartă și să
+             ceară scroll ca s-o vezi. Pe desktop rămâne aici, în grid lângă
+             hartă, neschimbat. */}
+          <div className="hidden md:col-span-4 md:col-start-9 md:block">
             <div className="flex items-baseline justify-between gap-4">
               <p className="eyebrow text-paper/50">
                 {selectedZone ? selectedZone.name : "Alege o zonă"}
@@ -400,26 +633,7 @@ export function PortfolioMap({
             </div>
 
             {selectedZone ? (
-              <ul className="border-void-line mt-5 border-t">
-                {selectedZone.items.map((property) => (
-                  <li key={property.slug}>
-                    <Link
-                      href={`/proprietati/${property.slug}`}
-                      className="border-void-line group block border-b py-4"
-                    >
-                      <p className="font-display group-hover:text-bronze-soft text-xl leading-tight transition-colors duration-300">
-                        {property.title}
-                      </p>
-                      <p className="text-paper/45 nums mt-1 text-sm">
-                        {property.status === "disponibil"
-                          ? priceLabel(property)
-                          : statusLabel[property.status]}{" "}
-                        · {property.specs.surface} mp
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-5">{renderZoneItems(selectedZone)}</div>
             ) : (
               <>
                 {/* „sau din listă” nu e o formulă de politețe: pe telefon,
@@ -480,6 +694,22 @@ export function PortfolioMap({
           </div>
         </div>
       </div>
+
+      {/* ---------- Bottom sheet (telefon) ----------
+         Pe telefon, la click pe o zonă, lista proprietăților urcă din josul
+         ecranului — ca Google Maps sau Apple Maps. Nu trebuie scroll să ajungi
+         la ea (căci nu e sub hartă), și e evident că a apărut. Backdrop-ul
+         întunecă harta și închide la atingere; mânerul de sus și butonul
+         „Închide" sunt celelalte două ieșiri.
+
+         `mounted` ne asigură că slide-ul animat pornește după ce React a pus
+         sheet-ul în DOM; altfel ar apărea direct în poziția finală, fără
+         mișcare — aceeași capcană ca zoom-ul din hero (animație vs. tranziție). */}
+      {isMobile && selectedZone && (
+        <MapSheet open={sheetOpen} onClose={closeSheet} zone={selectedZone}>
+          {renderZoneItems(selectedZone)}
+        </MapSheet>
+      )}
     </section>
   );
 }
