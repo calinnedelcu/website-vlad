@@ -225,8 +225,12 @@ function build(): Property[] {
 
 export const properties: Property[] = build();
 
-/** Când s-a citit ultima oară de la agenție. Se vede în raportul sincronizării. */
-export const syncedAt: string = generated.syncedAt;
+/**
+ * Când s-au schimbat ultima dată chiar datele — nu când a rulat ultima
+ * sincronizare. Rulările care nu găsesc nimic nou nu ating fișierul, tocmai ca
+ * să nu producă un commit și un deploy pe zi degeaba.
+ */
+export const updatedAt: string = generated.updatedAt;
 
 export const getProperty = (slug: string) => properties.find((p) => p.slug === slug);
 

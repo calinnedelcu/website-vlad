@@ -335,15 +335,32 @@ if (dryRun) {
   process.exit(0);
 }
 
+/**
+ * Scriem doar dacă s-a schimbat ceva la portofoliu.
+ *
+ * Fișierul avea și un `syncedAt` cu ora fiecărei rulări. Suna util — „mai
+ * trăiește sincronizarea?” — dar în practică însemna că fișierul se schimba în
+ * fiecare zi chiar când Vlad nu atinsese nimic, deci un commit, un build și un
+ * deploy zilnic degeaba. Prima rulare automată a și făcut asta: un commit în
+ * care singura diferență era ora.
+ *
+ * Când sincronizarea a rulat ultima oară scrie oricum în istoricul de rulări de
+ * pe GitHub, care e locul potrivit pentru asta. Aici ținem doar când s-au
+ * schimbat ultima dată chiar datele.
+ */
+const neschimbat =
+  JSON.stringify(previous.properties ?? {}) === JSON.stringify(merged);
+
+if (neschimbat) {
+  console.log("\nNimic de scris — portofoliul e la fel ca ultima dată.");
+  await writeFile(join(ROOT, "sync-report.json"), JSON.stringify(raport, null, 2) + "\n");
+  process.exit(0);
+}
+
 await writeFile(
   OUT,
   JSON.stringify(
-    {
-      // Ora ultimei citiri reușite. Utilă când te întrebi dacă sincronizarea
-      // mai rulează sau a murit tăcut acum trei luni.
-      syncedAt: new Date().toISOString(),
-      properties: merged,
-    },
+    { updatedAt: new Date().toISOString(), properties: merged },
     null,
     2,
   ) + "\n",
