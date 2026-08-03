@@ -6,12 +6,7 @@ import { OpeningBand } from "@/components/OpeningBand";
 import { PortfolioMap } from "@/components/PortfolioMap";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
-import {
-  availableProperties,
-  neighborhoods,
-  properties,
-  soldProperties,
-} from "@/lib/properties";
+import { availableProperties, properties, soldProperties } from "@/lib/properties";
 import { site } from "@/lib/site";
 
 /**
@@ -34,8 +29,6 @@ import { site } from "@/lib/site";
 export default function HomePage() {
   const available = availableProperties();
   const sold = soldProperties();
-  const commercial = available.filter((p) => p.segment === "comercial");
-  const zones = neighborhoods();
   // Defalcarea pe tip de tranzacție, cerută de Vlad: nu „12 proprietăți", ci
   // cât din ea e de vânzare și cât e de închiriat. Se calculează, nu se scrie.
   const sales = available.filter((p) => p.deal === "vanzare");
@@ -70,71 +63,22 @@ export default function HomePage() {
 
       <HeroCinematic properties={heroSlides} />
 
-      {/* ---------- Manifest ----------
-          A rămas o dungă: eticheta și cifrele. Fără padding jos — secțiunea
-          „Cum lucrez” de dedesubt își aduce propriul spațiu, iar două
-          umpluturi de 80px una peste alta ar fi lăsat cifrele plutind
-          într-un gol. */}
-      <section id="manifest" className="shell pt-20 md:pt-28">
-        {/* `gap-6` pe telefon: acolo coloanele se pun una sub alta, deci spațiul
-            ăsta cade între eticheta „Ce fac” și propriile ei cifre. Cei 48px de
-            dinainte erau potriviți sub un titlu mare; sub o etichetă de 11px
-            lăsau eticheta orfană. De la `md` în sus e spațiul dintre coloane,
-            pe orizontală, unde 48 e exact cât trebuie. */}
-        <div className="grid gap-6 md:grid-cols-12 md:gap-12">
-          {/* Aici era al doilea portret al lui Vlad, cu numele și rolul sub el.
-              A plecat când prima pagină a primit banda de deschidere: fața lui
-              e acum primul lucru de pe site, mare, iar a doua fotografie a lui
-              la două ecrane distanță nu mai adăuga nimic — doar repeta, și
-              odată cu ea repeta și „Agent imobiliar”. */}
-          <div className="md:col-span-3">
-            <Reveal>
-              <p className="eyebrow">Ce fac</p>
-            </Reveal>
-          </div>
+      {/* Aici a fost secțiunea „Ce fac”. A pierdut, pe rând, portretul al
+          doilea al lui Vlad, apoi titlul mare și paragraful de prezentare —
+          până a rămas o etichetă de secțiune cu patru cifre sub ea. O categorie
+          întreagă din pagină, pentru niște numere. Așa că s-a desființat, iar
+          cifrele care contează au trecut în „Cum lucrez”, de mai jos.
 
-          <div className="md:col-span-8 md:col-start-5">
-            {/* Aici stăteau titlul mare („Vând apartamente în București și
-                spații industriale în Ilfov"), paragraful de prezentare și
-                linkul „Despre Vlad". Cerut de Vlad să plece — voia prima pagină
-                să arate, nu să se explice.
-
-                Ce au lăsat în urmă:
-                - `h1`-ul paginii, care era chiar titlul ăla. S-a mutat pe eticheta
-                  din banda de deschidere, singurul text de sus care descrie
-                  pagina. Fără el, prima pagină rămânea fără niciun titlu de
-                  nivel unu. Vezi OpeningBand.
-                - `site.intro` nu e cod mort: din el se face descrierea paginii
-                  în meta și pe cardul de share. Vezi layout.tsx.
-                - Drumul spre /despre a rămas în meniu, sus, pe toate paginile. */}
-
-            {/* Cifrele care chiar spun ceva. Restul blocului de statistici a
-                plecat pe /despre — se repeta cu ce se vede oricum mai jos.
-                Ultima duce la harta de dedesubt: e și cifră, și indicator că
-                harta există, pentru cine nu derulează. */}
-            <Reveal>
-              <div className="border-line flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
-                <p className="nums text-sm">
-                  <span className="font-display mr-2 text-2xl">{sales.length}</span>
-                  vânzări
-                </p>
-                <p className="nums text-sm">
-                  <span className="font-display mr-2 text-2xl">{rentals.length}</span>
-                  chirii
-                </p>
-                <p className="nums text-sm">
-                  <span className="font-display mr-2 text-2xl">{commercial.length}</span>
-                  spații comerciale și industriale
-                </p>
-                <Link href="#harta" className="nums group text-sm">
-                  <span className="font-display mr-2 text-2xl">{zones.length}</span>
-                  <span className="link-underline">zone, pe hartă</span>
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+          Ce a mai plecat odată cu ea:
+          - `h1`-ul paginii era titlul de acolo; s-a mutat pe eticheta din banda
+            de deschidere. Fără el, prima pagină n-ar avea niciun titlu de nivel
+            unu. Vezi OpeningBand.
+          - Cifrele „spații comerciale” și „zone, pe hartă” — scoase de Vlad.
+            Harta rămâne oricum vizibilă mai jos, deci n-avea nevoie de un
+            indicator că există.
+          - `site.intro` nu e cod mort: din el se face descrierea paginii în
+            meta și pe cardul de share. Vezi layout.tsx.
+          - Drumul spre /despre a rămas în meniu, pe toate paginile. */}
 
       {/* ---------- Reprezentare exclusivă ----------
          Cerut de Vlad: pe partea albă, deasupra hărții, trei lucruri pe care
@@ -193,6 +137,24 @@ export default function HomePage() {
                   </p>
                 </li>
               </ul>
+            </Reveal>
+
+            {/* Cele două cifre, venite din secțiunea „Ce fac” când aia s-a
+                desființat. Închid blocul în loc să deschidă o secțiune proprie:
+                după trei afirmații despre cum lucrează, ele spun pe ce lucrează
+                chiar acum. Se calculează din portofoliu, nu se scriu de mână —
+                dacă se schimbă lista, se schimbă și ele. */}
+            <Reveal delay={200}>
+              <div className="border-line mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
+                <p className="nums text-sm">
+                  <span className="font-display mr-2 text-2xl">{sales.length}</span>
+                  vânzări
+                </p>
+                <p className="nums text-sm">
+                  <span className="font-display mr-2 text-2xl">{rentals.length}</span>
+                  chirii
+                </p>
+              </div>
             </Reveal>
           </div>
         </div>
