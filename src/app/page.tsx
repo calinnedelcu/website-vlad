@@ -70,9 +70,18 @@ export default function HomePage() {
 
       <HeroCinematic properties={heroSlides} />
 
-      {/* ---------- Manifest ---------- */}
-      <section id="manifest" className="shell py-20 md:py-28">
-        <div className="grid gap-12 md:grid-cols-12">
+      {/* ---------- Manifest ----------
+          A rămas o dungă: eticheta și cifrele. Fără padding jos — secțiunea
+          „Cum lucrez” de dedesubt își aduce propriul spațiu, iar două
+          umpluturi de 80px una peste alta ar fi lăsat cifrele plutind
+          într-un gol. */}
+      <section id="manifest" className="shell pt-20 md:pt-28">
+        {/* `gap-6` pe telefon: acolo coloanele se pun una sub alta, deci spațiul
+            ăsta cade între eticheta „Ce fac” și propriile ei cifre. Cei 48px de
+            dinainte erau potriviți sub un titlu mare; sub o etichetă de 11px
+            lăsau eticheta orfană. De la `md` în sus e spațiul dintre coloane,
+            pe orizontală, unde 48 e exact cât trebuie. */}
+        <div className="grid gap-6 md:grid-cols-12 md:gap-12">
           {/* Aici era al doilea portret al lui Vlad, cu numele și rolul sub el.
               A plecat când prima pagină a primit banda de deschidere: fața lui
               e acum primul lucru de pe site, mare, iar a doua fotografie a lui
@@ -85,34 +94,26 @@ export default function HomePage() {
           </div>
 
           <div className="md:col-span-8 md:col-start-5">
-            {/* `h1`-ul paginii stă aici de când banda cu ofertele a rămas fără
-                titlu — vezi HeroCinematic. E și locul potrivit: fraza asta
-                spune întreg ce se vinde, iar sus, peste fotografii de
-                apartamente, jumătate din ea era despre hale. */}
-            <SplitReveal as="h1" className="display-lg max-w-[20ch]" stagger={80}>
-              Vând apartamente în București și spații industriale în Ilfov.
-            </SplitReveal>
+            {/* Aici stăteau titlul mare („Vând apartamente în București și
+                spații industriale în Ilfov"), paragraful de prezentare și
+                linkul „Despre Vlad". Cerut de Vlad să plece — voia prima pagină
+                să arate, nu să se explice.
 
-            {/* Un singur paragraf. Al doilea explica de ce ține două piețe
-                deodată — dar aia e chiar povestea de pe /despre, spusă a doua
-                oară cu alte cuvinte. Cine vrea explicația are linkul dedesubt.
-                Comisionul nu mai e aici: s-a mutat în blocul „Reprezentare
-                exclusivă" de mai jos, ca să fie spus o singură dată. */}
-            <div className="mt-10">
-              <Reveal delay={120}>
-                <p className="lede max-w-[52ch]">{site.intro}</p>
-                <Link href="/despre" className="link-underline mt-6 inline-block text-sm">
-                  Despre Vlad
-                </Link>
-              </Reveal>
-            </div>
+                Ce au lăsat în urmă:
+                - `h1`-ul paginii, care era chiar titlul ăla. S-a mutat pe eticheta
+                  din banda de deschidere, singurul text de sus care descrie
+                  pagina. Fără el, prima pagină rămânea fără niciun titlu de
+                  nivel unu. Vezi OpeningBand.
+                - `site.intro` nu e cod mort: din el se face descrierea paginii
+                  în meta și pe cardul de share. Vezi layout.tsx.
+                - Drumul spre /despre a rămas în meniu, sus, pe toate paginile. */}
 
             {/* Cifrele care chiar spun ceva. Restul blocului de statistici a
                 plecat pe /despre — se repeta cu ce se vede oricum mai jos.
-                A treia duce la harta de dedesubt: e și cifră, și indicator că
+                Ultima duce la harta de dedesubt: e și cifră, și indicator că
                 harta există, pentru cine nu derulează. */}
-            <Reveal delay={200}>
-              <div className="border-line mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
+            <Reveal>
+              <div className="border-line flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
                 <p className="nums text-sm">
                   <span className="font-display mr-2 text-2xl">{sales.length}</span>
                   vânzări

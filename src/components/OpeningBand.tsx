@@ -79,10 +79,19 @@ export function OpeningBand() {
             className="h-14 w-auto md:h-20"
           />
 
-          <p className="eyebrow text-paper/75 pb-2">
+          {/* `h1`-ul prim ei pagini. A fost până acum titlul mare din secțiunea
+              „Ce fac”; când Vlad a cerut ca titlul ăla să plece, pagina a rămas
+              fără niciun titlu de nivel unu — adică fără să spună nicăieri, în
+              structura documentului, despre ce e vorba. E aici pentru că e
+              singurul text de sus care descrie pagina, nu o proprietate anume.
+              Numele lui îl poartă `sr-only`: pe ecran l-ar repeta pe cel din
+              header, la doi centimetri deasupra, dar un titlu fără el ar fi
+              „Agent imobiliar” al nimănui. Arată exact la fel ca înainte. */}
+          <h1 className="eyebrow text-paper/75 pb-2">
+            <span className="sr-only">{site.name} — </span>
             {site.role}
             <span className="block">București și Ilfov</span>
-          </p>
+          </h1>
         </div>
       </div>
     </section>
