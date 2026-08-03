@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "media": "node scripts/fetch-media.mjs && node scripts/build-og.mjs",
-    "geo": "node scripts/fetch-geo.mjs"
+    "geo": "node scripts/fetch-geo.mjs",
+    "sync": "node scripts/sync-properties.mjs"
   },
   "dependencies": {
     "next": "16.2.12",

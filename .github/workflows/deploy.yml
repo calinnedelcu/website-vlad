@@ -4,11 +4,18 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Sincronizarea cu portofoliul agenției. 04:10 UTC = 07:10 vara la noi, deci
+  # ce a schimbat Vlad seara e pe site înainte să se uite cineva dimineața.
+  # Minutul nu e rotund dinadins: la fix, GitHub are vârf de cereri și pornirea
+  # întârzie imprevizibil.
+  schedule:
+    - cron: "10 4 * * *"
 
 permissions:
-  contents: read
+  contents: write # ca să poată comite datele proaspete
   pages: write
   id-token: write
+  issues: write # ca să deschidă o notă când dispare o proprietate
 
 # O singură publicare odată. Nu anulăm una în curs — dacă a ajuns la deploy,
 # o lăsăm să termine, altfel site-ul poate rămâne pe jumătate încărcat.
@@ -28,6 +35,66 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      # --- Sincronizarea rulează doar la program sau la cerere ---
+      # La un push obișnuit n-are rost: dacă tocmai ai schimbat codul, vrei să
+      # vezi codul publicat, nu să aștepți încă o rundă de citit de la agenție.
+
+      - name: Sincronizează portofoliul
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: npm run sync
+
+      - name: Adu fotografiile noi
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: npm run media
+
+      - name: Comite ce s-a schimbat
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "sincronizare"
+          git config user.email "actions@github.com"
+          git add src/lib/properties.generated.json src/lib/blur-data.ts public/media
+          if git diff --cached --quiet; then
+            echo "Nimic schimbat la agenție." >> "$GITHUB_STEP_SUMMARY"
+          else
+            git commit -m "Portofoliu sincronizat cu listarea agenției"
+            git push
+            echo "Date actualizate din CRM." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # Ce a dispărut din listare are nevoie de un om: fluxul nu spune dacă
+      # proprietatea s-a vândut sau a fost retrasă, iar site-ul n-are voie să
+      # ghicească. Până se lămurește, pur și simplu nu mai apare.
+      - name: Anunță ce a dispărut
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node -e '
+            const fs = require("fs");
+            if (!fs.existsSync("sync-report.json")) process.exit(0);
+            const r = JSON.parse(fs.readFileSync("sync-report.json", "utf8"));
+            const linii = [];
+            if (r.noi.length) linii.push("### Anunțuri noi\n" + r.noi.map(n => `- ${n.titlu}`).join("\n"));
+            if (r.preturi.length) linii.push("### Prețuri schimbate\n" + r.preturi.map(p => `- ${p.id}: ${p.de_la} → ${p.la}`).join("\n"));
+            fs.writeFileSync("summary.md", linii.join("\n\n"));
+            if (r.disparute.length) {
+              const corp = [
+                "Proprietățile de mai jos nu mai apar în listarea agenției.",
+                "",
+                "Site-ul a încetat să le afișeze, dar **nu scrie nicăieri „vândut”** — fluxul nu spune dacă s-au vândut sau au fost retrase, iar un site care ghicește asta inventează un fapt.",
+                "",
+                ...r.disparute.map(d => `- [ ] **${d.titlu}** (id \`${d.id}\`) — ${d.url}`),
+                "",
+                "Întreabă-l pe Vlad. Dacă s-a vândut, treci `status: \"vandut\"` la id-ul respectiv în `src/lib/property-overrides.ts` și reapare, cu etichetă, la track record.",
+              ].join("\n");
+              fs.writeFileSync("issue.md", corp);
+            }
+          '
+          cat summary.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          if [ -f issue.md ]; then
+            gh issue create --title "Proprietăți dispărute din listare — vândute sau retrase?" --body-file issue.md
+          fi
 
       - run: npm run lint
 

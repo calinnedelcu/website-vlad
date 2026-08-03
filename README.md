@@ -133,11 +133,53 @@ Corectat în `properties.ts`, dar merită spus și lor:
 
 ### Sincronizare automată
 
-Agenția folosește **REBS CRM** (`crmrebs.com`) — de aceea vin pozele de pe
-`media.crmrebs.com`. Asta răspunde la întrebarea „de unde vin datele”: nu e
-nevoie de CMS și nici de introducere manuală a treia oară. De cerut agenției
-acces la API-ul sau exportul REBS și `properties` devine un fetch. Tipurile din
-`properties.ts` rămân la fel — de aceea sunt separate de date.
+**Merge.** Vlad schimbă prețul în CRM-ul agenției, iar a doua zi dimineață e pe
+site. Nu editează nimeni cod, nu tastează nimeni nimic a doua oară.
+
+Cum: fiecare anunț de pe `trimbitasu-estate.ro` are în pagină un bloc
+**schema.org JSON-LD** — date structurate, publicate special ca să fie citite de
+mașini. Preț, monedă, vânzare-vs-închiriere, suprafață, camere, băi, an,
+fotografii și descrierea scrisă de Vlad sunt acolo, pe toate anunțurile. N-a
+fost nevoie nici de API, nici de credențiale.
+
+    npm run sync              # citește și scrie properties.generated.json
+    npm run sync -- --dry-run # doar spune ce s-ar schimba
+
+Rulează singur zilnic, din workflow-ul de deploy (`schedule`, 04:10 UTC).
+
+**Datele stau în două straturi care nu se ating:**
+
+| | |
+|---|---|
+| `properties.generated.json` | Scris de script. Se rescrie zilnic. **Nu edita.** |
+| `property-overrides.ts` | Scris de mână. Sincronizarea nu-l atinge. **Aici editezi.** |
+
+`properties.ts` doar le împerechează, pe id-ul din CRM (`...cp3237398/`).
+
+**De ce e nevoie de al doilea strat.** Titlurile din CRM sunt scrise pentru
+portaluri („CISMIGIU - Cobalcescu 4 Camere 85 mp Renovat 1/3”), iar zona e
+`Bucuresti` la zece din douăsprezece anunțuri, fără diacritice. Dacă am lua tot
+din flux, site-ul ar arăta ca un portal. Deci: **cifrele automat, cuvintele de
+la noi.**
+
+**Un anunț nou apare singur pe site**, cu titlul și descrierea din CRM și cu un
+tagline compus din fapte („Voluntari — 46 mp”). Secțiunile care cer text scris
+de mână — punctele forte, reperele din jur — pur și simplu nu se afișează până
+nu le scrie cineva. Site-ul nu așteaptă după nimeni ca să fie corect.
+
+**Ce dispare din listare NU devine automat „vândut”.** Fluxul spune mereu
+`InStock`; când se vinde, anunțul dispare — exact ca atunci când e retras de pe
+piață. Deci proprietatea iese de pe site, workflow-ul deschide o notă pe GitHub,
+iar „vândut” se scrie în `property-overrides.ts` după ce confirmă Vlad. Vezi
+regula despre cifre inventate, mai sus.
+
+**Dacă agenția își schimbă site-ul**, scriptul se oprește cu eroare și nu scrie
+nimic — site-ul rămâne pe ultimele date bune. Praguri în `assertSane()`.
+
+**Capcană, verificată pe viu:** când ceri o pagină de listare peste câte are
+agentul, site-ul agenției nu întoarce o listă goală, ci **renunță tăcut la
+filtrul pe agent** și îți dă catalogul întregii agenții. De aceea fiecare anunț
+e verificat separat că e al lui Vlad, după fotografia agentului din pagină.
 
 ## De făcut înainte de lansare
 

@@ -181,15 +181,21 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
               </Reveal>
             ))}
 
-            <Reveal delay={100}>
-              <ul className="border-line mt-12 border-t">
-                {property.highlights.map((item) => (
-                  <li key={item} className="border-line text-ink-soft border-b py-4 text-sm">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+            {/* Lista apare doar dacă are ce arăta. O proprietate proaspăt
+                venită din CRM n-are încă puncte scrise de mână — vezi
+                `property-overrides.ts` — iar un `<ul>` gol ar lăsa în pagină
+                două linii orizontale între care nu scrie nimic. */}
+            {property.highlights.length > 0 && (
+              <Reveal delay={100}>
+                <ul className="border-line mt-12 border-t">
+                  {property.highlights.map((item) => (
+                    <li key={item} className="border-line text-ink-soft border-b py-4 text-sm">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
           </div>
         </div>
       </section>
@@ -234,24 +240,31 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         </section>
       )}
 
-      {/* ---------- În jur ---------- */}
-      <section className="shell pb-20 md:pb-28">
-        <Reveal>
-          <p className="eyebrow border-line border-t pt-8">În jur</p>
-          <h2 className="display-md mt-5 max-w-[20ch]">Ce ai la câteva minute distanță</h2>
-        </Reveal>
+      {/* ---------- În jur ----------
+          Toată secțiunea dispare când n-avem repere scrise de mână. Reperele
+          nu se pot lua din CRM — sunt citite din descriere de un om, iar o
+          distanță care nu scrie în anunț nu se inventează (vezi README). Un
+          titlu „Ce ai la câteva minute distanță” urmat de nimic ar fi promis
+          exact ce n-avem. */}
+      {property.nearby.length > 0 && (
+        <section className="shell pb-20 md:pb-28">
+          <Reveal>
+            <p className="eyebrow border-line border-t pt-8">În jur</p>
+            <h2 className="display-md mt-5 max-w-[20ch]">Ce ai la câteva minute distanță</h2>
+          </Reveal>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-3">
-          {property.nearby.map((item, i) => (
-            <Reveal key={item.label} delay={i * 100}>
-              <div className="border-line border-t pt-6">
-                <p className="display-sm">{item.label}</p>
-                <p className="text-muted mt-2 text-sm">{item.detail}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+          <div className="mt-12 grid gap-8 sm:grid-cols-3">
+            {property.nearby.map((item, i) => (
+              <Reveal key={item.label} delay={i * 100}>
+                <div className="border-line border-t pt-6">
+                  <p className="display-sm">{item.label}</p>
+                  <p className="text-muted mt-2 text-sm">{item.detail}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ---------- Alte proprietăți ---------- */}
       {/* `pb` propriu, ca la toate secțiunile de mai sus. Era singura din tot

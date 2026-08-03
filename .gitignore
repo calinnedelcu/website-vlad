@@ -45,3 +45,8 @@ next-env.d.ts
 
 # ZCode session scratch
 /.zcode/
+
+# Raportul sincronizarii — se regenereaza la fiecare rulare
+/sync-report.json
+/summary.md
+/issue.md

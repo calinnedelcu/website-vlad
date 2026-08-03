@@ -36,11 +36,14 @@ const force = process.argv.includes("--force");
 
 /** Extrage căile din `m("folder/fisier.jpg")` și portretul din site.ts. */
 async function collectPaths() {
-  const properties = await readFile(join(ROOT, "src/lib/properties.ts"), "utf8");
+  // Căile vin din fișierul generat de `npm run sync`, nu din `properties.ts`:
+  // acolo nu mai există o listă literală de fotografii de când portofoliul se
+  // sincronizează singur. Tot o singură sursă, doar că alta.
+  const generated = JSON.parse(await readFile(join(ROOT, "src/lib/properties.generated.json"), "utf8"));
   const site = await readFile(join(ROOT, "src/lib/site.ts"), "utf8");
 
-  const propertyPaths = [...properties.matchAll(/\bm\("([^"]+)"\)/g)].map(
-    (match) => `property_images/${match[1]}`,
+  const propertyPaths = Object.values(generated.properties).flatMap((p) =>
+    [p.media.cover, ...p.media.gallery].filter(Boolean).map((path) => `property_images/${path}`),
   );
 
   // `[^\s"']` și nu `[^"']`: URL-ul apare într-un comentariu, iar fără
