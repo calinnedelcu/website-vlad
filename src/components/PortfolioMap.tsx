@@ -405,7 +405,20 @@ export function PortfolioMap({
         const on = hovered === zone.name || selected === zone.name;
         // Aria punctului crește cu numărul de proprietăți, nu raza — altfel
         // trei par de nouă ori mai multe decât una.
-        const size = 12 + Math.sqrt(zone.items.length) * 7;
+        //
+        // Mărimea e în PROCENTE din lățimea hărții, nu în pixeli. Era
+        // `12 + sqrt(n) * 7` pixeli, la fel pe orice ecran — iar harta nu e la
+        // fel pe orice ecran: 650px pe desktop, 268 pe telefon. Aceleași puncte
+        // de 19–24px însemnau 2,9–3,7% din hartă pe desktop, unde arătau bine,
+        // și 7,1–9% pe telefon, unde se călcau în picioare: șapte perechi
+        // suprapuse din unsprezece puncte.
+        //
+        // Procentele de mai jos sunt exact vechile pixeli împărțiți la lățimea
+        // de pe desktop (12/650, 7/650), deci acolo nu se schimbă nimic — doar
+        // că acum punctul se micșorează odată cu harta. `clamp` ține un prag de
+        // jos ca să nu devină invizibile pe ecrane înguste, și unul de sus
+        // pentru monitoare foarte late.
+        const size = 1.85 + Math.sqrt(zone.items.length) * 1.08;
 
         return (
           <button
@@ -425,9 +438,15 @@ export function PortfolioMap({
             style={{
               left: `${(zone.x / mapSize.width) * 100}%`,
               top: `${(zone.y / mapSize.height) * 100}%`,
-              width: size,
-              height: size,
-              margin: `${-size / 2}px 0 0 ${-size / 2}px`,
+              width: `clamp(9px, ${size}%, 28px)`,
+              // Înălțimea urmează lățimea, oricare ar fi ieșit din `clamp`.
+              aspectRatio: "1",
+              // Centrarea pe coordonată se face din `translate`, nu din margini
+              // negative: procentele lui se raportează la propria mărime a
+              // punctului, deci merg și când mărimea vine din `clamp` și nu
+              // știm dinainte câți pixeli iese. Marginile negative în procente
+              // s-ar fi raportat la lățimea hărții — alt lucru.
+              translate: "-50% -50%",
             }}
           >
             {/* Inelul care se deschide la hover. Stă pe un element separat ca
@@ -582,7 +601,13 @@ export function PortfolioMap({
 
   /* ---------- Modul editorial ---------- */
   return (
-    <section id="harta" className="bg-void text-paper py-24 md:py-32">
+    // `pb` mai mic pe telefon: dedesubt urmează „Track record”, tot pe negru.
+    // Două secțiuni de aceeași culoare care se ating nu au margine vizibilă
+    // între ele, deci umpluturile lor se adună într-un singur gol — 96 de aici
+    // plus 80 de acolo făceau 176px de negru mort, care se citea ca o pagină
+    // neterminată. De la `md` în sus rămâne cum era: acolo secțiunile sunt mai
+    // înalte și raportul nu sare în ochi.
+    <section id="harta" className="bg-void text-paper pt-24 pb-12 md:py-32">
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
