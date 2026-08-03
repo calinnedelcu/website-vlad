@@ -254,8 +254,11 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* ---------- Alte proprietăți ---------- */}
+      {/* `pb` propriu, ca la toate secțiunile de mai sus. Era singura din tot
+          site-ul fără el: se sprijinea pe marginea de 128px a subsolului, care
+          între timp a plecat. Vezi SiteFooter. */}
       {others.length > 0 && (
-        <section className="shell">
+        <section className="shell pb-20 md:pb-28">
           <Reveal>
             <p className="eyebrow border-line border-t pt-8">Poate te interesează și</p>
           </Reveal>

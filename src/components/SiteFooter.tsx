@@ -25,7 +25,15 @@ import { site } from "@/lib/site";
  */
 export function SiteFooter() {
   return (
-    <footer className="bg-paper-deep text-ink mt-32">
+    // Fără margine de sus. Avea `mt-32`, iar cei 128px nu erau spațiu gol: erau
+    // o bandă de `bg-paper` între secțiunea de deasupra și subsolul de
+    // `bg-paper-deep`. Pe paginile care se termină închis la culoare — prima
+    // pagină și /despre — ieșeau trei benzi una sub alta: negru, crem deschis,
+    // crem mai închis. Fâșia din mijloc se citea ca o greșeală, nu ca respiro.
+    //
+    // Acum fiecare pagină își aduce propriul spațiu de jos, cum făceau oricum
+    // aproape toate. Vezi /proprietati/[slug], singura care nu-l avea.
+    <footer className="bg-paper-deep text-ink">
       <div className="shell py-16 md:py-20">
         {/* Pe telefon, „Scrie-mi” și „Social” stau umăr la umăr: sunt două
             liste de câte două rânduri, iar una sub alta însemnau un ecran de
