@@ -89,15 +89,29 @@ export default function HomePage() {
          așezat, ca peste tot: afirmații verificabile, nu „100%" ca cifră de
          marketing. Vezi și /despre, „Ce poți să aștepți" — acolo e totul
          extins; aici e doar titlurile, ca să ajungă la ochiul care doar trece. */}
+      {/* Așezarea, pe desktop: eticheta sus-stânga, cifrele sub ea, textul în
+          dreapta. Înainte, coloana din stânga ținea doar eticheta — 18px de
+          text într-o coloană de 515px, adică 97% gol — iar cifrele pluteau
+          singure sub listă, în dreapta. Pe un ecran de 1728px se pierdeau 554
+          din cei 1312px de grilă.
+
+          Ordinea în cod rămâne etichetă → text → cifre, ca pe telefon să curgă
+          exact ca până acum (acolo arăta bine). Mutarea se face din plasarea pe
+          rânduri, care se aplică doar de la `md` în sus. */}
       <section id="exclusivitate" className="shell py-20 md:py-28">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-3">
+        {/* `grid-rows-[auto_1fr]`: fără el, primul rând nu rămâne cât eticheta.
+            Coloana din dreapta se întinde pe ambele rânduri, iar înălțimea ei
+            se împarte între rânduri auto — cifrele ajungeau la 209px sub
+            etichetă, plutind pe la mijloc. Așa, primul rând ține exact cât
+            eticheta și cifrele vin imediat sub ea. */}
+        <div className="grid gap-6 md:grid-cols-12 md:grid-rows-[auto_1fr] md:gap-x-12 md:gap-y-8">
+          <div className="md:col-span-4 md:row-start-1">
             <Reveal>
               <p className="eyebrow">Cum lucrez</p>
             </Reveal>
           </div>
 
-          <div className="md:col-span-8 md:col-start-5">
+          <div className="md:col-span-7 md:col-start-6 md:row-span-2 md:row-start-1">
             <Reveal>
               <SplitReveal as="h2" className="display-sm max-w-[20ch]" stagger={80}>
                 Comision 0 pentru cumpărător și chiriaș.
@@ -138,25 +152,26 @@ export default function HomePage() {
                 </li>
               </ul>
             </Reveal>
-
-            {/* Cele două cifre, venite din secțiunea „Ce fac” când aia s-a
-                desființat. Închid blocul în loc să deschidă o secțiune proprie:
-                după trei afirmații despre cum lucrează, ele spun pe ce lucrează
-                chiar acum. Se calculează din portofoliu, nu se scriu de mână —
-                dacă se schimbă lista, se schimbă și ele. */}
-            <Reveal delay={200}>
-              <div className="border-line mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
-                <p className="nums text-sm">
-                  <span className="font-display mr-2 text-2xl">{sales.length}</span>
-                  vânzări
-                </p>
-                <p className="nums text-sm">
-                  <span className="font-display mr-2 text-2xl">{rentals.length}</span>
-                  chirii
-                </p>
-              </div>
-            </Reveal>
           </div>
+
+          {/* Cele două cifre, venite din secțiunea „Ce fac” când aia s-a
+              desființat. Se calculează din portofoliu, nu se scriu de mână —
+              dacă se schimbă lista, se schimbă și ele.
+              Pe telefon vin la final, sub cele trei afirmații: acolo curge
+              firesc, întâi cum lucrează, apoi pe ce lucrează. De la `md` în sus
+              urcă sub etichetă, în coloana care altfel rămânea goală. */}
+          <Reveal delay={200} className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-start">
+            <div className="border-line flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
+              <p className="nums text-sm">
+                <span className="font-display mr-2 text-2xl">{sales.length}</span>
+                vânzări
+              </p>
+              <p className="nums text-sm">
+                <span className="font-display mr-2 text-2xl">{rentals.length}</span>
+                chirii
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
