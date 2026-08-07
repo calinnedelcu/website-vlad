@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-06T06:44:04.822Z",
+  "updatedAt": "2026-08-07T05:49:53.851Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -833,7 +833,7 @@
     },
     "3246242": {
       "id": "3246242",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-mihai-bravu-bucuresti-cp3246242/",
       "sourceTitle": "Asmita Gardens 3 Camere 100 mp Metrou 8 m Etaj 2",
       "kind": "apartament",
@@ -1027,6 +1027,44 @@
           "3131961/5265859f-4b3e-4d99-8a8b-fedb5b519a5f.jpeg",
           "3131961/b59a4023-4118-4311-b7a2-00044b12efea.jpg",
           "3131961/74ff9af0-e7ef-4f77-ac30-e19b67a03a89.jpg"
+        ]
+      }
+    },
+    "3291462": {
+      "id": "3291462",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-mihai-bravu-bucuresti-cp3291462/",
+      "sourceTitle": "3 Camere Asmitha Gardens 100 mp Metrou 7 m PET FRIENDLY Etaj 2",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 900,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 105,
+        "rooms": 3,
+        "baths": 2,
+        "year": 2009
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un apartament cu 4 camere, situat la etajul 2 al prestigiosului complex rezidențial Asmita Gardens, amplasat pe Splaiul Unirii.",
+        "Apartamentul este spațios, luminos și foarte bine compartimentat, fiind ideal pentru o familie sau pentru persoanele care își doresc o locuință generoasă, într-un complex modern, cu acces facil către centrul orașului.",
+        "Proprietatea se află la aproximativ 8 minute de mers pe jos de stația de metrou Mihai Bravu, iar în imediata apropiere se regăsesc supermarketuri, restaurante, săli de fitness, spații verzi și numeroase alte facilități.",
+        "Apartamentul se închiriază complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit și mutare imediată. Separat se poate inchiria si un loc de parcare.",
+        "Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3246242/709436f0-8a51-40d7-a78c-4308857345f7.jpeg",
+        "gallery": [
+          "3246242/100eee1d-ba0b-4fa0-8086-9ffea8358f61.jpeg",
+          "3246242/fa228a78-d013-4d5c-b97a-388720ce8b8e.jpeg",
+          "3246242/446f3554-6a14-42a8-b453-762f0b521963.jpeg",
+          "3246242/7ca3eda4-9dab-4db0-8290-a3c23cb686bb.jpeg"
         ]
       }
     }
