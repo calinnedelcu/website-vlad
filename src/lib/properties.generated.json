@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T05:09:04.978Z",
+  "updatedAt": "2026-08-14T05:45:10.341Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -256,7 +256,7 @@
     },
     "3081123": {
       "id": "3081123",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-vanzare-militari-bucuresti-cp3081123/",
       "sourceTitle": "Apartament 3 camere Tineretului Mobilat/Utilat 74 mp Etaj 7/8",
       "kind": "apartament",
@@ -297,7 +297,7 @@
     },
     "3106703": {
       "id": "3106703",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-vanzare-chiajna-cp3106703/",
       "sourceTitle": "Apartament 3 Camere Tineretului 24 Mobilat/Utilat 74 mp Etaj 7/8",
       "kind": "apartament",
@@ -370,7 +370,7 @@
     },
     "3123651": {
       "id": "3123651",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-gradina-icoanei-bucuresti-cp3123651/",
       "sourceTitle": "Universitate Gradina Icoanei 3 Camere Nemobilat Pretabil Birou",
       "kind": "apartament",
@@ -413,7 +413,7 @@
     },
     "3124716": {
       "id": "3124716",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-de-birouri-3-camere-de-inchiriat-gradina-icoanei-bucuresti-cp3124716/",
       "sourceTitle": "Apartament 3 Camere Nemobilat Pretabil Birou",
       "kind": "birouri",
@@ -665,7 +665,7 @@
     },
     "3233945": {
       "id": "3233945",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-central-voluntari-cp3233945/",
       "sourceTitle": "Voluntari - Craiovei 2 Camere Lux 1/1 56 mp Bloc 2025 Prima Inchiriere",
       "kind": "apartament",
@@ -920,7 +920,7 @@
     },
     "3283468": {
       "id": "3283468",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-crangasi-bucuresti-cp3283468/",
       "sourceTitle": "Lake House 2 - Crangasi | 2 Camere | Lux | View Panoramic | 8/11",
       "kind": "apartament",
@@ -1000,7 +1000,7 @@
       "segment": "comercial",
       "deal": "inchiriere",
       "price": {
-        "amount": 3250,
+        "amount": 3000,
         "currency": "EUR",
         "period": "luna"
       },
@@ -1067,6 +1067,50 @@
           "3246242/446f3554-6a14-42a8-b453-762f0b521963.jpeg",
           "3246242/7ca3eda4-9dab-4db0-8290-a3c23cb686bb.jpeg",
           "3246242/a0b39108-132d-42b0-a094-ae9d8db49341.jpeg"
+        ]
+      }
+    },
+    "3316650": {
+      "id": "3316650",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-3-camere-de-inchiriat-varteju-cp3316650/",
+      "sourceTitle": "Hala Varteju | 1 km Centura Bucuresti | 4 km A0",
+      "kind": "hala",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 3000,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 550,
+        "rooms": 3,
+        "baths": 2,
+        "year": 2025
+      },
+      "sourceLocality": "Varteju",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Hala va fi predată viitorului chiriaș „la cheie”. Fotografiile de prezentare au caracter orientativ și sunt destinate exclusiv pentru ilustrarea compartimentării spațiilor de birouri.",
+        "Vă propunem spre închiriere un spațiu modern de depozitare/producție și birouri, cu infrastructură completă și acces facil direct din Șoseaua de Centură, în zona Vârteju, județul Ilfov. Proprietatea beneficiază de o amplasare excelentă, fiind situată la doar 1 km de Centura Bucureștiului și 4 km de Autostrada A0, oferind conexiuni rapide către principalele artere de transport.",
+        "Specificații hală:",
+        "Suprafață depozitare/producție (open space): 450 mp Suprafață construită birouri (P+1): 120 mp Suprafață teren: 1000 mp",
+        "Birouri și facilități:",
+        "Sistem de încălzire și răcire cu unități tip casetă de tavan; 2 grupuri sanitare; Spațiu destinat amenajării unei chicinete; Sală de ședințe; Infrastructură pregătită pentru internet, supraveghere video și sistem de alarmă.",
+        "Utilități:",
+        "Curent trifazic; Apă; Canalizare.",
+        "Avantaje: Spațiul este pregătit pentru utilizare imediată și este ideal pentru activități de:",
+        "producție; depozitare; distribuție; e-commerce; logistică și servicii conexe.",
+        "Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3163181/e7febc72-f226-4965-9822-f5f8c7a532b5.jpeg",
+        "gallery": [
+          "3163181/5ff2f680-a32b-430d-b864-c14a388fab35.jpeg",
+          "3163181/b332b6fc-3067-41fd-bae0-05a61d6217ae.jpeg",
+          "3163181/8f496e87-9dbd-4b50-a799-51422905d01c.jpeg",
+          "3163181/53fe124d-eed3-4688-bbe0-f432d4233b97.jpeg"
         ]
       }
     }
