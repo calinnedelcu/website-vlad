@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T05:45:10.341Z",
+  "updatedAt": "2026-08-17T04:56:22.980Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -448,7 +448,7 @@
     },
     "3131961": {
       "id": "3131961",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3131961/",
       "sourceTitle": "CENTURA - Rudeni | HALA 510 mp| Birouri 120mp | Parc Industrial nou",
       "kind": "hala",
@@ -494,7 +494,7 @@
     },
     "3163181": {
       "id": "3163181",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-3-camere-de-inchiriat-varteju-cp3163181/",
       "sourceTitle": "Hala Varteju | 1 km Centura Bucuresti | 4 km A0",
       "kind": "hala",
