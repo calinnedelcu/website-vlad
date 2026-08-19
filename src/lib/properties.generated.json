@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T04:56:22.980Z",
+  "updatedAt": "2026-08-19T04:50:26.907Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -706,7 +706,7 @@
     },
     "3234223": {
       "id": "3234223",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-6-camere-de-inchiriat-vacaresti-bucuresti-cp3234223/",
       "sourceTitle": "Spatiu Comercial Stradal Calea Vacaresti | VAD Vitrina 8 m",
       "kind": "spatiu comercial",
@@ -788,7 +788,7 @@
     },
     "3244787": {
       "id": "3244787",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-2-camere-de-inchiriat-central-magurele-cp3244787/",
       "sourceTitle": "Cort Industrial 300 mp Teren 900 mp Birouri",
       "kind": "hala",
@@ -901,14 +901,14 @@
         "COMISION 0% pentru cumpărător!",
         "Vă prezentăm spre vânzare un apartament cu 3 camere, situat pe Strada Ilie Petre 8C, Roșu – Chiajna. Proprietatea este ideală pentru familii tinere, care au un buget bine definit și își doresc mutarea imediată.",
         "Printre beneficiile proprietății se enumeră:",
-        "Mobilat și utilat complet -Suprafață utilă totala 66 mp: 63 mp + 3 mp balcon -Bloc construit în anul 2024 -Etaj intermediar: 4/5",
+        "-Suprafață utilă totala 66 mp: 63 mp + 3 mp balcon -Bloc construit în anul 2024 -Etaj intermediar: 4/5",
         "Beneficii zonă:",
         "Școli și grădinițe în vecinătate Acces facil către centre comerciale și Centura Bucureștiului Distanță de 4 minute până la stația STB"
       ],
       "media": {
-        "cover": "3257960/a646777c-138d-4cff-a100-85e476c31f79.jpg",
+        "cover": "3257960/0c100953-188b-4dba-ad1a-0659b525e9e9.jpg",
         "gallery": [
-          "3257960/0c100953-188b-4dba-ad1a-0659b525e9e9.jpg",
+          "3257960/a646777c-138d-4cff-a100-85e476c31f79.jpg",
           "3257960/a389a3dc-54cf-475e-8617-12c99024b82b.jpg",
           "3257960/57912644-d9e4-4e54-a6db-aabdfd935735.jpg",
           "3257960/ec9aac63-d131-4164-abd4-d4a16db931bb.jpg",
@@ -1111,6 +1111,183 @@
           "3163181/b332b6fc-3067-41fd-bae0-05a61d6217ae.jpeg",
           "3163181/8f496e87-9dbd-4b50-a799-51422905d01c.jpeg",
           "3163181/53fe124d-eed3-4688-bbe0-f432d4233b97.jpeg"
+        ]
+      }
+    },
+    "3321549": {
+      "id": "3321549",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3321549/",
+      "sourceTitle": "CENTURA - Rudeni | HALA 510 mp| Birouri 120mp | Parc Industrial nou",
+      "kind": "hala",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 3000,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 550,
+        "rooms": 6,
+        "baths": 2,
+        "year": 2025
+      },
+      "sourceLocality": "Rudeni",
+      "story": [
+        "Comision 0% chirias!",
+        "Vă propunem spre inchiriere spațiu de depozitare/producție și birouri, situate într-un parc industrial modern, cu infrastructură completă și acces direct din Șoseaua de Centură, în zona Chiajna – Rudeni. Specificatii Hala: • Suprafață depozitare/producție (open space): 450 mp • Suprafață construita birouri (P+1): 120 mp • Teren aferent: 982 mp",
+        "Birouri și facilități • Încălzire/răcire cu sistem tip casetă de tavan • 2 grupuri sanitare • Spațiu pentru chicinetă • Sală de ședințe • Infrastructură realizată pentru internet, supraveghere video și sistem de alarmă",
+        "Utilități • Curent trifazic • Apă • Canalizare",
+        "Avantaje și oportunitate de investiție:",
+        "Parcul industrial este complet sistematizat, cu facilități moderne și acces facil pentru transport marfă. Spațiul este pregătit pentru utilizare imediată și este ideal atât pentru: • producție • depozitare • distribuție • e-commerce",
+        "Imobilul/spatiul comercial este in proprietatea unei societăți, iar la prețul de 3250 se aplica TVA. De asemenea daca imobilul la randul lui va fi inchiriat de catre o societate comercială se va aplica taxarea inversă."
+      ],
+      "media": {
+        "cover": "3131961/fcbb4b70-931c-4c12-b43f-503d160f3d1b.jpeg",
+        "gallery": [
+          "3131961/0a951563-e2cf-4f3d-a4c7-10b36e760951.jpeg",
+          "3131961/5265859f-4b3e-4d99-8a8b-fedb5b519a5f.jpeg",
+          "3131961/b59a4023-4118-4311-b7a2-00044b12efea.jpg",
+          "3131961/74ff9af0-e7ef-4f77-ac30-e19b67a03a89.jpg"
+        ]
+      }
+    },
+    "3321554": {
+      "id": "3321554",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-sebastian-bucuresti-cp3321554/",
+      "sourceTitle": "Sebastian 2 Camere 60 mp Renovat 5/8",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 550,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 60,
+        "rooms": 2,
+        "baths": 1,
+        "year": 1985
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș! Vă propunem spre închiriere un apartament cu 2 camere renovat, situat pe strada Dumbrava Noua ,vis a vis de parcul Sebastian. Apartamentul este decomandat și se află la etajul 5 din 8, într-un bloc construit în anul 1985. Este mobilat și utilat complet, fiind dotat cu toate electrocasnicele necesare. Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "2659680/1e815a72-4560-4664-94db-82120393db40.jpg",
+        "gallery": [
+          "2659680/496ea9a3-b893-4980-9d5a-367b7ee6d2db.jpg",
+          "2659680/59d6cb05-ab48-4e28-8147-5528fe4c8f5f.jpg",
+          "2659680/5a942c90-f1b2-4932-806b-5a70b7c95e6c.jpg",
+          "2659680/cafbedf1-a59a-4fa9-90ac-794ae09a6b6b.jpg"
+        ]
+      }
+    },
+    "3321557": {
+      "id": "3321557",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-inchiriat-nerva-traian-bucuresti-cp3321557/",
+      "sourceTitle": "Garsoniera Nerva Traian Centrala Proprie 6/8 12 min Metrou",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 420,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 40,
+        "rooms": 1,
+        "baths": 1,
+        "year": 1990
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș! Vă propunem spre închiriere o Garsoniera renovata, situata pe strada Vasile Carlova nr 2 , la 12 minute de metrou Timpuri Noi. Garsoniera este decomandata și se află la etajul 6 din 8, într-un bloc construit în anul 1990. Este mobilata și utilata complet, fiind dotat cu toate electrocasnicele necesare. Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3321557/0eb4bb6e-ba3e-41bc-9f19-158ba72ffa86.jpeg",
+        "gallery": [
+          "3321557/e5256450-93dc-4e88-9b70-df22ddceaacb.jpeg",
+          "3321557/c62d13c9-a055-47c9-a3e1-00e477cda508.jpeg",
+          "3321557/f6f5bd83-2ede-4a94-842a-267902f406b9.jpeg",
+          "3321557/6a0ddc28-4976-42df-97d8-2cc59d199c25.jpeg"
+        ]
+      }
+    },
+    "3323086": {
+      "id": "3323086",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-6-camere-de-inchiriat-vacaresti-bucuresti-cp3323086/",
+      "sourceTitle": "Spatiu Comercial Stradal Calea Vacaresti | VAD Vitrina 8 m",
+      "kind": "spatiu comercial",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 1300,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 170,
+        "rooms": 6,
+        "baths": 2,
+        "year": 1900
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un spațiu comercial situat pe Calea Văcărești nr. 251. Spațiul are o suprafață de aproximativ 200 mp, fiind compartimentat conform fotografiilor de prezentare. Proprietatea este alcătuită din 4 birouri, 2 grupuri sanitare și 2 săli generoase, prin care se realizează accesul către birouri. Ca punct de reper proprietatea se află lângă Pizzeria Volare Alegro, la doar 2 minute de mers pe jos de Parcul Lumea Copiilor și la aproximativ 9 minute de stația de metrou Mihai Bravu, conform Google Maps. Pentru a înțelege mai bine compartimentarea și amplasarea spațiului, vă invităm să urmăriți videoclipul de prezentare.",
+        "Vă așteptăm cu drag la vizionare!"
+      ],
+      "media": {
+        "cover": "3234223/e8c46c9d-057e-4b44-8a37-27a2fbd650e9.jpeg",
+        "gallery": [
+          "3234223/09ce87cc-4550-42dc-9e9e-723881efc416.jpeg",
+          "3234223/edd21862-3bfd-49e6-b117-debde5dfd7f7.jpeg",
+          "3234223/9c8fb438-6188-4a4f-84da-5f70080ba213.jpeg",
+          "3234223/446374d6-f1c5-4dfd-8a4e-094c67e27fa6.jpeg"
+        ]
+      }
+    },
+    "3323087": {
+      "id": "3323087",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-2-camere-de-inchiriat-central-magurele-cp3323087/",
+      "sourceTitle": "Cort Industrial 300 mp Teren 900 mp Birouri",
+      "kind": "hala",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 2250,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 350,
+        "rooms": 2,
+        "year": 2020
+      },
+      "sourceLocality": "Magurele",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un cort industrial cu o suprafață de 300 mp, amplasat pe un teren de 900 mp, ideal pentru activități de depozitare, logistică, distribuție sau producție ușoară.",
+        "Datorită amplasării și suprafeței disponibile, spațiul este potrivit pentru companii care au nevoie de o soluție rapidă și eficientă pentru desfășurarea activității.",
+        "Caracteristici: Suprafață cort industrial: 300 mp; Suprafață teren: 900 mp; Acces facil pentru autovehicule de mare tonaj; Pretabil pentru depozitare, logistică, distribuție, producție ușoară sau e-commerce; Posibilitate de amenajare în funcție de necesitățile chiriașului.",
+        "Avantaje: Costuri reduse de operare; Acces rapid către principalele artere de circulație; Spațiu disponibil imediat; Curte proprie, ideală pentru activități logistice.",
+        "Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3244787/3ddc5a7d-0317-45cb-a58d-e71f5e758cd6.jpeg",
+        "gallery": [
+          "3244787/5a5e1a9a-f6f6-447d-909e-cdb4f136bafd.jpeg",
+          "3244787/a5c00773-cd93-4fad-bb65-50999b0bc62e.jpeg",
+          "3244787/4d971470-6e56-4f8b-9ec1-de11f88a57c9.jpeg",
+          "3244787/f2d5ccf8-1f90-434a-b094-eb193dbf7469.jpeg"
         ]
       }
     }
