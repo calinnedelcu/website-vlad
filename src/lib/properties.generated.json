@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T04:51:37.145Z",
+  "updatedAt": "2026-08-21T04:52:30.270Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -625,7 +625,7 @@
     },
     "3199302": {
       "id": "3199302",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-floreasca-bucuresti-cp3199302/",
       "sourceTitle": "Apartament 2 camere Floreasca Ceaikovski 1/3",
       "kind": "apartament",
@@ -1288,6 +1288,112 @@
           "3244787/a5c00773-cd93-4fad-bb65-50999b0bc62e.jpeg",
           "3244787/4d971470-6e56-4f8b-9ec1-de11f88a57c9.jpeg",
           "3244787/f2d5ccf8-1f90-434a-b094-eb193dbf7469.jpeg"
+        ]
+      }
+    },
+    "3325351": {
+      "id": "3325351",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-universitate-bucuresti-cp3325351/",
+      "sourceTitle": "Universitate 3 Camere  45mp Loc Parcare Centrala Metrou 6 min",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 700,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 45,
+        "rooms": 3,
+        "baths": 1,
+        "year": 1930
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un apartament renovat, situat pe Strada General David Praporgescu, la 6 minute de mers pe jos de stația de metrou Universitate. Apartamentul are o suprafață de 45 mp, este dispus pe două niveluri și beneficiază de un loc de parcare.",
+        "Proprietatea este complet mobilată și utilată, fiind dotată cu toate electrocasnicele necesare pentru o mutare imediată.",
+        "Datorită poziționării ultracentrale, apartamentul oferă acces rapid către principalele puncte de interes ale Capitalei, precum Piața Universității, Centrul Vechi, restaurante, cafenele, magazine și multiple mijloace de transport în comun. Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3325351/b163d0f1-9a0b-4ad1-ab50-738256fef16f.jpg",
+        "gallery": [
+          "3325351/b32834ce-8b3e-41cc-bd66-2257cb4d0f24.jpg",
+          "3325351/90361354-a630-4d15-bdbf-b4739c780cce.jpg",
+          "3325351/047cd879-048c-4da6-8a5a-ce29852b76b7.jpg",
+          "3325351/85a9ce82-e595-4da6-8037-55091d565192.jpg"
+        ]
+      }
+    },
+    "3326054": {
+      "id": "3326054",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-central-voluntari-cp3326054/",
+      "sourceTitle": "Voluntari - Craiovei 2 Camere Lux 1/1 46 mp Bloc 2025 Prima Inchiriere",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 500,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 46,
+        "rooms": 2,
+        "baths": 1,
+        "year": 2025
+      },
+      "sourceLocality": "Voluntari",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un apartament nou cu 2 camere, situat în Voluntari, pe strada Craiovei. Apartamentul dispune de 46 mp este semidecomandat, se află la parterul unui bloc construit 2025 și este complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit. Locuința dispune de centrală termică proprie, mașină de spălat rufe și mașină de spălat vase. Pentru o mai bună înțelegere a compartimentării, vă putem pune la dispoziție un videoclip de prezentare.",
+        "Vă așteptăm cu drag la vizionare!"
+      ],
+      "media": {
+        "cover": "3326054/9dd85bc5-54bb-4fbd-a756-dc31c8e377cd.jpeg",
+        "gallery": [
+          "3326054/20110517-a90b-4939-9a32-7beba5354d89.jpeg",
+          "3326054/c7726195-c02c-481c-aec8-7c7b42ed4a5c.jpeg",
+          "3326054/232a8b3e-b02a-456c-82d7-f322bdd8f81c.jpeg",
+          "3326054/f104e728-b78d-4111-b3f0-f0c1bc2b47b0.jpeg"
+        ]
+      }
+    },
+    "3326072": {
+      "id": "3326072",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-central-voluntari-cp3326072/",
+      "sourceTitle": "Voluntari - Craiovei 2 Camere Lux 1/1 36 mp Bloc 2025 Prima Inchiriere",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 450,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 46,
+        "rooms": 2,
+        "baths": 1,
+        "year": 2025
+      },
+      "sourceLocality": "Voluntari",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un apartament nou cu 2 camere, situat în Voluntari, pe strada Craiovei. Apartamentul dispune de 36 mp este semidecomandat, se află la parterul unui bloc construit 2025 și este complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit. Locuința dispune de centrală termică proprie, mașină de spălat rufe și mașină de spălat vase. Pentru o mai bună înțelegere a compartimentării, vă putem pune la dispoziție un videoclip de prezentare.",
+        "Vă așteptăm cu drag la vizionare!"
+      ],
+      "media": {
+        "cover": "3326072/61b07d0a-d48e-4da6-81ab-39c375879e82.jpeg",
+        "gallery": [
+          "3326072/2b529e3b-68dd-4163-bdd3-c6cc57233d64.jpeg",
+          "3326072/c9ff4a77-2dae-475a-a718-78a59228cbd9.jpeg",
+          "3326072/0ebde4fd-f439-4c8b-925d-ebc152519237.jpeg",
+          "3326072/20bbce53-e994-4d41-a377-4dc67d3c820c.jpeg"
         ]
       }
     }
