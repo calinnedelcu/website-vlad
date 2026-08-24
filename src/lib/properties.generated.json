@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T04:47:38.029Z",
+  "updatedAt": "2026-08-24T04:59:52.824Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1293,7 +1293,7 @@
     },
     "3325351": {
       "id": "3325351",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-universitate-bucuresti-cp3325351/",
       "sourceTitle": "Universitate 3 Camere  45mp Loc Parcare Centrala Metrou 6 min",
       "kind": "apartament",
@@ -1394,6 +1394,45 @@
           "3326072/c9ff4a77-2dae-475a-a718-78a59228cbd9.jpeg",
           "3326072/0ebde4fd-f439-4c8b-925d-ebc152519237.jpeg",
           "3326072/20bbce53-e994-4d41-a377-4dc67d3c820c.jpeg"
+        ]
+      }
+    },
+    "3331719": {
+      "id": "3331719",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-4-camere-de-vanzare-ferentari-bucuresti-cp3331719/",
+      "sourceTitle": "Ferentari Ofrandei Casa 4 Camere Constructie 2019 Util 120 mp",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 185000,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 120,
+        "rooms": 4,
+        "baths": 3,
+        "year": 2019
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru cumpărător!",
+        "Casă în Ferentari, pe Strada Ofrandei nr. 43. Construcție Parter + Mansardă, 2019. Suprafață utilă 120 mp. Suprafață totală teren 184 mp, curte liberă 70 mp. Vânzare mobilată și utilată complet, exact ca în fotografii.",
+        "Compartimentare:",
+        "Parter: Living, Bucătărie, Dormitor, Baie.",
+        "Etaj: Dormitor mic, Dormitor mare, grup sanitar.",
+        "Anexă: Bucătărie de vară + Grup sanitar.",
+        "Beci 6 mp.",
+        "Pentru videoclipul de prezentare ne puteți contacta la numărul din anunț! Toate detaliile înainte de vizionare! Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3331719/442193c8-5a1f-4247-9328-7b3c323c9191.jpg",
+        "gallery": [
+          "3331719/23c10773-e4e3-45d6-be7c-ffad21402e89.jpg",
+          "3331719/597f97c2-3eec-49ef-861c-5dc55e9eaa7f.jpg",
+          "3331719/8e5ae58b-2c01-4af6-aed0-4fabc2431cc2.jpg",
+          "3331719/881d0e7e-87fe-4c4d-bf16-e4bef9a0e18e.jpg"
         ]
       }
     }
