@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24T04:59:52.824Z",
+  "updatedAt": "2026-08-26T04:54:28.144Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1433,6 +1433,145 @@
           "3331719/597f97c2-3eec-49ef-861c-5dc55e9eaa7f.jpg",
           "3331719/8e5ae58b-2c01-4af6-aed0-4fabc2431cc2.jpg",
           "3331719/881d0e7e-87fe-4c4d-bf16-e4bef9a0e18e.jpg"
+        ]
+      }
+    },
+    "3336002": {
+      "id": "3336002",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-inchiriat-tei-bucuresti-cp3336002/",
+      "sourceTitle": "Garsoniera Tei 8/10 Bloc 1985",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 380,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 40,
+        "rooms": 1,
+        "baths": 1,
+        "year": 1985
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0!",
+        "Garsoniera Tei, bulevardul Ghica Tei 89. Etaj 8/10, 40 mp, bloc 1985. Mobilata si Utilata complet, alaturi de toate electrocasnicele necesare.",
+        "Pentru videoclip de prezentare ma puteti contacta in privat! Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3336002/3d151c5f-bb89-4a1e-8466-029b88eecdcb.jpeg",
+        "gallery": [
+          "3336002/74c14733-fc90-4912-b431-74ae1c75f1ca.jpeg",
+          "3336002/63e211a2-2525-4e93-ada0-5915fbf791a3.jpeg",
+          "3336002/89b29574-1b39-4245-b89c-f90d7b0ba8c0.jpeg",
+          "3336002/4955e2c9-e403-4d18-8dd1-d38743bcd32d.jpeg"
+        ]
+      }
+    },
+    "3336004": {
+      "id": "3336004",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-metalurgiei-bucuresti-cp3336004/",
+      "sourceTitle": "Cartierul Solar 2 Camere 64 mp Lux Parter Inalt",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 550,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 64,
+        "rooms": 2,
+        "baths": 1,
+        "year": 2019
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0 pentru chirias!",
+        "Apartament 2 Camere Cartierul solar. Bloc 2019 Parter/5. Mobilat si utilat complet, alături de toate electrocasnicele necesare. Posibilitate loc de parcare contra cost.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3336004/6fad86b5-a0c7-400e-9aa0-62ffe58e5ad2.jpeg",
+        "gallery": [
+          "3336004/2ee6cecb-4c40-41b9-a279-404a34c4636c.jpeg",
+          "3336004/dcfd9510-6262-4aea-a8c2-60cf082c370a.jpeg",
+          "3336004/ccd09fe4-ee3d-423c-af10-9048e252db57.jpeg",
+          "3336004/d410affc-b70b-4cd0-8234-34f1dd216643.jpeg"
+        ]
+      }
+    },
+    "3336005": {
+      "id": "3336005",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-4-camere-de-inchiriat-domnesti-cp3336005/",
+      "sourceTitle": "Domnesti Duplex 4 Camere 160 mp",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 800,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 160,
+        "rooms": 4,
+        "baths": 2,
+        "year": 2014
+      },
+      "sourceLocality": "Domnesti",
+      "story": [
+        "Comision 0!",
+        "Duplex Domnesti strada Diamnatului nr 4. Suprafata utila 160 mp. Suprafata teren 300 mp. Mobilata si utilata complet, alaturi de toate electrocasnicele necesare.",
+        "Loc de parcare inclus. Complex privat cu acces bariera.",
+        "Pentru videoclip, ma puteti contacta in privat! Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3336005/3c9829d4-e096-45b3-9333-e9a41addd2b1.jpeg",
+        "gallery": [
+          "3336005/13258be6-125b-408f-86eb-65fe3881ed3c.jpeg",
+          "3336005/7c2ef871-a741-4567-b07d-1176d97cac78.jpeg",
+          "3336005/61939095-e3f7-4ed2-af17-eaa80fd9b02f.jpeg",
+          "3336005/90e78ca1-1c15-42a5-98fa-ee9c46200308.jpeg"
+        ]
+      }
+    },
+    "3336006": {
+      "id": "3336006",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-tei-bucuresti-cp3336006/",
+      "sourceTitle": "Tei Ion Berindei 3 Camere 8/10 Renovat",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 500,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 67,
+        "rooms": 3,
+        "baths": 1,
+        "year": 1970
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș! Vă propunem spre închiriere un apartament cu 3 camere renovat recent, situat în zona Tei pe strada Ion Berindei , la 16 minute de Statia de metrou Obor. Apartamentul este semidecomandat și se află la etajul 8 din 10, într-un bloc construit în anul 1970. Este mobilat și utilat complet, fiind dotat cu toate electrocasnicele necesare. Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3336006/e5f34534-4d30-40d7-897c-14d2f987262f.jpeg",
+        "gallery": [
+          "3336006/e58bb31d-6c4e-4c9d-85a6-c461be338c73.jpeg",
+          "3336006/9112c1f0-7a0e-4345-b854-0f937be127b7.jpeg",
+          "3336006/b9858ae7-9117-4ffc-a259-ea9bd1d8e9b9.jpeg",
+          "3336006/c845bd77-3edc-4325-a59e-8a859cc39fd0.jpeg"
         ]
       }
     }
