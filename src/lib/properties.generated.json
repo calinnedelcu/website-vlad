@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T15:13:40.593Z",
+  "updatedAt": "2026-08-28T16:36:28.809Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1574,6 +1574,46 @@
           "3336006/9112c1f0-7a0e-4345-b854-0f937be127b7.jpeg",
           "3336006/b9858ae7-9117-4ffc-a259-ea9bd1d8e9b9.jpeg",
           "3336006/c845bd77-3edc-4325-a59e-8a859cc39fd0.jpeg"
+        ]
+      }
+    },
+    "3344381": {
+      "id": "3344381",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-8-camere-de-inchiriat-pipera-bucuresti-cp3344381/",
+      "sourceTitle": "PIPERA - Iancu Nicolae - Gradina Zoologica | Vila 290 mp| Teren 387 mp",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 2900,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 290,
+        "rooms": 8,
+        "baths": 4,
+        "year": 2014
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0 pentru chirias!",
+        "Vilă pretabilă pentru activități comerciale sau de birouri, dar și ca spațiu rezidențial!",
+        "Caracteristici principale: • Teren: 387 mp, plan, formă regulată, deschidere de 18 ml • Regim de înălțime: P + 1 + M • An construcție: 2000 • Structură: lemn cu fundații din beton armat • Renovare completă: 2014 • Suprafață construită totală: 355 mp • Suprafață utilă: 290 mp • Garaj • Toate utilitățile disponibile",
+        "Zona beneficiază de infrastructură în curs de modernizare, iar poziționarea oferă acces rapid către numeroase puncte de interes: • Centre comerciale: Băneasa Shopping City, Jolie Ville, Lidl • Școli și centre educaționale: Cambridge School of Bucharest, British School of Bucharest, Mark Twain International School, Olga Gudynn International School, Liceul Francez • Restaurante și zone de recreere: Pădurea Băneasa, Grădina Zoologică",
+        "Accesul către proprietate se realizează direct din Bulevardul Erou Iancu Nicolaepe o alee de servitute cu o lungime de doar 30 ml, iar proximitatea față de Aleea Privighetorilor asigură legătură rapidă către Șoseaua București–Ploiești. De asemenea vila este situata chiar langa statia de autobuz nr. 301 cu acces direct catre Piata Romana.",
+        "Spațiu și flexibilitate: Locuința beneficiază de o compartimentare inteligentă și versatilă, fiecare nivel putând fi organizat ca unitate independentă complet funcțională. Această caracteristică oferă multiple posibilități de utilizare: • locuință pentru familii numeroase • locuire multigenerațională • birouri sau activități profesionale",
+        "Pentru videoclipul de prezentare ma puteți contacta la numărul din anunț!",
+        "Vă asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3344381/a735ba37-67ca-4cc4-a855-f3f921670b3f.jpg",
+        "gallery": [
+          "3344381/a7769ef1-5091-4e27-b2f3-51b3c0903897.jpg",
+          "3344381/64992945-08d7-4ef1-8eee-828a09ace587.jpg",
+          "3344381/73538126-f688-4ca9-ba84-420855241d3a.jpeg",
+          "3344381/c35bbc9a-f9a2-4726-83e4-9d823856d5ef.jpeg"
         ]
       }
     }
