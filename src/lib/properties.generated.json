@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-28T16:36:28.809Z",
+  "updatedAt": "2026-08-31T10:49:34.407Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1336,7 +1336,7 @@
       "segment": "rezidential",
       "deal": "inchiriere",
       "price": {
-        "amount": 500,
+        "amount": 490,
         "currency": "EUR",
         "period": "luna"
       },
@@ -1366,12 +1366,12 @@
       "id": "3326072",
       "listed": true,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-central-voluntari-cp3326072/",
-      "sourceTitle": "Voluntari - Craiovei 2 Camere Lux 1/1 36 mp Bloc 2025 Prima Inchiriere",
+      "sourceTitle": "Apartment 2 Camere Voluntari Lux 1/1 36 mp Bloc 2025 Prima Inchiriere",
       "kind": "apartament",
       "segment": "rezidential",
       "deal": "inchiriere",
       "price": {
-        "amount": 450,
+        "amount": 440,
         "currency": "EUR",
         "period": "luna"
       },
@@ -1614,6 +1614,40 @@
           "3344381/64992945-08d7-4ef1-8eee-828a09ace587.jpg",
           "3344381/73538126-f688-4ca9-ba84-420855241d3a.jpeg",
           "3344381/c35bbc9a-f9a2-4726-83e4-9d823856d5ef.jpeg"
+        ]
+      }
+    },
+    "3347922": {
+      "id": "3347922",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-inchiriat-theodor-pallady-bucuresti-cp3347922/",
+      "sourceTitle": "Garsoniera Pallady | Parcare inclusa | Centrala AC",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 400,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 30,
+        "rooms": 1,
+        "baths": 1,
+        "year": 2020
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0! Garsoniera de inchiriat Pallady, Drumul Gura siriului 96-102. Etaj 2/3 . Loc de parcare disponibil inclus in pret. An constructie imobil 2020 Centrala proprie, AC, mobilata si utilata complet.",
+        "Pentru videoclip de prezentare ma puteți contacta la numarul din anunt! Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3347922/fae21141-4299-4b3c-8e27-354e12f80eb8.jpeg",
+        "gallery": [
+          "3347922/75cdc498-6961-4e6d-856b-2367d3633b32.jpeg",
+          "3347922/83ffd679-4c4d-431c-aff3-6d1384dcef8f.jpeg",
+          "3347922/c249f738-f9e0-497b-990e-264430e085fe.jpeg",
+          "3347922/ca8897d5-a735-402a-8339-79d5b4f20858.jpeg"
         ]
       }
     }
