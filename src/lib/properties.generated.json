@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T10:49:34.407Z",
+  "updatedAt": "2026-09-01T09:23:37.033Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1155,7 +1155,7 @@
     },
     "3321554": {
       "id": "3321554",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-sebastian-bucuresti-cp3321554/",
       "sourceTitle": "Sebastian 2 Camere 60 mp Renovat 5/8",
       "kind": "apartament",
@@ -1546,7 +1546,7 @@
     },
     "3336006": {
       "id": "3336006",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-tei-bucuresti-cp3336006/",
       "sourceTitle": "Tei Ion Berindei 3 Camere 8/10 Renovat",
       "kind": "apartament",
