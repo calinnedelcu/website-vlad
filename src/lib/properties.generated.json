@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T09:23:37.033Z",
+  "updatedAt": "2026-09-04T08:49:51.066Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -547,7 +547,7 @@
     },
     "3193617": {
       "id": "3193617",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-4-camere-de-inchiriat-crangasi-bucuresti-cp3193617/",
       "sourceTitle": "Crangasi 4 Camere Nemobilat 3/4",
       "kind": "apartament",
@@ -590,7 +590,7 @@
     },
     "3196994": {
       "id": "3196994",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-de-birouri-4-camere-de-inchiriat-crangasi-bucuresti-cp3196994/",
       "sourceTitle": "Apartament 4 Camere Crangasi Nemobilat 3/4",
       "kind": "birouri",
@@ -1072,7 +1072,7 @@
     },
     "3316650": {
       "id": "3316650",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-3-camere-de-inchiriat-varteju-cp3316650/",
       "sourceTitle": "Hala Varteju | 1 km Centura Bucuresti | 4 km A0",
       "kind": "hala",
@@ -1329,7 +1329,7 @@
     },
     "3326054": {
       "id": "3326054",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-central-voluntari-cp3326054/",
       "sourceTitle": "Voluntari - Craiovei 2 Camere Lux 1/1 46 mp Bloc 2025 Prima Inchiriere",
       "kind": "apartament",
@@ -1364,7 +1364,7 @@
     },
     "3326072": {
       "id": "3326072",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-central-voluntari-cp3326072/",
       "sourceTitle": "Apartment 2 Camere Voluntari Lux 1/1 36 mp Bloc 2025 Prima Inchiriere",
       "kind": "apartament",
