@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T08:49:51.066Z",
+  "updatedAt": "2026-09-05T08:20:28.748Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1648,6 +1648,83 @@
           "3347922/83ffd679-4c4d-431c-aff3-6d1384dcef8f.jpeg",
           "3347922/c249f738-f9e0-497b-990e-264430e085fe.jpeg",
           "3347922/ca8897d5-a735-402a-8339-79d5b4f20858.jpeg"
+        ]
+      }
+    },
+    "3357374": {
+      "id": "3357374",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-7-camere-de-vanzare-universitate-bucuresti-cp3357374/",
+      "sourceTitle": "Universitate - Praporgescu | Imobil/Casa SIngur Curte | 250 mp utili",
+      "kind": "spatiu comercial",
+      "segment": "comercial",
+      "deal": "vanzare",
+      "price": {
+        "amount": 599000,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 250,
+        "rooms": 7,
+        "year": 1900
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0 pentru cumparator!",
+        "Va propunem spre vanzare o casa in zona Universitate, pe strada General David Praprorgescu. Pentru o înțelegere cât mai clară a compartimentării și a potențialului imobilului, vă invităm să parcurgeți turul virtual de prezentare.",
+        "Imobilul este singur curte si este la 600 de metri de piata Universitatii. Suprafata terenului este 311 mp si suprafata utila a constructiilor este 250 mp.",
+        "Puteti regasi schita imobilului in ultima poza a anuntului.",
+        "Imobilul este construit la inceputul secolului trecut. In întreg imobilul sunt trei proprietari ce au decis sa vanda impreuna. Fiecare a dobândit in proprietate o parte din construcție in baza legii 112 plus cote de teren in proprietate de sub construcție.  Pentru terenul liber se plătește folosința - chirie catre stat - AFI. Se poate dobandi ulterior pe cale administrativa.",
+        "Proprietatea se pretează atât pentru locuință rezidențială, cât și pentru o gamă variată de activități comerciale sau profesionale, precum: sediu de companie, birouri, cabinet de avocatură, clinică, centru de consultanță, showroom sau spațiu destinat activităților creative. Poziționarea ultracentrală asigură acces rapid către principalele puncte de interes ale orașului, instituții de învățământ, centre culturale, restaurante, cafenele și multiple mijloace de transport în comun, toate acestea contribuind la atractivitatea și valoarea investițională a proprietății.",
+        "OPEN HOUSE: Vă invităm în data de 2.07.2026, între orele 15:00 – 19:00, la un eveniment de tip „porți deschise”, unde puteți viziona casa într-un cadru organizat și relaxat.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3169311/9b0c5604-3a1a-4524-825d-076b8372c4e0.jpg",
+        "gallery": [
+          "3169311/a3857cbb-ddb7-466e-a3cf-65a1eb76cfa4.jpg",
+          "3169311/a6cdc4cb-942a-43f0-a9f2-73a04ef043c8.jpg",
+          "3169311/19e6bcda-3424-4a7f-bd72-9f99ba81fbdb.jpg",
+          "3169311/fe2194ef-9553-45ac-b9fc-18eea3bfa4ab.jpg"
+        ]
+      }
+    },
+    "3357375": {
+      "id": "3357375",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-vanzare-universitate-bucuresti-cp3357375/",
+      "sourceTitle": "Universitate - Praporgescu | Imobil/Casa SIngur Curte | 250 mp utili",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 599000,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 250,
+        "rooms": 7,
+        "baths": 2,
+        "year": 1900
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0 pentru cumparator!",
+        "Va propunem spre vanzare o casa in zona Universitate, pe strada General David Praprorgescu. Pentru o înțelegere cât mai clară a compartimentării și a potențialului imobilului, vă invităm să parcurgeți turul virtual de prezentare.",
+        "Imobilul este singur curte si este la 600 de metri de piata Universitatii. Suprafata terenului este 311 mp si suprafata utila a constructiilor este 250 mp.",
+        "Puteti regasi schita imobilului in ultima poza a anuntului.",
+        "Imobilul este construit la inceputul secolului trecut. In întreg imobilul sunt trei proprietari ce au decis sa vanda impreuna. Fiecare a dobândit in proprietate o parte din construcție in baza legii 112 plus cote de teren in proprietate de sub construcție.  Pentru terenul liber se plătește folosința - chirie catre stat - AFI. Se poate dobandi ulterior pe cale administrativa.",
+        "Proprietatea se pretează atât pentru locuință rezidențială, cât și pentru o gamă variată de activități comerciale sau profesionale, precum: sediu de companie, birouri, cabinet de avocatură, clinică, centru de consultanță, showroom sau spațiu destinat activităților creative. Poziționarea ultracentrală asigură acces rapid către principalele puncte de interes ale orașului, instituții de învățământ, centre culturale, restaurante, cafenele și multiple mijloace de transport în comun, toate acestea contribuind la atractivitatea și valoarea investițională a proprietății.",
+        "OPEN HOUSE: Vă invităm în data de 02.07.2026, între orele 15:00 – 19:00, la un eveniment de tip „porți deschise”, unde puteți viziona casa într-un cadru organizat și relaxat.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3119856/bf1ac092-ea70-4a7c-ac4d-a273da05edf9.jpg",
+        "gallery": [
+          "3119856/c735a00d-3df6-4c26-91d7-d27a392a9ed9.jpg",
+          "3119856/40565b23-f223-4c25-96e6-c4d4133476f7.jpg",
+          "3119856/9effe8a4-80d8-4867-b873-921b8ab2d242.jpg",
+          "3119856/7956271f-a600-4afc-94a3-80cffdb50419.jpg"
         ]
       }
     }
