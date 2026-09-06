@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-05T08:20:28.748Z",
+  "updatedAt": "2026-09-06T08:39:04.530Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1510,7 +1510,7 @@
     },
     "3336005": {
       "id": "3336005",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-4-camere-de-inchiriat-domnesti-cp3336005/",
       "sourceTitle": "Domnesti Duplex 4 Camere 160 mp",
       "kind": "vila",
@@ -1725,6 +1725,41 @@
           "3119856/40565b23-f223-4c25-96e6-c4d4133476f7.jpg",
           "3119856/9effe8a4-80d8-4867-b873-921b8ab2d242.jpg",
           "3119856/7956271f-a600-4afc-94a3-80cffdb50419.jpg"
+        ]
+      }
+    },
+    "3361396": {
+      "id": "3361396",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-5-camere-de-inchiriat-vacaresti-bucuresti-cp3361396/",
+      "sourceTitle": "Spatiu Comercial Stradal Calea Vacaresti | VAD Vitrina 8 m",
+      "kind": "spatiu comercial",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 1000,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 100,
+        "rooms": 5,
+        "baths": 1,
+        "year": 1900
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un spațiu comercial situat pe Calea Văcărești nr. 251. Spațiul are o suprafață de aproximativ 100 mp, fiind compartimentat conform fotografiilor de prezentare. Proprietatea este alcătuită din 3 birouri, 1 grup sanitar și 1 sala generoasa, prin care se realizează accesul către birouri. Ca punct de reper proprietatea se află lângă Pizzeria Volare Alegro, la doar 2 minute de mers pe jos de Parcul Lumea Copiilor și la aproximativ 9 minute de stația de metrou Mihai Bravu, conform Google Maps. Pentru a înțelege mai bine compartimentarea și amplasarea spațiului, vă invităm să urmăriți videoclipul de prezentare.",
+        "Vă așteptăm cu drag la vizionare!"
+      ],
+      "media": {
+        "cover": "3234223/e8c46c9d-057e-4b44-8a37-27a2fbd650e9.jpeg",
+        "gallery": [
+          "3234223/09ce87cc-4550-42dc-9e9e-723881efc416.jpeg",
+          "3234223/edd21862-3bfd-49e6-b117-debde5dfd7f7.jpeg",
+          "3234223/9c8fb438-6188-4a4f-84da-5f70080ba213.jpeg",
+          "3234223/446374d6-f1c5-4dfd-8a4e-094c67e27fa6.jpeg"
         ]
       }
     }
