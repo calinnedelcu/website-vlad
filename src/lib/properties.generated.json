@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T08:57:32.065Z",
+  "updatedAt": "2026-09-10T08:56:16.845Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1438,7 +1438,7 @@
     },
     "3336002": {
       "id": "3336002",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-inchiriat-tei-bucuresti-cp3336002/",
       "sourceTitle": "Garsoniera Tei 8/10 Bloc 1985",
       "kind": "apartament",
@@ -1760,6 +1760,76 @@
           "3234223/edd21862-3bfd-49e6-b117-debde5dfd7f7.jpeg",
           "3234223/9c8fb438-6188-4a4f-84da-5f70080ba213.jpeg",
           "3234223/446374d6-f1c5-4dfd-8a4e-094c67e27fa6.jpeg"
+        ]
+      }
+    },
+    "3371034": {
+      "id": "3371034",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-metalurgiei-bucuresti-cp3371034/",
+      "sourceTitle": "Cavar Residence Postalionului 2 Camere 54 mp",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 450,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 54,
+        "rooms": 2,
+        "baths": 1,
+        "year": 2026
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0!",
+        "Apartament 2 camere Cavar Residence, Strada Postalionului 38-40. Bloc 2026, 54 mp, centrala termica. Mobilat si Utilat complet. Loc de parcare disponibil pentru 50 euro. Pentru videoclipul de prezentare ma puteti contacta la numarul de telefon din anunt!",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3371034/0f13a75d-d59f-426f-b057-5b02bc7f6f2d.jpeg",
+        "gallery": [
+          "3371034/e3dc6187-95a6-440b-99d0-1ea40cbc4095.jpeg",
+          "3371034/9ce59c50-dbd6-41bc-94f7-102b38b11061.jpeg",
+          "3371034/f4016eeb-d0ea-4878-a429-f9b810b78c82.jpeg",
+          "3371034/54ac1670-8f6f-4e1a-9e75-8d91421432f0.jpeg"
+        ]
+      }
+    },
+    "3371043": {
+      "id": "3371043",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-13-septembrie-bucuresti-cp3371043/",
+      "sourceTitle": "13 Septembrie 2 Camere 54 mp 3/8",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 500,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 54,
+        "rooms": 2,
+        "baths": 1,
+        "year": 1985
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0!",
+        "Apartament 2 Camere, Calea 13 Septembrie nr 128. Mobilat si utilat complet, pregatit pentru mutare. Etaj 3/8, bloc 1985. Pentru videoclipul de prezentare va rugam sa ma contactati in privat!",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3371043/5726ed87-9f0e-489f-9fc0-97a3c815057a.jpeg",
+        "gallery": [
+          "3371043/1d9ac5bb-20c0-4555-93a8-be180ec60f45.jpeg",
+          "3371043/a7946432-c28d-403a-a8b2-bcc2d27b0733.jpeg",
+          "3371043/d4121469-fc8e-4714-bd25-ecf8959b085a.jpeg",
+          "3371043/32918529-4ad5-44f1-8167-3af8bb032008.jpeg"
         ]
       }
     }
