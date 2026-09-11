@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T08:56:16.845Z",
+  "updatedAt": "2026-09-11T08:54:07.526Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1116,7 +1116,7 @@
     },
     "3321549": {
       "id": "3321549",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3321549/",
       "sourceTitle": "CENTURA - Rudeni | HALA 510 mp| Birouri 120mp | Parc Industrial nou",
       "kind": "hala",
@@ -1820,8 +1820,8 @@
       "sourceLocality": "Bucuresti",
       "story": [
         "Comision 0!",
-        "Apartament 2 Camere, Calea 13 Septembrie nr 128. Mobilat si utilat complet, pregatit pentru mutare. Etaj 3/8, bloc 1985. Pentru videoclipul de prezentare va rugam sa ma contactati in privat!",
-        "Va asteptam la vizionare!"
+        "Apartament 2 Camere, Calea 13 Septembrie nr 128. Apartamentul este renovat, mobilat si utilat complet, pregatit pentru mutare. Etaj 3/8, bloc 1985 reabilitat termic. Nu se accepta fumatori si nici pisici pentru apartament. Apartamentul este decorat cu grijă si gânduri bune pentru cei care vor locui acolo! Va așteapta să vă mutați și să vă bucurați de tot ce are de oferit! In cartier exista multiple centre comerciale, scoli, grădinițe, iar transportul in comun este la 2 minute distanță.",
+        "Pentru videoclipul de prezentare va rugam sa ma contactati in privat!"
       ],
       "media": {
         "cover": "3371043/5726ed87-9f0e-489f-9fc0-97a3c815057a.jpeg",
@@ -1830,6 +1830,83 @@
           "3371043/a7946432-c28d-403a-a8b2-bcc2d27b0733.jpeg",
           "3371043/d4121469-fc8e-4714-bd25-ecf8959b085a.jpeg",
           "3371043/32918529-4ad5-44f1-8167-3af8bb032008.jpeg"
+        ]
+      }
+    },
+    "3373599": {
+      "id": "3373599",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-vanzare-grozavesti-bucuresti-cp3373599/",
+      "sourceTitle": "Garsoniera Grozavesti 38 mp Bloc 2017 10/11",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 99500,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 38,
+        "rooms": 1,
+        "baths": 1,
+        "year": 2017
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "COMISION 0!",
+        "Garsonieră situată în Grozăvești, pe strada Orhideelor nr. 14.",
+        "Imobilul a fost construit în anul 2017, iar garsoniera este situată la etajul 10 din 11.",
+        "Garsoniera se vinde complet mobilată și utilată, conform fotografiilor de prezentare, și este pregătită pentru mutare imediată.",
+        "Distanța până la stația de metrou Grozăvești este de 10 minute.",
+        "Eveniment OPEN HOUSE Vă invităm în data de 24.10.2026, în intervalul 16:00 – 19:00, să descoperiți acest apartament, într-un cadru organizat și într-o atmosferă relaxată.",
+        "Pentru videoclipul de prezentare ma puteți contacta in privat la numarul de telefon din anunt! Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3373599/cb83accb-0a91-484f-98d6-0014cacf4d6d.jpeg",
+        "gallery": [
+          "3373599/a0db0c69-0665-4554-8313-022152015c7c.jpeg",
+          "3373599/f04b6c7f-7f16-49dd-9b03-e94e3b6873d5.jpeg",
+          "3373599/53953b74-6a12-4c2f-8e1f-f877e46afdd2.jpeg",
+          "3373599/551948fa-717b-4c86-93cd-ff95296c4113.jpeg"
+        ]
+      }
+    },
+    "3374021": {
+      "id": "3374021",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3374021/",
+      "sourceTitle": "CENTURA - Rudeni | HALA 510 mp| Birouri 120mp | Parc Industrial nou",
+      "kind": "hala",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 3000,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 550,
+        "rooms": 6,
+        "baths": 2,
+        "year": 2025
+      },
+      "sourceLocality": "Rudeni",
+      "story": [
+        "Comision 0% chirias!",
+        "Vă propunem spre inchiriere spațiu de depozitare/producție și birouri, situate într-un parc industrial modern, cu infrastructură completă și acces direct din Șoseaua de Centură, în zona Chiajna – Rudeni. Specificatii Hala: • Suprafață depozitare/producție (open space): 450 mp • Suprafață construita birouri (P+1): 120 mp • Teren aferent: 982 mp",
+        "Birouri și facilități • Încălzire/răcire cu sistem tip casetă de tavan • 2 grupuri sanitare • Spațiu pentru chicinetă • Sală de ședințe • Infrastructură realizată pentru internet, supraveghere video și sistem de alarmă",
+        "Utilități • Curent trifazic • Apă • Canalizare",
+        "Avantaje și oportunitate de investiție:",
+        "Parcul industrial este complet sistematizat, cu facilități moderne și acces facil pentru transport marfă. Spațiul este pregătit pentru utilizare imediată și este ideal atât pentru: • producție • depozitare • distribuție • e-commerce",
+        "Imobilul/spatiul comercial este in proprietatea unei societăți, iar la prețul de 3250 se aplica TVA. De asemenea daca imobilul la randul lui va fi inchiriat de catre o societate comercială se va aplica taxarea inversă."
+      ],
+      "media": {
+        "cover": "3131961/fcbb4b70-931c-4c12-b43f-503d160f3d1b.jpeg",
+        "gallery": [
+          "3131961/0a951563-e2cf-4f3d-a4c7-10b36e760951.jpeg",
+          "3131961/5265859f-4b3e-4d99-8a8b-fedb5b519a5f.jpeg",
+          "3131961/b59a4023-4118-4311-b7a2-00044b12efea.jpg",
+          "3131961/74ff9af0-e7ef-4f77-ac30-e19b67a03a89.jpg"
         ]
       }
     }
