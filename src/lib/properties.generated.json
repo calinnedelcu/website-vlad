@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T08:54:07.526Z",
+  "updatedAt": "2026-09-14T09:49:47.581Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -993,7 +993,7 @@
     },
     "3289965": {
       "id": "3289965",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3289965/",
       "sourceTitle": "CENTURA - Rudeni | HALA 510 mp| Birouri 120mp | Parc Industrial nou",
       "kind": "hala",
@@ -1473,7 +1473,7 @@
     },
     "3336004": {
       "id": "3336004",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-metalurgiei-bucuresti-cp3336004/",
       "sourceTitle": "Cartierul Solar 2 Camere 64 mp Lux Parter Inalt",
       "kind": "apartament",
@@ -1745,7 +1745,7 @@
         "surface": 100,
         "rooms": 5,
         "baths": 1,
-        "year": 1900
+        "year": 1940
       },
       "sourceLocality": "Bucuresti",
       "story": [
@@ -1907,6 +1907,41 @@
           "3131961/5265859f-4b3e-4d99-8a8b-fedb5b519a5f.jpeg",
           "3131961/b59a4023-4118-4311-b7a2-00044b12efea.jpg",
           "3131961/74ff9af0-e7ef-4f77-ac30-e19b67a03a89.jpg"
+        ]
+      }
+    },
+    "3378108": {
+      "id": "3378108",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-de-birouri-5-camere-de-inchiriat-vacaresti-bucuresti-cp3378108/",
+      "sourceTitle": "Spatiu Birouri Stradal Calea Vacaresti | VAD Vitrina 8 m",
+      "kind": "birouri",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 1000,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 100,
+        "rooms": 5,
+        "baths": 1,
+        "year": 1940
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un spațiu de Birouri situat pe Calea Văcărești nr. 251. Spațiul are o suprafață de aproximativ 100 mp, fiind compartimentat conform fotografiilor de prezentare. Proprietatea este alcătuită din 3 birouri, 1 grup sanitar și 1 sala generoasa, prin care se realizează accesul către birouri. Ca punct de reper proprietatea se află lângă Pizzeria Volare Alegro, la doar 2 minute de mers pe jos de Parcul Lumea Copiilor și la aproximativ 9 minute de stația de metrou Mihai Bravu, conform Google Maps. Pentru a înțelege mai bine compartimentarea și amplasarea spațiului, vă invităm să urmăriți videoclipul de prezentare.",
+        "Vă așteptăm cu drag la vizionare!"
+      ],
+      "media": {
+        "cover": "3378108/6258a65e-685f-4b37-89c4-cdf7eb8bf2ac.jpg",
+        "gallery": [
+          "3378108/6bb01431-52e9-4400-94b5-4cac36f75857.jpg",
+          "3378108/17b98147-5cc2-4f2b-8f9d-4b03701b9a9d.jpg",
+          "3378108/2d4babfd-413e-49c0-937b-d8222bf7c05e.jpg",
+          "3378108/4bf2f7a7-d2d5-4123-88a9-e6e645059102.jpg"
         ]
       }
     }
