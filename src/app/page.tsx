@@ -169,7 +169,7 @@ export default function HomePage() {
           />
           <div className="shell relative py-20 text-center md:py-28">
             <SplitReveal className="display-lg mx-auto max-w-[20ch]" stagger={80}>
-              Spune-mi ce cauți și îți răspund cu ce am în portofoliu.
+              Spune-mi ce cauți sau ce ai de vândut/închiriat.
             </SplitReveal>
             <Reveal delay={200}>
               <div className="mt-12 flex flex-wrap justify-center gap-4">

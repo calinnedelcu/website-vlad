@@ -100,16 +100,20 @@ export const site = {
   transactionsUrl: "https://www.trimbitasu-estate.ro/istoric-tranzactii/?agent=5830",
 
   /**
-   * DE COMPLETAT: Instagram și Facebook sunt încă linkuri goale — duc la
-   * pagina de start a rețelei, nu la contul lui.
+   * DE COMPLETAT: Instagram e încă link gol — duce la pagina de start a
+   * rețelei, nu la contul lui.
    *
-   * TikTok e contul real. Linkul e curățat de coada de urmărire cu care a
-   * venit (`?_r=1&_t=ZN-99miN9Po1xe`): aia identifică sesiunea din care a fost
-   * copiat linkul, n-are treabă cu profilul, și ar fi ajuns pe site public.
+   * Linkurile primite au venit amândouă cu coadă de urmărire — TikTok cu
+   * `?_r=1&_t=ZN-99miN9Po1xe`, Facebook cu `?mibextid=wwXIfr`. Alea identifică
+   * sesiunea din care a fost copiat linkul, n-au treabă cu profilul, și ar fi
+   * ajuns pe un site public. Tăiate.
+   *
+   * Facebook-ul a venit ca link de share (`/share/1EeCRT4rjp/`). Ăla e un
+   * redirect, nu o adresă: aici e ținta lui, adresa canonică a profilului.
    */
   social: [
     { label: "Instagram", href: "https://instagram.com/" },
-    { label: "Facebook", href: "https://facebook.com/" },
+    { label: "Facebook", href: "https://www.facebook.com/people/Vlad-Nedelcu/100075803291319/" },
     { label: "TikTok", href: "https://www.tiktok.com/@vladnedelcu9" },
   ],
 } as const;
