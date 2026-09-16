@@ -28,6 +28,7 @@
  */
 
 import { asset } from "./asset";
+import { resolveZone } from "./geo";
 import generated from "./properties.generated.json";
 import { order, overrides } from "./property-overrides";
 
@@ -123,6 +124,7 @@ interface Generated {
   price: { amount: number; currency: string; period?: string };
   specs: { surface?: number; rooms?: number; baths?: number; year?: number };
   sourceLocality: string;
+  zone?: { slug: string; county: "bucuresti" | "ilfov" } | null;
   story: string[];
   media: { cover: string; gallery: string[] };
 }
@@ -157,7 +159,18 @@ function build(): Property[] {
     // din site și apare în raportul sincronizării, ca să întrebi.
     if (!g.listed && !o?.status) return [];
 
-    const neighborhood = o?.neighborhood ?? g.sourceLocality ?? "";
+    /**
+     * Zona. Trei surse, în ordinea încrederii:
+     *
+     * 1. Ce am scris noi de mână — bate tot.
+     * 2. Zona din adresa anunțului, potrivită cu un reper de pe hartă. De aici
+     *    ies diacriticele corecte („grozavesti” → „Grozăvești”) și tot de aici
+     *    apar bulele noi pe hartă.
+     * 3. Localitatea din flux, ca ultimă plasă. E „Bucuresti” la aproape tot,
+     *    deci nu desenează nimic — dar e mai bine decât un câmp gol sub titlu.
+     */
+    const neighborhood =
+      o?.neighborhood ?? (g.zone ? resolveZone(g.zone.slug) : null) ?? g.sourceLocality ?? "";
     const surface = g.specs.surface;
 
     return [

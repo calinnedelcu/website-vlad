@@ -15,9 +15,11 @@
  *
  * CE NU SE POATE CITI DE ACOLO — și de ce există un al doilea strat
  *
- * 1. Zona. Fluxul scrie „Bucuresti” la zece din douăsprezece anunțuri, și fără
- *    diacritice („Varteju”, „Magurele”). Cișmigiu, Grădina Icoanei sau
- *    Roșu – Chiajna nu apar nicăieri. Zona rămâne scrisă de mână.
+ * 1. Numele bun al zonei. Fluxul scrie „Bucuresti” la douăsprezece din
+ *    paisprezece anunțuri. Zona REALĂ se ia din adresa anunțului (vezi
+ *    `zoneFromUrl`), iar reperul ei pe hartă se caută singur prin
+ *    OpenStreetMap. Ce rămâne de scris de mână e doar numele de casă —
+ *    „Roșu – Chiajna”, „Bd. Timișoara” — unde vrem altceva decât zice OSM.
  * 2. De ce a dispărut un anunț. `availability` e mereu `InStock`; când o
  *    proprietate se vinde, anunțul pur și simplu dispare din listare. Deci
  *    putem ști CĂ a dispărut, nu DACĂ s-a vândut, s-a închiriat sau a fost
@@ -153,6 +155,41 @@ function kindFromUrl(url) {
 
 const COMERCIAL = new Set(["birouri", "spatiu comercial", "hala"]);
 
+/**
+ * Zona, citită din adresa anunțului.
+ *
+ * DE CE NU DIN `addressLocality`: fluxul scrie „Bucuresti” la douăsprezece din
+ * paisprezece anunțuri — adică orice e în oraș — și fără diacritice
+ * („Magurele”, „Varteju”). Cu atât nu se poate desena nimic pe hartă: toate
+ * proprietățile din București ar cădea în același punct, dacă ar cădea undeva.
+ *
+ * Adresa anunțului, în schimb, o are de fiecare dată. Agenția își construiește
+ * URL-urile din zonă:
+ *   apartament-3-camere-de-inchiriat-mihai-bravu-bucuresti-cp123  → mihai-bravu
+ *   spatiu-industrial-2-camere-de-inchiriat-central-magurele-cp123 → magurele
+ *   spatiu-industrial-6-camere-de-inchiriat-rudeni-cp123           → rudeni
+ *
+ * Regula: ce vine după „-de-vanzare-” sau „-de-inchiriat-”. Dacă se termină în
+ * „-bucuresti”, zona e partea dinainte; altfel ultimul segment e localitatea
+ * din Ilfov (Măgurele, Voluntari, Rudeni), care e exact granularitatea hărții.
+ *
+ * Tot de aici iese și județul, și nu e dedus din coordonate: „-bucuresti” în
+ * adresă e o afirmație a agenției, nu o estimare a noastră.
+ */
+function zoneFromUrl(url) {
+  const slug = url.replace(/^https?:\/\/[^/]+\//, "").replace(/\/+$/, "").replace(/-cp\d+$/, "");
+  const m = slug.match(/-de-(?:vanzare|inchiriat)-(.+)$/);
+  if (!m) return null;
+
+  const rest = m[1];
+  if (rest.endsWith("-bucuresti")) {
+    const zone = rest.slice(0, -"-bucuresti".length);
+    return zone ? { slug: zone, county: "bucuresti" } : null;
+  }
+  const parts = rest.split("-");
+  return { slug: parts[parts.length - 1], county: "ilfov" };
+}
+
 /** Descrierea din CRM, ruptă în paragrafe. Rândurile goale sunt separatorii. */
 function paragraphs(description) {
   return String(description ?? "")
@@ -197,8 +234,10 @@ function toRecord(url, ld) {
       ...(rent ? { period: "luna" } : {}),
     },
     specs,
-    /** Localitatea din flux. Nefolosită direct — vezi nota de sus. */
+    /** Localitatea din flux. „Bucuresti” la aproape tot — vezi `zoneFromUrl`. */
     sourceLocality: ld.address?.addressLocality ?? "",
+    /** Zona reală, din adresa anunțului. Asta desenează harta. */
+    zone: zoneFromUrl(url),
     story: paragraphs(ld.description),
     media: { cover: images[0] ?? "", gallery: images.slice(1) },
   };
@@ -348,8 +387,103 @@ if (dryRun) {
  * pe GitHub, care e locul potrivit pentru asta. Aici ținem doar când s-au
  * schimbat ultima dată chiar datele.
  */
+/* ---------- Zonele noi, localizate automat ----------
+   Harta desenează dintr-un reper (lat/lng) pe zonă. Reperele scrise de mână
+   stau în `src/lib/geo.ts`; cele găsite automat, aici. O zonă fără reper nu
+   apare pe hartă — de aceea, până acum, anunțurile noi nu scoteau bule noi.
+
+   Sursa e tot OpenStreetMap, prin Nominatim, ca la conturul orașului
+   (`fetch-geo.mjs`) — deci aceeași licență ODbL și aceeași atribuire, deja
+   afișată sub hartă. Numele afișat vine tot de la ei, ca să iasă cu
+   diacritice: dintr-un slug ca „grozavesti” n-avem cum scoate „Grozăvești”.
+
+   Se cere doar pentru zone nemaivăzute, iar rezultatul rămâne în fișier
+   pentru totdeauna. În practică: zero cereri la rulările obișnuite.
+   Dacă Nominatim nu găsește zona, NU inventăm un punct — zona rămâne fără
+   reper, proprietatea rămâne în portofoliu și harta o raportează ca lipsă. */
+
+const ZONES_OUT = join(ROOT, "src/lib/zones.generated.json");
+const zonesPrev = await readFile(ZONES_OUT, "utf8")
+  .then((t) => JSON.parse(t))
+  .catch(() => ({ zones: {} }));
+
+/** Fără diacritice, litere mici, cratime — ca să comparăm „Măgurele” cu „magurele”. */
+const norm = (s) =>
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .toLowerCase()
+    .replace(/^-|-$/g, "");
+
+/** Reperele scrise de mână — pe alea nu le călcăm niciodată. */
+const handWritten = new Set(
+  [...(await readFile(join(ROOT, "src/lib/geo.ts"), "utf8")).matchAll(
+    /^ {2}(?:"([^"]+)"|([A-Za-z\u00C0-\u024F.\- ]+?)):\s*\{/gm,
+  )].map((m) => norm(m[1] ?? m[2])),
+);
+
+let ultimaCerere = 0;
+async function nominatim(query) {
+  const asteapta = 1100 - (Date.now() - ultimaCerere);
+  if (asteapta > 0) await new Promise((r) => setTimeout(r, asteapta));
+  ultimaCerere = Date.now();
+  const url =
+    `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}` +
+    `&format=json&limit=1&accept-language=ro`;
+  const res = await fetch(url, {
+    headers: { "User-Agent": "website-vlad/1.0 (harta portofoliului; contact prin site)" },
+  });
+  if (!res.ok) return null;
+  const [hit] = await res.json();
+  return hit ?? null;
+}
+
+const zones = { ...zonesPrev.zones };
+const zoneNoi = [];
+const zoneNegasite = [];
+
+for (const r of records) {
+  const z = r.zone;
+  if (!z) continue;
+  const cheie = norm(z.slug);
+  if (handWritten.has(cheie) || zones[cheie]) continue;
+
+  const unde = z.county === "bucuresti" ? "București" : "Ilfov";
+  const hit = await nominatim(`${z.slug.replace(/-/g, " ")}, ${unde}, România`);
+  if (!hit) {
+    zoneNegasite.push(z.slug);
+    continue;
+  }
+  zones[cheie] = {
+    // Numele scurt de la OSM, cu diacritice. `display_name` e adresa întreagă.
+    name: String(hit.name || hit.display_name.split(",")[0]).trim(),
+    lat: Number(Number(hit.lat).toFixed(4)),
+    lng: Number(Number(hit.lon).toFixed(4)),
+    county: z.county,
+  };
+  zoneNoi.push(`${zones[cheie].name} (${z.county})`);
+}
+
+if (zoneNoi.length) {
+  console.log(`\nZone noi, localizate prin OpenStreetMap: ${zoneNoi.length}`);
+  for (const n of zoneNoi) console.log(`  + ${n}`);
+}
+if (zoneNegasite.length) {
+  console.log(`\nZone fără reper (rămân în portofoliu, dar nu pe hartă): ${zoneNegasite.join(", ")}`);
+}
+
+if (JSON.stringify(zonesPrev.zones ?? {}) !== JSON.stringify(zones)) {
+  await writeFile(ZONES_OUT, JSON.stringify({ zones }, null, 2) + "\n");
+  console.log(`Scris: src/lib/zones.generated.json (${Object.keys(zones).length} zone)`);
+}
+
+/* Abia acum știm dacă e ceva de scris: zonele se caută înaintea verificării,
+   fiindcă o rulare poate găsi un reper nou pentru o zonă veche fără ca vreo
+   proprietate să se fi schimbat. Dacă ieșeam mai devreme, prima rulare de după
+   adăugarea hărții automate n-ar fi localizat nimic. */
 const neschimbat =
-  JSON.stringify(previous.properties ?? {}) === JSON.stringify(merged);
+  JSON.stringify(previous.properties ?? {}) === JSON.stringify(merged) && zoneNoi.length === 0;
 
 if (neschimbat) {
   console.log("\nNimic de scris — portofoliul e la fel ca ultima dată.");
@@ -360,7 +494,10 @@ if (neschimbat) {
 await writeFile(
   OUT,
   JSON.stringify(
-    { updatedAt: new Date().toISOString(), properties: merged },
+    { updatedAt: previous.updatedAt && JSON.stringify(previous.properties ?? {}) === JSON.stringify(merged)
+        ? previous.updatedAt
+        : new Date().toISOString(),
+      properties: merged },
     null,
     2,
   ) + "\n",

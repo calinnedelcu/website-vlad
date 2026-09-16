@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-16T09:16:51.075Z",
+  "updatedAt": "2026-09-16T15:49:06.248Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1068,6 +1068,10 @@
           "3246242/7ca3eda4-9dab-4db0-8290-a3c23cb686bb.jpeg",
           "3246242/a0b39108-132d-42b0-a094-ae9d8db49341.jpeg"
         ]
+      },
+      "zone": {
+        "slug": "mihai-bravu",
+        "county": "bucuresti"
       }
     },
     "3316650": {
@@ -1252,6 +1256,10 @@
           "3234223/9c8fb438-6188-4a4f-84da-5f70080ba213.jpeg",
           "3234223/446374d6-f1c5-4dfd-8a4e-094c67e27fa6.jpeg"
         ]
+      },
+      "zone": {
+        "slug": "tineretului",
+        "county": "bucuresti"
       }
     },
     "3323087": {
@@ -1289,6 +1297,10 @@
           "3244787/4d971470-6e56-4f8b-9ec1-de11f88a57c9.jpeg",
           "3244787/f2d5ccf8-1f90-434a-b094-eb193dbf7469.jpeg"
         ]
+      },
+      "zone": {
+        "slug": "magurele",
+        "county": "ilfov"
       }
     },
     "3325351": {
@@ -1434,6 +1446,10 @@
           "3331719/8e5ae58b-2c01-4af6-aed0-4fabc2431cc2.jpg",
           "3331719/881d0e7e-87fe-4c4d-bf16-e4bef9a0e18e.jpg"
         ]
+      },
+      "zone": {
+        "slug": "ferentari",
+        "county": "bucuresti"
       }
     },
     "3336002": {
@@ -1615,6 +1631,10 @@
           "3344381/73538126-f688-4ca9-ba84-420855241d3a.jpeg",
           "3344381/c35bbc9a-f9a2-4726-83e4-9d823856d5ef.jpeg"
         ]
+      },
+      "zone": {
+        "slug": "pipera",
+        "county": "bucuresti"
       }
     },
     "3347922": {
@@ -1687,6 +1707,10 @@
           "3169311/19e6bcda-3424-4a7f-bd72-9f99ba81fbdb.jpg",
           "3169311/fe2194ef-9553-45ac-b9fc-18eea3bfa4ab.jpg"
         ]
+      },
+      "zone": {
+        "slug": "universitate",
+        "county": "bucuresti"
       }
     },
     "3357375": {
@@ -1726,6 +1750,10 @@
           "3119856/9effe8a4-80d8-4867-b873-921b8ab2d242.jpg",
           "3119856/7956271f-a600-4afc-94a3-80cffdb50419.jpg"
         ]
+      },
+      "zone": {
+        "slug": "universitate",
+        "county": "bucuresti"
       }
     },
     "3361396": {
@@ -1761,11 +1789,15 @@
           "3234223/9c8fb438-6188-4a4f-84da-5f70080ba213.jpeg",
           "3234223/446374d6-f1c5-4dfd-8a4e-094c67e27fa6.jpeg"
         ]
+      },
+      "zone": {
+        "slug": "tineretului",
+        "county": "bucuresti"
       }
     },
     "3371034": {
       "id": "3371034",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-metalurgiei-bucuresti-cp3371034/",
       "sourceTitle": "Cavar Residence Postalionului 2 Camere 54 mp",
       "kind": "apartament",
@@ -1831,6 +1863,10 @@
           "3371043/d4121469-fc8e-4714-bd25-ecf8959b085a.jpeg",
           "3371043/32918529-4ad5-44f1-8167-3af8bb032008.jpeg"
         ]
+      },
+      "zone": {
+        "slug": "13-septembrie",
+        "county": "bucuresti"
       }
     },
     "3373599": {
@@ -1869,6 +1905,10 @@
           "3373599/53953b74-6a12-4c2f-8e1f-f877e46afdd2.jpeg",
           "3373599/551948fa-717b-4c86-93cd-ff95296c4113.jpeg"
         ]
+      },
+      "zone": {
+        "slug": "grozavesti",
+        "county": "bucuresti"
       }
     },
     "3374021": {
@@ -1908,6 +1948,10 @@
           "3131961/b59a4023-4118-4311-b7a2-00044b12efea.jpg",
           "3131961/74ff9af0-e7ef-4f77-ac30-e19b67a03a89.jpg"
         ]
+      },
+      "zone": {
+        "slug": "rudeni",
+        "county": "ilfov"
       }
     },
     "3378108": {
@@ -1943,6 +1987,10 @@
           "3378108/2d4babfd-413e-49c0-937b-d8222bf7c05e.jpg",
           "3378108/4bf2f7a7-d2d5-4123-88a9-e6e645059102.jpg"
         ]
+      },
+      "zone": {
+        "slug": "tineretului",
+        "county": "bucuresti"
       }
     },
     "3382870": {
@@ -1980,6 +2028,10 @@
           "3257960/57912644-d9e4-4e54-a6db-aabdfd935735.jpg",
           "3257960/ec9aac63-d131-4164-abd4-d4a16db931bb.jpg"
         ]
+      },
+      "zone": {
+        "slug": "militari",
+        "county": "bucuresti"
       }
     }
   }

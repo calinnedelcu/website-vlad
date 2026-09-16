@@ -1,0 +1,46 @@
+{
+  "zones": {
+    "ferentari": {
+      "name": "Ferentari",
+      "lat": 44.3993,
+      "lng": 26.0794,
+      "county": "bucuresti"
+    },
+    "grozavesti": {
+      "name": "Grozăvești",
+      "lat": 44.4427,
+      "lng": 26.0604,
+      "county": "bucuresti"
+    },
+    "tineretului": {
+      "name": "Tineretului",
+      "lat": 44.4096,
+      "lng": 26.1111,
+      "county": "bucuresti"
+    },
+    "13-septembrie": {
+      "name": "13 Septembrie",
+      "lat": 44.4206,
+      "lng": 26.0665,
+      "county": "bucuresti"
+    },
+    "universitate": {
+      "name": "Universitate",
+      "lat": 44.4357,
+      "lng": 26.1024,
+      "county": "bucuresti"
+    },
+    "pipera": {
+      "name": "Pipera",
+      "lat": 44.4806,
+      "lng": 26.1166,
+      "county": "bucuresti"
+    },
+    "militari": {
+      "name": "Militari",
+      "lat": 44.435,
+      "lng": 26.0207,
+      "county": "bucuresti"
+    }
+  }
+}

@@ -167,6 +167,16 @@ tagline compus din fapte („Voluntari — 46 mp”). Secțiunile care cer text 
 de mână — punctele forte, reperele din jur — pur și simplu nu se afișează până
 nu le scrie cineva. Site-ul nu așteaptă după nimeni ca să fie corect.
 
+**Harta se completează singură.** Zona nu se ia din `addressLocality` — acolo
+scrie `Bucuresti` la douăsprezece din paisprezece anunțuri — ci din adresa
+anunțului, unde agenția o pune de fiecare dată
+(`...-de-inchiriat-mihai-bravu-bucuresti-cp123` → Mihai Bravu). Dacă zona n-are
+încă un reper pe hartă, sincronizarea îl caută prin OpenStreetMap și îl scrie în
+`src/lib/zones.generated.json`, cu numele cu diacritice luat tot de la ei
+(„grozavesti” → „Grozăvești”). Reperele scrise de mână din `geo.ts` bat oricând
+pe cele găsite automat. Dacă OSM nu găsește zona, nu inventăm un punct:
+proprietatea rămâne în portofoliu, iar harta raportează că lipsește.
+
 **Ce dispare din listare NU devine automat „vândut”.** Fluxul spune mereu
 `InStock`; când se vinde, anunțul dispare — exact ca atunci când e retras de pe
 piață. Deci proprietatea iese de pe site, workflow-ul deschide o notă pe GitHub,

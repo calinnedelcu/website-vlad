@@ -1,3 +1,5 @@
+import generatedZones from "./zones.generated.json";
+
 /**
  * Unde cade fiecare zonă pe hartă.
  *
@@ -20,7 +22,12 @@ export interface Zone {
   county: "bucuresti" | "ilfov";
 }
 
-export const zoneCoords: Record<string, Zone> = {
+/**
+ * Reperele scrise de mână. Au prioritate absolută față de cele găsite automat:
+ * „Roșu – Chiajna” sau „Bd. Timișoara” sunt nume alese de noi, iar OSM n-are
+ * de unde să le știe exact așa.
+ */
+const handWritten: Record<string, Zone> = {
   // București — centru și semicentral
   Cișmigiu: { lat: 44.437, lng: 26.088, county: "bucuresti" },
   "Grădina Icoanei": { lat: 44.4425, lng: 26.1035, county: "bucuresti" },
@@ -65,6 +72,46 @@ const KM_PER_LAT = 111;
 const KM_PER_LNG = KM_PER_LAT * Math.cos((44.43 * Math.PI) / 180);
 
 /** Dimensiunile hărții în kilometri — și sistemul de coordonate al SVG-ului. */
+/**
+ * Cheia de comparație: fără diacritice, litere mici, cratime. Zona vine din
+ * adresa anunțului ca „magurele”, iar reperul nostru se cheamă „Măgurele” —
+ * fără normalizare, cele două n-ar fi niciodată același lucru, iar proprietatea
+ * n-ar apărea pe hartă. Exact asta se întâmpla.
+ */
+export const zoneKey = (name: string) =>
+  name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .toLowerCase()
+    .replace(/^-|-$/g, "");
+
+/**
+ * Toate reperele: cele scrise de mână, plus cele găsite automat de
+ * `npm run sync` prin OpenStreetMap (`zones.generated.json`).
+ *
+ * De ce există partea automată: harta desena doar zonele pe care le scrisesem
+ * noi. Când Vlad lista ceva într-un cartier nou, proprietatea intra pe site dar
+ * nu scotea nicio bulă — harta rămânea înghețată în zonele vechi. Acum o zonă
+ * nouă își găsește singură reperul, la prima sincronizare.
+ */
+export const zoneCoords: Record<string, Zone> = (() => {
+  const out: Record<string, Zone> = { ...handWritten };
+  const scriseDeMana = new Set(Object.keys(handWritten).map(zoneKey));
+
+  for (const z of Object.values(generatedZones.zones)) {
+    if (scriseDeMana.has(zoneKey(z.name))) continue;
+    out[z.name] = { lat: z.lat, lng: z.lng, county: z.county as Zone["county"] };
+  }
+  return out;
+})();
+
+/** Din slugul din adresa anunțului („mihai-bravu”) în numele reperului nostru. */
+export const resolveZone = (slug: string): string | null => {
+  const key = zoneKey(slug);
+  return Object.keys(zoneCoords).find((name) => zoneKey(name) === key) ?? null;
+};
+
 export const mapSize = {
   width: (BOUNDS.east - BOUNDS.west) * KM_PER_LNG,
   height: (BOUNDS.north - BOUNDS.south) * KM_PER_LAT,
