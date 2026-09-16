@@ -36,15 +36,20 @@ export default function PropertiesPage() {
 
         <div className="shell relative pt-36 pb-16 md:pt-44 md:pb-24">
           <p className="eyebrow text-paper/55">Portofoliu</p>
-          <div className="mt-6 grid gap-10 md:grid-cols-12 md:items-end">
-            <SplitReveal as="h1" className="display-lg md:col-span-7" immediate>
-              Proprietăți în București și Ilfov
-            </SplitReveal>
-            <p className="text-paper/70 md:col-span-4 md:col-start-9">
-              Apartamente de vânzare și de închiriat, hale industriale și spații comerciale.
-              Comision 0% pentru cumpărător și pentru chiriaș, pe toate.
-            </p>
-          </div>
+          {/* Lângă titlu era un paragraf: „Apartamente de vânzare și de
+              închiriat, hale industriale și spații comerciale. Comision 0%
+              pentru cumpărător și pentru chiriaș, pe toate.” Scos de Calin.
+
+              Odată cu el a plecat și singura mențiune a comisionului de pe
+              pagina asta. Mai scrie pe /contact și pe fiecare anunț în parte,
+              în lista de puncte forte.
+
+              Grila pe douăsprezece coloane a plecat și ea: exista doar ca să
+              așeze titlul și paragraful unul lângă altul. Cu un singur element
+              în ea ar fi lăsat cinci coloane goale în dreapta. */}
+          <SplitReveal as="h1" className="display-lg mt-6 max-w-[16ch]" immediate>
+            Proprietăți în București și Ilfov
+          </SplitReveal>
         </div>
       </section>
 

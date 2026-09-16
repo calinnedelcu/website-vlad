@@ -32,8 +32,10 @@ export default function TransactionsPage() {
         <div className="scrim-hero pointer-events-none absolute inset-0" />
 
         <div className="shell relative pt-36 pb-16 md:pt-44 md:pb-24">
-          <p className="eyebrow text-paper/55">Track record</p>
-          <div className="mt-6 grid gap-10 md:grid-cols-12 md:items-end">
+          {/* Eticheta „Track record" a plecat de aici, ca și de pe prima
+              pagină: „Proprietăți intermediate” spune deja despre ce e vorba,
+              iar eticheta o spunea încă o dată, în engleză. */}
+          <div className="grid gap-10 md:grid-cols-12 md:items-end">
             <SplitReveal as="h1" className="display-lg md:col-span-7" immediate>
               Proprietăți intermediate
             </SplitReveal>
