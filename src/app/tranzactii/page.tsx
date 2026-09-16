@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Photo } from "@/components/Photo";
 import { PropertyCard } from "@/components/PropertyCard";
-import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
 import { soldProperties } from "@/lib/properties";
-import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Tranzacții",
@@ -35,15 +33,14 @@ export default function TransactionsPage() {
           {/* Eticheta „Track record" a plecat de aici, ca și de pe prima
               pagină: „Proprietăți intermediate” spune deja despre ce e vorba,
               iar eticheta o spunea încă o dată, în engleză. */}
-          <div className="grid gap-10 md:grid-cols-12 md:items-end">
-            <SplitReveal as="h1" className="display-lg md:col-span-7" immediate>
-              Proprietăți intermediate
-            </SplitReveal>
-            <p className="text-paper/70 md:col-span-4 md:col-start-9">
-              Rămân pe site după tranzacție. E singura dovadă care contează. Prețurile sunt cele
-              cerute la listare — cele de vânzare nu se publică.
-            </p>
-          </div>
+          {/* Lângă titlu era un paragraf: „Rămân pe site după tranzacție. E
+              singura dovadă care contează. Prețurile sunt cele cerute la
+              listare — cele de vânzare nu se publică.” Scos de Calin. Grila pe
+              douăsprezece coloane a plecat odată cu el: exista doar ca să-l
+              așeze lângă titlu. */}
+          <SplitReveal as="h1" className="display-lg max-w-[14ch]" immediate>
+            Proprietăți intermediate
+          </SplitReveal>
         </div>
       </section>
 
@@ -56,32 +53,21 @@ export default function TransactionsPage() {
           proprietate încheiată: fotografia se decolorează, prețul se taie,
           eticheta „vândut” stă în colț. */}
       <section className="shell py-20 md:py-28">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <Reveal>
-              <p className="eyebrow">Registru</p>
-            </Reveal>
-            <SplitReveal className="display-md mt-3">Ce a trecut prin mâna mea</SplitReveal>
-            <Reveal delay={120}>
-              <p className="text-muted mt-4 max-w-[46ch] text-sm">
-                Selecția de mai jos e cea aleasă de Vlad. Istoricul complet, cu toate tranzacțiile
-                trecute prin el, e ținut de agenție.
-              </p>
-            </Reveal>
-          </div>
-          <Reveal delay={160}>
-            <a
-              href={site.transactionsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="link-underline text-sm"
-            >
-              Istoricul complet, pe site-ul agenției
-            </a>
-          </Reveal>
-        </div>
+        {/* Aici era antetul secțiunii: eticheta „Registru”, titlul „Ce a
+            trecut prin mâna mea”, o notă care spunea că selecția e aleasă de
+            Vlad, și linkul către istoricul complet de pe site-ul agenției.
+            Scos de Calin — titlul paginii, „Proprietăți intermediate”, spunea
+            deja același lucru cu două ecrane mai sus.
 
-        <div className="mt-14 grid gap-x-10 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
+            Ce a plecat odată cu el: singurul link de pe site către istoricul
+            complet al agenției (`site.transactionsUrl`, acum nefolosit), și
+            precizarea că cele opt de aici sunt o selecție, nu tot. Pagina nu
+            pretinde nicăieri că le arată pe toate, deci nu minte — dar nici nu
+            mai spune unde se văd restul. */}
+        {/* Fără `mt-14`: marginea aia îl despărțea de antetul de deasupra, care
+            nu mai există. Acum grila e primul lucru din secțiune, iar
+            distanța o dă `py-20` de pe ea. */}
+        <div className="grid gap-x-10 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
           {sold.map((property, i) => (
             <PropertyCard
               key={property.slug}

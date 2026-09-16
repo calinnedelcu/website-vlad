@@ -93,6 +93,10 @@ export const site = {
   agencyProfile: "https://www.trimbitasu-estate.ro/proprietati/?agent=5830",
 
   /**
+   * NEFOLOSIT PE SITE din septembrie 2026: linkul care trimitea aici stătea în
+   * antetul de pe /tranzactii, scos de Calin. Adresa rămâne scrisă fiindcă e
+   * reală și utilă — dacă vrei vreodată să pui linkul înapoi, e gata.
+   *
    * Istoricul complet de tranzacții, filtrat pe el, pe site-ul agenției.
    * În iulie 2026 arăta 54 de rezultate. Pe site-ul ăsta punem doar selecția
    * dată de Vlad — restul se vede acolo, la sursă.
