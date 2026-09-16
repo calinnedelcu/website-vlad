@@ -29,11 +29,6 @@ import { site } from "@/lib/site";
 export default function HomePage() {
   const available = availableProperties();
   const sold = soldProperties();
-  // Defalcarea pe tip de tranzacție, cerută de Vlad: nu „12 proprietăți", ci
-  // cât din ea e de vânzare și cât e de închiriat. Se calculează, nu se scrie.
-  const sales = available.filter((p) => p.deal === "vanzare");
-  const rentals = available.filter((p) => p.deal === "inchiriere");
-
   // Hero-ul ține ce e de vânzare ACUM. Selecția de dedesubt ține ce a vândut
   // DEJA. Înainte, amândouă arătau aceleași proprietăți marcate `featured` —
   // aceeași listă, la două ecrane distanță.
@@ -112,27 +107,6 @@ export default function HomePage() {
               </p>
             </Reveal>
           ))}
-
-          {/* Cele două cifre, rămase din „Cum lucrez” după ce secțiunea aia a
-              plecat. Le-am ținut fiindcă nu spun nimic din ce spune salutul:
-              alea erau despre felul în care lucrează, astea numără ce are în
-              portofoliu chiar acum. Se calculează din date, nu se scriu de
-              mână — dacă se schimbă lista, se schimbă și ele.
-
-              Sub salut, nu lângă: la stânga textului n-ar mai fi încăput, iar
-              la dreapta ar fi cerut o a doua coloană pentru două numere. */}
-          <Reveal delay={320}>
-            <div className="border-line mt-12 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6 md:mt-14">
-              <p className="nums text-sm">
-                <span className="font-display mr-2 text-2xl">{sales.length}</span>
-                vânzări
-              </p>
-              <p className="nums text-sm">
-                <span className="font-display mr-2 text-2xl">{rentals.length}</span>
-                chirii
-              </p>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -149,8 +123,10 @@ export default function HomePage() {
           pagină nu mai află. Dacă vrei să revină, cel mai ieftin loc e o linie
           sub salut.
 
-          Cele două cifre au urcat în secțiunea salutului: ele numărau
-          portofoliul, n-aveau nimic de-a face cu felul în care lucrează. */}
+          Cele două cifre („N vânzări / N chirii”) au trecut o rundă sub salut,
+          apoi le-a scos și pe ele. Erau ultimul lucru rămas din secțiunea asta.
+          Dacă le vrei înapoi, se calculau din `availableProperties()` după
+          `deal` — nu erau scrise de mână, deci nu s-a pierdut nicio cifră. */}
 
       {/* Harta. A plecat o rundă pe /proprietati, ca prima pagină să se
           scurteze — și Vlad a observat în aceeași seară că lipsește. Are
