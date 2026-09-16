@@ -124,11 +124,16 @@ export const site = {
  * pe telefon însă meniul acoperă tot ecranul, sigla dispare sub el, iar din
  * cele patru rânduri niciunul nu ducea acasă. Vlad a intrat undeva din meniu
  * și a rămas acolo — pe bună dreptate.
+ *
+ * „Despre” a plecat din meniu, cerut de Calin. Pagina `/despre` există în
+ * continuare și se construiește, dar NIMIC de pe site nu mai trimite spre ea —
+ * se ajunge doar cu adresa scrisă de mână sau din Google. Dacă rămâne așa mult
+ * timp, întrebarea corectă e dacă nu trebuie ștearsă de tot: ce e pe ea (cele
+ * trei lucruri verificabile, povestea lui) n-are alt loc pe site.
  */
 export const nav = [
   { href: "/", label: "Acasă" },
   { href: "/proprietati", label: "Proprietăți" },
   { href: "/tranzactii", label: "Tranzacții" },
-  { href: "/despre", label: "Despre" },
   { href: "/contact", label: "Contact" },
 ] as const;

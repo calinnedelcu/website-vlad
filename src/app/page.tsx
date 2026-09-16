@@ -73,7 +73,8 @@ export default function HomePage() {
             indicator că există.
           - `site.intro` nu e cod mort: din el se face descrierea paginii în
             meta și pe cardul de share. Vezi layout.tsx.
-          - Drumul spre /despre a rămas în meniu, pe toate paginile. */}
+          - Drumul spre /despre era în meniu; între timp a plecat și de acolo,
+            deci pagina nu mai e legată de nicăieri. Vezi nota din site.ts. */}
 
       {/* ---------- Salutul ----------
           Textul e scris de Vlad, cuvânt cu cuvânt (vezi `site.greeting`).
