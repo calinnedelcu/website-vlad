@@ -282,10 +282,6 @@ export const availableProperties = () =>
 export const soldProperties = () =>
   properties.filter((p) => p.status === "vandut" || p.status === "inchiriat");
 
-/** Toate zonele atinse vreodată — inclusiv cele unde nu mai e nimic de vânzare. */
-export const neighborhoods = () =>
-  [...new Set(properties.map((p) => p.neighborhood))].sort((a, b) => a.localeCompare(b, "ro"));
-
 /**
  * Zonele unde chiar are ceva acum.
  *
@@ -299,25 +295,11 @@ export const availableNeighborhoods = () =>
     a.localeCompare(b, "ro"),
   );
 
-/**
- * Cifrele de pe home, calculate din portofoliul real.
- *
- * Sunt scoase din date intenționat: orice număr scris de mână („128 tranzacții”)
- * devine minciună în momentul în care se schimbă ceva și nimeni nu-și amintește
- * să-l actualizeze. Astea nu pot rămâne în urmă.
- */
-export const portfolioStats = () => {
-  const live = availableProperties();
-  return [
-    { value: String(live.length), label: "proprietăți în portofoliu, acum" },
-    {
-      value: String(live.filter((p) => p.segment === "comercial").length),
-      label: "spații comerciale și industriale",
-    },
-    { value: String(availableNeighborhoods().length), label: "zone din București și Ilfov" },
-    { value: "0%", label: "comision pentru cumpărător și chiriaș" },
-  ];
-};
+/* Aici erau `neighborhoods()` (toate zonele atinse vreodată) și
+   `portfolioStats()` (patru cifre pentru un bloc de statistici). Amândouă
+   serveau doar pagina /despre, ștearsă la cererea lui Calin. Cifrele de pe
+   site se calculează în continuare din date, nu se scriu de mână — vezi
+   `availableProperties()` și `availableNeighborhoods()`, care au rămas. */
 
 const eur = new Intl.NumberFormat("ro-RO", {
   style: "currency",

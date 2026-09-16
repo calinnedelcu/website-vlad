@@ -62,7 +62,6 @@ Trei lucruri care fac diferența dintre „merge local” și „merge pe Pages�
 | `/proprietati`        | Doar ce e disponibil, cu filtre (tranzacție, tip, zonă)        |
 | `/tranzactii`         | Doar ce s-a vândut, ca registru                                 |
 | `/proprietati/[slug]` | Pagina de proprietate — piesa de rezistență                    |
-| `/despre`             | Povestea lui Vlad                                              |
 | `/contact`            | Formular de lead + WhatsApp                                    |
 
 Activ și vândut sunt **pagini separate**, nu un comutator într-un filtru: sunt două
@@ -101,7 +100,7 @@ preluate din listarea lui Vlad de pe site-ul agenției
 - **Fotografiile** vin de pe CDN-ul agenției (`media.crmrebs.com`), la
   rezoluția originală (4096×2304 la majoritate), nu miniaturi.
 - **Textele din `story`** sunt descrierile scrise de Vlad, nu inventate.
-- **Cifrele se calculează din portofoliu** (`portfolioStats()`), nu sunt scrise
+- **Cifrele se calculează din portofoliu**, nu sunt scrise
   de mână. Un număr scris de mână devine minciună la prima schimbare pe care
   nimeni n-o mai actualizează.
 - **Zonele afișate public vin din `availableNeighborhoods()`, nu din
@@ -205,10 +204,11 @@ e verificat separat că e al lui Vlad, după fotografia agentului din pagină.
    `LeadForm`. Atenție: un backend real înseamnă că nu mai poate rula pe
    GitHub Pages — atunci se mută pe Vercel (unde revine și optimizarea de
    imagini, deci `npm run media` devine opțional).
-3. **Biografia lui Vlad lipsește.** `/despre` are acum un text construit strict
-   din ce se vede în portofoliu. De când e în imobiliare, ce făcea înainte, de ce
-   s-a dus pe industrial — numai el le știe. Vezi comentariul din
-   `src/app/despre/page.tsx`.
+3. **Pagina `/despre` a fost ștearsă** (septembrie 2026), la cererea lui
+   Calin — întâi din meniu, apoi de tot. Odată cu ea au plecat povestea lui în
+   trei paragrafe și blocul „Ce poți să aștepți”. Comisionul se mai spune pe
+   `/proprietati`, pe `/contact` și pe fiecare anunț; povestea lui nu mai e
+   nicăieri, iar salutul de pe prima pagină e tot ce a rămas despre el.
 4. **Nu există testimoniale.** Cele inventate au fost șterse. Istoricul de
    tranzacții există acum (8 bucăți); secțiunea de arhivă de pe home apare
    automat cât timp există proprietăți cu status `vandut` sau `inchiriat`.
@@ -239,7 +239,7 @@ Bucureștiului sunt exact zona care se mișcă.
 
 Dacă Vlad vrea altă poziționare, se schimbă `tagline` și `intro` din
 `src/lib/site.ts`, blocul de manifest și `steps` din `src/app/page.tsx`, și
-`story` plus `values` din `src/app/despre/page.tsx`. Restul site-ului nu se
+`story` din datele proprietăților. Restul site-ului nu se
 atinge.
 
 ## Ce nu e construit încă
@@ -265,7 +265,8 @@ reflex:
   pe care le rotește hero-ul, la două ecrane distanță. Acum hero-ul ține ce e
   de vânzare acum, iar selecția orizontală ține ce s-a vândut deja — două
   lucruri diferite, fiecare cu rostul lui.
-- **Blocul de patru cifre.** Era identic cu cel de pe `/despre`, iar trei din
+- **Blocul de patru cifre.** Era identic cu cel de pe `/despre` (ștearsă între
+  timp), iar trei din
   patru numere repetau ce se vedea în secțiunile vecine. Au rămas două cifre,
   în manifest.
 - **Secțiunea „Două piețe”.** Spunea a doua oară ce spune manifestul, iar cele
@@ -452,7 +453,7 @@ Capcane deja plătite, de nu repetat:
 ## Verificat / neverificat
 
 **Verificat cu ochii, în browser:** hero-ul cinematic pe desktop și pe telefon,
-capul de pagină de la `/proprietati`, `/despre` și `/contact`, pagina de
+capul de pagină de la `/proprietati` și `/contact`, pagina de
 proprietate, secțiunea de manifest, banda cu cartiere, showcase-ul orizontal,
 cifrele care se numără, testimonialele pe negru, arhiva, banda de închidere.
 Împărțirea pe linii cu diacritice (fără cozi tăiate la ț/ș/ă). Header-ul care
