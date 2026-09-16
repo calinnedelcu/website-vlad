@@ -93,11 +93,11 @@ export default function HomePage() {
           exact ce spune prima propoziție, cu două cuvinte înainte. Un salut nu
           se anunță.
 
-          Măsura de 40ch nu e decorativă: pe un ecran lat, un rând pe toată
-          lățimea ar ajunge la ~90 de caractere, de două ori peste cât urmărește
-          ochiul fără să piardă rândul. La 30ch, cât era întâi, ieșeau zece
-          rânduri de cursiv de 2rem — o coloană înaltă și subțire, mai greu de
-          citit decât una așezată.
+          Centrat, pe 34ch, după modelul trimis de Calin. Centrarea merge aici
+          tocmai fiindcă e scurt și e singurul bloc de felul ăsta din pagină —
+          pe text lung ar obosi, fiindcă ochiul caută de fiecare dată începutul
+          rândului. Măsura ține rândurile pe la 34 de caractere; pe toată
+          lățimea ar ajunge la ~90, de două ori peste cât urmărește ochiul.
 
           Fără umplutură jos: dedesubt urmează „Cum lucrez”, tot pe crem. Două
           secțiuni de aceeași culoare care se ating n-au margine vizibilă între
@@ -107,7 +107,7 @@ export default function HomePage() {
         <div className="border-line border-t pt-10 md:pt-14">
           {site.greeting.map((paragraf, i) => (
             <Reveal key={i} delay={i * 140}>
-              <p className={`greeting max-w-[40ch] ${i > 0 ? "text-ink-soft mt-6 md:mt-8" : ""}`}>
+              <p className={`greeting mx-auto max-w-[34ch] text-center ${i > 0 ? "mt-6 md:mt-8" : ""}`}>
                 {paragraf}
               </p>
             </Reveal>

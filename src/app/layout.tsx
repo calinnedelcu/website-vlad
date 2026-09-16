@@ -10,11 +10,6 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   subsets: ["latin", "latin-ext"],
   weight: "400",
-  // Cursivul e pentru salutul de pe prima pagină (vezi `@utility greeting`).
-  // Instrument Serif nu e font variabil, deci stilurile se cer ca listă —
-  // altfel browserul ar înclina singur literele drepte, ceea ce la un serif cu
-  // contrast mare arată ca o eroare, nu ca un cursiv desenat.
-  style: ["normal", "italic"],
   display: "swap",
 });
 
