@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PortfolioMap } from "./PortfolioMap";
 import { PropertyCard } from "./PropertyCard";
 import type { Deal, Property, Segment } from "@/lib/properties";
@@ -65,6 +65,55 @@ export function PortfolioBrowser({ properties, neighborhoods }: PortfolioBrowser
     Boolean,
   ).length;
 
+  /**
+   * Cât trebuie să cobori ca să se închidă filtrele singure.
+   *
+   * Nu zero: la deschidere, bara crește și pe un telefon scund partea de jos a
+   * panoului poate ajunge sub pliu — cine dă puțin în jos ca să vadă lista
+   * „Zonă” n-are de ce să rămână fără filtre în mână. Patruzeci și opt de
+   * pixeli sunt mai mult decât o ajustare și mai puțin decât o derulare.
+   */
+  const CLOSE_AFTER = 48;
+
+  const barRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Filtrele se închid singure când începi să derulezi prin rezultate.
+   *
+   * Reclamat de Vlad: deschise, rămâneau lipite peste tot ecranul cât citea
+   * lista. Butonul de închidere e acum vizibil, dar tot îi cerea un gest în
+   * plus pentru ceva ce se înțelege de la sine — te-ai uitat la filtre, ai
+   * plecat mai departe.
+   *
+   * DOAR ÎN JOS. Dacă s-ar închide și la derulare în sus, ar dispărea exact
+   * când cineva urcă puțin ca să ajungă la capătul de sus al panoului.
+   *
+   * Saltul: bara se strânge cu ~250px, iar tot ce e sub ea urcă. Browserele
+   * moderne au ancorare de derulare și compensează singure, dar nu toate —
+   * de aceea măsurăm înălțimea înainte și după și punem noi diferența înapoi.
+   */
+  useEffect(() => {
+    if (!showFilters) return;
+
+    const start = window.scrollY;
+    const onScroll = () => {
+      if (window.scrollY - start < CLOSE_AFTER) return;
+
+      const inainte = barRef.current?.getBoundingClientRect().height ?? 0;
+      setShowFilters(false);
+
+      // După ce React a randat bara strânsă, punem la loc cât s-a scurtat.
+      requestAnimationFrame(() => {
+        const dupa = barRef.current?.getBoundingClientRect().height ?? 0;
+        const diferenta = Math.round(inainte - dupa);
+        if (diferenta > 1) window.scrollBy({ top: -diferenta, behavior: "instant" });
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [showFilters]);
+
   const count = `${results.length} ${
     results.length === 1 ? "proprietate" : results.length < 20 ? "proprietăți" : "de proprietăți"
   }`;
@@ -74,7 +123,10 @@ export function PortfolioBrowser({ properties, neighborhoods }: PortfolioBrowser
       {/* Bara de filtre rămâne lipită sub header cât derulezi grila. Marginile
           negative anulează padding-ul lui `shell`, ca fundalul să meargă pe
           toată lățimea — altfel cardurile s-ar vedea pe sub el, pe margini. */}
-      <div className="bg-paper/92 border-line sticky top-20 z-30 -mx-5 border-b px-5 backdrop-blur-md md:-mx-10 md:px-10 xl:-mx-16 xl:px-16">
+      <div
+        ref={barRef}
+        className="bg-paper/92 border-line sticky top-20 z-30 -mx-5 border-b px-5 backdrop-blur-md md:-mx-10 md:px-10 xl:-mx-16 xl:px-16"
+      >
         {/* Rândul strâns, doar pe telefon: un buton și numărul de rezultate.
             Numărul rămâne mereu la vedere — el e singurul lucru din bară care
             se schimbă singur, deci și singurul care trebuie văzut tot timpul.
