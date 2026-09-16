@@ -600,10 +600,12 @@ export function PortfolioMap({
             <p className="eyebrow text-paper/50">Hartă interactivă</p>
             <h2 className="display-md mt-3 max-w-[18ch]">București – Ilfov</h2>
           </div>
-          <p className="text-paper/45 max-w-[34ch] text-sm">
-            {zones.length - inIlfov} zone în București, {inIlfov} în Ilfov. Punctele sunt zone, nu
-            adrese — cu cât zona are mai multe proprietăți, cu atât punctul e mai mare.
-          </p>
+          {/* Aici era un paragraf care număra zonele și explica desenul:
+              „Punctele sunt zone, nu adrese — cu cât zona are mai multe
+              proprietăți, cu atât punctul e mai mare”. Scos de Calin.
+              Ce s-a pierdut, dacă vrei vreodată înapoi: numărătoarea pe județe
+              și explicația mărimii punctelor. Legenda de sub hartă a rămas și
+              spune în continuare ce înseamnă culorile. */}
         </div>
 
         <div className="mt-14 grid gap-12 md:grid-cols-12 md:gap-10">

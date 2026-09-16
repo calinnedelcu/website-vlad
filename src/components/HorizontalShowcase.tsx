@@ -20,7 +20,12 @@ const FALLBACK_VH = 45;
 interface HorizontalShowcaseProps {
   properties: Property[];
   /** Titlul secțiunii, arătat vertical în stânga cât timp e prinsă. */
-  eyebrow: string;
+  /**
+   * Eticheta mică de deasupra titlului. Opțională: pe prima pagină titlul
+   * („Istoric Vânzări”) spunea deja ce spunea eticheta („Track record”), doar
+   * în română — aceleași două cuvinte, de două ori, unul sub altul.
+   */
+  eyebrow?: string;
   title: string;
   /** Unde duce lista completă. */
   linkHref?: string;
@@ -149,8 +154,8 @@ export function HorizontalShowcase({
       >
         <div className="shell flex items-end justify-between gap-8">
           <div>
-            <p className="eyebrow text-paper/50">{eyebrow}</p>
-            <h2 className="display-md mt-3 max-w-[16ch]">{title}</h2>
+            {eyebrow && <p className="eyebrow text-paper/50">{eyebrow}</p>}
+            <h2 className={`display-md max-w-[16ch] ${eyebrow ? "mt-3" : ""}`}>{title}</h2>
           </div>
           <div className="hidden shrink-0 text-right md:block">
             {linkHref && linkLabel && (
