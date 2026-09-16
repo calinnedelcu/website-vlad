@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T09:49:47.581Z",
+  "updatedAt": "2026-09-16T09:16:51.075Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -749,7 +749,7 @@
     },
     "3237398": {
       "id": "3237398",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-4-camere-de-vanzare-cismigiu-bucuresti-cp3237398/",
       "sourceTitle": "CISMIGIU - Cobalcescu 4 Camere 85 mp Renovat 1/3",
       "kind": "apartament",
@@ -880,7 +880,7 @@
     },
     "3257960": {
       "id": "3257960",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-vanzare-militari-bucuresti-cp3257960/",
       "sourceTitle": "MIlitari Residence - Ilie Petre 3 Camere Bloc 2024 4/5",
       "kind": "apartament",
@@ -1222,7 +1222,7 @@
     "3323086": {
       "id": "3323086",
       "listed": true,
-      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-6-camere-de-inchiriat-vacaresti-bucuresti-cp3323086/",
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-6-camere-de-inchiriat-tineretului-bucuresti-cp3323086/",
       "sourceTitle": "Spatiu Comercial Stradal Calea Vacaresti | VAD Vitrina 8 m",
       "kind": "spatiu comercial",
       "segment": "comercial",
@@ -1731,7 +1731,7 @@
     "3361396": {
       "id": "3361396",
       "listed": true,
-      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-5-camere-de-inchiriat-vacaresti-bucuresti-cp3361396/",
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-5-camere-de-inchiriat-tineretului-bucuresti-cp3361396/",
       "sourceTitle": "Spatiu Comercial Stradal Calea Vacaresti | VAD Vitrina 8 m",
       "kind": "spatiu comercial",
       "segment": "comercial",
@@ -1855,7 +1855,7 @@
       "story": [
         "COMISION 0!",
         "Garsonieră situată în Grozăvești, pe strada Orhideelor nr. 14.",
-        "Imobilul a fost construit în anul 2017, iar garsoniera este situată la etajul 10 din 11.",
+        "Imobilul a fost construit în anul 2017, iar garsoniera este situată la etajul 10 din 11. Garsoniera a fost inchiriată la pretul de 460 euro pe luna timp de 2 ani, fiind ideală pentru investiție.",
         "Garsoniera se vinde complet mobilată și utilată, conform fotografiilor de prezentare, și este pregătită pentru mutare imediată.",
         "Distanța până la stația de metrou Grozăvești este de 10 minute.",
         "Eveniment OPEN HOUSE Vă invităm în data de 24.10.2026, în intervalul 16:00 – 19:00, să descoperiți acest apartament, într-un cadru organizat și într-o atmosferă relaxată.",
@@ -1913,7 +1913,7 @@
     "3378108": {
       "id": "3378108",
       "listed": true,
-      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-de-birouri-5-camere-de-inchiriat-vacaresti-bucuresti-cp3378108/",
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-de-birouri-5-camere-de-inchiriat-tineretului-bucuresti-cp3378108/",
       "sourceTitle": "Spatiu Birouri Stradal Calea Vacaresti | VAD Vitrina 8 m",
       "kind": "birouri",
       "segment": "comercial",
@@ -1942,6 +1942,43 @@
           "3378108/17b98147-5cc2-4f2b-8f9d-4b03701b9a9d.jpg",
           "3378108/2d4babfd-413e-49c0-937b-d8222bf7c05e.jpg",
           "3378108/4bf2f7a7-d2d5-4123-88a9-e6e645059102.jpg"
+        ]
+      }
+    },
+    "3382870": {
+      "id": "3382870",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-vanzare-militari-bucuresti-cp3382870/",
+      "sourceTitle": "MIlitari Residence - Ilie Petre 3 Camere Bloc 2024 4/5",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 88000,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 66,
+        "rooms": 3,
+        "baths": 1,
+        "year": 2024
+      },
+      "sourceLocality": "Bucuresti",
+      "story": [
+        "COMISION 0% pentru cumpărător!",
+        "Vă prezentăm spre vânzare un apartament cu 3 camere, situat pe Strada Ilie Petre 8C, Roșu – Chiajna. Proprietatea este ideală pentru familii tinere, care au un buget bine definit și își doresc mutarea imediată.",
+        "Printre beneficiile proprietății se enumeră:",
+        "-Suprafață utilă totala 66 mp: 63 mp + 3 mp balcon -Bloc construit în anul 2024 -Etaj intermediar: 4/5",
+        "Beneficii zonă:",
+        "Școli și grădinițe în vecinătate Acces facil către centre comerciale și Centura Bucureștiului Distanță de 4 minute până la stația STB"
+      ],
+      "media": {
+        "cover": "3257960/0c100953-188b-4dba-ad1a-0659b525e9e9.jpg",
+        "gallery": [
+          "3257960/a646777c-138d-4cff-a100-85e476c31f79.jpg",
+          "3257960/a389a3dc-54cf-475e-8617-12c99024b82b.jpg",
+          "3257960/57912644-d9e4-4e54-a6db-aabdfd935735.jpg",
+          "3257960/ec9aac63-d131-4164-abd4-d4a16db931bb.jpg"
         ]
       }
     }
