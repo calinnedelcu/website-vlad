@@ -143,7 +143,7 @@ export default function HomePage() {
         <HorizontalShowcase
           properties={showcase}
           eyebrow="Track record"
-          title="Câteva din ce am vândut"
+          title="Istoric Vânzări"
           linkHref="/tranzactii"
           linkLabel="Toate tranzacțiile"
         />

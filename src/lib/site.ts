@@ -99,11 +99,18 @@ export const site = {
    */
   transactionsUrl: "https://www.trimbitasu-estate.ro/istoric-tranzactii/?agent=5830",
 
-  /** DE COMPLETAT cu conturile reale ale lui Vlad. */
+  /**
+   * DE COMPLETAT: Instagram și Facebook sunt încă linkuri goale — duc la
+   * pagina de start a rețelei, nu la contul lui.
+   *
+   * TikTok e contul real. Linkul e curățat de coada de urmărire cu care a
+   * venit (`?_r=1&_t=ZN-99miN9Po1xe`): aia identifică sesiunea din care a fost
+   * copiat linkul, n-are treabă cu profilul, și ar fi ajuns pe site public.
+   */
   social: [
     { label: "Instagram", href: "https://instagram.com/" },
     { label: "Facebook", href: "https://facebook.com/" },
-    { label: "LinkedIn", href: "https://linkedin.com/" },
+    { label: "TikTok", href: "https://www.tiktok.com/@vladnedelcu9" },
   ],
 } as const;
 

@@ -592,8 +592,13 @@ export function PortfolioMap({
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="eyebrow text-paper/50">Unde lucrez</p>
-            <h2 className="display-md mt-3 max-w-[18ch]">Vestul orașului, și ce e dincolo de el</h2>
+            {/* Eticheta spune ce E lucrul de dedesubt („poți da click pe ea”),
+                titlul spune DESPRE CE e. Înainte era invers: eticheta zicea
+                „Unde lucrez”, iar titlul — „Vestul orașului, și ce e dincolo de
+                el” — era o observație frumoasă, dar care se demoda singură:
+                depindea de unde are Vlad proprietăți în ziua aia. */}
+            <p className="eyebrow text-paper/50">Hartă interactivă</p>
+            <h2 className="display-md mt-3 max-w-[18ch]">București – Ilfov</h2>
           </div>
           <p className="text-paper/45 max-w-[34ch] text-sm">
             {zones.length - inIlfov} zone în București, {inIlfov} în Ilfov. Punctele sunt zone, nu
