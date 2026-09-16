@@ -86,13 +86,43 @@ export function PortfolioBrowser({ properties, neighborhoods }: PortfolioBrowser
             onClick={() => setShowFilters((v) => !v)}
             aria-expanded={showFilters}
             aria-controls="filtre"
-            className="border-line flex items-center gap-2.5 border px-4 py-2.5 text-sm"
+            /* Deschis, butonul se inversează: cerneală plină, text deschis, cu
+               un X. Închis, e doar conturat.
+
+               Reclamat de Vlad: cu panoul deschis, derulatul ținea filtrele pe
+               tot ecranul și nu se vedea cum scapi de ele. Butonul exista, dar
+               arăta exact la fel ca atunci când e închis — se schimba doar
+               textul. Un buton care nu-și arată starea nu e o ieșire, e o
+               etichetă.
+
+               `cursor-pointer` nu e de prisos: Tailwind v4 pune `cursor:
+               default` pe butoane, deci nici măcar cursorul nu spunea că e
+               apăsabil. */
+            className={`flex cursor-pointer items-center gap-2.5 border px-4 py-2.5 text-sm transition-colors duration-300 ${
+              showFilters ? "bg-ink border-ink text-paper" : "border-line"
+            }`}
           >
             {showFilters ? "Ascunde filtrele" : "Filtre"}
-            {active > 0 && (
-              <span className="bg-ink text-paper nums grid h-5 w-5 place-items-center rounded-full text-[0.6875rem]">
-                {active}
-              </span>
+            {showFilters ? (
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden
+                className="h-3.5 w-3.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="square"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              /* Câte filtre sunt puse. Doar în starea închisă: deschis, se văd
+                 oricum, iar X-ul e mai util decât o cifră. */
+              active > 0 && (
+                <span className="bg-ink text-paper nums grid h-5 w-5 place-items-center rounded-full text-[0.6875rem]">
+                  {active}
+                </span>
+              )
             )}
           </button>
           <p className="text-muted text-sm">{count}</p>
