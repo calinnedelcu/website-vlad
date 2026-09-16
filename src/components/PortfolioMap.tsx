@@ -15,6 +15,11 @@ import { priceLabel, statusLabel, type Property } from "@/lib/properties";
  * privire ce e de fapt de spus: gros în vestul orașului, câteva în centru, iar
  * halele — dincolo de Centură.
  *
+ * Harta arată DOAR ce e de vânzare sau de închiriat acum. Vândutele au ieșit
+ * de pe ea: o bulă e o invitație să dai click și să vezi ce are acolo, iar o
+ * zonă în care totul e vândut e o invitație goală. Dovada de track record stă
+ * pe /tranzactii, unde omul o caută anume.
+ *
  * Punctele sunt ZONE, nu adrese. O zonă cu trei proprietăți e un punct mai
  * mare, nu trei puncte. Asta e și corect față de date (adresele exacte nu se
  * publică), și mai lizibil: șaptesprezece puncte se citesc, douăzeci
@@ -59,9 +64,6 @@ interface MapZone {
   ilfov: boolean;
 }
 
-/** O proprietate vândută sau închiriată — dovada de track record, nu ofertă. */
-const isSold = (p: Property) => p.status === "vandut" || p.status === "inchiriat";
-
 /**
  * Bottom sheet pentru lista proprietăților dintr-o zonă, pe telefon.
  *
@@ -100,8 +102,9 @@ function MapSheet({
   // efect sincron care să declanșeze randări în cascadă.
   const visible = entered && open;
 
-  const active = zone.items.filter((p) => !isSold(p)).length;
-  const sold = zone.items.filter(isSold).length;
+  // Numărătoarea era „N active · N vândute”. Vândutele nu mai ajung pe hartă,
+  // deci a rămas un singur număr.
+  const cate = zone.items.length;
 
   return (
     <div
@@ -140,9 +143,7 @@ function MapSheet({
           <div>
             <p className="eyebrow text-paper/50">{zone.name}</p>
             <p className="text-paper/45 nums mt-1 text-xs">
-              {active > 0 && `${active} ${active === 1 ? "activă" : "active"}`}
-              {active > 0 && sold > 0 && " · "}
-              {sold > 0 && `${sold} ${sold === 1 ? "vândută" : "vândute"}`}
+              {cate} {cate === 1 ? "proprietate" : "proprietăți"}
             </p>
           </div>
           <button
@@ -164,13 +165,13 @@ function MapSheet({
  * Un rând de proprietate în lista de la click pe o zonă.
  *
  * E scos ca bucată partajată: randează la fel în panoul de lângă hartă (desktop)
- * și în bottom sheet-ul de pe telefon. Singura diferență între active și
- * vândute e eticheta: cele active arată prețul, cele vândute arată statusul ca
- * badge — cerut de Vlad, ca „să se observe care sunt vândute", nu doar text
- * mic gri sub titlu, de neosebit de un preț.
+ * și în bottom sheet-ul de pe telefon.
+ *
+ * Aici era și o ramură pentru proprietăți vândute, cu badge „Vândut". N-a mai
+ * avut ce servi de când harta primește doar ce e disponibil — vezi nota de pe
+ * componentă. `rezervat` a rămas: ăla e tot disponibil, doar că e vorbit.
  */
 function ZonePropertyItem({ property }: { property: Property }) {
-  const sold = isSold(property);
   return (
     <li>
       <Link
@@ -180,21 +181,10 @@ function ZonePropertyItem({ property }: { property: Property }) {
         <p className="font-display group-hover:text-bronze-soft text-xl leading-tight transition-colors duration-300">
           {property.title}
         </p>
-        {sold ? (
-          <div className="mt-1.5 flex items-center gap-2.5">
-            {/* Badge, nu text gri: o proprietate vândută trebuie să se vadă
-                că e vândută, nu să semene cu un preț. Ton așezat, fără roșu. */}
-            <span className="border-paper/25 text-paper/60 inline-flex items-center border px-2 py-0.5 text-[0.6875rem] tracking-[0.08em] uppercase">
-              {statusLabel[property.status]}
-            </span>
-            <span className="text-paper/45 nums text-sm">{property.specs.surface} mp</span>
-          </div>
-        ) : (
-          <p className="text-paper/45 nums mt-1 text-sm">
-            {property.status === "rezervat" ? `${statusLabel.rezervat} · ` : ""}
-            {priceLabel(property)} · {property.specs.surface} mp
-          </p>
-        )}
+        <p className="text-paper/45 nums mt-1 text-sm">
+          {property.status === "rezervat" ? `${statusLabel.rezervat} · ` : ""}
+          {priceLabel(property)} · {property.specs.surface} mp
+        </p>
       </Link>
     </li>
   );
@@ -577,27 +567,18 @@ export function PortfolioMap({
 
   /* ---------- Lista proprietăților dintr-o zonă (partajată) ----------
      Aceeași listă în două locuri: panoul de lângă hartă (desktop) și bottom
-     sheet-ul (telefon). Activele primele, vândutele la final cu etichetă. */
-  const renderZoneItems = (zone: MapZone) => {
-    const active = zone.items.filter((p) => !isSold(p));
-    const sold = zone.items.filter(isSold);
-    const mixed = active.length > 0 && sold.length > 0;
-    return (
-      <ul className="border-void-line border-t">
-        {active.map((property) => (
-          <ZonePropertyItem key={property.slug} property={property} />
-        ))}
-        {mixed && (
-          <li className="text-paper/35 mt-2 mb-1 px-0.5 text-[0.6875rem] tracking-[0.08em] uppercase">
-            Vândute anterior
-          </li>
-        )}
-        {sold.map((property) => (
-          <ZonePropertyItem key={property.slug} property={property} />
-        ))}
-      </ul>
-    );
-  };
+     sheet-ul (telefon).
+
+     Aici era și o grupare „active întâi, vândute la final, cu separator”.
+     A plecat odată cu vândutele: harta primește acum doar ce e de vânzare sau
+     de închiriat. Vezi nota de pe componentă. */
+  const renderZoneItems = (zone: MapZone) => (
+    <ul className="border-void-line border-t">
+      {zone.items.map((property) => (
+        <ZonePropertyItem key={property.slug} property={property} />
+      ))}
+    </ul>
+  );
 
   /* ---------- Modul editorial ---------- */
   return (

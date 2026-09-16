@@ -148,16 +148,43 @@ function fallbackSlug(sourceUrl: string, id: string): string {
  * pe care fluxul nu le are deloc — reperele din jur, etajul — nu inventăm o
  * valoare; rămân goale și paginile știu să nu le afișeze.
  */
+/**
+ * Folderul în care stau fotografiile, din prima cale de imagine: `3246242/x.jpg`.
+ *
+ * E identitatea durabilă a unei proprietăți, mai durabilă decât id-ul
+ * anunțului. CRM-ul agenției dă un id NOU la fiecare re-listare, dar
+ * fotografiile rămân în folderul de la prima încărcare — verificat: anunțul
+ * `3374021` are pozele în `3131961`, id pe care îl avea acum două luni.
+ */
+const photoFolder = (g: Generated) => (g.media.cover || "").split("/")[0];
+
+/**
+ * Textul scris de mână pentru o proprietate.
+ *
+ * Se caută întâi pe id-ul anunțului, apoi pe folderul de fotografii. A doua
+ * cale nu e un moft: în șase săptămâni, CRM-ul a re-listat tot portofoliul cu
+ * id-uri noi, iar toate cele douăzeci de fișe scrise de noi au rămas legate de
+ * id-uri moarte. Site-ul a afișat brusc titluri de portal — „3 Camere Asmitha
+ * Gardens 100 mp Metrou 7 m PET FRIENDLY”. Legat de folder, textul supraviețuiește
+ * re-listării, fără ca cineva să bage de seamă că s-a întâmplat ceva.
+ */
+const overrideFor = (g: Generated) => overrides[g.id] ?? overrides[photoFolder(g)];
+
 function build(): Property[] {
   const records = Object.values(generated.properties as Record<string, Generated>);
 
   const merged = records.flatMap((g): Property[] => {
-    const o = overrides[g.id];
+    const o = overrideFor(g);
 
     // Dispărut din listare și neconfirmat de nimeni: nu-l arătăm deloc. Nu e
     // nici disponibil (nu mai e pe piață), nici vândut (nu știm asta). Iese
     // din site și apare în raportul sincronizării, ca să întrebi.
     if (!g.listed && !o?.status) return [];
+
+    // Ascuns cu mâna. Agenția își listează uneori aceeași proprietate de două
+    // ori — o dată ca spațiu comercial, o dată ca locuință — iar pe site ar
+    // apărea de două ori. Vezi `hidden` în property-overrides.ts.
+    if (o?.hidden) return [];
 
     /**
      * Zona. Trei surse, în ordinea încrederii:

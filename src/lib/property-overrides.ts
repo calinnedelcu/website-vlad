@@ -9,7 +9,17 @@ import type { Deal, PropertyKind, Segment, Status } from "./properties";
  *
  * Cheia e id-ul proprietății din CRM, cel din coada adresei anunțului:
  * `.../apartament-4-camere-de-vanzare-cismigiu-bucuresti-cp3237398/` → 3237398.
- * E stabil: nu se schimbă când Vlad modifică prețul sau textul.
+ *
+ * ATENȚIE, lecție plătită: id-ul NU e stabil. Se schimbă la fiecare re-listare,
+ * iar CRM-ul re-listează des — în șase săptămâni a schimbat id-ul la tot
+ * portofoliul, și toate fișele de aici au rămas legate de id-uri moarte. Site-ul
+ * a început să afișeze titluri de portal fără ca nimeni să observe.
+ *
+ * De aceea căutarea are două trepte: întâi id-ul anunțului, apoi FOLDERUL DE
+ * FOTOGRAFII (vezi `overrideFor` în properties.ts). Folderul rămâne cel de la
+ * prima încărcare și supraviețuiește re-listărilor. Când scrii o fișă nouă,
+ * cheia bună e folderul de poze al proprietății, nu id-ul de azi al anunțului —
+ * îl vezi în `properties.generated.json`, la `media.cover`.
  *
  * DE CE EXISTĂ FIECARE CÂMP DE AICI
  *
@@ -54,10 +64,98 @@ export interface PropertyOverride {
   featured?: boolean;
   exclusive?: boolean;
   soldNote?: string;
+  /**
+   * Scoate proprietatea de pe site cu totul.
+   *
+   * Agenția își listează uneori aceeași proprietate de două ori — o dată ca
+   * spațiu comercial, o dată ca locuință, sau pur și simplu de două ori la
+   * rând. Pe site ar apărea de două ori, cu același titlu. Aici marcăm
+   * duplicatul, cu un comentariu care spune pe care îl dublează, ca să se
+   * poată da înapoi dintr-un cuvânt.
+   */
+  hidden?: boolean;
 }
 
 /** Cheie: id-ul din CRM. Vezi mai sus de unde îl iei. */
 export const overrides: Record<string, PropertyOverride> = {
+  /* ---------------------------------------------------------------
+     Fișe scrise în septembrie 2026, după ce CRM-ul a re-listat tot
+     portofoliul și site-ul a rămas cu titluri de portal.
+
+     Titlurile și taglinurile de mai jos sunt scrise din descrierea lui Vlad și
+     din specificațiile anunțului — stradă, an, suprafață, etaj. Nimic dedus și
+     nimic inventat: ce nu scrie în anunț nu scrie nici aici. `highlights` și
+     `nearby` lipsesc intenționat; se completează când are cineva răgaz să
+     citească descrierile pe îndelete, iar paginile știu să nu le afișeze goale.
+     --------------------------------------------------------------- */
+
+  3331719: {
+    slug: "ferentari-ofrandei-casa",
+    title: "Casă pe Ofrandei",
+    tagline: "Ferentari — parter și mansardă, construită în 2019",
+    neighborhood: "Ferentari",
+    area: "Strada Ofrandei 43, Ferentari",
+    // Adresa anunțului începe cu „casa-vila”, deci scriptul o citește ca vilă.
+    // Descrierea spune „Casă”.
+    kind: "casa",
+    specs: { land: 184 },
+  },
+
+  3344381: {
+    slug: "pipera-iancu-nicolae-vila",
+    title: "Vilă pe Iancu Nicolae",
+    tagline: "Pipera — 290 mp, potrivită și de birouri, și de locuit",
+    neighborhood: "Pipera",
+    area: "Iancu Nicolae, lângă Grădina Zoologică",
+    specs: { land: 387 },
+  },
+
+  3357375: {
+    slug: "universitate-praporgescu-casa",
+    title: "Casă singur curte, lângă Universitate",
+    tagline: "Universitate — 250 mp utili pe General David Praporgescu",
+    neighborhood: "Universitate",
+    area: "Strada General David Praporgescu, zona Universitate",
+    kind: "casa",
+  },
+
+  // Același imobil ca 3357375 — aceeași stradă, același preț, aceeași
+  // suprafață — listat a doua oară, ca spațiu comercial. Un singur imobil,
+  // deci un singur anunț pe site. Scoate `hidden` dacă sunt totuși două.
+  3357374: { slug: "universitate-praporgescu-comercial", hidden: true },
+
+  3371043: {
+    slug: "13-septembrie-2-camere",
+    title: "Două camere pe 13 Septembrie",
+    tagline: "13 Septembrie — renovat, mobilat și utilat, bloc reabilitat termic",
+    neighborhood: "13 Septembrie",
+    area: "Calea 13 Septembrie 128",
+    specs: { floor: "3 / 8" },
+  },
+
+  3373599: {
+    slug: "grozavesti-orhideelor-garsoniera",
+    title: "Garsonieră pe Orhideelor",
+    tagline: "Grozăvești — 38 mp în bloc din 2017",
+    neighborhood: "Grozăvești",
+    area: "Strada Orhideelor 14, Grozăvești",
+    specs: { floor: "10 / 11" },
+  },
+
+  3378108: {
+    slug: "vacaresti-birouri-stradal",
+    title: "Birouri stradale pe Calea Văcărești",
+    tagline: "Văcărești — 100 mp la stradă, cu vitrină",
+    // Adresa anunțului zice „tineretului”, dar descrierea dă strada: Calea
+    // Văcărești 251. Celelalte două anunțuri de la aceeași adresă sunt trecute
+    // tot la Văcărești, deci stau toate în același punct pe hartă.
+    neighborhood: "Văcărești",
+    area: "Calea Văcărești 251",
+  },
+
+  // Dublura anunțului 3323086 — același folder de fotografii, același titlu.
+  3361396: { slug: "vacaresti-comercial-dublura", hidden: true },
+
 
   3081123: {
     slug: "tineretului-24-rosu-chiajna",

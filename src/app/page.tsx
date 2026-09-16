@@ -6,7 +6,7 @@ import { OpeningBand } from "@/components/OpeningBand";
 import { PortfolioMap } from "@/components/PortfolioMap";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
-import { availableProperties, properties, soldProperties } from "@/lib/properties";
+import { availableProperties, soldProperties } from "@/lib/properties";
 import { site } from "@/lib/site";
 
 /**
@@ -134,7 +134,7 @@ export default function HomePage() {
           ceva ce se vede, nu o formulă. S-a întors, și e și pe /proprietati,
           dar acolo în celălalt mod — acolo filtrează, aici povestește. Costă
           1,3 ecrane din prima pagină; le plătim conștient. */}
-      <PortfolioMap properties={properties} />
+      <PortfolioMap properties={available} />
 
       {/* ---------- Portofoliul, pe orizontală ---------- */}
       {/* Ce a vândut, cu fotografii mari. Ce e disponibil acum se vede sus, în
