@@ -103,7 +103,7 @@ export default function HomePage() {
           secțiuni de aceeași culoare care se ating n-au margine vizibilă între
           ele, deci umpluturile lor se adună — 112 de aici plus 112 de acolo
           făceau 224px de gol, care se citea ca o pagină neterminată. */}
-      <section id="salut" className="shell pt-20 md:pt-28">
+      <section id="salut" className="shell py-20 md:py-28">
         <div className="border-line border-t pt-10 md:pt-14">
           {site.greeting.map((paragraf, i) => (
             <Reveal key={i} delay={i * 140}>
@@ -112,91 +112,17 @@ export default function HomePage() {
               </p>
             </Reveal>
           ))}
-        </div>
-      </section>
 
-      {/* ---------- Reprezentare exclusivă ----------
-         Cerut de Vlad: pe partea albă, deasupra hărții, trei lucruri pe care
-         vrea să le spună clar. Comisionul a venit de aici — înainte era în
-         `site.intro`, acum trăiește o singură dată, ca titlu. Celelalte trei
-         (reprezentare single-party, colaborare, transparență) sunt noi: nu
-         existau nicăieri pe site, deși sunt adevărate și deferențiatoare. Ton
-         așezat, ca peste tot: afirmații verificabile, nu „100%" ca cifră de
-         marketing. Vezi și /despre, „Ce poți să aștepți" — acolo e totul
-         extins; aici e doar titlurile, ca să ajungă la ochiul care doar trece. */}
-      {/* Așezarea, pe desktop: eticheta sus-stânga, cifrele sub ea, textul în
-          dreapta. Înainte, coloana din stânga ținea doar eticheta — 18px de
-          text într-o coloană de 515px, adică 97% gol — iar cifrele pluteau
-          singure sub listă, în dreapta. Pe un ecran de 1728px se pierdeau 554
-          din cei 1312px de grilă.
+          {/* Cele două cifre, rămase din „Cum lucrez” după ce secțiunea aia a
+              plecat. Le-am ținut fiindcă nu spun nimic din ce spune salutul:
+              alea erau despre felul în care lucrează, astea numără ce are în
+              portofoliu chiar acum. Se calculează din date, nu se scriu de
+              mână — dacă se schimbă lista, se schimbă și ele.
 
-          Ordinea în cod rămâne etichetă → text → cifre, ca pe telefon să curgă
-          exact ca până acum (acolo arăta bine). Mutarea se face din plasarea pe
-          rânduri, care se aplică doar de la `md` în sus. */}
-      <section id="exclusivitate" className="shell py-20 md:py-28">
-        {/* `grid-rows-[auto_1fr]`: fără el, primul rând nu rămâne cât eticheta.
-            Coloana din dreapta se întinde pe ambele rânduri, iar înălțimea ei
-            se împarte între rânduri auto — cifrele ajungeau la 209px sub
-            etichetă, plutind pe la mijloc. Așa, primul rând ține exact cât
-            eticheta și cifrele vin imediat sub ea. */}
-        <div className="grid gap-6 md:grid-cols-12 md:grid-rows-[auto_1fr] md:gap-x-12 md:gap-y-8">
-          <div className="md:col-span-4 md:row-start-1">
-            <Reveal>
-              <p className="eyebrow">Cum lucrez</p>
-            </Reveal>
-          </div>
-
-          <div className="md:col-span-7 md:col-start-6 md:row-span-2 md:row-start-1">
-            <Reveal>
-              <SplitReveal as="h2" className="display-sm max-w-[20ch]" stagger={80}>
-                Comision 0 pentru cumpărător și chiriaș.
-              </SplitReveal>
-            </Reveal>
-
-            <Reveal delay={120}>
-              {/* Cele trei piese, ca rânduri, nu carduri: o afirmație pe fiecare,
-                  fără ilustrații. Pe negru ar fi trebuit carduri; pe hârtie se
-                  citește mai bine ca listă. */}
-              <ul className="border-line mt-10 divide-y divide-line">
-                <li className="flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-8">
-                  <span className="text-ink-soft nums w-44 shrink-0 text-xs tracking-[0.08em] uppercase">
-                    Reprezentare exclusivă
-                  </span>
-                  <p className="text-ink-soft max-w-[44ch] text-sm leading-relaxed">
-                    Reprezent o singură parte în tranzacție. Fără joc dublu, fără interese
-                    încrucișate — când te reprezint pe tine, lucrez pentru tine.
-                  </p>
-                </li>
-                <li className="flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-8">
-                  <span className="text-ink-soft nums w-44 shrink-0 text-xs tracking-[0.08em] uppercase">
-                    Colaborare
-                  </span>
-                  <p className="text-ink-soft max-w-[44ch] text-sm leading-relaxed">
-                    Colaborez cu toate agențiile din piață. O proprietate listată la mine e
-                    văzută de toți agenții activi, deci de toți cumpărătorii lor.
-                  </p>
-                </li>
-                <li className="flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-8">
-                  <span className="text-ink-soft nums w-44 shrink-0 text-xs tracking-[0.08em] uppercase">
-                    Transparență
-                  </span>
-                  <p className="text-ink-soft max-w-[44ch] text-sm leading-relaxed">
-                    Preț, stare și istoric, scrise în anunț. Știi ce cumperi înainte să
-                    faci drumul — și poți verifica totul independent.
-                  </p>
-                </li>
-              </ul>
-            </Reveal>
-          </div>
-
-          {/* Cele două cifre, venite din secțiunea „Ce fac” când aia s-a
-              desființat. Se calculează din portofoliu, nu se scriu de mână —
-              dacă se schimbă lista, se schimbă și ele.
-              Pe telefon vin la final, sub cele trei afirmații: acolo curge
-              firesc, întâi cum lucrează, apoi pe ce lucrează. De la `md` în sus
-              urcă sub etichetă, în coloana care altfel rămânea goală. */}
-          <Reveal delay={200} className="md:col-span-4 md:col-start-1 md:row-start-2 md:self-start">
-            <div className="border-line flex flex-wrap gap-x-12 gap-y-4 border-t pt-6">
+              Sub salut, nu lângă: la stânga textului n-ar mai fi încăput, iar
+              la dreapta ar fi cerut o a doua coloană pentru două numere. */}
+          <Reveal delay={320}>
+            <div className="border-line mt-12 flex flex-wrap gap-x-12 gap-y-4 border-t pt-6 md:mt-14">
               <p className="nums text-sm">
                 <span className="font-display mr-2 text-2xl">{sales.length}</span>
                 vânzări
@@ -209,6 +135,22 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Aici a fost „Cum lucrez”: titlul „Comision 0 pentru cumpărător și
+          chiriaș” și trei rânduri — reprezentare exclusivă, colaborare,
+          transparență. Scoasă de Vlad: salutul de mai sus o înlocuiește, și are
+          dreptate, spun același lucru cu alte cuvinte (abordare modernă,
+          atenție la detalii, orientare către rezultate).
+
+          ATENȚIE, ce s-a pierdut odată cu ea: comisionul nu mai scrie nicăieri
+          pe prima pagină. Nu s-a pierdut de pe site — e pe /proprietati, pe
+          /contact, pe /despre și pe fiecare anunț în parte, unde scrie
+          „Comision 0% pentru cumpărător/chiriaș”. Dar cine intră doar pe prima
+          pagină nu mai află. Dacă vrei să revină, cel mai ieftin loc e o linie
+          sub salut.
+
+          Cele două cifre au urcat în secțiunea salutului: ele numărau
+          portofoliul, n-aveau nimic de-a face cu felul în care lucrează. */}
 
       {/* Harta. A plecat o rundă pe /proprietati, ca prima pagină să se
           scurteze — și Vlad a observat în aceeași seară că lipsește. Are
