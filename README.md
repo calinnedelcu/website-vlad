@@ -42,7 +42,7 @@ Se publică singur pe GitHub Pages la fiecare push pe `main`
 Trei lucruri care fac diferența dintre „merge local” și „merge pe Pages”:
 
 - `output: "export"` — nu există server, deci nici Server Actions. De aceea
-  formularul de contact deschide WhatsApp în loc să trimită un email.
+  `/contact` trimite direct la WhatsApp, telefon și email, fără formular.
 - `images.unoptimized: true` — nu există optimizator. De aceea fotografiile
   sunt aduse și redimensionate din timp.
 - **Prefixul se pune în două locuri, în sensuri opuse.** Ambele dau bug-uri
@@ -62,7 +62,7 @@ Trei lucruri care fac diferența dintre „merge local” și „merge pe Pages�
 | `/proprietati`        | Doar ce e disponibil, cu filtre (tranzacție, tip, zonă)        |
 | `/tranzactii`         | Doar ce s-a vândut, ca registru                                 |
 | `/proprietati/[slug]` | Pagina de proprietate — piesa de rezistență                    |
-| `/contact`            | Formular de lead + WhatsApp                                    |
+| `/contact`            | WhatsApp, telefon, email, datele agenției                      |
 
 Activ și vândut sunt **pagini separate**, nu un comutator într-un filtru: sunt două
 intenții diferite (cumpăr ceva / verific pe cine sun).
@@ -197,13 +197,18 @@ e verificat separat că e al lui Vlad, după fotografia agentului din pagină.
 1. **Acordul agenției pentru fotografii.** Fotografiile lor și portretul lui
    Vlad sunt acum copiate în `public/media/` și publicate pe un site public.
    De confirmat cu ei că e în regulă.
-2. **Formularul de contact nu trimite email.** Deschide WhatsApp cu mesajul
-   compus — funcționează, dar nu lasă urmă nicăieri. Când vrei lead-uri
-   salvate: email (Resend/Postmark) + o bază unde nu se pierd. Validarea e deja
-   separată, în `src/lib/lead.ts`; se schimbă doar `handleSubmit` din
-   `LeadForm`. Atenție: un backend real înseamnă că nu mai poate rula pe
-   GitHub Pages — atunci se mută pe Vercel (unde revine și optimizarea de
-   imagini, deci `npm run media` devine opțional).
+2. **Nu există formular de contact** — a fost șters în septembrie 2026, la
+   cererea lui Vlad. Site-ul fiind static, nici înainte nu trimitea email:
+   compunea mesajul și deschidea tot WhatsApp-ul, adică cinci câmpuri pentru a
+   ajunge unde duce butonul într-o apăsare. Deci nu s-a pierdut niciun canal,
+   doar un ocol. Odată cu el au plecat `LeadForm.tsx` și `lib/lead.ts`.
+
+   Ce s-a pierdut totuși: lead-urile nu lasă nicio urmă structurată — nici
+   înainte nu lăsau, dar acum nici măcar nu există un loc unde ar putea. Când
+   vrei lead-uri salvate: email (Resend/Postmark) + o bază unde nu se pierd.
+   Atenție: un backend real înseamnă că nu mai poate rula pe GitHub Pages —
+   atunci se mută pe Vercel (unde revine și optimizarea de imagini, deci
+   `npm run media` devine opțional).
 3. **Pagina `/despre` a fost ștearsă** (septembrie 2026), la cererea lui
    Calin — întâi din meniu, apoi de tot. Odată cu ea au plecat povestea lui în
    trei paragrafe și blocul „Ce poți să aștepți”. Comisionul se mai spune pe
