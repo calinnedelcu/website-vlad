@@ -80,6 +80,41 @@ export default function HomePage() {
             meta și pe cardul de share. Vezi layout.tsx.
           - Drumul spre /despre a rămas în meniu, pe toate paginile. */}
 
+      {/* ---------- Salutul ----------
+          Textul e scris de Vlad, cuvânt cu cuvânt (vezi `site.greeting`).
+          Stă aici, între oferte și „Cum lucrez”, fiindcă asta e ordinea firească
+          a unei prezentări: îi vezi fața sus, vezi ce vinde, afli cine e, apoi
+          cum lucrează.
+
+          Fără etichetă de secțiune și fără grilă pe douăsprezece coloane, spre
+          deosebire de tot ce urmează. Două motive: secțiunea de dedesubt are
+          deja etichetă-stânga + text-dreapta, iar două la rând ar fi făcut
+          pagina să pară un formular; și o etichetă („Despre mine”) ar fi spus
+          exact ce spune prima propoziție, cu două cuvinte înainte. Un salut nu
+          se anunță.
+
+          Măsura de 40ch nu e decorativă: pe un ecran lat, un rând pe toată
+          lățimea ar ajunge la ~90 de caractere, de două ori peste cât urmărește
+          ochiul fără să piardă rândul. La 30ch, cât era întâi, ieșeau zece
+          rânduri de cursiv de 2rem — o coloană înaltă și subțire, mai greu de
+          citit decât una așezată.
+
+          Fără umplutură jos: dedesubt urmează „Cum lucrez”, tot pe crem. Două
+          secțiuni de aceeași culoare care se ating n-au margine vizibilă între
+          ele, deci umpluturile lor se adună — 112 de aici plus 112 de acolo
+          făceau 224px de gol, care se citea ca o pagină neterminată. */}
+      <section id="salut" className="shell pt-20 md:pt-28">
+        <div className="border-line border-t pt-10 md:pt-14">
+          {site.greeting.map((paragraf, i) => (
+            <Reveal key={i} delay={i * 140}>
+              <p className={`greeting max-w-[40ch] ${i > 0 ? "text-ink-soft mt-6 md:mt-8" : ""}`}>
+                {paragraf}
+              </p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ---------- Reprezentare exclusivă ----------
          Cerut de Vlad: pe partea albă, deasupra hărții, trei lucruri pe care
          vrea să le spună clar. Comisionul a venit de aici — înainte era în

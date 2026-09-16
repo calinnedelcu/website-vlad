@@ -189,6 +189,25 @@ dd {
   color: var(--color-muted);
 }
 
+/* Salutul de pe prima pagină.
+   A treia voce de pe site, și singura cursivă. Titlurile sunt serif drept,
+   textul curent e sans — un salut la persoana întâi n-are ce căuta în niciuna
+   din ele: în sans ar fi arătat ca o notă de subsol crescută, iar în serif
+   drept ar fi concurat cu titlurile de secțiune, care sunt exact la fel.
+   Cursivul îl scoate din rând fără să aducă un al treilea fișier de font —
+   Instrument Serif e deja încărcat, doar că nu-i foloseam decât romanul.
+   Rândul e mai strâns decât la `lede` (1.35 față de 1.55) fiindcă la 2rem
+   distanța dintre rânduri se vede oricum, iar una mare ar fi rupt fraza. */
+@utility greeting {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.2vw, 1.875rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
 @utility lede {
   font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
   line-height: 1.55;

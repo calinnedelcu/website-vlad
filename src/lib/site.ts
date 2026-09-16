@@ -25,6 +25,23 @@ export const site = {
   intro:
     "Vând și închiriez apartamente în București și Ilfov, și spații industriale și comerciale cu acces din Centură și A0.",
 
+  /**
+   * Salutul de pe prima pagină, scris de Vlad. Rupt în două fraze dinadins:
+   * prima spune cine e, a doua ce promite. La 2rem, într-un singur bloc, ar fi
+   * ieșit cinci rânduri fără aer.
+   *
+   * Diacriticele sunt corectate față de cum l-a trimis pe WhatsApp („moderna”,
+   * „atentia”, „si”) — restul cuvintelor sunt ale lui, neatinse.
+   *
+   * NU e același lucru cu `intro` de mai sus: ăla are 116 caractere și ține
+   * descrierea din Google și de pe cardul de share, unde peste ~160 se taie.
+   * Ăsta are 300 și e făcut să fie citit pe pagină.
+   */
+  greeting: [
+    "Salut! Sunt Nedelcu Vlad, un agent imobiliar dedicat, reprezentant Trîmbițașu Estate, apreciat pentru abordarea modernă, prezentarea premium și promovarea eficientă a proprietăților.",
+    "Prin atenția la detalii și orientarea către rezultate, transform fiecare proprietate într-o oportunitate care merită văzută.",
+  ],
+
   contact: {
     phone: "+40 750 467 866",
     phoneHref: "tel:+40750467866",
