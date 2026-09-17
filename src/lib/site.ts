@@ -13,8 +13,15 @@ export const site = {
   role: "Agent imobiliar",
   agency: "Trîmbițașu Estate",
   city: "București",
-  /** Se schimbă când intră domeniul propriu. Acum e previzualizarea de pe GitHub Pages. */
-  url: "https://calinnedelcu.github.io/website-vlad",
+  /**
+   * Domeniul propriu, din 17 septembrie 2026. Înainte era previzualizarea de pe
+   * GitHub Pages (`calinnedelcu.github.io/website-vlad`).
+   *
+   * De aici se construiesc adresele absolute: cardul de share, `canonical`,
+   * sitemap-ul, robots și datele structurate. Dacă îl schimbi, se schimbă
+   * toate odată — de aia e scris într-un singur loc.
+   */
+  url: "https://vlad-nedelcu.ro",
 
   /*
    * Paragraful de deschidere de pe prima pagină. A plecat fraza despre

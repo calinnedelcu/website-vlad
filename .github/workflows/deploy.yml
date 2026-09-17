@@ -98,12 +98,15 @@ jobs:
 
       - run: npm run lint
 
+      # Fără `NEXT_PUBLIC_BASE_PATH` de când site-ul are domeniu propriu.
+      #
+      # Cât era pe `calinnedelcu.github.io/website-vlad/`, tot ce pornea de la
+      # rădăcină avea nevoie de prefixul `/website-vlad`. Pe vlad-nedelcu.ro
+      # site-ul stă chiar în rădăcină, deci prefixul trebuie să fie gol — altfel
+      # fiecare fotografie și fiecare fișier CSS ar fi căutat la
+      # `/website-vlad/...`, care nu mai există.
       - name: Build static
         run: npm run build
-        env:
-          # GitHub Pages servește proiectul la /<repo>/. `github.event.repository.name`
-          # ține prefixul corect chiar dacă repo-ul e redenumit.
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
