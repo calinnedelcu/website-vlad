@@ -30,6 +30,10 @@ export function Analytics() {
       // browserului și ar rata omul care intră și pleacă în trei secunde —
       // adică exact vizita pe care vrei s-o numeri.
       strategy="afterInteractive"
+      // `module`, ca în fragmentul dat de ei. Nu e detaliu de stil: beacon.min.js
+      // e livrat ca modul ES, iar încărcat ca script clasic ar crăpa la prima
+      // instrucțiune de import.
+      type="module"
       src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon={JSON.stringify({ token: analyticsToken })}
     />

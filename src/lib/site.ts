@@ -174,7 +174,7 @@ export const site = {
  * analiză. De aceea stă aici, lângă restul configurației, și nu într-o variabilă
  * de mediu care ar trebui setată și în CI degeaba.
  */
-export const analyticsToken = "";
+export const analyticsToken = "5d6428320a944542a932d6fe77386bba";
 
 export const nav = [
   { href: "/", label: "Acasă" },
