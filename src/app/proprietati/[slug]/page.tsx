@@ -21,6 +21,7 @@ import {
 } from "@/lib/properties";
 import { unprefixed } from "@/lib/asset";
 import { site } from "@/lib/site";
+import { openGraphBase } from "@/lib/metadata";
 
 export function generateStaticParams() {
   // TOATE, nu doar cele disponibile: vândutele își păstrează pagina, se ajunge
@@ -37,10 +38,19 @@ export async function generateMetadata({
   const property = getProperty(slug);
   if (!property) return {};
 
+  const cale = `/proprietati/${slug}/`;
+
   return {
     title: `${property.title} — ${property.neighborhood}`,
     description: property.tagline,
+    alternates: { canonical: cale },
     openGraph: {
+      // Baza comună întâi, apoi ce e al anunțului. `images` vine ultimul
+      // dinadins: suprascrie cardul general cu fotografia proprietății, ca
+      // linkul trimis pe WhatsApp să arate chiar apartamentul. Vezi
+      // `src/lib/metadata.ts` pentru de ce nu putem scrie doar ce schimbăm.
+      ...openGraphBase,
+      url: cale,
       title: `${property.title} — ${property.neighborhood}`,
       description: property.tagline,
       images: [unprefixed(property.media.cover)],

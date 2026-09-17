@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { openGraphBase } from "@/lib/metadata";
+import { site } from "@/lib/site";
 import { Photo } from "@/components/Photo";
 import { PortfolioBrowser } from "@/components/PortfolioBrowser";
 import { SplitReveal } from "@/components/SplitReveal";
@@ -8,6 +10,13 @@ export const metadata: Metadata = {
   title: "Proprietăți",
   description:
     "Apartamente, hale industriale și spații comerciale în București și Ilfov — de vânzare și de închiriat, din portofoliul lui Vlad Nedelcu.",
+  alternates: { canonical: "/proprietati/" },
+  openGraph: {
+    ...openGraphBase,
+    url: "/proprietati/",
+    title: `${site.name} — Proprietăți`,
+    description: "Apartamente, hale industriale și spații comerciale în București și Ilfov — de vânzare și de închiriat, din portofoliul lui Vlad Nedelcu.",
+  },
 };
 
 export default function PropertiesPage() {

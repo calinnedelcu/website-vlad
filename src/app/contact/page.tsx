@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { openGraphBase } from "@/lib/metadata";
 import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
 import { site } from "@/lib/site";
@@ -6,6 +7,13 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description: `Scrie-i lui ${site.name} ce cauți în București — răspunde în aceeași zi.`,
+  alternates: { canonical: "/contact/" },
+  openGraph: {
+    ...openGraphBase,
+    url: "/contact/",
+    title: `${site.name} — Contact`,
+    description: `Scrie-i lui ${site.name} ce cauți în București — răspunde în aceeași zi.`,
+  },
 };
 
 /**

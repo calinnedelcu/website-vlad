@@ -23,6 +23,11 @@ export const dynamic = "force-static";
  * publicare ar spune motorului „totul e nou” — inclusiv când n-am schimbat
  * nimic. Pe un site care se republică zilnic, asta e zgomot, nu informație.
  *
+ * BARA DE LA FINAL nu e o scăpare: `trailingSlash: true` face ca adresa chiar
+ * servită să fie `/proprietati/`. Fără bară, sitemap-ul ar fi trimis motorul
+ * spre adresa care doar redirecționează, iar canonical-ul paginii ar fi arătat
+ * în altă parte decât sitemap-ul. Cele două trebuie să spună același lucru.
+ *
  * ATENȚIE la prefix: căile din cod au `basePath` lipit (vezi `asset.ts`), dar
  * aici trebuie adrese complete, o singură dată — de aceea `unprefixed`, la fel
  * ca la cardul de share.
@@ -33,13 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const pagini: MetadataRoute.Sitemap = [
     { url: url("/"), lastModified: schimbat, changeFrequency: "daily", priority: 1 },
-    { url: url("/proprietati"), lastModified: schimbat, changeFrequency: "daily", priority: 0.9 },
-    { url: url("/tranzactii"), lastModified: schimbat, changeFrequency: "monthly", priority: 0.6 },
-    { url: url("/contact"), changeFrequency: "yearly", priority: 0.5 },
+    { url: url("/proprietati/"), lastModified: schimbat, changeFrequency: "daily", priority: 0.9 },
+    { url: url("/tranzactii/"), lastModified: schimbat, changeFrequency: "monthly", priority: 0.6 },
+    { url: url("/contact/"), changeFrequency: "yearly", priority: 0.5 },
   ];
 
   const anunturi: MetadataRoute.Sitemap = properties.map((p) => ({
-    url: url(unprefixed(`/proprietati/${p.slug}`)),
+    url: url(unprefixed(`/proprietati/${p.slug}/`)),
     lastModified: schimbat,
     changeFrequency: "weekly",
     priority: p.status === "disponibil" ? 0.8 : 0.4,

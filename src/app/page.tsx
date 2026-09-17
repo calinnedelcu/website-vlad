@@ -8,6 +8,17 @@ import { Reveal } from "@/components/Reveal";
 import { SplitReveal } from "@/components/SplitReveal";
 import { availableProperties, soldProperties } from "@/lib/properties";
 import { site } from "@/lib/site";
+import type { Metadata } from "next";
+
+/**
+ * Canonical-ul stătea în layout și se moștenea peste tot — vezi nota de acolo.
+ * Bara de la final nu e cosmetică: `trailingSlash: true` din `next.config.ts`
+ * face ca adresa servită să fie `/proprietati/`, iar un canonical fără bară ar
+ * arăta spre adresa care doar redirecționează.
+ */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /**
  * Prima pagină ține șase lucruri, în ordinea asta: cine e, ce vinde acum, ce

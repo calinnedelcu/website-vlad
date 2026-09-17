@@ -5,6 +5,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StickyContact } from "@/components/StickyContact";
 import { site } from "@/lib/site";
+import { ogImage, openGraphBase } from "@/lib/metadata";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -20,14 +21,6 @@ const inter = Inter({
   display: "swap",
 });
 
-/** Cardul de share. Generat de `npm run media` — vezi scripts/build-og.mjs. */
-const ogImage = {
-  url: "/og.jpg",
-  width: 1200,
-  height: 630,
-  alt: `${site.name} — ${site.role} în ${site.city}`,
-};
-
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -36,13 +29,10 @@ export const metadata: Metadata = {
   },
   description: site.intro,
   openGraph: {
-    type: "website",
-    locale: "ro_RO",
-    siteName: site.name,
-    url: site.url,
+    ...openGraphBase,
+    url: "/",
     title: `${site.name} — ${site.role} în ${site.city}`,
     description: site.intro,
-    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
@@ -50,7 +40,14 @@ export const metadata: Metadata = {
     description: site.intro,
     images: [ogImage.url],
   },
-  alternates: { canonical: "/" },
+  // Fără `alternates` aici, dinadins. Metadatele se îmbină superficial, iar o
+  // cheie pusă în layout e moștenită de FIECARE pagină care n-o rescrie. Un
+  // `canonical: "/"` pus aici spunea Google, de pe /proprietati, /tranzactii,
+  // /contact și de pe toate anunțurile: „nu mă indexa pe mine, indexează prima
+  // pagină, eu sunt o copie a ei”. Adică exact invers decât vrem.
+  //
+  // Canonical-ul e o afirmație despre O pagină anume, deci se scrie în pagina
+  // aceea. Vezi `src/app/page.tsx` și surorile ei.
 };
 
 /** Culoarea barei de sus în browserele de telefon — se leagă cu hero-ul negru. */

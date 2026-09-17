@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { openGraphBase } from "@/lib/metadata";
+import { site } from "@/lib/site";
 import { Photo } from "@/components/Photo";
 import { PropertyCard } from "@/components/PropertyCard";
 import { SplitReveal } from "@/components/SplitReveal";
@@ -8,6 +10,13 @@ export const metadata: Metadata = {
   title: "Tranzacții",
   description:
     "Proprietăți intermediate de Vlad Nedelcu în București și Ilfov — apartamente și garsoniere vândute, cu fotografiile și descrierile lor.",
+  alternates: { canonical: "/tranzactii/" },
+  openGraph: {
+    ...openGraphBase,
+    url: "/tranzactii/",
+    title: `${site.name} — Tranzacții`,
+    description: "Proprietăți intermediate de Vlad Nedelcu în București și Ilfov — apartamente și garsoniere vândute, cu fotografiile și descrierile lor.",
+  },
 };
 
 export default function TransactionsPage() {
