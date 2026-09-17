@@ -95,19 +95,71 @@ export default function HomePage() {
           rândului. Măsura ține rândurile pe la 34 de caractere; pe toată
           lățimea ar ajunge la ~90, de două ori peste cât urmărește ochiul.
 
-          Fără umplutură jos: dedesubt urmează „Cum lucrez”, tot pe crem. Două
-          secțiuni de aceeași culoare care se ating n-au margine vizibilă între
-          ele, deci umpluturile lor se adună — 112 de aici plus 112 de acolo
-          făceau 224px de gol, care se citea ca o pagină neterminată. */}
+          Are acum trei etaje: salutul, cele două fotografii în cadru negru, și
+          cele trei drumuri ca butoane. Dedesubt urmează harta, pe negru — deci
+          umplutura de jos își face treaba, marginea dintre secțiuni se vede.
+          (A avut o vreme `pb-0`, pe când dedesubt era tot crem.) */}
       <section id="salut" className="shell py-20 md:py-28">
         <div className="border-line border-t pt-10 md:pt-14">
-          {site.greeting.map((paragraf, i) => (
-            <Reveal key={i} delay={i * 140}>
-              <p className={`greeting mx-auto max-w-[34ch] text-center ${i > 0 ? "mt-6 md:mt-8" : ""}`}>
-                {paragraf}
-              </p>
-            </Reveal>
-          ))}
+          <Reveal>
+            <p className="greeting mx-auto max-w-[34ch] text-center">{site.greeting}</p>
+          </Reveal>
+
+          {/* Cele două fotografii, una lângă alta — „chiar așa cum le-a făcut
+              WhatsApp-ul, pe din 2”, cerut de Vlad.
+
+              Cadrul negru e chiar containerul: fundal închis cu umplutură, iar
+              spațiul dintre fotografii e tot el. Așa n-ating nicăieri cremul
+              paginii — a doua cerință a lui.
+
+              Rămân două coloane și pe telefon, nu una sub alta: alăturarea E
+              ideea. Caseta impune același raport la amândouă (3/4), fiindcă
+              originalele vin cu 0,80 și 0,75 — puse ca atare, una ar fi ieșit
+              mai înaltă decât cealaltă și cadrul s-ar fi strâmbat. */}
+          <Reveal delay={140}>
+            <div className="bg-void mx-auto mt-12 max-w-[40rem] p-2.5 md:mt-14 md:p-3">
+              <div className="grid grid-cols-2 gap-2.5 md:gap-3">
+                {[
+                  { src: site.portraitSuit, alt: `${site.name}, ${site.role.toLowerCase()}` },
+                  { src: site.portraitStreet, alt: site.name },
+                ].map((foto) => (
+                  <div key={foto.src} className="relative aspect-3/4">
+                    <Photo
+                      src={foto.src}
+                      alt={foto.alt}
+                      fill
+                      sizes="(max-width: 768px) 46vw, 20rem"
+                      className="object-cover object-center"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          {/* „Pe site găsești” — cerut de Vlad în locul frazei a doua, cu cele
+              trei ca butoane care duc direct la paginile lor. Textul lui spunea
+              exact asta; butoanele sunt singura parte pe care a cerut-o el, nu
+              o interpretare de-a mea. */}
+          <Reveal delay={240}>
+            <div className="mt-12 text-center md:mt-14">
+              <p className="eyebrow">Pe site găsești</p>
+              {/* Pe telefon stau unul sub altul, la aceeași lățime. Lăsate să
+                  curgă, ieșeau două pe primul rând și „Contact” singur pe al
+                  doilea, centrat — arăta a rest, nu a al treilea drum. */}
+              <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+                {site.onSite.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="border-ink text-ink btn-sweep hover:text-paper w-full max-w-[18rem] border px-6 py-3.5 text-center text-sm transition-colors duration-500 sm:w-auto"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

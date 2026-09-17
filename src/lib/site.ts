@@ -26,20 +26,32 @@ export const site = {
     "Vând și închiriez apartamente în București și Ilfov, și spații industriale și comerciale cu acces din Centură și A0.",
 
   /**
-   * Salutul de pe prima pagină, scris de Vlad. Rupt în două fraze dinadins:
-   * prima spune cine e, a doua ce promite. La 2rem, într-un singur bloc, ar fi
-   * ieșit cinci rânduri fără aer.
+   * Salutul de pe prima pagină, scris de Vlad. Diacriticele sunt corectate față
+   * de cum l-a trimis pe WhatsApp („moderna”, „atentia”, „si”) — restul
+   * cuvintelor sunt ale lui, neatinse.
    *
-   * Diacriticele sunt corectate față de cum l-a trimis pe WhatsApp („moderna”,
-   * „atentia”, „si”) — restul cuvintelor sunt ale lui, neatinse.
+   * A avut și o a doua frază — „Prin atenția la detalii și orientarea către
+   * rezultate, transform fiecare proprietate într-o oportunitate care merită
+   * văzută.” A cerut el s-o înlocuiască cu lista de mai jos. Bun schimb: fraza
+   * spunea ceva despre el, lista spune unde să te duci.
    *
    * NU e același lucru cu `intro` de mai sus: ăla are 116 caractere și ține
    * descrierea din Google și de pe cardul de share, unde peste ~160 se taie.
-   * Ăsta are 300 și e făcut să fie citit pe pagină.
    */
-  greeting: [
+  greeting:
     "Salut! Sunt Nedelcu Vlad, un agent imobiliar dedicat, reprezentant Trîmbițașu Estate, apreciat pentru abordarea modernă, prezentarea premium și promovarea eficientă a proprietăților.",
-    "Prin atenția la detalii și orientarea către rezultate, transform fiecare proprietate într-o oportunitate care merită văzută.",
+
+  /**
+   * „Pe site găsești” — cele trei drumuri, scrise de Vlad, ca butoane către
+   * paginile lor.
+   *
+   * El a scris „Meniu Contact” la al treilea. Pe un buton, „Meniu” e cuvântul
+   * de prisos: butonul E meniul.
+   */
+  onSite: [
+    { label: "Portofoliul meu activ", href: "/proprietati" },
+    { label: "Istoric Vânzări", href: "/tranzactii" },
+    { label: "Contact", href: "/contact" },
   ],
 
   contact: {
@@ -64,6 +76,18 @@ export const site = {
    * unde se taie se folosește `object-position: center 20%`.
    */
   portraitOffice: asset("/media/local/portret-vlad-birou.webp"),
+
+  /**
+   * Cele două fotografii din salutul de pe prima pagină, date de Vlad în
+   * septembrie 2026. Stau una lângă alta, cum le-a trimis pe WhatsApp.
+   *
+   * Sunt amândouă în picioare, dar cu rapoarte diferite (0,80 și 0,75), deci
+   * nu se pot pune pur și simplu alături fără să iasă una mai înaltă. Caseta
+   * le impune același cadru și `object-fit: cover` taie ce prisosește — vezi
+   * prima pagină.
+   */
+  portraitSuit: asset("/media/local/portret-vlad-costum.webp"),
+  portraitStreet: asset("/media/local/portret-vlad-strada.webp"),
 
   /**
    * Sigla agenției, decupată de pe fundalul ei bleumarin — vezi
@@ -129,11 +153,8 @@ export const site = {
  * cele patru rânduri niciunul nu ducea acasă. Vlad a intrat undeva din meniu
  * și a rămas acolo — pe bună dreptate.
  *
- * „Despre” a plecat din meniu, cerut de Calin. Pagina `/despre` există în
- * continuare și se construiește, dar NIMIC de pe site nu mai trimite spre ea —
- * se ajunge doar cu adresa scrisă de mână sau din Google. Dacă rămâne așa mult
- * timp, întrebarea corectă e dacă nu trebuie ștearsă de tot: ce e pe ea (cele
- * trei lucruri verificabile, povestea lui) n-are alt loc pe site.
+ * „Despre” a plecat din meniu, iar apoi pagina a fost ștearsă de tot — ambele
+ * cerute de Calin. Rămân patru rânduri, toate cu pagină în spate.
  */
 export const nav = [
   { href: "/", label: "Acasă" },
