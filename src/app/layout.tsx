@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
+import { StructuredData } from "@/components/StructuredData";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StickyContact } from "@/components/StickyContact";
 import { site } from "@/lib/site";
@@ -63,6 +64,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {/* Grain peste toată pagina — vezi .grain din globals.css */}
         <div className="grain" aria-hidden />
+        {/* Cine e Vlad, pentru mașini. Vezi StructuredData. */}
+        <StructuredData />
         <SiteHeader />
         <main className="pt-20">{children}</main>
         <SiteFooter />
