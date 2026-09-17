@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { StructuredData } from "@/components/StructuredData";
+import { Analytics } from "@/components/Analytics";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StickyContact } from "@/components/StickyContact";
 import { site } from "@/lib/site";
@@ -67,6 +68,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="pt-20">{children}</main>
         <SiteFooter />
         <StickyContact />
+        {/* Numărătoarea vizitelor, fără cookie-uri. Vezi Analytics. */}
+        <Analytics />
       </body>
     </html>
   );

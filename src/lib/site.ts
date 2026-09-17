@@ -163,6 +163,19 @@ export const site = {
  * „Despre” a plecat din meniu, iar apoi pagina a fost ștearsă de tot — ambele
  * cerute de Calin. Rămân patru rânduri, toate cu pagină în spate.
  */
+/**
+ * Tokenul de la Cloudflare Web Analytics.
+ *
+ * Gol înseamnă „nu măsurăm nimic” — componenta nu randează niciun script. Se ia
+ * din contul Cloudflare → Web Analytics → adaugi vlad-nedelcu.ro → îți dă un
+ * JS snippet în care scrie `token: "..."`. Doar șirul ăla se pune aici.
+ *
+ * NU E SECRET. Ajunge oricum în sursa paginii, la vedere, ca orice script de
+ * analiză. De aceea stă aici, lângă restul configurației, și nu într-o variabilă
+ * de mediu care ar trebui setată și în CI degeaba.
+ */
+export const analyticsToken = "";
+
 export const nav = [
   { href: "/", label: "Acasă" },
   { href: "/proprietati", label: "Proprietăți" },
