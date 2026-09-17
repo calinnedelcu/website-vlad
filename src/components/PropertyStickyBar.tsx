@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { priceLabel, type Property } from "@/lib/properties";
 import { site } from "@/lib/site";
@@ -51,14 +52,31 @@ export function PropertyStickyBar({ property }: { property: Property }) {
           <p className={`nums text-sm ${sold ? "text-muted line-through" : ""}`}>
             {priceLabel(property)}
           </p>
-          <a
-            href={site.contact.whatsapp}
-            target="_blank"
-            rel="noreferrer"
-            className="bg-ink text-paper px-5 py-2 text-sm transition-opacity duration-300 hover:opacity-85"
-          >
-            Programează o vizionare
-          </a>
+          {/* Pe o proprietate vândută, „Programează o vizionare” e o invitație
+              la ceva ce nu mai există. Bara știa că e vândută — tăia prețul —
+              dar tot chema la vizionare. Pagina de dedesubt ascunde butonul
+              corect (`!sold`); aici scăpase.
+
+              Nu-l ascundem de tot: un colț gol nu ajută pe nimeni. Cine a
+              ajuns pe un anunț vândut caută ceva asemănător, deci îl trimitem
+              unde are ce găsi. */}
+          {sold ? (
+            <Link
+              href="/proprietati"
+              className="border-ink hover:bg-ink hover:text-paper border px-5 py-2 text-sm transition-colors duration-300"
+            >
+              Vezi ce e disponibil
+            </Link>
+          ) : (
+            <a
+              href={site.contact.whatsapp}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-ink text-paper px-5 py-2 text-sm transition-opacity duration-300 hover:opacity-85"
+            >
+              Programează o vizionare
+            </a>
+          )}
         </div>
       </div>
     </div>

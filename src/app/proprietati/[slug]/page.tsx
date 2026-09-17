@@ -11,6 +11,7 @@ import { PropertyStickyBar } from "@/components/PropertyStickyBar";
 import { Morph } from "@/components/Morph";
 import { morphName } from "@/lib/morph";
 import {
+  availableProperties,
   getProperty,
   priceLabel,
   properties,
@@ -22,6 +23,8 @@ import { unprefixed } from "@/lib/asset";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
+  // TOATE, nu doar cele disponibile: vândutele își păstrează pagina, se ajunge
+  // la ele de pe /tranzactii. Doar recomandările de la final sunt filtrate.
   return properties.map((p) => ({ slug: p.slug }));
 }
 
@@ -51,7 +54,22 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
   if (!property) notFound();
 
   const sold = property.status === "vandut" || property.status === "inchiriat";
-  const others = properties.filter((p) => p.slug !== property.slug && !p.soldNote).slice(0, 3);
+  /**
+   * Ce se recomandă la finalul paginii.
+   *
+   * Doar ce e de vânzare sau de închiriat ACUM. Filtrul de dinainte se uita la
+   * `soldNote` — nota scrisă de mână despre o tranzacție — nu la status. Cum
+   * niciuna dintre cele opt vândute n-avea nota aia scrisă, treceau toate prin
+   * filtru: „Poate te interesează și” recomanda, de fiecare dată, proprietăți
+   * pe care nu le mai poate cumpăra nimeni.
+   *
+   * Regula, la fel ca pe hartă: o recomandare e o invitație, iar o proprietate
+   * vândută e o invitație goală. Dovada de track record stă pe /tranzactii,
+   * unde omul o caută anume.
+   */
+  const others = availableProperties()
+    .filter((p) => p.slug !== property.slug)
+    .slice(0, 3);
 
   return (
     <>
