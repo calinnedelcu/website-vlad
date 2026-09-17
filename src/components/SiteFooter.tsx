@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { realSocial, site } from "@/lib/site";
 
 /**
  * Subsolul.
@@ -70,7 +70,7 @@ export function SiteFooter() {
           <div className="md:col-span-3 md:col-start-10">
             <p className="eyebrow">Social</p>
             <ul className="mt-4 space-y-2 text-sm">
-              {site.social.map((item) => (
+              {realSocial.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}

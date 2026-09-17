@@ -174,6 +174,26 @@ export const site = {
  * analiză. De aceea stă aici, lângă restul configurației, și nu într-o variabilă
  * de mediu care ar trebui setată și în CI degeaba.
  */
+/**
+ * Conturile pe care le avem cu adevărat.
+ *
+ * `site.social` mai conține și adrese de tip „https://instagram.com/” — adică
+ * pagina de start a rețelei, pusă ca loc rezervat până aflăm contul lui Vlad.
+ * Un link etichetat „Instagram” care te duce pe prima pagină a Instagramului nu
+ * e un link incomplet, e un link mincinos: omul crede că vede profilul agentului
+ * și ajunge la un ecran de login.
+ *
+ * Aceeași regulă și pentru `sameAs` din datele structurate, unde un cont care
+ * nu-i aparține e o afirmație falsă despre identitate. De aceea filtrul stă
+ * aici, într-un loc, și nu scris de două ori.
+ *
+ * Cum revine Instagramul: îi pui adresa adevărată în `social` și reapare singur,
+ * fără altă modificare.
+ */
+export const realSocial = site.social.filter(
+  (cont) => !/^https?:\/\/(www\.)?(instagram|facebook|tiktok)\.com\/?$/i.test(cont.href),
+);
+
 export const analyticsToken = "5d6428320a944542a932d6fe77386bba";
 
 export const nav = [

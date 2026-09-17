@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { realSocial, site } from "@/lib/site";
 import { unprefixed } from "@/lib/asset";
 import { availableNeighborhoods } from "@/lib/properties";
 
@@ -55,10 +55,8 @@ export function StructuredData() {
     // harta și ca filtrele de pe /proprietati.
     areaServed: zone.map((nume) => ({ "@type": "Place", name: nume })),
 
-    // Doar conturile reale. Vezi nota de sus despre Instagram.
-    sameAs: site.social
-      .filter((cont) => !/^https?:\/\/(www\.)?(instagram|facebook|tiktok)\.com\/?$/i.test(cont.href))
-      .map((cont) => cont.href),
+    // Doar conturile reale — aceeași regulă ca în subsol. Vezi `realSocial`.
+    sameAs: realSocial.map((cont) => cont.href),
 
     makesOffer: {
       "@type": "Offer",
