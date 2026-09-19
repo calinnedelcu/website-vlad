@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T08:59:20.507Z",
+  "updatedAt": "2026-09-19T08:47:12.862Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1830,7 +1830,7 @@
     },
     "3371043": {
       "id": "3371043",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-13-septembrie-bucuresti-cp3371043/",
       "sourceTitle": "13 Septembrie 2 Camere 54 mp 3/8",
       "kind": "apartament",
@@ -1924,7 +1924,7 @@
         "period": "luna"
       },
       "specs": {
-        "surface": 550,
+        "surface": 560,
         "rooms": 6,
         "baths": 2,
         "year": 2025
