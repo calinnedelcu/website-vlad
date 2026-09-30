@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T10:39:24.318Z",
+  "updatedAt": "2026-09-30T10:28:16.250Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1032,7 +1032,7 @@
     },
     "3291462": {
       "id": "3291462",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-mihai-bravu-bucuresti-cp3291462/",
       "sourceTitle": "3 Camere Asmitha Gardens 100 mp Metrou 7 m PET FRIENDLY Etaj 2",
       "kind": "apartament",
@@ -2076,6 +2076,48 @@
         ]
       }
     },
+    "3433981": {
+      "id": "3433981",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-vanzare-grozavesti-bucuresti-cp3433981/",
+      "sourceTitle": "Politehnica Park Garsoniera 35 mp 6/8",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 95000,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 35,
+        "rooms": 1,
+        "baths": 1,
+        "year": 2017
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "grozavesti",
+        "county": "bucuresti"
+      },
+      "story": [
+        "COMISION 0!",
+        "Garsonieră situată în Grozăvești, in complexul Politehnica Park, pe strada Economu Cezarescu 52.",
+        "Imobilul a fost construit în anul 2017, iar garsoniera este situată la etajul 6 din 8.",
+        "Garsoniera se vinde complet mobilată și utilată, conform fotografiilor de prezentare, și este pregătită pentru mutare imediată.",
+        "Distanța până la stația de metrou Grozăvești este de 6 minute.",
+        "Eveniment OPEN HOUSE Vă invităm în data de 13.10.2026, în intervalul 16:00 – 19:00, să descoperiți acest apartament, într-un cadru organizat și într-o atmosferă relaxată.",
+        "Pentru videoclipul de prezentare ma puteți contacta in privat la numarul de telefon din anunt! Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3433981/65417ea6-6874-49fc-b443-1cd0745b8269.jpeg",
+        "gallery": [
+          "3433981/df7e0f96-299a-43d5-80f2-9934b7eb43a3.jpeg",
+          "3433981/1a67bdbd-10d8-4c02-b50b-aa9c55bb1cc2.jpeg",
+          "3433981/9befca66-3845-4311-bc39-d746946fd6c3.jpeg",
+          "3433981/eef6b9ab-5de5-461c-846e-ff18874f0f49.jpeg"
+        ]
+      }
+    },
     "3446662": {
       "id": "3446662",
       "listed": true,
@@ -2201,7 +2243,7 @@
         "period": "luna"
       },
       "specs": {
-        "surface": 90,
+        "surface": 85,
         "rooms": 3,
         "year": 2009
       },
@@ -2222,6 +2264,48 @@
           "3446677/9cf24308-98e2-4430-90ce-41ee2961cc35.jpeg",
           "3446677/1130b8bd-7037-41f0-b2f7-76e26131bf5d.jpeg",
           "3446677/b58dbc6a-0139-401d-b605-a846dbdd727b.jpeg"
+        ]
+      }
+    },
+    "3449261": {
+      "id": "3449261",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-mihai-bravu-bucuresti-cp3449261/",
+      "sourceTitle": "3 Camere Asmitha Gardens 100 mp Metrou 7 m PET FRIENDLY Etaj 2",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 850,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 105,
+        "rooms": 3,
+        "baths": 2,
+        "year": 2009
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "mihai-bravu",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un apartament cu 4 camere, situat la etajul 2 al prestigiosului complex rezidențial Asmita Gardens, amplasat pe Splaiul Unirii.",
+        "Apartamentul este spațios, luminos și foarte bine compartimentat, fiind ideal pentru o familie sau pentru persoanele care își doresc o locuință generoasă, într-un complex modern, cu acces facil către centrul orașului.",
+        "Proprietatea se află la aproximativ 8 minute de mers pe jos de stația de metrou Mihai Bravu, iar în imediata apropiere se regăsesc supermarketuri, restaurante, săli de fitness, spații verzi și numeroase alte facilități.",
+        "Apartamentul se închiriază complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit și mutare imediată. Separat se poate inchiria si un loc de parcare.",
+        "Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3246242/a0b39108-132d-42b0-a094-ae9d8db49341.jpeg",
+        "gallery": [
+          "3246242/e9eccc5c-1aed-4f75-916b-86e4c98aa699.jpeg",
+          "3246242/709436f0-8a51-40d7-a78c-4308857345f7.jpeg",
+          "3246242/fa228a78-d013-4d5c-b97a-388720ce8b8e.jpeg",
+          "3246242/100eee1d-ba0b-4fa0-8086-9ffea8358f61.jpeg"
         ]
       }
     }
