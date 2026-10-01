@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T10:28:16.250Z",
+  "updatedAt": "2026-10-01T10:55:35.604Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2036,7 +2036,7 @@
     "3396203": {
       "id": "3396203",
       "listed": true,
-      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-chiajna-cp3396203/",
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3396203/",
       "sourceTitle": "CENTURA - Rudeni | HALA 585 mp| Birouri 120mp | Parc Industrial nou",
       "kind": "hala",
       "segment": "comercial",
@@ -2052,9 +2052,9 @@
         "baths": 2,
         "year": 2025
       },
-      "sourceLocality": "Chiajna",
+      "sourceLocality": "Rudeni",
       "zone": {
-        "slug": "chiajna",
+        "slug": "rudeni",
         "county": "ilfov"
       },
       "story": [
@@ -2293,7 +2293,7 @@
       },
       "story": [
         "Comision 0% pentru chiriaș!",
-        "Vă propunem spre închiriere un apartament cu 4 camere, situat la etajul 2 al prestigiosului complex rezidențial Asmita Gardens, amplasat pe Splaiul Unirii.",
+        "Vă propunem spre închiriere un apartament cu 3 camere, situat la etajul 2 in complexul rezidențial Asmita Gardens, amplasat pe Splaiul Unirii.",
         "Apartamentul este spațios, luminos și foarte bine compartimentat, fiind ideal pentru o familie sau pentru persoanele care își doresc o locuință generoasă, într-un complex modern, cu acces facil către centrul orașului.",
         "Proprietatea se află la aproximativ 8 minute de mers pe jos de stația de metrou Mihai Bravu, iar în imediata apropiere se regăsesc supermarketuri, restaurante, săli de fitness, spații verzi și numeroase alte facilități.",
         "Apartamentul se închiriază complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit și mutare imediată. Separat se poate inchiria si un loc de parcare.",
@@ -2306,6 +2306,44 @@
           "3246242/709436f0-8a51-40d7-a78c-4308857345f7.jpeg",
           "3246242/fa228a78-d013-4d5c-b97a-388720ce8b8e.jpeg",
           "3246242/100eee1d-ba0b-4fa0-8086-9ffea8358f61.jpeg"
+        ]
+      }
+    },
+    "3451469": {
+      "id": "3451469",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-13-septembrie-bucuresti-cp3451469/",
+      "sourceTitle": "Marriott - Sabinelor 2 Camere 2/5 Bloc 2009",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 550,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 45,
+        "rooms": 2,
+        "baths": 1,
+        "year": 2009
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "13-septembrie",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0! Va propunem spre inchiriere un apartament de 2 Camere, situat pe strada Sabinelor nr. 98. Apartmentul este mobilat si utilat complet, alaturi de toate electrocasnicele necesare. Blocul este construit in anul 2009, iar apartamentul se situează la etajul 2/5.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3451469/edb80605-2abe-4d92-80dc-a0f1ff63044b.jpeg",
+        "gallery": [
+          "3451469/7d47c534-3a3d-4fa4-ac3e-5cad33565dde.jpeg",
+          "3451469/a56d9f34-c053-494d-924f-b93683207b2c.jpeg",
+          "3451469/706338e3-560d-43c1-95b2-ca40663ce42d.jpeg",
+          "3451469/19f9a7db-6c91-4334-81e6-4d99ef9af388.jpeg"
         ]
       }
     }
