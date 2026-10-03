@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T10:28:59.359Z",
+  "updatedAt": "2026-10-03T09:50:55.819Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2001,7 +2001,7 @@
       "segment": "rezidential",
       "deal": "vanzare",
       "price": {
-        "amount": 88000,
+        "amount": 86000,
         "currency": "EUR"
       },
       "specs": {
@@ -2025,7 +2025,8 @@
           "3257960/a646777c-138d-4cff-a100-85e476c31f79.jpg",
           "3257960/a389a3dc-54cf-475e-8617-12c99024b82b.jpg",
           "3257960/57912644-d9e4-4e54-a6db-aabdfd935735.jpg",
-          "3257960/ec9aac63-d131-4164-abd4-d4a16db931bb.jpg"
+          "3257960/ec9aac63-d131-4164-abd4-d4a16db931bb.jpg",
+          "3257960/efc8c1df-0f55-4643-a47a-bf5a285921f8.jpg"
         ]
       },
       "zone": {
