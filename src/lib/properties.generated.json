@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T11:02:52.421Z",
+  "updatedAt": "2026-10-08T11:20:17.676Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2036,7 +2036,7 @@
     },
     "3396203": {
       "id": "3396203",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3396203/",
       "sourceTitle": "CENTURA - Rudeni | HALA 585 mp| Birouri 120mp | Parc Industrial nou",
       "kind": "hala",
@@ -2385,6 +2385,49 @@
           "3460482/af3d2580-a4c5-4120-be9f-c85068814221.jpeg",
           "3460482/f53dbb7e-6510-4ab1-8997-1e32714d487d.jpeg",
           "3460482/eb2835b9-2ff9-46db-ba1d-427d78884482.jpeg"
+        ]
+      }
+    },
+    "3466685": {
+      "id": "3466685",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-industrial-6-camere-de-inchiriat-rudeni-cp3466685/",
+      "sourceTitle": "CENTURA - Rudeni | HALA 585 mp| Birouri 120mp | Parc Industrial TBM",
+      "kind": "hala",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 3000,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 560,
+        "rooms": 6,
+        "baths": 2,
+        "year": 2025
+      },
+      "sourceLocality": "Rudeni",
+      "zone": {
+        "slug": "rudeni",
+        "county": "ilfov"
+      },
+      "story": [
+        "Comision 0% chirias!",
+        "Vă propunem spre inchiriere spațiu de depozitare/producție și birouri, situate într-un parc industrial modern, cu infrastructură completă și acces direct din Șoseaua de Centură, în zona Chiajna – Rudeni. Specificatii Hala: • Suprafață depozitare/producție (open space): 450 mp • Suprafață construita birouri (P+1): 120 mp • Teren aferent: 982 mp",
+        "Birouri și facilități • Încălzire/răcire cu sistem tip casetă de tavan • 2 grupuri sanitare • Spațiu pentru chicinetă • Sală de ședințe • Infrastructură realizată pentru internet, supraveghere video și sistem de alarmă",
+        "Utilități • Curent trifazic • Apă • Canalizare",
+        "Avantaje și oportunitate de investiție:",
+        "Parcul industrial este complet sistematizat, cu facilități moderne și acces facil pentru transport marfă. Spațiul este pregătit pentru utilizare imediată și este ideal atât pentru: • producție • depozitare • distribuție • e-commerce",
+        "Imobilul/spatiul comercial este in proprietatea unei societăți, iar la prețul de 3250 se aplica TVA. De asemenea daca imobilul la randul lui va fi inchiriat de catre o societate comercială se va aplica taxarea inversă."
+      ],
+      "media": {
+        "cover": "3131961/fcbb4b70-931c-4c12-b43f-503d160f3d1b.jpeg",
+        "gallery": [
+          "3131961/0a951563-e2cf-4f3d-a4c7-10b36e760951.jpeg",
+          "3131961/5265859f-4b3e-4d99-8a8b-fedb5b519a5f.jpeg",
+          "3131961/b59a4023-4118-4311-b7a2-00044b12efea.jpg",
+          "3131961/74ff9af0-e7ef-4f77-ac30-e19b67a03a89.jpg"
         ]
       }
     }
