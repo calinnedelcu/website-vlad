@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T11:20:17.676Z",
+  "updatedAt": "2026-10-14T09:29:45.799Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2428,6 +2428,48 @@
           "3131961/5265859f-4b3e-4d99-8a8b-fedb5b519a5f.jpeg",
           "3131961/b59a4023-4118-4311-b7a2-00044b12efea.jpg",
           "3131961/74ff9af0-e7ef-4f77-ac30-e19b67a03a89.jpg"
+        ]
+      }
+    },
+    "3477630": {
+      "id": "3477630",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-4-camere-de-vanzare-giulesti-sarbi-bucuresti-cp3477630/",
+      "sourceTitle": "GIULESTI - Casă Duplex 4 Camere 140 mp | Finisaje Premium",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 279900,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 141,
+        "rooms": 4,
+        "baths": 3,
+        "year": 2026
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "giulesti-sarbi",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0% pentru cumpărător",
+        "Giulești-Sârbi, Sector 6 | 4 camere, 3 băi | 141 mp utili, P+1 | terasă 18 mp | 2 balcoane",
+        "Preț: 279.900 euro + TVA",
+        "Ultimele 3 case duplex dintr-un ansamblu nou de 10 unități, pe Calea Giulești 543A. Se predau la cheie, cu finisaje incluse. Stația de autobuz se afla în fața complexului.",
+        "Suprafață utilă totala: 141 mp Parter: 74 mp Etaj: 67 mp Terasă curte: 18 mp Teren: 200 mp Regim de înălțime: P+1 An construcție: 2026 Structură: beton armat pe cadre Pereți exteriori: cărămidă 32 cm Pereți interiori: cărămidă 11,5 cm Perete comun: cărămidă 32 cm, izolat fonic pe ambele părți Fațadă: EPS 15 cm, vată bazaltică, lemn de pin termotratat, cărămidă aparentă Caparol Tâmplărie: PVC Kömmerling 76 MD antracit, geam tripan 48 mm cu argon, feronerie TRT Titan Ușă acces: aluminiu Încălzire: în pardoseală, parter și etaj Climatizare: multisplit Ariston, 4 unități de 12.000 BTU Sanitare: baterii Grohe, obiecte Ideal Standard Placări ceramice: Italia Balustrade: sticlă",
+        "Parter: living cu dining, bucătărie, baie, cameră tehnică, depozitare și ieșire pe terasă. Etaj: dormitor matrimonial cu dressing și baie proprie, 2 dormitoare, baie, 2 balcoane. Curte amenajată cu gazon și gard viu între proprietăți.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3477630/f45cebbf-5852-4003-92b6-214ac9c4937c.jpg",
+        "gallery": [
+          "3477630/4b70fa01-c0d8-4b2b-9681-f97438eb7f24.jpg",
+          "3477630/9032bd09-9218-42cd-bf21-72108b50cacc.jpg",
+          "3477630/b370f323-2dcf-4c6f-b200-66884cdf5733.jpg",
+          "3477630/b9d76558-7637-4fde-8540-7d66ef1448f7.jpg"
         ]
       }
     }
