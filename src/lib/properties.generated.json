@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T09:51:11.518Z",
+  "updatedAt": "2026-10-20T09:23:58.404Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2352,12 +2352,12 @@
       "id": "3460482",
       "listed": true,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-progresul-bucuresti-cp3460482/",
-      "sourceTitle": "Apartament 2 camere Piata Progresul 35 mp",
+      "sourceTitle": "Piata progresu 2 Camere 8/10",
       "kind": "apartament",
       "segment": "rezidential",
       "deal": "inchiriere",
       "price": {
-        "amount": 400,
+        "amount": 380,
         "currency": "EUR",
         "period": "luna"
       },
@@ -2373,15 +2373,15 @@
       },
       "story": [
         "Comision 0% pentru chiriaș!",
-        "Vă propunem spre închiriere un apartament cu 2 camere, situat la etajul 8 la Piata Progresul.",
+        "Vă propunem spre închiriere un apartament cu 2 camere, situat la etajul 8/10 la Piata Progresul.",
         "Apartamentul este spațios, luminos și foarte bine compartimentat.",
         "Apartamentul se închiriază complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit și mutare imediată.",
         "Vă așteptăm la vizionare!"
       ],
       "media": {
-        "cover": "3460482/874c797b-2164-4279-9292-ba65e4f6e712.jpeg",
+        "cover": "3460482/1058501f-051f-41fe-87d6-7de312fa38c6.jpeg",
         "gallery": [
-          "3460482/1058501f-051f-41fe-87d6-7de312fa38c6.jpeg",
+          "3460482/874c797b-2164-4279-9292-ba65e4f6e712.jpeg",
           "3460482/af3d2580-a4c5-4120-be9f-c85068814221.jpeg",
           "3460482/f53dbb7e-6510-4ab1-8997-1e32714d487d.jpeg",
           "3460482/eb2835b9-2ff9-46db-ba1d-427d78884482.jpeg"
@@ -2470,6 +2470,44 @@
           "3477630/9032bd09-9218-42cd-bf21-72108b50cacc.jpg",
           "3477630/b370f323-2dcf-4c6f-b200-66884cdf5733.jpg",
           "3477630/b9d76558-7637-4fde-8540-7d66ef1448f7.jpg"
+        ]
+      }
+    },
+    "3490634": {
+      "id": "3490634",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-inchiriat-aparatorii-patriei-bucuresti-cp3490634/",
+      "sourceTitle": "Berceni Garoniera 3/5 40 mp Parcare Centrala",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 380,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 40,
+        "rooms": 1,
+        "year": 2021
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "aparatorii-patriei",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0% pentru chiriaș! Va propunem spre inchiriere o garsoniera la etajul 3/5 situata pe Soseaua Oltenitei 227-237. Aceasta este spațiosa, luminoasa și foarte bine compartimentata.",
+        "Se închiriază complet mobilata și utilata, fiind dotata cu toate electrocasnicele necesare pentru un confort sporit și mutare imediată. De asemenea include si loc de parcare.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3490634/d3b33ae9-e91b-4066-ba97-e72a8da4c5b2.jpeg",
+        "gallery": [
+          "3490634/fcff7c5e-bcc9-4d02-aefd-cbcca42f3662.jpeg",
+          "3490634/c27b1861-ef08-41cc-8e04-01121e45d70c.jpeg",
+          "3490634/25668958-b566-4e06-98e6-a7d1d5781614.jpeg",
+          "3490634/fc228e96-9b3d-4e0d-8868-76160eb85bd0.jpeg"
         ]
       }
     }
