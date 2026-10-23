@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T09:20:32.993Z",
+  "updatedAt": "2026-10-23T09:19:19.789Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1715,13 +1715,13 @@
     "3357375": {
       "id": "3357375",
       "listed": true,
-      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-vanzare-universitate-bucuresti-cp3357375/",
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-universitate-bucuresti-cp3357375/",
       "sourceTitle": "Universitate - Praporgescu | Imobil/Casa SIngur Curte | 250 mp utili",
       "kind": "vila",
       "segment": "rezidential",
       "deal": "vanzare",
       "price": {
-        "amount": 599000,
+        "amount": 0,
         "currency": "EUR"
       },
       "specs": {
@@ -1749,10 +1749,7 @@
           "3119856/7956271f-a600-4afc-94a3-80cffdb50419.jpg"
         ]
       },
-      "zone": {
-        "slug": "universitate",
-        "county": "bucuresti"
-      }
+      "zone": null
     },
     "3361396": {
       "id": "3361396",
@@ -2121,7 +2118,7 @@
     },
     "3446662": {
       "id": "3446662",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-de-birouri-7-camere-de-inchiriat-mihai-bravu-bucuresti-cp3446662/",
       "sourceTitle": "Casa de inchiriat Timpuri Noi 204 m",
       "kind": "birouri",
@@ -2158,7 +2155,7 @@
     },
     "3446664": {
       "id": "3446664",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-inchiriat-timpuri-noi-bucuresti-cp3446664/",
       "sourceTitle": "Casa de inchiriat Timpuri Noi 204 m",
       "kind": "vila",
