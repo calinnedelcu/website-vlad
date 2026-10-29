@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T09:19:19.789Z",
+  "updatedAt": "2026-10-29T10:52:18.710Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2505,6 +2505,42 @@
           "3490634/c27b1861-ef08-41cc-8e04-01121e45d70c.jpeg",
           "3490634/25668958-b566-4e06-98e6-a7d1d5781614.jpeg",
           "3490634/fc228e96-9b3d-4e0d-8868-76160eb85bd0.jpeg"
+        ]
+      }
+    },
+    "3510669": {
+      "id": "3510669",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-vanzare-timpuri-noi-bucuresti-cp3510669/",
+      "sourceTitle": "Casa Timpuri Noi 2010 P+1+M 220M",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 370000,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 223,
+        "rooms": 7,
+        "baths": 3,
+        "year": 2010
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "timpuri-noi",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0% Casă ideală pentru birouri sau activitate comercială! Vă propunem spre vanzare o proprietate situată pe strada Călugăreni, nr. 27, perfectă pentru birouri sau activități comerciale. Suprafața terenului: 115 mp Suprafață utilă: 204 mp Suprafață totală (inclusiv balcoane și casa scării): 223 mp Curte liberă: 36 mp Imobilul are un regim de înălțime P+1+M,  este dotat cu centrală termică proprie și aer condiționat în fiecare cameră, oferind un confort optim indiferent de sezon. Pentru videoclipul de prezentare și mai multe detalii, mă puteți contacta în privat. Preț: 370.000 EUR Vă așteptăm cu drag la vizionare!"
+      ],
+      "media": {
+        "cover": "3510669/6faf08a3-78e6-45f2-bfae-523f6725881b.jpg",
+        "gallery": [
+          "3446664/a6ca719e-2b80-4388-83e8-a469c6d938af.jpg",
+          "3446664/976c028c-36ed-497c-bd08-55a511713f29.jpg",
+          "3446664/d59c11f0-cab9-401f-b03c-61071203c62d.jpg",
+          "3446664/e53ab6a0-331e-442c-ab30-c6cea3a76701.jpg"
         ]
       }
     }
