@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T12:20:02.488Z",
+  "updatedAt": "2026-11-03T11:54:21.742Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2541,6 +2541,89 @@
           "3446664/976c028c-36ed-497c-bd08-55a511713f29.jpg",
           "3446664/d59c11f0-cab9-401f-b03c-61071203c62d.jpg",
           "3446664/e53ab6a0-331e-442c-ab30-c6cea3a76701.jpg"
+        ]
+      }
+    },
+    "3516840": {
+      "id": "3516840",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-vanzare-militari-bucuresti-cp3516840/",
+      "sourceTitle": "MIlitari Residence - Ilie Petre 3 Camere Bloc 2024 4/5",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 84900,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 66,
+        "rooms": 3,
+        "baths": 1,
+        "year": 2024
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "militari",
+        "county": "bucuresti"
+      },
+      "story": [
+        "COMISION 0% pentru cumpărător!",
+        "Vă prezentăm spre vânzare un apartament cu 3 camere, situat pe Strada Ilie Petre 8C, Roșu – Chiajna. Proprietatea este ideală pentru familii tinere, care au un buget bine definit și își doresc mutarea imediată.",
+        "Printre beneficiile proprietății se enumeră:",
+        "-Suprafață utilă totala 66 mp: 63 mp + 3 mp balcon -Bloc construit în anul 2024 -Etaj intermediar: 4/5",
+        "Beneficii zonă:",
+        "Școli și grădinițe în vecinătate Acces facil către centre comerciale și Centura Bucureștiului Distanță de 4 minute până la stația STB"
+      ],
+      "media": {
+        "cover": "3516840/06dba2e6-8164-4568-a480-919f9b8e34fd.jpeg",
+        "gallery": [
+          "3516840/ff137398-09c8-4c40-801b-cf0996a50c9d.jpeg",
+          "3257960/a389a3dc-54cf-475e-8617-12c99024b82b.jpg",
+          "3257960/57912644-d9e4-4e54-a6db-aabdfd935735.jpg",
+          "3257960/ec9aac63-d131-4164-abd4-d4a16db931bb.jpg"
+        ]
+      }
+    },
+    "3516885": {
+      "id": "3516885",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-vanzare-universitate-bucuresti-cp3516885/",
+      "sourceTitle": "Universitate - Praporgescu | Imobil/Casa SIngur Curte | 250 mp utili",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "vanzare",
+      "price": {
+        "amount": 599000,
+        "currency": "EUR"
+      },
+      "specs": {
+        "surface": 250,
+        "rooms": 7,
+        "baths": 2,
+        "year": 1900
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "universitate",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0 pentru cumparator!",
+        "Va propunem spre vanzare o casa in zona Universitate, pe strada General David Praprorgescu. Pentru o înțelegere cât mai clară a compartimentării și a potențialului imobilului, vă invităm să parcurgeți turul virtual de prezentare.",
+        "Imobilul este singur curte si este la 600 de metri de piata Universitatii. Suprafata terenului este 311 mp si suprafata utila a constructiilor este 250 mp.",
+        "Puteti regasi schita imobilului in ultima poza a anuntului.",
+        "Imobilul este construit la inceputul secolului trecut. In întreg imobilul sunt trei proprietari ce au decis sa vanda impreuna. Fiecare a dobândit in proprietate o parte din construcție in baza legii 112 plus cote de teren in proprietate de sub construcție.  Pentru terenul liber se plătește folosința - chirie catre stat - AFI. Se poate dobandi ulterior pe cale administrativa.",
+        "Proprietatea se pretează atât pentru locuință rezidențială, cât și pentru o gamă variată de activități comerciale sau profesionale, precum: sediu de companie, birouri, cabinet de avocatură, clinică, centru de consultanță, showroom sau spațiu destinat activităților creative. Poziționarea ultracentrală asigură acces rapid către principalele puncte de interes ale orașului, instituții de învățământ, centre culturale, restaurante, cafenele și multiple mijloace de transport în comun, toate acestea contribuind la atractivitatea și valoarea investițională a proprietății.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3119856/bf1ac092-ea70-4a7c-ac4d-a273da05edf9.jpg",
+        "gallery": [
+          "3119856/c735a00d-3df6-4c26-91d7-d27a392a9ed9.jpg",
+          "3119856/40565b23-f223-4c25-96e6-c4d4133476f7.jpg",
+          "3119856/9effe8a4-80d8-4867-b873-921b8ab2d242.jpg",
+          "3119856/7956271f-a600-4afc-94a3-80cffdb50419.jpg"
         ]
       }
     }
