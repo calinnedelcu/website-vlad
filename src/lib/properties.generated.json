@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T11:54:21.742Z",
+  "updatedAt": "2026-11-04T12:04:51.805Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2349,12 +2349,12 @@
       "id": "3460482",
       "listed": true,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-progresul-bucuresti-cp3460482/",
-      "sourceTitle": "Piata progresu 2 Camere 8/10",
+      "sourceTitle": "Giurgiului - Progresu 2 camere 8/10 36mp",
       "kind": "apartament",
       "segment": "rezidential",
       "deal": "inchiriere",
       "price": {
-        "amount": 380,
+        "amount": 360,
         "currency": "EUR",
         "period": "luna"
       },
@@ -2376,10 +2376,10 @@
         "Vă așteptăm la vizionare!"
       ],
       "media": {
-        "cover": "3460482/1058501f-051f-41fe-87d6-7de312fa38c6.jpeg",
+        "cover": "3460482/af3d2580-a4c5-4120-be9f-c85068814221.jpeg",
         "gallery": [
+          "3460482/1058501f-051f-41fe-87d6-7de312fa38c6.jpeg",
           "3460482/874c797b-2164-4279-9292-ba65e4f6e712.jpeg",
-          "3460482/af3d2580-a4c5-4120-be9f-c85068814221.jpeg",
           "3460482/f53dbb7e-6510-4ab1-8997-1e32714d487d.jpeg",
           "3460482/eb2835b9-2ff9-46db-ba1d-427d78884482.jpeg"
         ]
@@ -2624,6 +2624,48 @@
           "3119856/40565b23-f223-4c25-96e6-c4d4133476f7.jpg",
           "3119856/9effe8a4-80d8-4867-b873-921b8ab2d242.jpg",
           "3119856/7956271f-a600-4afc-94a3-80cffdb50419.jpg"
+        ]
+      }
+    },
+    "3520036": {
+      "id": "3520036",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-mihai-bravu-bucuresti-cp3520036/",
+      "sourceTitle": "Asmita Gardens 3 camere 105 mp etaj 2/13 PET FRIENDLY",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 800,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 105,
+        "rooms": 3,
+        "baths": 2,
+        "year": 2009
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "mihai-bravu",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un apartament cu 3 camere, situat la etajul 2 in complexul rezidențial Asmita Gardens, amplasat pe Splaiul Unirii.",
+        "Apartamentul este spațios, luminos și foarte bine compartimentat, fiind ideal pentru o familie sau pentru persoanele care își doresc o locuință generoasă, într-un complex modern, cu acces facil către centrul orașului.",
+        "Proprietatea se află la aproximativ 8 minute de mers pe jos de stația de metrou Mihai Bravu, iar în imediata apropiere se regăsesc supermarketuri, restaurante, săli de fitness, spații verzi și numeroase alte facilități.",
+        "Apartamentul se închiriază complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit și mutare imediată. Separat se poate inchiria si un loc de parcare.",
+        "Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3246242/709436f0-8a51-40d7-a78c-4308857345f7.jpeg",
+        "gallery": [
+          "3246242/fa228a78-d013-4d5c-b97a-388720ce8b8e.jpeg",
+          "3246242/446f3554-6a14-42a8-b453-762f0b521963.jpeg",
+          "3246242/100eee1d-ba0b-4fa0-8086-9ffea8358f61.jpeg",
+          "3246242/e9eccc5c-1aed-4f75-916b-86e4c98aa699.jpeg"
         ]
       }
     }
