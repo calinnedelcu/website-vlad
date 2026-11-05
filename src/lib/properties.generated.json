@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T12:04:51.805Z",
+  "updatedAt": "2026-11-05T12:16:31.256Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2229,7 +2229,7 @@
     },
     "3446677": {
       "id": "3446677",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-vacaresti-bucuresti-cp3446677/",
       "sourceTitle": "Apartament 90 mp RIN Grand Residence 3 camere 10/13",
       "kind": "apartament",
@@ -2347,7 +2347,7 @@
     },
     "3460482": {
       "id": "3460482",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-progresul-bucuresti-cp3460482/",
       "sourceTitle": "Giurgiului - Progresu 2 camere 8/10 36mp",
       "kind": "apartament",
@@ -2666,6 +2666,46 @@
           "3246242/446f3554-6a14-42a8-b453-762f0b521963.jpeg",
           "3246242/100eee1d-ba0b-4fa0-8086-9ffea8358f61.jpeg",
           "3246242/e9eccc5c-1aed-4f75-916b-86e4c98aa699.jpeg"
+        ]
+      }
+    },
+    "3523192": {
+      "id": "3523192",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-2-camere-de-inchiriat-giurgiului-bucuresti-cp3523192/",
+      "sourceTitle": "Giurgiului - Progresu 2 camere 8/10 36mp",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 360,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 35,
+        "rooms": 2,
+        "year": 1972
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "giurgiului",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0% pentru chiriaș!",
+        "Vă propunem spre închiriere un apartament cu 2 camere, situat la etajul 8/10 la Piata Progresul.",
+        "Apartamentul este spațios, luminos și foarte bine compartimentat.",
+        "Apartamentul se închiriază complet mobilat și utilat, fiind dotat cu toate electrocasnicele necesare pentru un confort sporit și mutare imediată.",
+        "Vă așteptăm la vizionare!"
+      ],
+      "media": {
+        "cover": "3460482/af3d2580-a4c5-4120-be9f-c85068814221.jpeg",
+        "gallery": [
+          "3460482/1058501f-051f-41fe-87d6-7de312fa38c6.jpeg",
+          "3460482/874c797b-2164-4279-9292-ba65e4f6e712.jpeg",
+          "3460482/f53dbb7e-6510-4ab1-8997-1e32714d487d.jpeg",
+          "3460482/eb2835b9-2ff9-46db-ba1d-427d78884482.jpeg"
         ]
       }
     }
