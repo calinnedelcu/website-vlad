@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T12:16:31.256Z",
+  "updatedAt": "2026-11-10T12:35:37.653Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1225,7 +1225,7 @@
     },
     "3323086": {
       "id": "3323086",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/spatiu-comercial-6-camere-de-inchiriat-tineretului-bucuresti-cp3323086/",
       "sourceTitle": "Spatiu Comercial Stradal Calea Vacaresti | VAD Vitrina 8 m",
       "kind": "spatiu comercial",
@@ -2706,6 +2706,46 @@
           "3460482/874c797b-2164-4279-9292-ba65e4f6e712.jpeg",
           "3460482/f53dbb7e-6510-4ab1-8997-1e32714d487d.jpeg",
           "3460482/eb2835b9-2ff9-46db-ba1d-427d78884482.jpeg"
+        ]
+      }
+    },
+    "3528347": {
+      "id": "3528347",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-inchiriat-titulescu-bucuresti-cp3528347/",
+      "sourceTitle": "Casa Titulescu 270 mp D+P+2E",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 3500,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 270,
+        "rooms": 7,
+        "baths": 4,
+        "year": 2000
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "titulescu",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0 pentru chirias!",
+        "Vilă pretabilă pentru activități comerciale sau de birouri, dar și ca spațiu rezidențial! Sector 1, str. Valea Merilor nr 6. Demisol + parter + 2 etaje 260 mp utili, teren 140 mp 3.500 €/lună",
+        "Pentru videoclip de prezentare va rog sa ma contactati la numarul din anunt!",
+        "Vă asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3528347/cbd6fffd-171c-4117-9d37-0ccbd5d98bee.jpeg",
+        "gallery": [
+          "3528347/7de9764f-1bf4-4a1c-9417-953ba77a090c.jpeg",
+          "3528347/fefea251-6f08-4eae-9eb1-2b47d38a9d7c.jpeg",
+          "3528347/df90d5ad-3654-487f-8c21-bd6d4c85097e.jpeg",
+          "3528347/152a9913-cfe3-4478-bc1f-59bcd68da171.jpeg"
         ]
       }
     }
