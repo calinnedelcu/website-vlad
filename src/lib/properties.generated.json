@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T12:35:37.653Z",
+  "updatedAt": "2026-11-12T12:39:51.992Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2740,12 +2740,16 @@
         "Vă asteptam la vizionare!"
       ],
       "media": {
-        "cover": "3528347/cbd6fffd-171c-4117-9d37-0ccbd5d98bee.jpeg",
+        "cover": "3528347/7fc9815a-861c-44ad-91c8-1ae7f810db00.jpg",
         "gallery": [
+          "3528347/cbd6fffd-171c-4117-9d37-0ccbd5d98bee.jpeg",
           "3528347/7de9764f-1bf4-4a1c-9417-953ba77a090c.jpeg",
           "3528347/fefea251-6f08-4eae-9eb1-2b47d38a9d7c.jpeg",
           "3528347/df90d5ad-3654-487f-8c21-bd6d4c85097e.jpeg",
-          "3528347/152a9913-cfe3-4478-bc1f-59bcd68da171.jpeg"
+          "3528347/152a9913-cfe3-4478-bc1f-59bcd68da171.jpeg",
+          "3528347/d127dbaf-a1ca-4816-9be5-dae16ec5f12e.jpg",
+          "3528347/a3b047d4-1042-49d4-b507-de22c0bf931b.jpg",
+          "3528347/6531db36-357a-4106-a56c-020c8221e760.jpg"
         ]
       }
     }
