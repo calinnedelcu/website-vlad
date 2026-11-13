@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T12:39:51.992Z",
+  "updatedAt": "2026-11-13T12:09:19.253Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2472,7 +2472,7 @@
     },
     "3490634": {
       "id": "3490634",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-o-camera-de-inchiriat-aparatorii-patriei-bucuresti-cp3490634/",
       "sourceTitle": "Berceni Garoniera 3/5 40 mp Parcare Centrala",
       "kind": "apartament",
@@ -2750,6 +2750,44 @@
           "3528347/d127dbaf-a1ca-4816-9be5-dae16ec5f12e.jpg",
           "3528347/a3b047d4-1042-49d4-b507-de22c0bf931b.jpg",
           "3528347/6531db36-357a-4106-a56c-020c8221e760.jpg"
+        ]
+      }
+    },
+    "3537033": {
+      "id": "3537033",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/teren-de-inchiriat-adunatii-copaceni-judet-giurgiu-cp3537033/",
+      "sourceTitle": "Teren 26000mp de inchiriat Adunati-Copaceni",
+      "kind": "apartament",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 4500,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 766
+      },
+      "sourceLocality": "Adunatii-Copaceni",
+      "zone": {
+        "slug": "giurgiu",
+        "county": "ilfov"
+      },
+      "story": [
+        "Comision 0 pentru chirias!",
+        "Va propunem spre inchiriere un teren în Adunații-Copăceni, județul Giurgiu, la ieșirea din satul Adunații-Copăceni spre nord, pe DJ412A, aproape de DN5.",
+        "Terenul are 26.620 mp măsurați și formă regulată, lungă. Are acces din DJ412A și se învecinează cu Strada Cucului.",
+        "Teren extravilan, categoria arabil plus curți-construcții. Cadastru și intabulare la zi, proprietar unic.",
+        "Va asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3537033/6fb082dd-b536-4bbc-98ef-6786e6796ffb.jpg",
+        "gallery": [
+          "3537033/3422488d-24d6-4717-b48f-a983e3e38f9f.jpg",
+          "3537033/433e1bbe-d1f7-4976-8f0e-4ab6e76a9d48.jpg",
+          "3537033/a4054d62-a69c-4079-9c66-5faa06bff685.jpg",
+          "3537033/f8946493-7caa-42b3-ac04-f8bb5a67f586.jpg"
         ]
       }
     }
