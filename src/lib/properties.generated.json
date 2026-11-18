@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T13:18:35.679Z",
+  "updatedAt": "2026-11-18T13:00:40.759Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2712,7 +2712,7 @@
     "3528347": {
       "id": "3528347",
       "listed": true,
-      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-inchiriat-titulescu-bucuresti-cp3528347/",
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-inchiriat-banu-manta-bucuresti-cp3528347/",
       "sourceTitle": "Casa Titulescu 270 mp D+P+2E",
       "kind": "vila",
       "segment": "rezidential",
@@ -2730,7 +2730,7 @@
       },
       "sourceLocality": "Bucuresti",
       "zone": {
-        "slug": "titulescu",
+        "slug": "banu-manta",
         "county": "bucuresti"
       },
       "story": [
@@ -2788,6 +2788,46 @@
           "3537033/433e1bbe-d1f7-4976-8f0e-4ab6e76a9d48.jpg",
           "3537033/a4054d62-a69c-4079-9c66-5faa06bff685.jpg",
           "3537033/f8946493-7caa-42b3-ac04-f8bb5a67f586.jpg"
+        ]
+      }
+    },
+    "3545798": {
+      "id": "3545798",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-inchiriat-victoriei-bucuresti-cp3545798/",
+      "sourceTitle": "Casa Titulescu 270 mp D+P+2E",
+      "kind": "vila",
+      "segment": "rezidential",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 3500,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {
+        "surface": 270,
+        "rooms": 7,
+        "baths": 4,
+        "year": 2000
+      },
+      "sourceLocality": "Bucuresti",
+      "zone": {
+        "slug": "victoriei",
+        "county": "bucuresti"
+      },
+      "story": [
+        "Comision 0 pentru chirias!",
+        "Vilă pretabilă pentru activități comerciale sau de birouri, dar și ca spațiu rezidențial! Sector 1, str. Valea Merilor nr 6. Demisol + parter + 2 etaje 260 mp utili, teren 140 mp 3.500 €/lună",
+        "Pentru videoclip de prezentare va rog sa ma contactati la numarul din anunt!",
+        "Vă asteptam la vizionare!"
+      ],
+      "media": {
+        "cover": "3528347/7fc9815a-861c-44ad-91c8-1ae7f810db00.jpg",
+        "gallery": [
+          "3528347/d127dbaf-a1ca-4816-9be5-dae16ec5f12e.jpg",
+          "3528347/a3b047d4-1042-49d4-b507-de22c0bf931b.jpg",
+          "3528347/df90d5ad-3654-487f-8c21-bd6d4c85097e.jpeg",
+          "3528347/6531db36-357a-4106-a56c-020c8221e760.jpg"
         ]
       }
     }
