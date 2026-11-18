@@ -522,32 +522,26 @@ export function PortfolioMap({
           <div className="mx-auto w-full max-w-[20rem] md:mx-0">{map}</div>
 
           <div className="flex flex-col">
-            <p className="eyebrow text-paper/50">
-              {selected ? "Zona aleasă" : "Alege zona de pe hartă"}
-            </p>
-
-            {selected ? (
-              <div className="mt-3 flex flex-wrap items-baseline gap-x-5 gap-y-2">
-                <p className="font-display text-2xl leading-none">{selected}</p>
-                <button
-                  type="button"
-                  onClick={() => onChange?.("toate")}
-                  className="text-paper/40 hover:text-paper text-xs transition-colors duration-300"
-                >
-                  Toate zonele
-                </button>
-              </div>
-            ) : null /* Aici era o frază care număra zonele pe județe și explica mărimea
-                        punctelor. Scoasă la cererea lui Calin — ca și cea din secțiunea
-                        editorială; legenda de sub hartă spune deja ce înseamnă culorile. */}
-
-            {/* Pe telefon harta intră în ~300px, iar Cișmigiu și Grădina
-                Icoanei sunt la 1,4 km unul de altul — vreo 15 pixeli. Nu se pot
-                nimeri cu degetul, deci spunem pe față unde e calea sigură. */}
-            <p className="text-paper/35 mt-3 max-w-[42ch] text-xs md:hidden">
-              Punctele apropiate nu se nimeresc cu degetul — lista „Zonă” din filtre le are pe
-              toate.
-            </p>
+            {/* Fără selecție, panoul ține doar legenda. Aici erau o etichetă („Alege
+                zona de pe hartă”), o notă pe telefon („Punctele apropiate nu se
+                nimeresc cu degetul…”) și o frază despre mărimea punctelor — scoase
+                la cererea lui Calin: harta se înțelege singură. Pe telefon, lista
+                „Zonă” din filtre rămâne calea sigură spre punctele apropiate. */}
+            {selected && (
+              <>
+                <p className="eyebrow text-paper/50">Zona aleasă</p>
+                <div className="mt-3 flex flex-wrap items-baseline gap-x-5 gap-y-2">
+                  <p className="font-display text-2xl leading-none">{selected}</p>
+                  <button
+                    type="button"
+                    onClick={() => onChange?.("toate")}
+                    className="text-paper/40 hover:text-paper text-xs transition-colors duration-300"
+                  >
+                    Toate zonele
+                  </button>
+                </div>
+              </>
+            )}
 
             <div className="mt-5 md:mt-auto">{legend}</div>
           </div>
@@ -603,12 +597,6 @@ export function PortfolioMap({
           <div className="md:col-span-7">
             {map}
             <div className="mt-6">{legend}</div>
-            {/* Pe telefon, harta e singură (panoul e ascuns, vine în sheet).
-                Fără un hint, nu e evident că atingerea unei buline face ceva.
-                Doar mobil; pe desktop panoul din dreapta își spune singur rostul. */}
-            <p className="text-paper/45 mt-5 text-sm md:hidden">
-              Atinge o zonă, ca să vezi ce am acolo.
-            </p>
           </div>
 
           {/* ---------- Panoul (desktop) ----------
@@ -617,15 +605,13 @@ export function PortfolioMap({
              ceară scroll ca s-o vezi. Pe desktop rămâne aici, în grid lângă
              hartă, neschimbat. */}
           <div className="hidden md:col-span-4 md:col-start-9 md:block">
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="eyebrow text-paper/50">
-                {selectedZone ? selectedZone.name : "Alege o zonă"}
-              </p>
-
-              {/* Singura ieșire din zona aleasă, de când selecția nu mai moare
-                  la `pointerleave`. Înainte era doar o plasă pentru atingere;
-                  acum e drumul înapoi și pe mouse. */}
-              {selectedZone && (
+            {/* Singura ieșire din zona aleasă, de când selecția nu mai moare la
+                `pointerleave`. Fără selecție, rândul lipsește: aici erau „Alege o
+                zonă” și „Dă click pe o zonă, de pe hartă sau din listă, și îți arăt
+                ce am acolo” — scoase la cererea lui Calin. */}
+            {selectedZone && (
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="eyebrow text-paper/50">{selectedZone.name}</p>
                 <button
                   type="button"
                   onClick={clear}
@@ -633,26 +619,17 @@ export function PortfolioMap({
                 >
                   Toate zonele
                 </button>
-              )}
-            </div>
+              </div>
+            )}
 
             {selectedZone ? (
               <div className="mt-5">{renderZoneItems(selectedZone)}</div>
             ) : (
               <>
-                {/* „sau din listă” nu e o formulă de politețe: pe telefon,
-                    harta intră în ~335px, iar Cișmigiu și Grădina Icoanei sunt
-                    la 1,4 km unul de altul — adică vreo 17 pixeli. Punctele nu
-                    se pot nimeri cu degetul la scara aia, deci lista de mai jos
-                    e calea adevărată acolo, nu o variantă de rezervă. */}
-                <p className="text-paper/55 mt-5 text-sm">
-                  Dă click pe o zonă, de pe hartă sau din listă, și îți arăt ce am acolo.
-                </p>
-
                 {/* `<details>` nativ: se deschide fără JS, e în ordinea de
                     tabulare și anunță singur starea. Nu avem nevoie de stare
                     în React pentru o listă care doar se pliază. */}
-                <details className="group mt-6">
+                <details className="group">
                   <summary className="border-void-line hover:text-bronze-soft flex cursor-pointer list-none items-center justify-between border-t border-b py-3 text-sm transition-colors duration-300 [&::-webkit-details-marker]:hidden">
                     Toate zonele
                     <span className="nums text-paper/40 group-open:hidden">{zones.length}</span>

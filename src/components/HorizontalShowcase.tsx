@@ -163,9 +163,6 @@ export function HorizontalShowcase({
                 {linkLabel}
               </Link>
             )}
-            <p className="text-paper/40 mt-2 text-xs tracking-[0.18em] uppercase">
-              {pinned ? "Derulează" : "Trage lateral"} →
-            </p>
           </div>
         </div>
 
