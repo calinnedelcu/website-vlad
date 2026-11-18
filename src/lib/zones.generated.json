@@ -41,6 +41,36 @@
       "lat": 44.435,
       "lng": 26.0207,
       "county": "bucuresti"
+    },
+    "timpuri-noi": {
+      "name": "Timpuri Noi",
+      "lat": 44.417,
+      "lng": 26.1133,
+      "county": "bucuresti"
+    },
+    "giulesti": {
+      "name": "Giulești",
+      "lat": 44.4632,
+      "lng": 26.0385,
+      "county": "bucuresti"
+    },
+    "giurgiului": {
+      "name": "Giurgiului",
+      "lat": 44.3895,
+      "lng": 26.0918,
+      "county": "bucuresti"
+    },
+    "banu-manta": {
+      "name": "Banu Manta",
+      "lat": 44.4533,
+      "lng": 26.0739,
+      "county": "bucuresti"
+    },
+    "victoriei": {
+      "name": "Piața Victoriei",
+      "lat": 44.4526,
+      "lng": 26.0864,
+      "county": "bucuresti"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T16:03:09.316Z",
+  "updatedAt": "2026-11-18T16:12:53.683Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2942,10 +2942,7 @@
         "surface": 766
       },
       "sourceLocality": "Adunatii-Copaceni",
-      "zone": {
-        "slug": "giurgiu",
-        "county": "ilfov"
-      },
+      "zone": null,
       "story": [
         "Comision 0 pentru chirias!",
         "Va propunem spre inchiriere un teren în Adunații-Copăceni, județul Giurgiu, la ieșirea din satul Adunații-Copăceni spre nord, pe DJ412A, aproape de DN5.",

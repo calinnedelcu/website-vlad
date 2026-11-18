@@ -109,7 +109,15 @@ export const zoneCoords: Record<string, Zone> = (() => {
 /** Din slugul din adresa anunțului („mihai-bravu”) în numele reperului nostru. */
 export const resolveZone = (slug: string): string | null => {
   const key = zoneKey(slug);
-  return Object.keys(zoneCoords).find((name) => zoneKey(name) === key) ?? null;
+  const byName = Object.keys(zoneCoords).find((name) => zoneKey(name) === key);
+  if (byName) return byName;
+
+  // Zonele găsite automat sunt păstrate sub slug-ul din adresa anunțului
+  // („victoriei”), dar numele vine de la OpenStreetMap și poate fi altul
+  // („Piața Victoriei”). Fără căutarea asta, proprietatea nu își găsea zona și
+  // dispărea de pe hartă, deși reperul era găsit și scris.
+  const generated = (generatedZones.zones as Record<string, { name: string }>)[key];
+  return generated && generated.name in zoneCoords ? generated.name : null;
 };
 
 export const mapSize = {

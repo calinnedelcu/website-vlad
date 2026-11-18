@@ -303,8 +303,6 @@ export function PortfolioMap({
    * fugă de sub deget.
    */
   const shown = zones.find((zone) => zone.name === (hovered ?? selected));
-  const missing = properties.length - zones.reduce((n, zone) => n + zone.items.length, 0);
-  const inIlfov = zones.filter((zone) => zone.ilfov).length;
 
   /** Click pe un punct sau pe un rând din listă. A doua oară pe același: înapoi. */
   const pick = (name: string) => {
@@ -539,16 +537,9 @@ export function PortfolioMap({
                   Toate zonele
                 </button>
               </div>
-            ) : (
-              /* Explicația mărimii punctelor n-are ce căuta pe telefon: acolo
-                 costă patru rânduri sub o hartă de 300px, iar cine se uită
-                 vede oricum că punctele diferă. Rămâne de la `md` în sus,
-                 unde e loc. */
-              <p className="text-paper/55 mt-3 hidden max-w-[40ch] text-sm md:block">
-                {zones.length - inIlfov} zone în București, {inIlfov} în Ilfov. Cu cât zona are mai
-                multe proprietăți, cu atât punctul e mai mare.
-              </p>
-            )}
+            ) : null /* Aici era o frază care număra zonele pe județe și explica mărimea
+                        punctelor. Scoasă la cererea lui Calin — ca și cea din secțiunea
+                        editorială; legenda de sub hartă spune deja ce înseamnă culorile. */}
 
             {/* Pe telefon harta intră în ~300px, iar Cișmigiu și Grădina
                 Icoanei sunt la 1,4 km unul de altul — vreo 15 pixeli. Nu se pot
@@ -692,13 +683,6 @@ export function PortfolioMap({
                   </ul>
                 </details>
               </>
-            )}
-
-            {missing > 0 && (
-              <p className="text-paper/35 mt-5 text-xs">
-                {missing} {missing === 1 ? "proprietate nu apare" : "proprietăți nu apar"} pe hartă
-                — zona lor n-are încă un reper.
-              </p>
             )}
 
             <Link href="/proprietati" className="link-underline mt-8 inline-block text-sm">

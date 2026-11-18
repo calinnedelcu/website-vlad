@@ -202,6 +202,14 @@ function zoneFromUrl(url) {
   if (!m) return null;
 
   const rest = m[1];
+
+  // „...-adunatii-copaceni-judet-giurgiu”: agenția scrie județul când nu e
+  // București sau Ilfov. Harta e doar București–Ilfov, iar fără ramura asta
+  // ultimul segment („giurgiu”) era luat drept localitate din Ilfov și căuta un
+  // punct — a găsit Jilava, în Ilfov, pentru un teren din județul Giurgiu.
+  // Ce e în afara hărții nu primește zonă: rămâne în portofoliu, fără bulă.
+  if (/-judet-/.test(rest)) return null;
+
   if (rest.endsWith("-bucuresti")) {
     const zone = rest.slice(0, -"-bucuresti".length);
     return zone ? { slug: zone, county: "bucuresti" } : null;
@@ -471,6 +479,8 @@ const raport = {
   retrase: [...tr("withdrawn"), ...tr("removed")],
   neclare,
   preturi,
+  // Completat mai jos, după căutarea zonelor.
+  zoneFaraReper: [],
 };
 
 console.log(`\nAnunțuri noi:      ${noi.length}`);
@@ -591,6 +601,7 @@ if (zoneNoi.length) {
 if (zoneNegasite.length) {
   console.log(`\nZone fără reper (rămân în portofoliu, dar nu pe hartă): ${zoneNegasite.join(", ")}`);
 }
+raport.zoneFaraReper = zoneNegasite;
 
 if (JSON.stringify(zonesPrev.zones ?? {}) !== JSON.stringify(zones)) {
   await writeFile(ZONES_OUT, JSON.stringify({ zones }, null, 2) + "\n");
