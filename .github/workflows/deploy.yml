@@ -44,6 +44,12 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: npm run sync
 
+      # O proprietate fără reper nu dă eroare, doar lipsește de pe hartă. Aici pică
+      # zgomotos, ÎNAINTE de comit și de build: nu se publică nimic, iar site-ul
+      # rămâne pe ultima versiune bună. Rulează și la push, nu doar la sincronizare.
+      - name: Verifică harta
+        run: node scripts/check-map.mjs
+
       - name: Adu fotografiile noi
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: npm run media

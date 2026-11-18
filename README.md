@@ -378,6 +378,12 @@ fotografie; subsolul n-are fotografie. A trecut pe `paper-deep`, iar tokenii
 
 ## Harta
 
+**Nicio proprietate nu dispare de pe hartă pe tăcute.** `npm run check:map`
+verifică că fiecare proprietate din București–Ilfov are reper în marginile hărții
+și rulează în workflow înainte de comit și de build: dacă pică, nu se publică
+nimic. Soluția e un rând în `handWritten` din `geo.ts`. Terenurile din alte județe
+(`-judet-...` în adresă) nu au zonă și sunt sărite intenționat.
+
 Conturul e **geometrie reală**, adusă din OpenStreetMap:
 
 ```bash
