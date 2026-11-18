@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T16:12:53.683Z",
+  "updatedAt": "2026-11-18T16:31:28.670Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -38,7 +38,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "dobroesti",
+        "county": "ilfov"
+      }
     },
     "2861201": {
       "id": "2861201",
@@ -77,7 +81,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "drumul-taberei",
+        "county": "bucuresti"
+      }
     },
     "2861711": {
       "id": "2861711",
@@ -116,7 +124,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "valea-ialomitei",
+        "county": "bucuresti"
+      }
     },
     "2926910": {
       "id": "2926910",
@@ -155,7 +167,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "gorjului",
+        "county": "bucuresti"
+      }
     },
     "2991262": {
       "id": "2991262",
@@ -194,7 +210,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "pacii",
+        "county": "bucuresti"
+      }
     },
     "3006898": {
       "id": "3006898",
@@ -234,7 +254,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "timisoara",
+        "county": "bucuresti"
+      }
     },
     "3029210": {
       "id": "3029210",
@@ -273,7 +297,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "chiajna",
+        "county": "ilfov"
+      }
     },
     "3081123": {
       "id": "3081123",
@@ -317,7 +345,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "withdrawn",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "militari",
+        "county": "bucuresti"
+      }
     },
     "3106703": {
       "id": "3106703",
@@ -357,7 +389,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "withdrawn",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "chiajna",
+        "county": "ilfov"
+      }
     },
     "3117764": {
       "id": "3117764",
@@ -396,7 +432,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "militari",
+        "county": "bucuresti"
+      }
     },
     "3123651": {
       "id": "3123651",
@@ -442,7 +482,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "withdrawn",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "gradina-icoanei",
+        "county": "bucuresti"
+      }
     },
     "3124716": {
       "id": "3124716",
@@ -480,7 +524,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "withdrawn",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "gradina-icoanei",
+        "county": "bucuresti"
+      }
     },
     "3131961": {
       "id": "3131961",
@@ -529,7 +577,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "rudeni",
+        "county": "ilfov"
+      }
     },
     "3163181": {
       "id": "3163181",
@@ -585,7 +637,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "varteju",
+        "county": "ilfov"
+      }
     },
     "3193617": {
       "id": "3193617",
@@ -631,7 +687,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "crangasi",
+        "county": "bucuresti"
+      }
     },
     "3196994": {
       "id": "3196994",
@@ -669,7 +729,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "crangasi",
+        "county": "bucuresti"
+      }
     },
     "3199302": {
       "id": "3199302",
@@ -712,7 +776,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "floreasca",
+        "county": "bucuresti"
+      }
     },
     "3233945": {
       "id": "3233945",
@@ -756,7 +824,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "voluntari",
+        "county": "ilfov"
+      }
     },
     "3234223": {
       "id": "3234223",
@@ -802,7 +874,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "vacaresti",
+        "county": "bucuresti"
+      }
     },
     "3237398": {
       "id": "3237398",
@@ -844,7 +920,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "cismigiu",
+        "county": "bucuresti"
+      }
     },
     "3244787": {
       "id": "3244787",
@@ -892,7 +972,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "magurele",
+        "county": "ilfov"
+      }
     },
     "3246242": {
       "id": "3246242",
@@ -942,7 +1026,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "mihai-bravu",
+        "county": "bucuresti"
+      }
     },
     "3257960": {
       "id": "3257960",
@@ -985,7 +1073,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "militari",
+        "county": "bucuresti"
+      }
     },
     "3283468": {
       "id": "3283468",
@@ -1026,7 +1118,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "crangasi",
+        "county": "bucuresti"
+      }
     },
     "3283496": {
       "id": "3283496",
@@ -1064,7 +1160,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "voluntari",
+        "county": "ilfov"
+      }
     },
     "3289965": {
       "id": "3289965",
@@ -1106,7 +1206,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "rudeni",
+        "county": "ilfov"
+      }
     },
     "3291462": {
       "id": "3291462",
@@ -1200,7 +1304,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "varteju",
+        "county": "ilfov"
+      }
     },
     "3321549": {
       "id": "3321549",
@@ -1242,7 +1350,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "removed",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "rudeni",
+        "county": "ilfov"
+      }
     },
     "3321554": {
       "id": "3321554",
@@ -1278,7 +1390,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "sebastian",
+        "county": "bucuresti"
+      }
     },
     "3321557": {
       "id": "3321557",
@@ -1314,7 +1430,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "nerva-traian",
+        "county": "bucuresti"
+      }
     },
     "3323086": {
       "id": "3323086",
@@ -1436,7 +1556,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "universitate",
+        "county": "bucuresti"
+      }
     },
     "3326054": {
       "id": "3326054",
@@ -1474,7 +1598,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "voluntari",
+        "county": "ilfov"
+      }
     },
     "3326072": {
       "id": "3326072",
@@ -1512,7 +1640,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "voluntari",
+        "county": "ilfov"
+      }
     },
     "3331719": {
       "id": "3331719",
@@ -1596,7 +1728,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "tei",
+        "county": "bucuresti"
+      }
     },
     "3336004": {
       "id": "3336004",
@@ -1636,7 +1772,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "metalurgiei",
+        "county": "bucuresti"
+      }
     },
     "3336005": {
       "id": "3336005",
@@ -1675,7 +1815,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "domnesti",
+        "county": "ilfov"
+      }
     },
     "3336006": {
       "id": "3336006",
@@ -1711,7 +1855,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "tei",
+        "county": "bucuresti"
+      }
     },
     "3344381": {
       "id": "3344381",
@@ -1792,7 +1940,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "theodor-pallady",
+        "county": "bucuresti"
+      }
     },
     "3357374": {
       "id": "3357374",
@@ -1950,7 +2102,11 @@
       },
       "goneAt": "2026-11-18",
       "outcome": "sold",
-      "outcomeAt": "2026-11-18"
+      "outcomeAt": "2026-11-18",
+      "zone": {
+        "slug": "metalurgiei",
+        "county": "bucuresti"
+      }
     },
     "3371043": {
       "id": "3371043",
@@ -2930,8 +3086,8 @@
       "listed": true,
       "sourceUrl": "https://www.trimbitasu-estate.ro/teren-de-inchiriat-adunatii-copaceni-judet-giurgiu-cp3537033/",
       "sourceTitle": "Teren 26000mp de inchiriat Adunati-Copaceni",
-      "kind": "apartament",
-      "segment": "rezidential",
+      "kind": "teren",
+      "segment": "comercial",
       "deal": "inchiriere",
       "price": {
         "amount": 4500,

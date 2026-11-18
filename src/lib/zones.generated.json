@@ -71,6 +71,66 @@
       "lat": 44.4526,
       "lng": 26.0864,
       "county": "bucuresti"
+    },
+    "stefan-cel-mare": {
+      "name": "Ștefan cel Mare",
+      "lat": 44.4529,
+      "lng": 26.1047,
+      "county": "bucuresti"
+    },
+    "aparatorii-patriei": {
+      "name": "Apărătorii Patriei",
+      "lat": 44.3793,
+      "lng": 26.1353,
+      "county": "bucuresti"
+    },
+    "valea-ialomitei": {
+      "name": "Valea Ialomiței",
+      "lat": 44.4211,
+      "lng": 26.0144,
+      "county": "bucuresti"
+    },
+    "timisoara": {
+      "name": "Bd. Timișoara",
+      "lat": 44.4273,
+      "lng": 26.0171,
+      "county": "bucuresti"
+    },
+    "sebastian": {
+      "name": "Sebastian",
+      "lat": 44.4123,
+      "lng": 26.0738,
+      "county": "bucuresti"
+    },
+    "nerva-traian": {
+      "name": "Nerva Traian",
+      "lat": 44.4205,
+      "lng": 26.1157,
+      "county": "bucuresti"
+    },
+    "tei": {
+      "name": "Tei",
+      "lat": 44.4722,
+      "lng": 26.128,
+      "county": "bucuresti"
+    },
+    "metalurgiei": {
+      "name": "Metalurgiei",
+      "lat": 44.3708,
+      "lng": 26.1261,
+      "county": "bucuresti"
+    },
+    "domnesti": {
+      "name": "Domnești",
+      "lat": 44.3992,
+      "lng": 25.9173,
+      "county": "ilfov"
+    },
+    "theodor-pallady": {
+      "name": "Theodor Pallady",
+      "lat": 44.4393,
+      "lng": 26.1136,
+      "county": "bucuresti"
     }
   }
 }

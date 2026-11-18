@@ -161,8 +161,17 @@ portaluri („CISMIGIU - Cobalcescu 4 Camere 85 mp Renovat 1/3”), iar zona e
 din flux, site-ul ar arăta ca un portal. Deci: **cifrele automat, cuvintele de
 la noi.**
 
-**Un anunț nou apare singur pe site**, cu titlul și descrierea din CRM și cu un
-tagline compus din fapte („Voluntari — 46 mp”). Secțiunile care cer text scris
+**Un anunț nou apare singur pe site**, cu descrierea din CRM, un titlu compus din
+fapte („Două camere în Voluntari”, „Garsonieră în Tei”, „Teren în …” — tip, camere
+și zonă, nimic inventat) și un tagline la fel („Voluntari — 46 mp, lux, bloc din
+2025, prima închiriere”). Titlurile din CRM sunt scrise pentru portaluri
+(„Apartment 2 Camere Voluntari Lux 1/1 36 mp Bloc 2025 Prima Inchiriere”) și nu
+se mai afișează ca atare, dar detaliile din ele nu se pierd: `titleFacts()` din
+`properties.ts` recunoaște o listă fixă de formule (lux, renovat, parcare,
+centrală, bloc din…, metrou la N minute, etaj 5/8, finisaje premium…) și le
+scrie curat în tagline. Ce nu recunoaște se ignoră — mai bine un detaliu lipsă
+decât unul înțeles greșit; pentru o formulă nouă se adaugă un rând în funcție.
+Un titlu sau tagline scris de mână, în `property-overrides.ts`, le bate oricând. Secțiunile care cer text scris
 de mână — punctele forte, reperele din jur — pur și simplu nu se afișează până
 nu le scrie cineva. Site-ul nu așteaptă după nimeni ca să fie corect.
 

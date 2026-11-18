@@ -164,6 +164,9 @@ const crmId = (url) => url.match(/cp(\d+)/)?.[1] ?? null;
  */
 function kindFromUrl(url) {
   const u = url.toLowerCase();
+  // Terenul are adresa `/teren-de-inchiriat-...`. Fără asta, cădea pe „apartament”
+  // (valoarea implicită de la sfârșit) și apărea așa pe site.
+  if (/^https?:\/\/[^/]+\/teren/.test(u)) return "teren";
   if (u.includes("spatiu-de-birouri") || u.includes("birouri")) return "birouri";
   if (u.includes("spatiu-comercial") || u.includes("spatiu-de-vanzare")) return "spatiu comercial";
   if (u.includes("hala") || u.includes("spatiu-industrial") || u.includes("depozit")) return "hala";
@@ -173,7 +176,7 @@ function kindFromUrl(url) {
   return "apartament";
 }
 
-const COMERCIAL = new Set(["birouri", "spatiu comercial", "hala"]);
+const COMERCIAL = new Set(["birouri", "spatiu comercial", "hala", "teren"]);
 
 /**
  * Zona, citită din adresa anunțului.
@@ -423,6 +426,15 @@ for (const r of records) {
   merged[r.id] = { ...rest, ...r, listed: true, media: unionMedia(inainte[r.id]?.media, r.media) };
 }
 
+/**
+ * Zona se recalculează din adresă pentru TOATE anunțurile, nu doar pentru cele
+ * active. Câmpul `zone` a apărut după ce 39 de anunțuri erau deja dispărute, iar
+ * `...r` îl pune doar pe cele din listare — celelalte rămâneau fără zonă, deci
+ * tranzacțiile încheiate își scriau „Bucuresti”, fără cartier. E o funcție pură
+ * de adresă, deci recalculul e gratuit și urmează orice regulă îmbunătățită.
+ */
+for (const p of Object.values(merged)) p.zone = zoneFromUrl(p.sourceUrl);
+
 /* --- Rezultatul pentru ce a dispărut: citit, nu ghicit --- */
 
 const azi = new Date().toISOString().slice(0, 10);
@@ -572,7 +584,14 @@ const zones = { ...zonesPrev.zones };
 const zoneNoi = [];
 const zoneNegasite = [];
 
-for (const r of records) {
+/**
+ * Zonele de localizat: ale anunțurilor active ȘI ale tranzacțiilor încheiate,
+ * pentru că și acestea își scriu zona pe card. Înainte se căutau doar cele
+ * active, iar la închirierile încheiate zona rămânea „Bucuresti”, fără cartier.
+ */
+const deLocalizat = Object.values(merged).filter((p) => p.listed || p.outcome === "sold");
+
+for (const r of deLocalizat) {
   const z = r.zone;
   if (!z) continue;
   const cheie = norm(z.slug);

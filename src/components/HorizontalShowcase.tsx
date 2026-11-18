@@ -3,7 +3,7 @@
 import { Photo } from "./Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { priceLabel, statusLabel, type Property } from "@/lib/properties";
+import { formatArea, priceLabel, statusLabel, type Property } from "@/lib/properties";
 import { Morph } from "./Morph";
 import { morphName } from "@/lib/morph";
 
@@ -218,7 +218,7 @@ function ShowcaseCard({ property, index }: { property: Property; index: number }
         <span className={done ? "text-paper/50 line-through" : "text-paper"}>
           {priceLabel(property)}
         </span>
-        <span>{property.specs.surface} mp</span>
+        <span>{formatArea(property.specs.surface)} mp</span>
       </div>
     </Link>
   );

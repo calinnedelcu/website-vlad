@@ -46,13 +46,9 @@ export default function ContactPage() {
           Spune-mi ce cauți
         </SplitReveal>
 
-        <Reveal delay={100}>
-          {/* Fraza spunea „formularul din dreapta ajunge tot la mine”. Nu mai e
-              niciun formular și nicio dreaptă. */}
-          <p className="text-paper/75 mt-8 max-w-[40ch] text-lg">
-            Cel mai rapid e pe WhatsApp. Dacă preferi să scrii pe îndelete, ai emailul mai jos.
-          </p>
-        </Reveal>
+        {/* Aici era „Cel mai rapid e pe WhatsApp. Dacă preferi să scrii pe îndelete,
+            ai emailul mai jos.” Scoasă la cererea lui Calin: butoanele de dedesubt
+            spun același lucru. */}
 
         <Reveal delay={160}>
           <div className="mt-10 flex flex-wrap gap-3">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { cityPath, sectorPaths } from "@/lib/bucharest-shape";
 import { cityCentre, mapSize, project, zoneCoords } from "@/lib/geo";
-import { priceLabel, statusLabel, type Property } from "@/lib/properties";
+import { formatArea, priceLabel, statusLabel, type Property } from "@/lib/properties";
 
 /**
  * Harta portofoliului.
@@ -183,7 +183,7 @@ function ZonePropertyItem({ property }: { property: Property }) {
         </p>
         <p className="text-paper/45 nums mt-1 text-sm">
           {property.status === "rezervat" ? `${statusLabel.rezervat} · ` : ""}
-          {priceLabel(property)} · {property.specs.surface} mp
+          {priceLabel(property)} · {formatArea(property.specs.surface)} mp
         </p>
       </Link>
     </li>

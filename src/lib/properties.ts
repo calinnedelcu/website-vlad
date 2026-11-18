@@ -38,7 +38,7 @@
  */
 
 import { asset } from "./asset";
-import { resolveZone } from "./geo";
+import { resolveZone, zoneCoords } from "./geo";
 import generated from "./properties.generated.json";
 import { order, overrides } from "./property-overrides";
 
@@ -54,7 +54,8 @@ export type PropertyKind =
   | "vila"
   | "birouri"
   | "spatiu comercial"
-  | "hala";
+  | "hala"
+  | "teren";
 
 export interface Property {
   slug: string;
@@ -186,6 +187,91 @@ const photoFolder = (g: Generated) => (g.media.cover || "").split("/")[0];
  */
 const overrideFor = (g: Generated) => overrides[g.id] ?? overrides[photoFolder(g)];
 
+/** „Bucuresti” din flux, cu diacritice — ultima plasă când zona nu se găsește. */
+const prettyLocality = (s: string | undefined) => (/^bucuresti$/i.test(s ?? "") ? "București" : (s ?? ""));
+
+const ROOM_WORDS: Record<number, string> = { 2: "Două camere", 3: "Trei camere", 4: "Patru camere", 5: "Cinci camere" };
+const KIND_TITLES: Partial<Record<PropertyKind, string>> = {
+  casa: "Casă",
+  vila: "Vilă",
+  penthouse: "Penthouse",
+  birouri: "Birouri",
+  "spatiu comercial": "Spațiu comercial",
+  hala: "Hală",
+  teren: "Teren",
+};
+
+/**
+ * Titlu pentru un anunț care n-are încă unul scris de mână. Cele din CRM sunt
+ * scrise pentru portaluri („Apartment 2 Camere Voluntari Lux 1/1 36 mp Bloc 2025
+ * Prima Inchiriere”) și pe site arătau ca atare. Din fapte iese ceva citibil și
+ * adevărat: „Două camere în Voluntari”. Nu inventează nimic — doar tipul,
+ * numărul de camere și zona, toate din flux.
+ */
+function autoTitle(kind: PropertyKind, rooms: number | undefined, zone: string): string {
+  const what =
+    kind === "apartament"
+      ? rooms === 1
+        ? "Garsonieră"
+        : rooms
+          ? (ROOM_WORDS[rooms] ?? `${rooms} camere`)
+          : "Apartament"
+      : (KIND_TITLES[kind] ?? "Proprietate");
+  return zone ? `${what} în ${zone}` : what;
+}
+
+/**
+ * Ce spune titlul din CRM în afară de tip, camere și zonă — „Lux”, „Bloc 2025”,
+ * „Parcare”, „Finisaje Premium”, „Metrou 6 min”, „5/8”. La multe anunțuri
+ * descrierea e doar „Comision 0%”, deci titlul e SINGURUL loc unde stau aceste
+ * detalii; dacă nu le luăm de acolo, titlul compus de mai sus le pierde.
+ *
+ * Nu se copiază textul lor — e scris pentru portaluri, fără diacritice și cu
+ * prescurtări. Se recunosc doar formulele de mai jos, fiecare tradusă într-o
+ * expresie curată, iar ce nu se recunoaște se ignoră: mai bine un detaliu lipsă
+ * decât unul înțeles greșit. Nimic nu se adaugă din ce nu scrie în titlu.
+ */
+function titleFacts(sourceTitle: string): { features: string[]; floor?: string } {
+  const t = sourceTitle
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+  const has = (re: RegExp) => re.test(t);
+  const features: string[] = [];
+  const add = (cond: boolean, text: string) => cond && features.push(text);
+
+  add(has(/\blux\b/), "lux");
+  add(has(/\bfinisaje premium\b/), "finisaje premium");
+  add(has(/\brenovat/), "renovat");
+  if (has(/\bmobilat\b/) && has(/\butilat\b/)) features.push("mobilat și utilat");
+  else add(has(/\bmobilat\b/), "mobilat");
+  add(has(/\bduplex\b/), "duplex");
+  add(has(/\bpet friendly\b/), "pet friendly");
+  add(has(/\bprima inchiriere\b/), "prima închiriere");
+  add(has(/\bview panoramic\b/), "vedere panoramică");
+  add(has(/\bparter inalt\b/), "parter înalt");
+
+  const bloc = t.match(/\bbloc (\d{4})\b/);
+  if (bloc) features.push(`bloc din ${bloc[1]}`);
+  const niveluri = t.match(/\bd\+p\+(\d)e\b/);
+  if (niveluri) features.push(`demisol, parter și ${niveluri[1]} etaje`);
+  add(has(/\bp\+1\+m\b/), "parter, etaj și mansardă");
+
+  if (has(/\bcentrala proprie\b/)) features.push("centrală proprie");
+  else add(has(/\bcentrala\b/), "centrală");
+  add(has(/\bac\b/), "aer condiționat");
+  if (has(/\bparcare inclusa\b/)) features.push("parcare inclusă");
+  else add(has(/\bparcare\b/), "parcare");
+  const metrou = t.match(/(?:(\d+)\s*min\w*\s*metrou|metrou\s*(\d+)\s*min)/);
+  if (metrou) features.push(`metrou la ${metrou[1] ?? metrou[2]} minute`);
+
+  const parter = t.match(/\bparter\/(\d{1,2})\b/);
+  const etaj = t.match(/\b(\d{1,2})\/(\d{1,2})\b/);
+  const floor = parter ? `parter / ${parter[1]}` : etaj ? `${etaj[1]} / ${etaj[2]}` : undefined;
+
+  return { features: features.slice(0, 4), floor };
+}
+
 /** Proprietatea fizică: aceleași poze, aceeași tranzacție. Vezi antetul fișierului. */
 const physicalKey = (g: Generated) => `${photoFolder(g)}|${g.deal}`;
 
@@ -245,19 +331,44 @@ function build(): Property[] {
      *    deci nu desenează nimic — dar e mai bine decât un câmp gol sub titlu.
      */
     const neighborhood =
-      o?.neighborhood ?? (g.zone ? resolveZone(g.zone.slug) : null) ?? g.sourceLocality ?? "";
+      o?.neighborhood ??
+      (g.zone ? resolveZone(g.zone.slug) : null) ??
+      prettyLocality(g.sourceLocality);
+    const kind = (o?.kind ?? g.kind) as PropertyKind;
     const surface = g.specs.surface;
+
+    const facts = titleFacts(g.sourceTitle);
+    const specs: Property["specs"] = {
+      surface: surface ?? 0,
+      ...(facts.floor ? { floor: facts.floor } : {}),
+      ...(g.specs.rooms ? { rooms: g.specs.rooms } : {}),
+      ...(g.specs.baths ? { baths: g.specs.baths } : {}),
+      ...(g.specs.year ? { year: g.specs.year } : {}),
+      ...(o?.specs ?? {}),
+    };
+    // La teren, suprafața din CRM nu e a terenului (la cel din Adunații-Copăceni
+    // zicea 766 mp, iar terenul are 26.620). Suprafața lui e terenul: o singură
+    // cifră, cea scrisă de noi, în loc de două care se bat cap în cap.
+    if (kind === "teren") {
+      specs.surface = specs.land ?? 0;
+      delete specs.land;
+    }
 
     return [
       {
         slug: o?.slug ?? fallbackSlug(g.sourceUrl, g.id),
-        title: o?.title ?? g.sourceTitle,
+        title: o?.title ?? autoTitle(kind, g.specs.rooms, neighborhood),
         // Fără tagline scris de mână, compunem unul din fapte — zonă și
         // suprafață. Scurt, adevărat, și nu inventează nimic.
         tagline:
           o?.tagline ??
-          [neighborhood, surface ? `${surface} mp` : null].filter(Boolean).join(" — "),
-        kind: (o?.kind ?? g.kind) as PropertyKind,
+          [
+            [neighborhood, surface ? `${surface} mp` : null].filter(Boolean).join(" — "),
+            ...facts.features,
+          ]
+            .filter(Boolean)
+            .join(", "),
+        kind,
         deal: (o?.deal ?? g.deal) as Deal,
         segment: (o?.segment ?? g.segment) as Segment,
         status:
@@ -273,13 +384,7 @@ function build(): Property[] {
           ...(g.price.period === "luna" ? { period: "luna" as const } : {}),
         },
 
-        specs: {
-          surface: surface ?? 0,
-          ...(g.specs.rooms ? { rooms: g.specs.rooms } : {}),
-          ...(g.specs.baths ? { baths: g.specs.baths } : {}),
-          ...(g.specs.year ? { year: g.specs.year } : {}),
-          ...(o?.specs ?? {}),
-        },
+        specs,
 
         story: g.story,
         highlights: o?.highlights ?? [],
@@ -366,9 +471,15 @@ export const soldProperties = () => [
  * în ea e o promisiune pe care n-o poți ține la telefon.
  */
 export const availableNeighborhoods = () =>
-  [...new Set(availableProperties().map((p) => p.neighborhood))].sort((a, b) =>
-    a.localeCompare(b, "ro"),
-  );
+  [
+    ...new Set(
+      availableProperties()
+        .map((p) => p.neighborhood)
+        // Doar zonele de pe hartă: filtrul de zonă merge cu harta de deasupra lui.
+        // Un teren din alt județ rămâne în listă, dar nu are zonă de filtrat.
+        .filter((n) => n in zoneCoords),
+    ),
+  ].sort((a, b) => a.localeCompare(b, "ro"));
 
 /* Aici erau `neighborhoods()` (toate zonele atinse vreodată) și
    `portfolioStats()` (patru cifre pentru un bloc de statistici). Amândouă
@@ -381,6 +492,12 @@ const eur = new Intl.NumberFormat("ro-RO", {
   currency: "EUR",
   maximumFractionDigits: 0,
 });
+
+/** Suprafețe cu separator de mii: „26.620 mp”, nu „26620 mp”. */
+export const formatArea = (n: number) => new Intl.NumberFormat("ro-RO").format(n);
+
+/** „1 cameră”, nu „1 camere”. */
+export const roomsLabel = (n: number) => (n === 1 ? "1 cameră" : `${n} camere`);
 
 export function formatPrice(price: Property["price"]): string {
   if (price.onRequest) return "Preț la cerere";

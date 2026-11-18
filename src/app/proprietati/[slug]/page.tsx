@@ -12,9 +12,11 @@ import { Morph } from "@/components/Morph";
 import { morphName } from "@/lib/morph";
 import {
   availableProperties,
+  formatArea,
   getProperty,
   priceLabel,
   properties,
+  roomsLabel,
   segmentLabel,
   statusLabel,
   type Property,
@@ -135,9 +137,9 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
                 )}
               </div>
               <div className="text-paper/70 nums flex flex-wrap gap-x-8 gap-y-2 text-sm">
-                <span>{property.specs.surface} mp</span>
-                {property.specs.rooms && <span>{property.specs.rooms} camere</span>}
-                {property.specs.land && <span>teren {property.specs.land} mp</span>}
+                <span>{formatArea(property.specs.surface)} mp</span>
+                {property.specs.rooms && <span>{roomsLabel(property.specs.rooms)}</span>}
+                {property.specs.land && <span>teren {formatArea(property.specs.land)} mp</span>}
                 {property.specs.year && <span>{property.specs.year}</span>}
               </div>
             </div>
@@ -153,8 +155,8 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
             <div className="md:sticky md:top-32">
               <Reveal>
                 <dl className="border-line border-t">
-                  <Spec label="Suprafață" value={`${property.specs.surface} mp`} />
-                  {property.specs.land && <Spec label="Teren" value={`${property.specs.land} mp`} />}
+                  <Spec label="Suprafață" value={`${formatArea(property.specs.surface)} mp`} />
+                  {property.specs.land && <Spec label="Teren" value={`${formatArea(property.specs.land)} mp`} />}
                   {property.specs.rooms && <Spec label="Camere" value={String(property.specs.rooms)} />}
                   {property.specs.baths && <Spec label="Băi" value={String(property.specs.baths)} />}
                   {property.specs.floor && <Spec label="Etaj" value={property.specs.floor} />}

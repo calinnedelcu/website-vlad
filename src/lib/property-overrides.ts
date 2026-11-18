@@ -90,6 +90,19 @@ export const overrides: Record<string, PropertyOverride> = {
      citească descrierile pe îndelete, iar paginile știu să nu le afișeze goale.
      --------------------------------------------------------------- */
 
+  // Cheia e folderul de poze. Terenul e în județul Giurgiu, în afara hărții
+  // București–Ilfov: rămâne în listă, fără bulă și fără zonă de filtrat.
+  // Suprafața din CRM (766 mp) nu e a terenului; descrierea dă 26.620 mp.
+  3537033: {
+    slug: "adunatii-copaceni-teren",
+    title: "Teren de 26.620 mp în Adunații-Copăceni",
+    tagline: "Județul Giurgiu — extravilan, acces din DJ412A, aproape de DN5",
+    neighborhood: "Adunații-Copăceni",
+    area: "Adunații-Copăceni, județul Giurgiu",
+    kind: "teren",
+    specs: { land: 26620 },
+  },
+
   3331719: {
     slug: "ferentari-ofrandei-casa",
     title: "Casă pe Ofrandei",

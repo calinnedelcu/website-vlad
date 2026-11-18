@@ -1,6 +1,6 @@
 import { Photo } from "./Photo";
 import Link from "next/link";
-import { priceLabel, statusLabel, type Property } from "@/lib/properties";
+import { formatArea, priceLabel, roomsLabel, statusLabel, type Property } from "@/lib/properties";
 import { Morph } from "./Morph";
 import { morphName } from "@/lib/morph";
 import { Reveal } from "./Reveal";
@@ -99,9 +99,9 @@ export function PropertyCard({
               dark ? "border-void-line text-paper/60" : "border-line text-muted"
             }`}
           >
-            <span>{property.specs.surface} mp</span>
-            {property.specs.rooms && <span>{property.specs.rooms} camere</span>}
-            {property.specs.land && <span>teren {property.specs.land} mp</span>}
+            <span>{formatArea(property.specs.surface)} mp</span>
+            {property.specs.rooms && <span>{roomsLabel(property.specs.rooms)}</span>}
+            {property.specs.land && <span>teren {formatArea(property.specs.land)} mp</span>}
             {property.specs.year && <span>{property.specs.year}</span>}
           </div>
         </div>
