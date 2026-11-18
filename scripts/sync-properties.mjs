@@ -20,14 +20,31 @@
  *    `zoneFromUrl`), iar reperul ei pe hartă se caută singur prin
  *    OpenStreetMap. Ce rămâne de scris de mână e doar numele de casă —
  *    „Roșu – Chiajna”, „Bd. Timișoara” — unde vrem altceva decât zice OSM.
- * 2. De ce a dispărut un anunț. `availability` e mereu `InStock`; când o
- *    proprietate se vinde, anunțul pur și simplu dispare din listare. Deci
- *    putem ști CĂ a dispărut, nu DACĂ s-a vândut, s-a închiriat sau a fost
- *    retrasă. Scriptul o marchează `listed: false` și atât — „vândut” îl scrie
- *    un om, în `property-overrides.ts`, după ce confirmă Vlad. Un site care
- *    scrie singur „vândut” inventează un fapt; vezi README.
- * 3. Tot ce ține de redacție: titlul nostru, tagline-ul, ce e „featured”,
+ * 2. Tot ce ține de redacție: titlul nostru, tagline-ul, ce e „featured”,
  *    reperele din jur. Alea sunt scrise de noi și scriptul nu le atinge.
+ *
+ * DE CE A DISPĂRUT UN ANUNȚ — SE CITEȘTE, NU SE GHICEȘTE
+ *
+ * În listare, `availability` e mereu `InStock`; când o proprietate pleacă,
+ * anunțul dispare. Dar pagina lui NU dispare: răspunde în continuare cu 200, iar
+ * în JSON-LD-ul ei `availability` spune ce s-a întâmplat (verificat pe toate
+ * cele 58 de anunțuri dispărute din septembrie–noiembrie 2026):
+ *
+ *   SoldOut        tranzacție încheiată — vândut sau închiriat, după `deal`
+ *   Discontinued   retras de pe piață, fără tranzacție
+ *   redirect spre o pagină de categorie, sau 404/410
+ *                  anunțul a fost șters din CRM (de obicei înlocuit printr-o
+ *                  re-listare cu alt id)
+ *
+ * Scriptul citește asta pentru fiecare anunț dispărut și scrie `outcome`:
+ * `sold` | `withdrawn` | `removed`. Ce nu se poate citi (rețea căzută, pagină
+ * schimbată) rămâne FĂRĂ `outcome` — iar site-ul îl ascunde. „Nu știu” nu devine
+ * niciodată „vândut”. Pagina „Istoric tranzacții” a agenției NU e folosită:
+ * paginarea ei se suprapune (un anunț apare pe două pagini, altul se pierde), pe
+ * când pagina fiecărui anunț e exactă.
+ *
+ * `sold` e definitiv. Celelalte se mai verifică zilnic încă `REPROBE_DAYS` zile
+ * după dispariție, în caz că agenția trece tranzacția cu întârziere.
  *
  * FIȘIERUL E CUMULATIV, NU O FOTOGRAFIE A ZILEI
  *
@@ -64,6 +81,9 @@ const CONCURRENCY = 4;
  * ștergem site-ul pe baza unei presupuneri.
  */
 const MIN_EXPECTED = 6;
+
+/** Cât timp după dispariție mai verificăm zilnic dacă s-a schimbat rezultatul. */
+const REPROBE_DAYS = 45;
 
 const dryRun = process.argv.includes("--dry-run");
 
@@ -280,6 +300,40 @@ async function pool(items, limit, fn) {
   return out;
 }
 
+/**
+ * Ce s-a întâmplat cu un anunț dispărut din listare, citit de pe pagina lui.
+ * Vezi „DE CE A DISPĂRUT UN ANUNȚ” sus.
+ *
+ * Întoarce `sold` | `withdrawn` | `removed`, sau `null` când nu putem ști —
+ * rețea căzută, pagină schimbată, sau anunțul e totuși viu (`InStock`, deci
+ * doar lipsit din listare). `null` înseamnă „nu schimba nimic”, niciodată
+ * „vândut”.
+ */
+async function probeOutcome(rec) {
+  let res;
+  try {
+    res = await fetch(rec.sourceUrl, { headers: { "User-Agent": UA }, redirect: "follow" });
+  } catch {
+    return null;
+  }
+  if (res.status === 404 || res.status === 410) return "removed";
+  if (!res.ok) return null;
+
+  // Anunțul șters din CRM nu dă 404: te duce la pagina de categorie
+  // (`/apartamente-de-vanzare/bucuresti/militari/`). Adresa finală n-are id-ul.
+  if (crmId(res.url) !== rec.id) return "removed";
+
+  const html = await res.text();
+  const ld = jsonLdBlocks(html).find((b) => {
+    const t = b["@type"];
+    return Array.isArray(t) ? t.includes("RealEstateListing") : t === "RealEstateListing";
+  });
+  const availability = String(ld?.offers?.availability ?? "");
+  if (availability.endsWith("/SoldOut")) return "sold";
+  if (availability.endsWith("/Discontinued")) return "withdrawn";
+  return null;
+}
+
 /* ---------------------------------------------------------------- */
 
 const previous = await readFile(OUT, "utf8")
@@ -352,20 +406,85 @@ function unionMedia(vechi, nou) {
 
 const merged = { ...inainte };
 for (const r of records) {
-  merged[r.id] = { ...inainte[r.id], ...r, listed: true, media: unionMedia(inainte[r.id]?.media, r.media) };
+  // Dacă un anunț reapare în listare, ce credeam despre dispariția lui nu mai
+  // e valabil — îl scoatem, ca să nu rămână un „vândut” vechi pe ceva activ.
+  const rest = { ...inainte[r.id] };
+  delete rest.outcome;
+  delete rest.outcomeAt;
+  delete rest.goneAt;
+  merged[r.id] = { ...rest, ...r, listed: true, media: unionMedia(inainte[r.id]?.media, r.media) };
 }
+
+/* --- Rezultatul pentru ce a dispărut: citit, nu ghicit --- */
+
+const azi = new Date().toISOString().slice(0, 10);
+const zileDe = (data) => (Date.now() - new Date(data).getTime()) / 86_400_000;
+
 for (const p of disparute) merged[p.id] = { ...merged[p.id], listed: false };
 
+/** Dispărut și încă neclar, sau neînchis definitiv și încă în fereastra de verificare. */
+const dePrivit = Object.values(merged).filter((p) => {
+  if (p.listed || p.outcome === "sold") return false;
+  if (!p.outcome) return true;
+  return zileDe(p.goneAt ?? azi) < REPROBE_DAYS;
+});
+
+console.log(`\nVerific pagina a ${dePrivit.length} anunțuri dispărute…`);
+const schimbari = [];
+await pool(dePrivit, CONCURRENCY, async (p) => {
+  const rezultat = await probeOutcome(p);
+  const cur = merged[p.id];
+  // `goneAt`: data la care am observat prima dată că lipsește. Pentru anunțurile
+  // dispărute înainte de existența câmpului, ziua primei verificări.
+  const goneAt = cur.goneAt ?? azi;
+  if (rezultat && rezultat !== cur.outcome) {
+    merged[p.id] = { ...cur, goneAt, outcome: rezultat, outcomeAt: azi };
+    schimbari.push({ id: p.id, titlu: p.sourceTitle, url: p.sourceUrl, deal: p.deal, de_la: cur.outcome ?? null, la: rezultat });
+  } else if (cur.goneAt !== goneAt) {
+    merged[p.id] = { ...cur, goneAt };
+  }
+});
+
+/**
+ * Proprietatea fizică = folderul de fotografii + tipul tranzacției. CRM-ul dă id
+ * nou la fiecare re-listare, dar pozele rămân în folderul primei încărcări — la
+ * fel ca în `properties.ts`.
+ */
+const cheieFizica = (p) => `${(p.media?.cover ?? "").split("/")[0]}|${p.deal}`;
+const reListate = new Set(Object.values(merged).filter((p) => p.listed).map(cheieFizica));
+
+/**
+ * Încă fără rezultat după verificare: omul trebuie să se uite. Nu și când
+ * aceeași proprietate e între timp listată sub alt id — atunci e doar o veche
+ * versiune a ei, iar site-ul o arată pe cea nouă.
+ */
+const neclare = Object.values(merged)
+  .filter((p) => !p.listed && !p.outcome && !reListate.has(cheieFizica(p)))
+  .map((p) => ({ id: p.id, titlu: p.sourceTitle, url: p.sourceUrl }));
+
+const tr = (s) => schimbari.filter((s2) => s2.la === s);
 const raport = {
   noi: noi.map((r) => ({ id: r.id, titlu: r.sourceTitle, url: r.sourceUrl })),
   disparute: disparute.map((p) => ({ id: p.id, titlu: p.sourceTitle, url: p.sourceUrl })),
+  vandute: tr("sold").filter((s) => s.deal === "vanzare"),
+  inchiriate: tr("sold").filter((s) => s.deal === "inchiriere"),
+  retrase: [...tr("withdrawn"), ...tr("removed")],
+  neclare,
   preturi,
 };
 
 console.log(`\nAnunțuri noi:      ${noi.length}`);
 for (const n of raport.noi) console.log(`  + ${n.titlu}`);
-console.log(`Dispărute:         ${disparute.length}`);
+console.log(`Dispărute azi:     ${disparute.length}`);
 for (const d of raport.disparute) console.log(`  - ${d.titlu}`);
+console.log(`Vândute (nou):     ${raport.vandute.length}`);
+for (const s of raport.vandute) console.log(`  $ ${s.titlu}`);
+console.log(`Închiriate (nou):  ${raport.inchiriate.length}`);
+for (const s of raport.inchiriate) console.log(`  = ${s.titlu}`);
+console.log(`Retrase (nou):     ${raport.retrase.length}`);
+for (const s of raport.retrase) console.log(`  x ${s.titlu} (${s.la})`);
+console.log(`Fără rezultat:     ${neclare.length}`);
+for (const n of neclare) console.log(`  ? ${n.titlu}`);
 console.log(`Prețuri schimbate: ${preturi.length}`);
 for (const p of preturi) console.log(`  ~ ${p.id}: ${p.de_la} → ${p.la}`);
 

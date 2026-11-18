@@ -32,10 +32,11 @@ import type { Deal, PropertyKind, Segment, Status } from "./properties";
  * - `neighborhood` — fluxul dă „Bucuresti” la zece din douăsprezece anunțuri,
  *   și fără diacritice („Varteju”, „Magurele”). Cișmigiu, Grădina Icoanei sau
  *   Roșu – Chiajna nu apar nicăieri. Harta se desenează din câmpul ăsta.
- * - `status` — se scrie DOAR când proprietatea nu mai e disponibilă, și doar
- *   după ce confirmă Vlad. Când un anunț dispare din listare, sincronizarea îl
- *   marchează `listed: false` și te întreabă; nu scrie singură „vândut”,
- *   fiindcă dispariția poate însemna la fel de bine „retras de pe piață”.
+ * - `status` — de obicei GOL. „Vândut” / „închiriat” / ascuns se decid singure:
+ *   sincronizarea citește de pe pagina anunțului dispărut dacă a fost tranzacție
+ *   (`SoldOut`), retragere (`Discontinued`) sau ștergere, iar `properties.ts`
+ *   aplică regula. Se scrie aici doar ca portiță, când agenția greșește — și
+ *   atunci bate regula.
  * - `specs` — etaj, teren, parcare. Fluxul n-are câmpuri pentru ele.
  * - `highlights`, `nearby` — citite din descriere de un om. Nimic inventat:
  *   dacă o distanță nu scrie în anunț, nu se trece. Vezi README.
@@ -441,7 +442,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Dobroești — 89 mp total, cu loc de parcare",
     neighborhood: "Dobroești",
     area: "Strada Stejarului, complexul Platanii Residence",
-    status: "vandut",
     specs: {floor: "2 / 4",parking: 1},
     highlights: [
       "78 mp utili, 89 mp total",
@@ -464,7 +464,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Drumul Taberei — retras de bulevard, gata de mutare",
     neighborhood: "Drumul Taberei",
     area: "Strada Prelungirea Ghencea, Sector 6",
-    status: "vandut",
     specs: {floor: "parter / 10"},
     highlights: [
       "Decomandat",
@@ -486,7 +485,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Drumul Taberei — bloc reabilitat termic, logie de 4 mp",
     neighborhood: "Drumul Taberei",
     area: "Strada Cetatea Histriei, Sector 6",
-    status: "vandut",
     specs: {floor: "3 / 4"},
     highlights: [
       "Decomandat, 61 mp + logie de 4 mp",
@@ -508,7 +506,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Gorjului — două balcoane, instalații schimbate",
     neighborhood: "Gorjului",
     area: "Strada Răsăritului, Sector 6",
-    status: "vandut",
     specs: {floor: "5 / 10"},
     highlights: [
       "Două balcoane",
@@ -530,7 +527,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Roșu – Chiajna — decomandat, bloc din 2010",
     neighborhood: "Roșu – Chiajna",
     area: "Drumul Bacriului, Roșu – Chiajna",
-    status: "vandut",
     specs: {floor: "demisol / 3"},
     highlights: [
       "Decomandat",
@@ -553,7 +549,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Bd. Timișoara — renovat complet, mobilat și utilat",
     neighborhood: "Bd. Timișoara",
     area: "Aleea Dumbrăvița, lângă Plaza România",
-    status: "vandut",
     specs: {floor: "6 / 10"},
     highlights: [
       "Renovat recent, finisaje 2022",
@@ -575,7 +570,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Chiajna — bloc din 2023, stație STB în fața blocului",
     neighborhood: "Chiajna",
     area: "Strada Stelelor, Chiajna",
-    status: "vandut",
     specs: {floor: "4 / 5"},
     highlights: [
       "Bloc din 2023",
@@ -597,7 +591,6 @@ export const overrides: Record<string, PropertyOverride> = {
     tagline: "Păcii — mobilată și utilată, Lidl în fața blocului",
     neighborhood: "Păcii",
     area: "Drumul Belșugului, Sector 6",
-    status: "vandut",
     specs: {floor: "parter / 10"},
     highlights: [
       "Bloc din 2020",

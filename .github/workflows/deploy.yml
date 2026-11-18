@@ -62,10 +62,12 @@ jobs:
             echo "Date actualizate din CRM." >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      # Ce a dispărut din listare are nevoie de un om: fluxul nu spune dacă
-      # proprietatea s-a vândut sau a fost retrasă, iar site-ul n-are voie să
-      # ghicească. Până se lămurește, pur și simplu nu mai apare.
-      - name: Anunță ce a dispărut
+      # Ce a dispărut din listare se lămurește singur: sincronizarea citește de pe
+      # pagina anunțului dacă a fost tranzacție (vândut / închiriat), retragere sau
+      # ștergere, iar site-ul arată sau ascunde în consecință. Aici doar se
+      # raportează în rezumatul rulării. Se deschide o notă DOAR pentru ce n-a putut
+      # fi citit — acolo site-ul ascunde proprietatea și are nevoie de un om.
+      - name: Raportează ce s-a schimbat
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -74,26 +76,31 @@ jobs:
             const fs = require("fs");
             if (!fs.existsSync("sync-report.json")) process.exit(0);
             const r = JSON.parse(fs.readFileSync("sync-report.json", "utf8"));
-            const linii = [];
-            if (r.noi.length) linii.push("### Anunțuri noi\n" + r.noi.map(n => `- ${n.titlu}`).join("\n"));
-            if (r.preturi.length) linii.push("### Prețuri schimbate\n" + r.preturi.map(p => `- ${p.id}: ${p.de_la} → ${p.la}`).join("\n"));
+            const lista = (titlu, xs, f) => xs && xs.length ? `### ${titlu}\n` + xs.map(f).join("\n") : null;
+            const linii = [
+              lista("Anunțuri noi", r.noi, n => `- ${n.titlu}`),
+              lista("Vândute", r.vandute, s => `- ${s.titlu}`),
+              lista("Închiriate", r.inchiriate, s => `- ${s.titlu}`),
+              lista("Retrase sau șterse (nu mai apar pe site)", r.retrase, s => `- ${s.titlu} (${s.la})`),
+              lista("Prețuri schimbate", r.preturi, p => `- ${p.id}: ${p.de_la} → ${p.la}`),
+            ].filter(Boolean);
             fs.writeFileSync("summary.md", linii.join("\n\n"));
-            if (r.disparute.length) {
+            if (r.neclare && r.neclare.length) {
               const corp = [
-                "Proprietățile de mai jos nu mai apar în listarea agenției.",
+                "Proprietățile de mai jos au dispărut din listarea agenției, iar pagina lor nu spune ce s-a întâmplat (nici `SoldOut`, nici `Discontinued`, nici ștergere).",
                 "",
-                "Site-ul a încetat să le afișeze, dar **nu scrie nicăieri „vândut”** — fluxul nu spune dacă s-au vândut sau au fost retrase, iar un site care ghicește asta inventează un fapt.",
+                "Site-ul **le ascunde** până se lămurește — nu le scrie „vândut” din ghicit.",
                 "",
-                ...r.disparute.map(d => `- [ ] **${d.titlu}** (id \`${d.id}\`) — ${d.url}`),
+                ...r.neclare.map(d => `- [ ] **${d.titlu}** (id \`${d.id}\`) — ${d.url}`),
                 "",
-                "Întreabă-l pe Vlad. Dacă s-a vândut, treci `status: \"vandut\"` la id-ul respectiv în `src/lib/property-overrides.ts` și reapare, cu etichetă, la track record.",
+                "Dacă s-a vândut, treci `status: \"vandut\"` (sau `\"inchiriat\"`) la proprietatea respectivă în `src/lib/property-overrides.ts`. Dacă se întâmplă des, probabil agenția și-a schimbat pagina — verifică `probeOutcome` din `scripts/sync-properties.mjs`.",
               ].join("\n");
               fs.writeFileSync("issue.md", corp);
             }
           '
           cat summary.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
           if [ -f issue.md ]; then
-            gh issue create --title "Proprietăți dispărute din listare — vândute sau retrase?" --body-file issue.md
+            gh issue create --title "Proprietăți dispărute din listare, fără rezultat clar" --body-file issue.md
           fi
 
       - run: npm run lint

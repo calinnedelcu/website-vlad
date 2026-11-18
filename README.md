@@ -94,9 +94,9 @@ preluate din listarea lui Vlad de pe site-ul agenției
 
 - **12 proprietăți active** — 3 de vânzare, 9 de închiriat. Agenția afișează 15,
   dar trei sunt duplicate (vezi mai jos).
-- **8 tranzacții încheiate**, selecția dată de Vlad. Istoricul complet, filtrat
-  pe el pe site-ul agenției, arăta **54 de rezultate** în iulie 2026 — linkul
-  e pe home, sub arhivă (`site.transactionsUrl`).
+- **Tranzacțiile încheiate** se citesc singure din pagina anunțurilor dispărute
+  (vezi „Sincronizare automată”): în noiembrie 2026, 12 vânzări și 20 de
+  închirieri. Nu mai sunt o selecție scrisă de mână.
 - **Fotografiile** vin de pe CDN-ul agenției (`media.crmrebs.com`), la
   rezoluția originală (4096×2304 la majoritate), nu miniaturi.
 - **Textele din `story`** sunt descrierile scrise de Vlad, nu inventate.
@@ -176,11 +176,35 @@ anunțului, unde agenția o pune de fiecare dată
 pe cele găsite automat. Dacă OSM nu găsește zona, nu inventăm un punct:
 proprietatea rămâne în portofoliu, iar harta raportează că lipsește.
 
-**Ce dispare din listare NU devine automat „vândut”.** Fluxul spune mereu
-`InStock`; când se vinde, anunțul dispare — exact ca atunci când e retras de pe
-piață. Deci proprietatea iese de pe site, workflow-ul deschide o notă pe GitHub,
-iar „vândut” se scrie în `property-overrides.ts` după ce confirmă Vlad. Vezi
-regula despre cifre inventate, mai sus.
+**Ce dispare din listare se lămurește singur: vândut, închiriat sau scos.**
+În listare fluxul spune mereu `InStock`, deci acolo nu se vede diferența. Dar
+pagina anunțului dispărut răspunde în continuare, iar în JSON-LD-ul ei
+`availability` spune ce s-a întâmplat — verificat în noiembrie 2026 pe toate
+cele 58 de anunțuri dispărute:
+
+| Pe pagina anunțului | Înseamnă | Pe site |
+| --- | --- | --- |
+| `SoldOut` + vânzare | vândut | `/tranzactii`, cu eticheta „Vândut” |
+| `SoldOut` + închiriere | închiriat | `/tranzactii`, după vânzări, „Închiriat” |
+| `Discontinued` | retras de pe piață | nu apare |
+| redirect spre o pagină de categorie, 404 | șters din CRM | nu apare |
+| nu se poate citi | necunoscut | nu apare — și se deschide o notă |
+
+`npm run sync` scrie `outcome` pe fiecare anunț dispărut. `sold` e definitiv;
+celelalte se mai verifică zilnic 45 de zile, în caz că agenția trece tranzacția
+cu întârziere. „Nu știu” nu devine niciodată „vândut”.
+
+**Se judecă proprietatea, nu anunțul.** CRM-ul dă id nou la fiecare re-listare,
+iar o hală poate avea șase. Proprietatea fizică = folderul de fotografii +
+vânzare/închiriere (`physicalKey` în `properties.ts`). Dacă oricare versiune e în
+listare, proprietatea e disponibilă și cele vechi dispar; altfel, dacă oricare e
+`sold`, e tranzacție încheiată; altfel nu apare.
+
+Pagina „Istoric tranzacții” a agenției nu e folosită: paginarea ei se suprapune
+(un anunț apare pe două pagini, altul se pierde). Pagina fiecărui anunț e exactă.
+
+`status` în `property-overrides.ts` rămâne doar ca portiță când agenția greșește.
+Nu mai trebuie scris de mână pentru vândut.
 
 **Dacă agenția își schimbă site-ul**, scriptul se oprește cu eroare și nu scrie
 nimic — site-ul rămâne pe ultimele date bune. Praguri în `assertSane()`.
