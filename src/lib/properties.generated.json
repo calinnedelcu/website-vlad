@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T16:31:28.670Z",
+  "updatedAt": "2026-11-19T12:59:09.427Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2957,7 +2957,7 @@
     },
     "3520036": {
       "id": "3520036",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/apartament-3-camere-de-inchiriat-mihai-bravu-bucuresti-cp3520036/",
       "sourceTitle": "Asmita Gardens 3 camere 105 mp etaj 2/13 PET FRIENDLY",
       "kind": "apartament",
@@ -2995,7 +2995,10 @@
           "3246242/100eee1d-ba0b-4fa0-8086-9ffea8358f61.jpeg",
           "3246242/e9eccc5c-1aed-4f75-916b-86e4c98aa699.jpeg"
         ]
-      }
+      },
+      "goneAt": "2026-11-19",
+      "outcome": "sold",
+      "outcomeAt": "2026-11-19"
     },
     "3523192": {
       "id": "3523192",
@@ -3113,6 +3116,36 @@
           "3537033/433e1bbe-d1f7-4976-8f0e-4ab6e76a9d48.jpg",
           "3537033/a4054d62-a69c-4079-9c66-5faa06bff685.jpg",
           "3537033/f8946493-7caa-42b3-ac04-f8bb5a67f586.jpg"
+        ]
+      }
+    },
+    "3542831": {
+      "id": "3542831",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/teren-de-inchiriat-bucuresti-judet-bucuresti-ilfov-cp3542831/",
+      "sourceTitle": "Teren de inchiriat Giulesti",
+      "kind": "teren",
+      "segment": "comercial",
+      "deal": "inchiriere",
+      "price": {
+        "amount": 2000,
+        "currency": "EUR",
+        "period": "luna"
+      },
+      "specs": {},
+      "sourceLocality": "Bucuresti",
+      "zone": null,
+      "story": [
+        "Comision 0%!Deschidere la stradă de aproximativ 19 m și adâncime de aproximativ 95 m Împrejmuit cu gard din beton, cu poartă la stradă Acces direct din Drumul Săbăreni, cu trotuar și iluminat stradal Potrivit pentru depozitare, parcare utilaje sau auto, ori platformă pentru firmă Acte la zi (cadastru și carte funciară)",
+        "Chirie: 2000€/lună"
+      ],
+      "media": {
+        "cover": "3542831/c3d3f607-9178-42dc-9f69-425f8faa8940.jpg",
+        "gallery": [
+          "3542831/4948905e-de80-4862-89d3-fd4cdebf3919.jpg",
+          "3542831/91b72743-e884-4d79-a7b0-62150296d72d.jpg",
+          "3542831/9e38cec0-9c53-463d-84a1-96973925636b.jpg",
+          "3542831/a582076a-259e-4411-a981-1617bc24f94c.jpg"
         ]
       }
     },
