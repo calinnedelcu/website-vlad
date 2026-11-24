@@ -16,7 +16,7 @@ import type { Deal, PropertyKind, Segment, Status } from "./properties";
  * a început să afișeze titluri de portal fără ca nimeni să observe.
  *
  * De aceea căutarea are două trepte: întâi id-ul anunțului, apoi FOLDERUL DE
- * FOTOGRAFII (vezi `overrideFor` în properties.ts). Folderul rămâne cel de la
+ * FOTOGRAFII (vezi `ownOverride` în properties.ts). Folderul rămâne cel de la
  * prima încărcare și supraviețuiește re-listărilor. Când scrii o fișă nouă,
  * cheia bună e folderul de poze al proprietății, nu id-ul de azi al anunțului —
  * îl vezi în `properties.generated.json`, la `media.cover`.

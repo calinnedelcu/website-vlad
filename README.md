@@ -203,11 +203,23 @@ cele 58 de anunțuri dispărute:
 celelalte se mai verifică zilnic 45 de zile, în caz că agenția trece tranzacția
 cu întârziere. „Nu știu” nu devine niciodată „vândut”.
 
-**Se judecă proprietatea, nu anunțul.** CRM-ul dă id nou la fiecare re-listare,
-iar o hală poate avea șase. Proprietatea fizică = folderul de fotografii +
-vânzare/închiriere (`physicalKey` în `properties.ts`). Dacă oricare versiune e în
-listare, proprietatea e disponibilă și cele vechi dispar; altfel, dacă oricare e
-`sold`, e tranzacție încheiată; altfel nu apare.
+**Se judecă proprietatea, nu anunțul — și din fiecare se arată un singur anunț.**
+CRM-ul dă id nou la fiecare re-listare, iar o hală poate avea șase. Două anunțuri
+sunt aceeași proprietate când au același tip de tranzacție și aceleași
+fotografii: același folder, sau foldere diferite cu poze identice
+(`groupRecords` în `properties.ts`). Dacă oricare versiune e în listare,
+proprietatea e disponibilă și cele vechi dispar; altfel, dacă oricare e `sold`,
+e tranzacție încheiată; altfel nu apare.
+
+**Dublurile se scot singure.** Agenția listează uneori aceeași casă de două ori
+— cu zone diferite, sau o dată ca locuință și o dată ca spațiu comercial, cu
+pozele urcate din nou. `npm run media` compară fișierele (`photo-twins.mjs`) și
+leagă folderele care au cel puțin două poze identice; site-ul arată un singur
+anunț din grup: cel cu fișă scrisă de mână, altfel cel mai nou. Fișa scrisă de
+mână se moștenește în grup, deci nu se mai pierde la re-listare. Nu se judecă
+după titlu sau preț: două apartamente din același bloc le pot avea identice și
+sunt totuși două. `hidden` din overrides rămâne pentru dublurile cu poze
+diferite, pe care doar un om le poate recunoaște.
 
 Pagina „Istoric tranzacții” a agenției nu e folosită: paginarea ei se suprapune
 (un anunț apare pe două pagini, altul se pierde). Pagina fiecărui anunț e exactă.

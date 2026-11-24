@@ -23,11 +23,15 @@
  * CE SE ÎNTÂMPLĂ CU O PROPRIETATE DISPĂRUTĂ DIN LISTARE — automat, fără om.
  * Sincronizarea citește de pe pagina anunțului ce s-a întâmplat (`outcome`, vezi
  * `scripts/sync-properties.mjs`), iar aici se aplică regula, pe PROPRIETATEA
- * FIZICĂ (folderul de fotografii + vânzare/închiriere), nu pe id-ul anunțului —
- * CRM-ul dă id nou la fiecare re-listare, deci una singură poate avea șase:
+ * FIZICĂ, nu pe id-ul anunțului — CRM-ul dă id nou la fiecare re-listare, deci
+ * una singură poate avea șase. Două anunțuri sunt aceeași proprietate când au
+ * același tip de tranzacție și aceleași fotografii: același folder, sau foldere
+ * diferite cu poze identice (vezi `groupRecords`). Din fiecare proprietate se
+ * arată UN SINGUR anunț:
  *
  *   1. Dacă oricare dintre ele e în listare → proprietatea e DISPONIBILĂ, iar
- *      versiunile vechi dispar (altfel ar apărea de două ori).
+ *      versiunile vechi dispar. Dacă sunt două în listare deodată (agenția
+ *      listează uneori aceeași casă de două ori), rămâne una.
  *   2. Altfel, dacă oricare are `outcome: sold` → tranzacție încheiată:
  *      VÂNDUT (vânzare) sau ÎNCHIRIAT (închiriere).
  *   3. Altfel (retras, șters, sau nu știm) → nu apare deloc. „Nu știm” nu devine
@@ -39,8 +43,9 @@
 
 import { asset } from "./asset";
 import { resolveZone, zoneCoords } from "./geo";
+import photoTwins from "./photo-twins.generated.json";
 import generated from "./properties.generated.json";
-import { order, overrides } from "./property-overrides";
+import { order, overrides, type PropertyOverride } from "./property-overrides";
 
 
 export type Deal = "vanzare" | "inchiriere";
@@ -185,7 +190,8 @@ const photoFolder = (g: Generated) => (g.media.cover || "").split("/")[0];
  * Gardens 100 mp Metrou 7 m PET FRIENDLY”. Legat de folder, textul supraviețuiește
  * re-listării, fără ca cineva să bage de seamă că s-a întâmplat ceva.
  */
-const overrideFor = (g: Generated) => overrides[g.id] ?? overrides[photoFolder(g)];
+const ownOverride = (g: Generated): PropertyOverride | undefined =>
+  overrides[g.id] ?? overrides[photoFolder(g)];
 
 /** „Bucuresti” din flux, cu diacritice — ultima plasă când zona nu se găsește. */
 const prettyLocality = (s: string | undefined) => (/^bucuresti$/i.test(s ?? "") ? "București" : (s ?? ""));
@@ -272,53 +278,119 @@ function titleFacts(sourceTitle: string): { features: string[]; floor?: string }
   return { features: features.slice(0, 4), floor };
 }
 
-/** Proprietatea fizică: aceleași poze, aceeași tranzacție. Vezi antetul fișierului. */
-const physicalKey = (g: Generated) => `${photoFolder(g)}|${g.deal}`;
+/** Foldere diferite cu aceleași poze — vezi `scripts/photo-twins.mjs`. */
+const twins = photoTwins.twins as Record<string, string>;
+const canonFolder = (folder: string) => twins[folder] ?? folder;
+
+/** Toate folderele din care își ia un anunț fotografiile, aduse la cel canonic. */
+const foldersOf = (g: Generated) => [
+  ...new Set(
+    [g.media.cover, ...g.media.gallery]
+      .filter(Boolean)
+      .map((path) => canonFolder(path.split("/")[0])),
+  ),
+];
+
+const newestFirst = (a: Generated, b: Generated) => Number(b.id) - Number(a.id);
+
+/** Ce se arată dintr-o proprietate fizică, și cu ce text scris de mână. */
+interface Shown {
+  override?: PropertyOverride;
+  /** Fotografii în plus, de la celelalte anunțuri active ale aceleiași proprietăți. */
+  extraGallery: string[];
+}
 
 /**
- * Pentru fiecare proprietate fizică: e listată acum sub vreun id, și care id
- * poartă tranzacția încheiată (cel mai nou, dacă sunt mai multe).
+ * Grupează anunțurile pe proprietăți fizice și alege, din fiecare, singurul
+ * anunț care se arată. Întoarce doar anunțurile alese, pe id.
+ *
+ * CÂND SUNT DOUĂ ANUNȚURI ACEEAȘI PROPRIETATE: același tip de tranzacție și cel
+ * puțin un folder de fotografii comun — direct, sau prin foldere-gemene (poze
+ * identice urcate a doua oară). Se leagă în lanț: A cu B și B cu C fac un grup.
+ * Vânzarea și închirierea aceleiași case rămân separate: sunt două oferte.
+ *
+ * DE CE NU DUPĂ TITLU SAU PREȚ: două apartamente din același bloc au același
+ * titlu, aceeași suprafață și uneori același preț, și sunt totuși două. Pozele
+ * identice sunt singurul semn care nu minte.
+ *
+ * CARE ANUNȚ RĂMÂNE, când sunt mai multe de același fel (două active, sau două
+ * cu tranzacție): cel care are fișă scrisă de mână, altfel cel mai nou.
+ *
+ * TEXTUL SCRIS DE MÂNĂ se moștenește în grup: dacă anunțul ales n-are fișă, o
+ * ia pe a unei versiuni mai vechi. Fișele legate de un id de anunț (nu de
+ * folder) rămâneau orfane la re-listare și site-ul revenea la titlul automat.
+ * `hidden` nu se moștenește — ascunde doar anunțul pe care e scris.
  */
-function groupState(records: Generated[]) {
-  const state = new Map<string, { listed: boolean; soldId: string | null; newestId: string }>();
+function groupRecords(records: Generated[]): Map<string, Shown> {
+  // Union-find peste anunțuri și peste „folder + tranzacție”.
+  const parent = new Map<string, string>();
+  const find = (x: string): string => {
+    if (!parent.has(x)) parent.set(x, x);
+    let root = x;
+    while (parent.get(root) !== root) root = parent.get(root)!;
+    parent.set(x, root);
+    return root;
+  };
+  for (const g of records)
+    for (const folder of foldersOf(g)) parent.set(find(`id:${g.id}`), find(`f:${folder}|${g.deal}`));
+
+  const groups = new Map<string, Generated[]>();
   for (const g of records) {
-    const key = physicalKey(g);
-    const cur = state.get(key) ?? { listed: false, soldId: null, newestId: g.id };
-    if (g.listed) cur.listed = true;
-    if (g.outcome === "sold" && (!cur.soldId || Number(g.id) > Number(cur.soldId))) cur.soldId = g.id;
-    if (Number(g.id) > Number(cur.newestId)) cur.newestId = g.id;
-    state.set(key, cur);
+    const root = find(`id:${g.id}`);
+    groups.set(root, [...(groups.get(root) ?? []), g]);
   }
-  return state;
+
+  const shown = new Map<string, Shown>();
+  for (const members of groups.values()) {
+    members.sort(newestFirst);
+    const visible = members.filter((m) => !ownOverride(m)?.hidden);
+    /** Dintre candidați: cel cu fișă proprie, altfel cel mai nou. */
+    const pick = (list: Generated[]) => list.find((m) => ownOverride(m)) ?? list[0];
+
+    // Fișa grupului: a oricărei versiuni, cea mai nouă întâi, fără cele `hidden`.
+    const inherited = [
+      ...members.map(ownOverride),
+      ...members.flatMap(foldersOf).map((folder) => overrides[folder]),
+    ].find((o) => o && !o.hidden);
+
+    let chosen: Generated | undefined;
+    if (members.some((m) => m.listed)) {
+      // Listată sub vreun id → doar un anunț activ; versiunile vechi ies. Dacă
+      // toate cele active sunt ascunse de mână, nu se arată nimic.
+      chosen = pick(visible.filter((m) => m.listed));
+    } else if (members.some((m) => m.outcome === "sold")) {
+      chosen = pick(visible.filter((m) => m.outcome === "sold"));
+    } else if (inherited?.status) {
+      // Retras, șters sau neclar → nimic, în afară de portița din overrides.
+      chosen = visible[0];
+    }
+    if (!chosen) continue;
+
+    const own = ownOverride(chosen);
+    // Pozele celorlalte anunțuri ACTIVE din același folder: aceeași proprietate,
+    // listată de două ori, cu galerii incomplete fiecare.
+    const siblings = chosen.listed
+      ? visible.filter((m) => m !== chosen && m.listed && photoFolder(m) === photoFolder(chosen!))
+      : [];
+    const have = new Set([chosen.media.cover, ...chosen.media.gallery]);
+    const extraGallery = [
+      ...new Set(siblings.flatMap((m) => [m.media.cover, ...m.media.gallery])),
+    ].filter((path) => path && !have.has(path));
+
+    shown.set(chosen.id, { override: own && !own.hidden ? own : inherited, extraGallery });
+  }
+  return shown;
 }
 
 function build(): Property[] {
   const records = Object.values(generated.properties as Record<string, Generated>);
-  const groups = groupState(records);
+  const shown = groupRecords(records);
 
   const merged = records.flatMap((g): Property[] => {
-    const o = overrideFor(g);
-    const group = groups.get(physicalKey(g))!;
-
-    // Ce arătăm din fiecare proprietate fizică — vezi regula din antet.
-    //  - Dacă e listată sub un id, doar anunțul listat; vechile versiuni ies.
-    //  - Altfel, doar anunțul cu tranzacția încheiată (`outcome: sold`).
-    //  - Altfel nimic: retras, șters sau neclar. Dacă Vlad vrea totuși una
-    //    arătată, `status` în overrides o aduce (atunci cea mai nouă versiune).
-    if (g.listed) {
-      // listat → rămâne
-    } else if (group.listed) {
-      return [];
-    } else if (group.soldId) {
-      if (g.id !== group.soldId) return [];
-    } else if (!(o?.status && g.id === group.newestId)) {
-      return [];
-    }
-
-    // Ascuns cu mâna. Agenția își listează uneori aceeași proprietate de două
-    // ori — o dată ca spațiu comercial, o dată ca locuință — iar pe site ar
-    // apărea de două ori. Vezi `hidden` în property-overrides.ts.
-    if (o?.hidden) return [];
+    // Un singur anunț din fiecare proprietate fizică — vezi `groupRecords`.
+    const pick = shown.get(g.id);
+    if (!pick) return [];
+    const o = pick.override;
 
     /**
      * Zona. Trei surse, în ordinea încrederii:
@@ -392,7 +464,7 @@ function build(): Property[] {
 
         media: {
           cover: m(g.media.cover),
-          gallery: g.media.gallery.map(m),
+          gallery: [...g.media.gallery, ...pick.extraGallery].map(m),
         },
 
         ...(o?.featured ? { featured: true } : {}),
@@ -409,7 +481,7 @@ function build(): Property[] {
   const rank = new Map(order.map((id, i) => [id, i]));
   const idOf = (p: Property) => p.sourceUrl?.match(/cp(\d+)/)?.[1] ?? "";
   // Locul se caută și după folderul de poze: o proprietate re-listată are alt id
-  // decât cel trecut în `order`, dar același folder (ca la `overrideFor`).
+  // decât cel trecut în `order`, dar același folder (ca la `ownOverride`).
   const folderOf = (p: Property) => p.media.cover.match(/property_images\/(\d+)\//)?.[1] ?? "";
   const rankOf = (p: Property) => rank.get(idOf(p)) ?? rank.get(folderOf(p));
   merged.sort((a, b) => {

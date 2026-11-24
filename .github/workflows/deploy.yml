@@ -59,7 +59,7 @@ jobs:
         run: |
           git config user.name "sincronizare"
           git config user.email "actions@github.com"
-          git add src/lib/properties.generated.json src/lib/zones.generated.json src/lib/blur-data.ts public/media
+          git add src/lib/properties.generated.json src/lib/zones.generated.json src/lib/photo-twins.generated.json src/lib/blur-data.ts public/media
           if git diff --cached --quiet; then
             echo "Nimic schimbat la agenție." >> "$GITHUB_STEP_SUMMARY"
           else

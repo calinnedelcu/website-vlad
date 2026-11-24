@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "media": "node scripts/fetch-media.mjs && node scripts/build-og.mjs",
+    "media": "node scripts/fetch-media.mjs && node scripts/photo-twins.mjs && node scripts/build-og.mjs",
     "geo": "node scripts/fetch-geo.mjs",
     "sync": "node scripts/sync-properties.mjs",
     "check:map": "node scripts/check-map.mjs"
