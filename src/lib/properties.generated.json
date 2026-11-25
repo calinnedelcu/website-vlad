@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T14:50:01.948Z",
+  "updatedAt": "2026-11-25T14:16:39.674Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -2459,16 +2459,15 @@
     },
     "3446664": {
       "id": "3446664",
-      "listed": false,
-      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-inchiriat-timpuri-noi-bucuresti-cp3446664/",
-      "sourceTitle": "Casa de inchiriat Timpuri Noi 204 m",
+      "listed": true,
+      "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-7-camere-de-vanzare-timpuri-noi-bucuresti-cp3446664/",
+      "sourceTitle": "Casa de vanzare Timpuri Noi 204 m",
       "kind": "vila",
       "segment": "rezidential",
-      "deal": "inchiriere",
+      "deal": "vanzare",
       "price": {
-        "amount": 1800,
-        "currency": "EUR",
-        "period": "luna"
+        "amount": 370000,
+        "currency": "EUR"
       },
       "specs": {
         "surface": 204,
@@ -2481,20 +2480,22 @@
         "county": "bucuresti"
       },
       "story": [
-        "Comision 0% Casă ideală pentru birouri sau activitate comercială! Vă propunem spre închiriere o proprietate situată pe strada Călugăreni, nr. 27, perfectă pentru birouri sau activități comerciale. Suprafața terenului: 115 mp Suprafață utilă: 204 mp Suprafață totală (inclusiv balcoane și casa scării): 223 mp Curte liberă: 36 mp Imobilul are un regim de înălțime P+1+M, a fost recent renovat și este disponibil pentru prima închiriere după renovare. Este dotat cu centrală termică proprie și aer condiționat în fiecare cameră, oferind un confort optim indiferent de sezon. Pentru videoclipul de prezentare și mai multe detalii, mă puteți contacta în privat. Preț: 1800 EUR NET Vă așteptăm cu drag la vizionare!"
+        "Comision 0% Casă ideală pentru birouri sau activitate comercială! Vă propunem spre vanzareo proprietate situată pe strada Călugăreni, nr. 27, perfectă pentru birouri sau activități comerciale. Suprafața terenului: 115 mp Suprafață utilă: 204 mp Suprafață totală (inclusiv balcoane și casa scării): 223 mp Curte liberă: 36 mp Imobilul are un regim de înălțime P+1+M, a fost recent renovat și este disponibil pentru vanzare după renovare. Este dotat cu centrală termică proprie și aer condiționat în fiecare cameră, oferind un confort optim indiferent de sezon. Pentru videoclipul de prezentare și mai multe detalii, mă puteți contacta în privat. Preț: 370.000 EUR Vă așteptăm cu drag la vizionare!"
       ],
       "media": {
-        "cover": "3446664/f8f2c25b-2987-44a5-bf51-39448946323a.jpg",
+        "cover": "3446664/a6ca719e-2b80-4388-83e8-a469c6d938af.jpg",
         "gallery": [
+          "3446664/f8f2c25b-2987-44a5-bf51-39448946323a.jpg",
           "3446664/638cde1f-9830-49a5-a63e-ebe6c2600065.jpg",
           "3446664/16a7e071-c13a-4d8d-99f9-5b6e11a85256.jpg",
           "3446664/889ef899-b3d5-4aa2-9d72-226a2c3a7e5e.jpg",
-          "3446664/3f8a36d7-926f-4815-81b2-1eeaec6fc667.jpg"
+          "3446664/3f8a36d7-926f-4815-81b2-1eeaec6fc667.jpg",
+          "3446664/310bc323-7e95-4fba-8a02-a82f008ff2d3.jpg",
+          "3446664/e53ab6a0-331e-442c-ab30-c6cea3a76701.jpg",
+          "3446664/71683180-804c-41df-b95b-f7b873d004c0.jpg",
+          "3446664/880606ea-00f0-46a4-967a-9b4b1804ae48.jpg"
         ]
-      },
-      "goneAt": "2026-11-18",
-      "outcome": "withdrawn",
-      "outcomeAt": "2026-11-18"
+      }
     },
     "3446674": {
       "id": "3446674",
