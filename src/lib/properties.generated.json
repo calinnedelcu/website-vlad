@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T14:16:39.674Z",
+  "updatedAt": "2026-11-27T13:49:16.620Z",
   "properties": {
     "2805124": {
       "id": "2805124",
@@ -1863,7 +1863,7 @@
     },
     "3344381": {
       "id": "3344381",
-      "listed": true,
+      "listed": false,
       "sourceUrl": "https://www.trimbitasu-estate.ro/casa-vila-8-camere-de-inchiriat-pipera-bucuresti-cp3344381/",
       "sourceTitle": "PIPERA - Iancu Nicolae - Gradina Zoologica | Vila 290 mp| Teren 387 mp",
       "kind": "vila",
@@ -1903,7 +1903,10 @@
       "zone": {
         "slug": "pipera",
         "county": "bucuresti"
-      }
+      },
+      "goneAt": "2026-11-27",
+      "outcome": "withdrawn",
+      "outcomeAt": "2026-11-27"
     },
     "3347922": {
       "id": "3347922",
